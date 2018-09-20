@@ -76,7 +76,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "1 f/ string", MESSAGE_INVALID_FORMAT);
     }
 
     @Test
@@ -87,10 +87,10 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_EXPENSE_DESC, Expense.MESSAGE_EXPENSE_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
 
-        // invalid phone followed by valid income
+        // invalid date followed by valid income
         assertParseFailure(parser, "1" + INVALID_DATE_DESC + INCOME_DESC_AMY, Date.MESSAGE_DATE_CONSTRAINTS);
 
-        // valid phone followed by invalid phone. The test case for invalid phone followed by valid phone
+        // valid date followed by invalid date. The test case for invalid date followed by valid date
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
         assertParseFailure(parser, "1" + DATE_DESC_BOB + INVALID_DATE_DESC, Date.MESSAGE_DATE_CONSTRAINTS);
 
@@ -140,7 +140,7 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // phone
+        // date
         userInput = targetIndex.getOneBased() + DATE_DESC_AMY;
         descriptor = new EditRecordDescriptorBuilder().withDate(VALID_DATE_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);

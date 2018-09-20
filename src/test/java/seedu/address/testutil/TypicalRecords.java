@@ -24,23 +24,23 @@ import seedu.address.model.record.Record;
 public class TypicalRecords {
 
     public static final Record ALICE = new RecordBuilder().withName("Alice Pauline")
-            .withExpense("39.60").withIncome("39.60")
+            .withExpense("39.60").withIncome("40.60")
             .withDate("18-9-2012")
             .withTags("friends").build();
     public static final Record BENSON = new RecordBuilder().withName("Benson Meier")
             .withExpense("25.80")
-            .withIncome("25.80").withDate("18-12-2012")
+            .withIncome("26.80").withDate("18-12-2012")
             .withTags("owesMoney", "friends").build();
     public static final Record CARL = new RecordBuilder().withName("Carl Kurz").withDate("10-12-2012")
-            .withIncome("26.90").withExpense("26.90").build();
+            .withIncome("26.90").withExpense("25.90").build();
     public static final Record DANIEL = new RecordBuilder().withName("Daniel Meier").withDate("10-1-2012")
-            .withIncome("31.50").withExpense("31.50").withTags("friends").build();
+            .withIncome("31.50").withExpense("30.50").withTags("friends").build();
     public static final Record ELLE = new RecordBuilder().withName("Elle Meyer").withDate("10-1-2003")
-            .withIncome("50.99").withExpense("50.99").build();
+            .withIncome("50.99").withExpense("49.99").build();
     public static final Record FIONA = new RecordBuilder().withName("Fiona Kunz").withDate("31-12-1996")
-            .withIncome("26.89").withExpense("26.89").build();
+            .withIncome("26.89").withExpense("25.89").build();
     public static final Record GEORGE = new RecordBuilder().withName("George Best").withDate("23-10-2010")
-            .withIncome("4.50").withExpense("4.50").build();
+            .withIncome("4.50").withExpense("3.50").build();
 
     // Manually added
     public static final Record HOON = new RecordBuilder().withName("Hoon Meier").withDate("31-4-2080")

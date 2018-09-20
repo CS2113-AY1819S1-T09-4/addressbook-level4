@@ -23,7 +23,7 @@ public class RecordCardHandle extends NodeHandle<Node> {
 
     private final Label idLabel;
     private final Label nameLabel;
-    private final Label addressLabel;
+    private final Label expenseLabel;
     private final Label dateLabel;
     private final Label incomeLabel;
     private final List<Label> tagLabels;
@@ -33,7 +33,7 @@ public class RecordCardHandle extends NodeHandle<Node> {
 
         idLabel = getChildNode(ID_FIELD_ID);
         nameLabel = getChildNode(NAME_FIELD_ID);
-        addressLabel = getChildNode(EXPENSE_FIELD_ID);
+        expenseLabel = getChildNode(EXPENSE_FIELD_ID);
         dateLabel = getChildNode(DATE_FIELD_ID);
         incomeLabel = getChildNode(INCOME_FIELD_ID);
 
@@ -54,7 +54,7 @@ public class RecordCardHandle extends NodeHandle<Node> {
     }
 
     public String getExpense() {
-        return addressLabel.getText();
+        return expenseLabel.getText();
     }
 
     public String getDate() {

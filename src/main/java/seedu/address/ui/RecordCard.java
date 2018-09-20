@@ -47,9 +47,9 @@ public class RecordCard extends UiPart<Region> {
         this.record = record;
         id.setText(displayedIndex + ". ");
         name.setText(record.getName().fullName);
-        date.setText("Date: " + record.getDate().value);
-        expense.setText("Expense: " + record.getExpense().value);
-        income.setText("Income: " + record.getIncome().value);
+        date.setText(record.getDate().value);
+        expense.setText(record.getExpense().value);
+        income.setText(record.getIncome().value);
         record.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

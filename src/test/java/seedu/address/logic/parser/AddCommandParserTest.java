@@ -55,7 +55,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + DATE_DESC_BOB + INCOME_DESC_BOB
                 + EXPENSE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedRecord));
 
-        // multiple phones - last phone accepted
+        // multiple dates - last date accepted
         assertParseSuccess(parser, NAME_DESC_BOB + DATE_DESC_AMY + DATE_DESC_BOB + INCOME_DESC_BOB
                 + EXPENSE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedRecord));
 
