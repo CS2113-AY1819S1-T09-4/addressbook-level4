@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+<<<<<<< HEAD
 import static seedu.address.logic.commands.CommandTestUtil.EXPENSE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EXPENSE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INCOME_DESC_AMY;
@@ -9,19 +10,37 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPENSE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INCOME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+=======
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MONEYFLOW_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MONEYFLOW_EXPENSE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.MONEYFLOW_INCOME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+<<<<<<< HEAD
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BOB;
+=======
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+<<<<<<< HEAD
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INCOME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
+=======
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MONEYFLOW_EXPENSE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -32,11 +51,18 @@ import static seedu.address.testutil.TypicalRecords.BOB;
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
+<<<<<<< HEAD
 import seedu.address.model.record.Expense;
 import seedu.address.model.record.Income;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
 import seedu.address.model.record.Date;
+=======
+import seedu.address.model.record.Date;
+import seedu.address.model.record.MoneyFlow;
+import seedu.address.model.record.Name;
+import seedu.address.model.record.Record;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.RecordBuilder;
 
@@ -48,6 +74,7 @@ public class AddCommandParserTest {
         Record expectedRecord = new RecordBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
+<<<<<<< HEAD
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + DATE_DESC_BOB + INCOME_DESC_BOB
                 + EXPENSE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedRecord));
 
@@ -66,11 +93,31 @@ public class AddCommandParserTest {
         // multiple expenses - last expense accepted
         assertParseSuccess(parser, NAME_DESC_BOB + DATE_DESC_BOB + INCOME_DESC_BOB + EXPENSE_DESC_AMY
                 + EXPENSE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedRecord));
+=======
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + DATE_DESC_BOB + MONEYFLOW_EXPENSE_DESC_BOB
+                + TAG_DESC_FRIEND, new AddCommand(expectedRecord));
+
+        // multiple names - last name accepted
+        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + DATE_DESC_BOB + MONEYFLOW_EXPENSE_DESC_BOB
+                + TAG_DESC_FRIEND, new AddCommand(expectedRecord));
+
+        // multiple dates - last date accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + DATE_DESC_AMY + DATE_DESC_BOB + MONEYFLOW_EXPENSE_DESC_BOB
+                + TAG_DESC_FRIEND, new AddCommand(expectedRecord));
+
+        // multiple money flow - last money flow accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + DATE_DESC_BOB + MONEYFLOW_INCOME_DESC_AMY
+                + MONEYFLOW_EXPENSE_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedRecord));
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 
         // multiple tags - all accepted
         Record expectedRecordMultipleTags = new RecordBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
+<<<<<<< HEAD
         assertParseSuccess(parser, NAME_DESC_BOB + DATE_DESC_BOB + INCOME_DESC_BOB + EXPENSE_DESC_BOB
+=======
+        assertParseSuccess(parser, NAME_DESC_BOB + DATE_DESC_BOB + MONEYFLOW_EXPENSE_DESC_BOB
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedRecordMultipleTags));
     }
 
@@ -78,7 +125,11 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Record expectedRecord = new RecordBuilder(AMY).withTags().build();
+<<<<<<< HEAD
         assertParseSuccess(parser, NAME_DESC_AMY + DATE_DESC_AMY + INCOME_DESC_AMY + EXPENSE_DESC_AMY,
+=======
+        assertParseSuccess(parser, NAME_DESC_AMY + DATE_DESC_AMY + MONEYFLOW_INCOME_DESC_AMY,
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
                 new AddCommand(expectedRecord));
     }
 
@@ -87,6 +138,7 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing name prefix
+<<<<<<< HEAD
         assertParseFailure(parser, VALID_NAME_BOB + DATE_DESC_BOB + INCOME_DESC_BOB + EXPENSE_DESC_BOB,
                 expectedMessage);
 
@@ -104,12 +156,28 @@ public class AddCommandParserTest {
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_DATE_BOB + VALID_INCOME_BOB + VALID_EXPENSE_BOB,
+=======
+        assertParseFailure(parser, VALID_NAME_BOB + DATE_DESC_BOB + MONEYFLOW_EXPENSE_DESC_BOB,
+                expectedMessage);
+
+        // missing date prefix
+        assertParseFailure(parser, NAME_DESC_BOB + VALID_DATE_BOB + MONEYFLOW_EXPENSE_DESC_BOB,
+                expectedMessage);
+
+        // missing moneyflow prefix
+        assertParseFailure(parser, NAME_DESC_BOB + DATE_DESC_BOB + VALID_MONEYFLOW_EXPENSE_BOB,
+                expectedMessage);
+
+        // all prefixes missing
+        assertParseFailure(parser, VALID_NAME_BOB + VALID_DATE_BOB + VALID_MONEYFLOW_EXPENSE_BOB,
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
                 expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
+<<<<<<< HEAD
         assertParseFailure(parser, INVALID_NAME_DESC + DATE_DESC_BOB + INCOME_DESC_BOB + EXPENSE_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_NAME_CONSTRAINTS);
 
@@ -136,6 +204,30 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + DATE_DESC_BOB + INCOME_DESC_BOB
                 + EXPENSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+=======
+        assertParseFailure(parser, INVALID_NAME_DESC + DATE_DESC_BOB + MONEYFLOW_EXPENSE_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_NAME_CONSTRAINTS);
+
+        // invalid date
+        assertParseFailure(parser, NAME_DESC_BOB + INVALID_DATE_DESC + MONEYFLOW_EXPENSE_DESC_BOB
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Date.MESSAGE_DATE_CONSTRAINTS);
+
+        // invalid moneyflow
+        assertParseFailure(parser, NAME_DESC_BOB + DATE_DESC_BOB + INVALID_MONEYFLOW_DESC
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
+
+        // invalid tag
+        assertParseFailure(parser, NAME_DESC_BOB + DATE_DESC_BOB + MONEYFLOW_EXPENSE_DESC_BOB
+                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_TAG_CONSTRAINTS);
+
+        // two invalid values, only first invalid value reported
+        assertParseFailure(parser, INVALID_NAME_DESC + DATE_DESC_BOB + MONEYFLOW_EXPENSE_DESC_BOB,
+                Name.MESSAGE_NAME_CONSTRAINTS);
+
+        // non-empty preamble
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + DATE_DESC_BOB
+                + MONEYFLOW_EXPENSE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

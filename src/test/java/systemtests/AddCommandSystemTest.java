@@ -1,6 +1,7 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+<<<<<<< HEAD
 import static seedu.address.logic.commands.CommandTestUtil.EXPENSE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EXPENSE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INCOME_DESC_AMY;
@@ -9,9 +10,19 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPENSE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INCOME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+=======
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MONEYFLOW_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MONEYFLOW_EXPENSE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.MONEYFLOW_INCOME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+<<<<<<< HEAD
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
@@ -28,6 +39,22 @@ import static seedu.address.testutil.TypicalRecords.CARL;
 import static seedu.address.testutil.TypicalRecords.HOON;
 import static seedu.address.testutil.TypicalRecords.IDA;
 import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_MEIER;
+=======
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MONEYFLOW_EXPENSE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MONEYFLOW_INCOME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.testutil.TypicalRecords.AMY;
+import static seedu.address.testutil.TypicalRecords.BOB;
+import static seedu.address.testutil.TypicalRecords.BURSARY;
+import static seedu.address.testutil.TypicalRecords.IDA;
+import static seedu.address.testutil.TypicalRecords.INDO;
+import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
+import static seedu.address.testutil.TypicalRecords.ZT;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 
 import org.junit.Test;
 
@@ -37,11 +64,18 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
+<<<<<<< HEAD
 import seedu.address.model.record.Expense;
 import seedu.address.model.record.Income;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
 import seedu.address.model.record.Date;
+=======
+import seedu.address.model.record.Date;
+import seedu.address.model.record.MoneyFlow;
+import seedu.address.model.record.Name;
+import seedu.address.model.record.Record;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.RecordBuilder;
 import seedu.address.testutil.RecordUtil;
@@ -59,7 +93,11 @@ public class AddCommandSystemTest extends ExpenseBookSystemTest {
          */
         Record toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + DATE_DESC_AMY + " "
+<<<<<<< HEAD
                 + INCOME_DESC_AMY + "   " + EXPENSE_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+=======
+                + MONEYFLOW_INCOME_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -75,19 +113,28 @@ public class AddCommandSystemTest extends ExpenseBookSystemTest {
 
         /* Case: add a record with all fields same as another record in the address book except name -> added */
         toAdd = new RecordBuilder(AMY).withName(VALID_NAME_BOB).build();
+<<<<<<< HEAD
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + DATE_DESC_AMY + INCOME_DESC_AMY + EXPENSE_DESC_AMY
+=======
+        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + DATE_DESC_AMY + MONEYFLOW_INCOME_DESC_AMY
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a record with all fields same as another record in the address book except date and income
          * -> added
          */
+<<<<<<< HEAD
         toAdd = new RecordBuilder(AMY).withDate(VALID_DATE_BOB).withIncome(VALID_INCOME_BOB).build();
+=======
+        toAdd = new RecordBuilder(AMY).withDate(VALID_DATE_BOB).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB).build();
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         command = RecordUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty address book -> added */
         deleteAllRecords();
+<<<<<<< HEAD
         assertCommandSuccess(ALICE);
 
         /* Case: add a record with tags, command with parameters in random order -> added */
@@ -98,41 +145,78 @@ public class AddCommandSystemTest extends ExpenseBookSystemTest {
 
         /* Case: add a record, missing tags -> added */
         assertCommandSuccess(HOON);
+=======
+        assertCommandSuccess(INDO);
+
+        /* Case: add a record with tags, command with parameters in random order -> added */
+        toAdd = BOB;
+        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + DATE_DESC_BOB + MONEYFLOW_EXPENSE_DESC_BOB + NAME_DESC_BOB
+                + TAG_DESC_HUSBAND + MONEYFLOW_EXPENSE_DESC_BOB;
+        assertCommandSuccess(command, toAdd);
+
+        /* Case: add a record, missing tags -> added */
+        assertCommandSuccess(BURSARY);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 
         /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
 
         /* Case: filters the record list before adding -> added */
+<<<<<<< HEAD
         showRecordsWithName(KEYWORD_MATCHING_MEIER);
+=======
+        showRecordsWithName(KEYWORD_MATCHING_BURSARY);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         assertCommandSuccess(IDA);
 
         /* ------------------------ Perform add operation while a record card is selected --------------------------- */
 
         /* Case: selects first card in the record list, add a record -> added, card selection remains unchanged */
         selectRecord(Index.fromOneBased(1));
+<<<<<<< HEAD
         assertCommandSuccess(CARL);
+=======
+        assertCommandSuccess(ZT);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
 
         /* Case: add a duplicate record -> rejected */
+<<<<<<< HEAD
         command = RecordUtil.getAddCommand(HOON);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RECORD);
 
         /* Case: add a duplicate record except with different day parameter -> rejected */
         toAdd = new RecordBuilder(HOON).withDate(VALID_DATE_BOB).build();
+=======
+        command = RecordUtil.getAddCommand(BURSARY);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RECORD);
+
+        /* Case: add a duplicate record except with different day parameter -> rejected */
+        toAdd = new RecordBuilder(BURSARY).withDate(VALID_DATE_BOB).build();
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         command = RecordUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RECORD);
 
         /* Case: add a duplicate record except with different income -> rejected */
+<<<<<<< HEAD
         toAdd = new RecordBuilder(HOON).withIncome(VALID_INCOME_BOB).build();
+=======
+        toAdd = new RecordBuilder(BURSARY).withMoneyFlow(VALID_MONEYFLOW_INCOME_AMY).build();
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         command = RecordUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RECORD);
 
         /* Case: add a duplicate record except with different expense -> rejected */
+<<<<<<< HEAD
         toAdd = new RecordBuilder(HOON).withExpense(VALID_EXPENSE_BOB).build();
+=======
+        toAdd = new RecordBuilder(BURSARY).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB).build();
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         command = RecordUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RECORD);
 
         /* Case: add a duplicate record except with different tags -> rejected */
+<<<<<<< HEAD
         command = RecordUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RECORD);
 
@@ -150,6 +234,21 @@ public class AddCommandSystemTest extends ExpenseBookSystemTest {
 
         /* Case: missing expense -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DATE_DESC_AMY + INCOME_DESC_AMY;
+=======
+        command = RecordUtil.getAddCommand(BURSARY) + " " + PREFIX_TAG.getPrefix() + "friends";
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RECORD);
+
+        /* Case: missing name -> rejected */
+        command = AddCommand.COMMAND_WORD + DATE_DESC_AMY + MONEYFLOW_INCOME_DESC_AMY;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        /* Case: missing date parameter -> rejected */
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + MONEYFLOW_INCOME_DESC_AMY;
+        assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+
+        /* Case: missing money flow parameter -> rejected */
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DATE_DESC_AMY;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
@@ -157,6 +256,7 @@ public class AddCommandSystemTest extends ExpenseBookSystemTest {
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
+<<<<<<< HEAD
         command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + DATE_DESC_AMY + INCOME_DESC_AMY + EXPENSE_DESC_AMY;
         assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
 
@@ -174,6 +274,21 @@ public class AddCommandSystemTest extends ExpenseBookSystemTest {
 
         /* Case: invalid tag -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DATE_DESC_AMY + INCOME_DESC_AMY + EXPENSE_DESC_AMY
+=======
+        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + DATE_DESC_AMY + MONEYFLOW_INCOME_DESC_AMY;
+        assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
+
+        /* Case: invalid date parameter -> rejected */
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_DATE_DESC + MONEYFLOW_INCOME_DESC_AMY;
+        assertCommandFailure(command, Date.MESSAGE_DATE_CONSTRAINTS);
+
+        /* Case: invalid money flow parameter -> rejected */
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DATE_DESC_AMY + INVALID_MONEYFLOW_DESC;
+        assertCommandFailure(command, MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
+
+        /* Case: invalid tag -> rejected */
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DATE_DESC_AMY + MONEYFLOW_INCOME_DESC_AMY
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
                 + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
     }

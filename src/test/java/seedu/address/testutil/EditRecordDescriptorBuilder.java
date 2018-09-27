@@ -6,11 +6,18 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditRecordDescriptor;
+<<<<<<< HEAD
+=======
+import seedu.address.model.record.Date;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import seedu.address.model.record.Expense;
 import seedu.address.model.record.Income;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
+<<<<<<< HEAD
 import seedu.address.model.record.Date;
+=======
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,8 +42,12 @@ public class EditRecordDescriptorBuilder {
         descriptor = new EditCommand.EditRecordDescriptor();
         descriptor.setName(record.getName());
         descriptor.setDate(record.getDate());
+<<<<<<< HEAD
         descriptor.setIncome(record.getIncome());
         descriptor.setExpense(record.getExpense());
+=======
+        descriptor.setMoneyFlow(record.getMoneyFlow());
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         descriptor.setTags(record.getTags());
     }
 
@@ -57,6 +68,7 @@ public class EditRecordDescriptorBuilder {
     }
 
     /**
+<<<<<<< HEAD
      * Sets the {@code Income} of the {@code EditRecordDescriptor} that we are building.
      */
     public EditRecordDescriptorBuilder withIncome(String email) {
@@ -69,6 +81,17 @@ public class EditRecordDescriptorBuilder {
      */
     public EditRecordDescriptorBuilder withExpense(String expense) {
         descriptor.setExpense(new Expense(expense));
+=======
+     * Sets the {@code MoneyFlow} of the {@code EditRecordDescriptor} that we are building.
+     */
+    public EditRecordDescriptorBuilder withMoneyFlow(String moneyFlow) {
+        if (Expense.isValidExpense(moneyFlow)) {
+            descriptor.setMoneyFlow(new Expense(moneyFlow));
+        }
+        if (Income.isValidIncome(moneyFlow)) {
+            descriptor.setMoneyFlow(new Income(moneyFlow));
+        }
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         return this;
     }
 

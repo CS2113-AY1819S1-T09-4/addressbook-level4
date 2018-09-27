@@ -20,7 +20,11 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
+<<<<<<< HEAD
     /** Returns an unmodifiable view of the filtered list of persons */
+=======
+    /** Returns an unmodifiable view of the filtered list of records */
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
     ObservableList<Record> getFilteredRecordList();
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */

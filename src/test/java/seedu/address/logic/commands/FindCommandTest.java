@@ -5,9 +5,15 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_RECORDS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+<<<<<<< HEAD
 import static seedu.address.testutil.TypicalRecords.CARL;
 import static seedu.address.testutil.TypicalRecords.ELLE;
 import static seedu.address.testutil.TypicalRecords.FIONA;
+=======
+import static seedu.address.testutil.TypicalRecords.CHICKENRICE;
+import static seedu.address.testutil.TypicalRecords.MALA;
+import static seedu.address.testutil.TypicalRecords.ZT;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import static seedu.address.testutil.TypicalRecords.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -69,11 +75,19 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleRecordsFound() {
         String expectedMessage = String.format(MESSAGE_RECORDS_LISTED_OVERVIEW, 3);
+<<<<<<< HEAD
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredRecordList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredRecordList());
+=======
+        NameContainsKeywordsPredicate predicate = preparePredicate("ZT mala chicken");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredRecordList(predicate);
+        assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ZT, MALA, CHICKENRICE), model.getFilteredRecordList());
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
     }
 
     /**

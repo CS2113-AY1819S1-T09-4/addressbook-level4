@@ -842,6 +842,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |user |be able to undo |Revert any unwanted changes
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 |`* * *` |user |be able to clear history |to reduce the clutter in the app
 
 |`* * *` |user |be able to see a summary expenditure of each category | see the areas where I am spending the most
@@ -882,6 +883,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 =======
 |`*` |user with many persons in the expense book |sort persons by name |locate a person easily
 >>>>>>> 0229e935d6e4d3daea73607e2e8f1351c6e81f55
+=======
+|`*` |user with many persons in the expense book |sort persons by name |locate a person easily
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 |=======================================================================
 
 _{More to be added}_

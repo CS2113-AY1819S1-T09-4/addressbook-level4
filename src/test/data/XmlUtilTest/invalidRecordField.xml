@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- Record with an invalid date field -->
 <record>
+<<<<<<< HEAD
     <name>Hans Muster</name>
     <date>9482asf424</date>
     <income>11.99</income>
     <expense>10.99</expense>
+=======
+    <name>Payment for HM</name>
+    <date>9482asf424</date>
+    <moneyFlow>-11.99</moneyFlow>
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
     <tagged>friends</tagged>
 </record>

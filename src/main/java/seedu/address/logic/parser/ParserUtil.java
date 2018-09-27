@@ -9,10 +9,18 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+<<<<<<< HEAD
 import seedu.address.model.record.Expense;
 import seedu.address.model.record.Income;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Date;
+=======
+import seedu.address.model.record.Date;
+import seedu.address.model.record.Expense;
+import seedu.address.model.record.Income;
+import seedu.address.model.record.MoneyFlow;
+import seedu.address.model.record.Name;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import seedu.address.model.tag.Tag;
 
 /**
@@ -66,6 +74,7 @@ public class ParserUtil {
     }
 
     /**
+<<<<<<< HEAD
      * Parses a {@code String expense} into an {@code Expense}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -93,6 +102,26 @@ public class ParserUtil {
             throw new ParseException(Income.MESSAGE_INCOME_CONSTRAINTS);
         }
         return new Income(trimmedIncome);
+=======
+     * Parses a {@code String moneyFlow} into an {@code Income} or an {@code Expense}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code MoneyFlow} is invalid.
+     */
+    public static MoneyFlow parseMoneyFlow(String moneyFlow) throws ParseException {
+        requireNonNull(moneyFlow);
+        String trimmedMoneyFlow = moneyFlow.trim();
+        if (!MoneyFlow.isValidMoneyFlow(trimmedMoneyFlow)) {
+            throw new ParseException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
+        }
+        if (Income.isValidIncome(trimmedMoneyFlow)) {
+            return new Income(trimmedMoneyFlow);
+        } else if (Expense.isValidExpense(trimmedMoneyFlow)) {
+            return new Expense(trimmedMoneyFlow);
+        } else {
+            throw new ParseException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
+        }
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
     }
 
     /**

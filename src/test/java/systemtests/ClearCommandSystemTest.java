@@ -1,7 +1,11 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+<<<<<<< HEAD
 import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_MEIER;
+=======
+import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 
 import org.junit.Test;
 
@@ -44,7 +48,11 @@ public class ClearCommandSystemTest extends ExpenseBookSystemTest {
 
         /* Case: filters the record list before clearing -> entire address book cleared */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original address book
+<<<<<<< HEAD
         showRecordsWithName(KEYWORD_MATCHING_MEIER);
+=======
+        showRecordsWithName(KEYWORD_MATCHING_BURSARY);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 

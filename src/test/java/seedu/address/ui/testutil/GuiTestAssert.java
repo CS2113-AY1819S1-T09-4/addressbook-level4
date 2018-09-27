@@ -19,8 +19,12 @@ public class GuiTestAssert {
      */
     public static void assertCardEquals(RecordCardHandle expectedCard, RecordCardHandle actualCard) {
         assertEquals(expectedCard.getId(), actualCard.getId());
+<<<<<<< HEAD
         assertEquals(expectedCard.getExpense(), actualCard.getExpense());
         assertEquals(expectedCard.getIncome(), actualCard.getIncome());
+=======
+        assertEquals(expectedCard.getMoneyFlow(), actualCard.getMoneyFlow());
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         assertEquals(expectedCard.getName(), actualCard.getName());
         assertEquals(expectedCard.getDate(), actualCard.getDate());
         assertEquals(expectedCard.getTags(), actualCard.getTags());
@@ -32,8 +36,12 @@ public class GuiTestAssert {
     public static void assertCardDisplaysRecord(Record expectedRecord, RecordCardHandle actualCard) {
         assertEquals(expectedRecord.getName().fullName, actualCard.getName());
         assertEquals(expectedRecord.getDate().value, actualCard.getDate());
+<<<<<<< HEAD
         assertEquals(expectedRecord.getIncome().value, actualCard.getIncome());
         assertEquals(expectedRecord.getExpense().value, actualCard.getExpense());
+=======
+        assertEquals(expectedRecord.getMoneyFlow().value, actualCard.getMoneyFlow());
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         assertEquals(expectedRecord.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
     }

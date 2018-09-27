@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import org.junit.rules.ExpectedException;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
@@ -60,10 +61,16 @@ public class ExitCommandTest {
 
         private static final String INVALID_DATE = "9482asf424";
 
+<<<<<<< HEAD
         private static final String VALID_NAME = "Hans Muster";
         private static final String VALID_DATE = "23-10-2010";
         private static final String VALID_INCOME = "11.99";
         private static final String VALID_EXPENSE = "10.99";
+=======
+        private static final String VALID_NAME = "Payment for HM";
+        private static final String VALID_DATE = "23-10-2010";
+        private static final String VALID_MONEYFLOW = "-11.99";
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
 
         @Rule
@@ -95,7 +102,12 @@ public class ExitCommandTest {
 
         @Test
         public void getDataFromFile_validFile_validResult() throws Exception {
+<<<<<<< HEAD
             AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
+=======
+            AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class)
+                    .toModelType();
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
             assertEquals(9, dataFromFile.getRecordList().size());
         }
 
@@ -104,7 +116,11 @@ public class ExitCommandTest {
             XmlAdaptedRecord actualRecord = XmlUtil.getDataFromFile(
                     MISSING_RECORD_FIELD_FILE, XmlAdaptedRecordWithRootElement.class);
             XmlAdaptedRecord expectedRecord = new XmlAdaptedRecord(
+<<<<<<< HEAD
                     null, VALID_DATE, VALID_INCOME, VALID_EXPENSE, VALID_TAGS);
+=======
+                    null, VALID_DATE, VALID_MONEYFLOW, VALID_TAGS);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
             assertEquals(expectedRecord, actualRecord);
         }
 
@@ -113,7 +129,11 @@ public class ExitCommandTest {
             XmlAdaptedRecord actualRecord = XmlUtil.getDataFromFile(
                     INVALID_RECORD_FIELD_FILE, XmlAdaptedRecordWithRootElement.class);
             XmlAdaptedRecord expectedRecord = new XmlAdaptedRecord(
+<<<<<<< HEAD
                     VALID_NAME, INVALID_DATE, VALID_INCOME, VALID_EXPENSE, VALID_TAGS);
+=======
+                    VALID_NAME, INVALID_DATE, VALID_MONEYFLOW, VALID_TAGS);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
             assertEquals(expectedRecord, actualRecord);
         }
 
@@ -122,7 +142,11 @@ public class ExitCommandTest {
             XmlAdaptedRecord actualRecord = XmlUtil.getDataFromFile(
                     VALID_RECORD_FILE, XmlAdaptedRecordWithRootElement.class);
             XmlAdaptedRecord expectedRecord = new XmlAdaptedRecord(
+<<<<<<< HEAD
                     VALID_NAME, VALID_DATE, VALID_INCOME, VALID_EXPENSE, VALID_TAGS);
+=======
+                    VALID_NAME, VALID_DATE, VALID_MONEYFLOW, VALID_TAGS);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
             assertEquals(expectedRecord, actualRecord);
         }
 
@@ -149,7 +173,12 @@ public class ExitCommandTest {
             FileUtil.createFile(TEMP_FILE);
             XmlSerializableAddressBook dataToWrite = new XmlSerializableAddressBook(new AddressBook());
             XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
+<<<<<<< HEAD
             XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+=======
+            XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile
+                    (TEMP_FILE, XmlSerializableAddressBook.class);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
             assertEquals(dataToWrite, dataFromFile);
 
             AddressBookBuilder builder = new AddressBookBuilder(new AddressBook());
@@ -162,7 +191,12 @@ public class ExitCommandTest {
         }
 
         /**
+<<<<<<< HEAD
          * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedRecord}
+=======
+         * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to
+         * {@code XmlAdaptedRecord}
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
          * objects.
          */
         @XmlRootElement(name = "record")

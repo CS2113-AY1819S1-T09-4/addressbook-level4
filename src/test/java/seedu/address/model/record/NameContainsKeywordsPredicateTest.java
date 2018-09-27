@@ -67,9 +67,16 @@ public class NameContainsKeywordsPredicateTest {
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new RecordBuilder().withName("Alice Bob").build()));
 
+<<<<<<< HEAD:src/test/java/seedu/address/model/record/NameContainsKeywordsPredicateTest.java
         // Keywords match date parameters, income and expense, but does not match name
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("12-3-1945", "11.24", "Main", "10.24"));
         assertFalse(predicate.test(new RecordBuilder().withName("Alice").withDate("12-3-1945")
                 .withIncome("11.24").withExpense("10.24").build()));
+=======
+        // Keywords match date parameters, money flow, but does not match name
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12-3-1945", "11.24", "Main", "-10.24"));
+        assertFalse(predicate.test(new RecordBuilder().withName("Alice").withDate("12-3-1945")
+                .withMoneyFlow("-10.24").build()));
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e:src/test/java/seedu/address/model/record/NameContainsKeywordsPredicateTest.java
     }
 }

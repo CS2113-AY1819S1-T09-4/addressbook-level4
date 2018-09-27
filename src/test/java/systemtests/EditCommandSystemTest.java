@@ -3,6 +3,7 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+<<<<<<< HEAD
 import static seedu.address.logic.commands.CommandTestUtil.EXPENSE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EXPENSE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INCOME_DESC_AMY;
@@ -11,15 +12,31 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPENSE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INCOME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+=======
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MONEYFLOW_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MONEYFLOW_EXPENSE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.MONEYFLOW_INCOME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+<<<<<<< HEAD
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INCOME_AMY;
+=======
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MONEYFLOW_INCOME_AMY;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -29,7 +46,11 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_RECORD;
 import static seedu.address.testutil.TypicalRecords.AMY;
 import static seedu.address.testutil.TypicalRecords.BOB;
+<<<<<<< HEAD
 import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_MEIER;
+=======
+import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 
 import org.junit.Test;
 
@@ -39,11 +60,18 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
+<<<<<<< HEAD
 import seedu.address.model.record.Expense;
 import seedu.address.model.record.Income;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
 import seedu.address.model.record.Date;
+=======
+import seedu.address.model.record.Date;
+import seedu.address.model.record.Income;
+import seedu.address.model.record.Name;
+import seedu.address.model.record.Record;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.RecordBuilder;
 import seedu.address.testutil.RecordUtil;
@@ -61,7 +89,11 @@ public class EditCommandSystemTest extends ExpenseBookSystemTest {
          */
         Index index = INDEX_FIRST_RECORD;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
+<<<<<<< HEAD
                 + DATE_DESC_BOB + " " + INCOME_DESC_BOB + "  " + EXPENSE_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
+=======
+                + DATE_DESC_BOB + " " + MONEYFLOW_EXPENSE_DESC_BOB + "  " + TAG_DESC_HUSBAND + " ";
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         Record editedRecord = new RecordBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedRecord);
 
@@ -78,16 +110,26 @@ public class EditCommandSystemTest extends ExpenseBookSystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a record with new values same as existing values -> edited */
+<<<<<<< HEAD
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_BOB + INCOME_DESC_BOB
                 + EXPENSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+=======
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_BOB
+                + MONEYFLOW_EXPENSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit a record with new values same as another record's values but with different name -> edited */
         assertTrue(getModel().getAddressBook().getRecordList().contains(BOB));
         index = INDEX_SECOND_RECORD;
         assertNotEquals(getModel().getFilteredRecordList().get(index.getZeroBased()), BOB);
+<<<<<<< HEAD
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + DATE_DESC_BOB + INCOME_DESC_BOB
                 + EXPENSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+=======
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + DATE_DESC_BOB
+                + MONEYFLOW_EXPENSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         editedRecord = new RecordBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedRecord);
 
@@ -95,9 +137,16 @@ public class EditCommandSystemTest extends ExpenseBookSystemTest {
          * -> edited
          */
         index = INDEX_SECOND_RECORD;
+<<<<<<< HEAD
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_AMY + INCOME_DESC_AMY
                 + EXPENSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         editedRecord = new RecordBuilder(BOB).withDate(VALID_DATE_AMY).withIncome(VALID_INCOME_AMY).build();
+=======
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_AMY
+                + MONEYFLOW_INCOME_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+        editedRecord = new RecordBuilder(BOB).withDate(VALID_DATE_AMY)
+                .withMoneyFlow(VALID_MONEYFLOW_INCOME_AMY).build();
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         assertCommandSuccess(command, index, editedRecord);
 
         /* Case: clear tags -> cleared */
@@ -110,7 +159,11 @@ public class EditCommandSystemTest extends ExpenseBookSystemTest {
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
 
         /* Case: filtered record list, edit index within bounds of address book and record list -> edited */
+<<<<<<< HEAD
         showRecordsWithName(KEYWORD_MATCHING_MEIER);
+=======
+        showRecordsWithName(KEYWORD_MATCHING_BURSARY);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         index = INDEX_FIRST_RECORD;
         assertTrue(index.getZeroBased() < getModel().getFilteredRecordList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
@@ -121,7 +174,11 @@ public class EditCommandSystemTest extends ExpenseBookSystemTest {
         /* Case: filtered record list, edit index within bounds of address book but out of bounds of record list
          * -> rejected
          */
+<<<<<<< HEAD
         showRecordsWithName(KEYWORD_MATCHING_MEIER);
+=======
+        showRecordsWithName(KEYWORD_MATCHING_BURSARY);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         int invalidIndex = getModel().getAddressBook().getRecordList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_RECORD_DISPLAYED_INDEX);
@@ -134,8 +191,13 @@ public class EditCommandSystemTest extends ExpenseBookSystemTest {
         showAllRecords();
         index = INDEX_FIRST_RECORD;
         selectRecord(index);
+<<<<<<< HEAD
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + DATE_DESC_AMY + INCOME_DESC_AMY
                 + EXPENSE_DESC_AMY + TAG_DESC_FRIEND;
+=======
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + DATE_DESC_AMY
+                + MONEYFLOW_INCOME_DESC_AMY + TAG_DESC_FRIEND;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new record's name
         assertCommandSuccess(command, index, AMY, index);
@@ -164,6 +226,7 @@ public class EditCommandSystemTest extends ExpenseBookSystemTest {
                 EditCommand.MESSAGE_NOT_EDITED);
 
         /* Case: invalid name -> rejected */
+<<<<<<< HEAD
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RECORD.getOneBased() + INVALID_NAME_DESC,
                 Name.MESSAGE_NAME_CONSTRAINTS);
 
@@ -182,12 +245,29 @@ public class EditCommandSystemTest extends ExpenseBookSystemTest {
         /* Case: invalid tag -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RECORD.getOneBased() + INVALID_TAG_DESC,
                 Tag.MESSAGE_TAG_CONSTRAINTS);
+=======
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RECORD.getOneBased()
+                + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS);
+
+        /* Case: invalid date -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RECORD.getOneBased()
+                + INVALID_DATE_DESC, Date.MESSAGE_DATE_CONSTRAINTS);
+
+        /* Case: invalid money flow -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RECORD.getOneBased()
+                + INVALID_MONEYFLOW_DESC, Income.MESSAGE_MONEY_FLOW_CONSTRAINTS);
+
+        /* Case: invalid tag -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RECORD.getOneBased()
+                + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 
         /* Case: edit a record with new values same as another record's values -> rejected */
         executeCommand(RecordUtil.getAddCommand(BOB));
         assertTrue(getModel().getAddressBook().getRecordList().contains(BOB));
         index = INDEX_FIRST_RECORD;
         assertFalse(getModel().getFilteredRecordList().get(index.getZeroBased()).equals(BOB));
+<<<<<<< HEAD
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_BOB + INCOME_DESC_BOB
                 + EXPENSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RECORD);
@@ -210,6 +290,30 @@ public class EditCommandSystemTest extends ExpenseBookSystemTest {
         /* Case: edit a record with new values same as another record's values but with different income -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_BOB + INCOME_DESC_AMY
                 + EXPENSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+=======
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_BOB
+                + MONEYFLOW_EXPENSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RECORD);
+
+        /* Case: edit a record with new values same as another record's values but with different tags -> rejected */
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_BOB
+                + MONEYFLOW_EXPENSE_DESC_BOB + TAG_DESC_HUSBAND;
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RECORD);
+
+        /* Case: edit a record with new values same as another record's values but with different expense -> rejected */
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_BOB
+                + MONEYFLOW_INCOME_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RECORD);
+
+        /* Case: edit a record with new values same as another record's values but with different date -> rejected */
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_AMY
+                + MONEYFLOW_EXPENSE_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RECORD);
+
+        /* Case: edit a record with new values same as another record's values but with different income -> rejected */
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_BOB
+                + MONEYFLOW_INCOME_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RECORD);
     }
 

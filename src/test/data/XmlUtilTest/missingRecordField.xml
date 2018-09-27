@@ -2,7 +2,11 @@
 <!-- Record with missing name field -->
 <record>
     <date>23-10-2010</date>
+<<<<<<< HEAD
     <income>11.99</income>
     <expense>10.99</expense>
+=======
+    <moneyFlow>-11.99</moneyFlow>
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
     <tagged>friends</tagged>
 </record>

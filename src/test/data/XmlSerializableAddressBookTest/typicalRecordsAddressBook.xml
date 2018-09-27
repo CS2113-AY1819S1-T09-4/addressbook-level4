@@ -2,6 +2,7 @@
 <!-- AddressBook save file which contains the same Record values as in TypicalRecords#getTypicalAddressBook() -->
 <addressbook>
     <records>
+<<<<<<< HEAD
         <name>Alice Pauline</name>
         <date>18-9-2012</date>
         <income>40.60</income>
@@ -13,10 +14,22 @@
         <date>18-12-2012</date>
         <income>26.80</income>
         <expense>25.80</expense>
+=======
+        <name>Indo</name>
+        <date>18-9-2012</date>
+        <moneyFlow>-5.6</moneyFlow>
+        <tagged>friends</tagged>
+    </records>
+    <records>
+        <name>caifan</name>
+        <date>18-12-2012</date>
+        <moneyFlow>-3.80</moneyFlow>
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </records>
     <records>
+<<<<<<< HEAD
         <name>Carl Kurz</name>
         <date>10-12-2012</date>
         <income>26.90</income>
@@ -46,5 +59,31 @@
         <date>23-10-2010</date>
         <income>4.50</income>
         <expense>3.50</expense>
+=======
+        <name>Income from work</name>
+        <date>10-12-2012</date>
+        <moneyFlow>+60.0</moneyFlow>
+    </records>
+    <records>
+        <name>Payment from ZT</name>
+        <date>10-1-2012</date>
+        <moneyFlow>+5.90</moneyFlow>
+        <tagged>friends</tagged>
+    </records>
+    <records>
+        <name>Payment for mala</name>
+        <date>10-1-2003</date>
+        <moneyFlow>-10.50</moneyFlow>
+    </records>
+    <records>
+        <name>Payment for chicken rice</name>
+        <date>31-12-1996</date>
+        <moneyFlow>-0.90</moneyFlow>
+    </records>
+    <records>
+        <name>Random income</name>
+        <date>23-10-2010</date>
+        <moneyFlow>+14.50</moneyFlow>
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
     </records>
 </addressbook>

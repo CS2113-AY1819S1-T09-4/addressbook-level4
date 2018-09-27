@@ -31,6 +31,7 @@ public class RecordCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+<<<<<<< HEAD:src/main/java/seedu/address/ui/RecordCard.java
     private Label date
             ;
     @FXML
@@ -42,14 +43,28 @@ public class RecordCard extends UiPart<Region> {
 
 
     // TODO: Currently, hardcoded. Create a class to handle formatting for UI purposes
+=======
+    private Label date;
+    @FXML
+    private Label moneyFlow;
+    @FXML
+    private FlowPane tags;
+
+    // TODO: Refactor this next time
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e:src/main/java/seedu/address/ui/RecordCard.java
     public RecordCard(Record record, int displayedIndex) {
         super(FXML);
         this.record = record;
         id.setText(displayedIndex + ". ");
         name.setText(record.getName().fullName);
+<<<<<<< HEAD:src/main/java/seedu/address/ui/RecordCard.java
         date.setText("Date: " + record.getDate().value);
         expense.setText("Expense: " + record.getExpense().value);
         income.setText("Income: " + record.getIncome().value);
+=======
+        date.setText(record.getDate().value);
+        moneyFlow.setText(record.getMoneyFlow().value);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e:src/main/java/seedu/address/ui/RecordCard.java
         record.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

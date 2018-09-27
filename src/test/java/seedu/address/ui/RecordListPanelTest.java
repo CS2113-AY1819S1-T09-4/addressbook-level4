@@ -12,10 +12,17 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+<<<<<<< HEAD
 import guitests.guihandles.RecordListPanelHandle;
 import org.junit.Test;
 
 import guitests.guihandles.RecordCardHandle;
+=======
+import org.junit.Test;
+
+import guitests.guihandles.RecordCardHandle;
+import guitests.guihandles.RecordListPanelHandle;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
@@ -97,8 +104,12 @@ public class RecordListPanelTest extends GuiUnitTest {
             builder.append("<records>\n");
             builder.append("<name>").append(i).append("a</name>\n");
             builder.append("<date>10-10-2000</date>\n");
+<<<<<<< HEAD
             builder.append("<income>1.1</income>\n");
             builder.append("<expense>0.1</expense>\n");
+=======
+            builder.append("<moneyFlow>-1.1</moneyFlow>\n");
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
             builder.append("</records>\n");
         }
         builder.append("</addressbook>\n");

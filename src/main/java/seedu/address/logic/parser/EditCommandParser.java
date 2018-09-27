@@ -2,10 +2,16 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+<<<<<<< HEAD
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+=======
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -32,7 +38,11 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
+<<<<<<< HEAD
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_INCOME, PREFIX_EXPENSE, PREFIX_TAG);
+=======
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_MONEYFLOW, PREFIX_TAG);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 
         Index index;
 
@@ -49,12 +59,18 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editRecordDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
+<<<<<<< HEAD
         if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
             editRecordDescriptor.setIncome(ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get()));
         }
         if (argMultimap.getValue(PREFIX_EXPENSE).isPresent()) {
             editRecordDescriptor.setExpense(ParserUtil.parseExpense(argMultimap.getValue(PREFIX_EXPENSE).get()));
         }
+=======
+        if (argMultimap.getValue(PREFIX_MONEYFLOW).isPresent()) {
+            editRecordDescriptor.setMoneyFlow(ParserUtil.parseMoneyFlow(argMultimap.getValue(PREFIX_MONEYFLOW).get()));
+        }
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editRecordDescriptor::setTags);
 
         if (!editRecordDescriptor.isAnyFieldEdited()) {

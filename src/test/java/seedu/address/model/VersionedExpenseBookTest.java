@@ -6,7 +6,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.testutil.TypicalRecords.AMY;
 import static seedu.address.testutil.TypicalRecords.BOB;
+<<<<<<< HEAD:src/test/java/seedu/address/model/VersionedExpenseBookTest.java
 import static seedu.address.testutil.TypicalRecords.CARL;
+=======
+import static seedu.address.testutil.TypicalRecords.INDO;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e:src/test/java/seedu/address/model/VersionedAddressBookTest.java
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,7 +24,11 @@ public class VersionedExpenseBookTest {
 
     private final ReadOnlyAddressBook addressBookWithAmy = new AddressBookBuilder().withRecord(AMY).build();
     private final ReadOnlyAddressBook addressBookWithBob = new AddressBookBuilder().withRecord(BOB).build();
+<<<<<<< HEAD:src/test/java/seedu/address/model/VersionedExpenseBookTest.java
     private final ReadOnlyAddressBook addressBookWithCarl = new AddressBookBuilder().withRecord(CARL).build();
+=======
+    private final ReadOnlyAddressBook addressBookWithIndo = new AddressBookBuilder().withRecord(INDO).build();
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e:src/test/java/seedu/address/model/VersionedAddressBookTest.java
     private final ReadOnlyAddressBook emptyAddressBook = new AddressBookBuilder().build();
 
     @Test
@@ -225,7 +233,7 @@ public class VersionedExpenseBookTest {
         assertFalse(versionedAddressBook.equals(1));
 
         // different state list -> returns false
-        VersionedAddressBook differentAddressBookList = prepareAddressBookList(addressBookWithBob, addressBookWithCarl);
+        VersionedAddressBook differentAddressBookList = prepareAddressBookList(addressBookWithBob, addressBookWithIndo);
         assertFalse(versionedAddressBook.equals(differentAddressBookList));
 
         // different current pointer index -> returns false

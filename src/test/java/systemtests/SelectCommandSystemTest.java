@@ -8,7 +8,11 @@ import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_RECORD_S
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
+<<<<<<< HEAD
 import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_MEIER;
+=======
+import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 
 import org.junit.Test;
 
@@ -57,7 +61,11 @@ public class SelectCommandSystemTest extends ExpenseBookSystemTest {
         /* Case: filtered record list, select index within bounds of address book but out of bounds of record list
          * -> rejected
          */
+<<<<<<< HEAD
         showRecordsWithName(KEYWORD_MATCHING_MEIER);
+=======
+        showRecordsWithName(KEYWORD_MATCHING_BURSARY);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         int invalidIndex = getModel().getAddressBook().getRecordList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_RECORD_DISPLAYED_INDEX);
 

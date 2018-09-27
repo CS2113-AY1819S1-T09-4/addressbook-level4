@@ -3,8 +3,13 @@ package seedu.address.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECORDS;
+<<<<<<< HEAD
 import static seedu.address.testutil.TypicalRecords.ALICE;
 import static seedu.address.testutil.TypicalRecords.BENSON;
+=======
+import static seedu.address.testutil.TypicalRecords.CAIFAN;
+import static seedu.address.testutil.TypicalRecords.INDO;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -30,13 +35,22 @@ public class ModelManagerTest {
 
     @Test
     public void hasRecord_recordNotInAddressBook_returnsFalse() {
+<<<<<<< HEAD
         assertFalse(modelManager.hasRecord(ALICE));
+=======
+        assertFalse(modelManager.hasRecord(INDO));
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
     }
 
     @Test
     public void hasRecord_recordInAddressBook_returnsTrue() {
+<<<<<<< HEAD
         modelManager.addRecord(ALICE);
         assertTrue(modelManager.hasRecord(ALICE));
+=======
+        modelManager.addRecord(INDO);
+        assertTrue(modelManager.hasRecord(INDO));
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
     }
 
     @Test
@@ -47,7 +61,11 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
+<<<<<<< HEAD
         AddressBook addressBook = new AddressBookBuilder().withRecord(ALICE).withRecord(BENSON).build();
+=======
+        AddressBook addressBook = new AddressBookBuilder().withRecord(INDO).withRecord(CAIFAN).build();
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -69,7 +87,11 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
+<<<<<<< HEAD
         String[] keywords = ALICE.getName().fullName.split("\\s+");
+=======
+        String[] keywords = INDO.getName().fullName.split("\\s+");
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         modelManager.updateFilteredRecordList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

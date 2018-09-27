@@ -2,9 +2,15 @@
 <addressbook>
     <!-- Record with invalid name field -->
     <records>
+<<<<<<< HEAD
         <name>Ha!ns Mu@ster</name>
         <date isPrivate="false">10-12-1994</date>
         <income isPrivate="false">11.99</income>
         <expense isPrivate="false">10.99</expense>
+=======
+        <name>Payment for HM!!</name>
+        <date isPrivate="false">10-12-1994</date>
+        <moneyFlow isPrivate="false">-11.99</moneyFlow>
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
     </records>
 </addressbook>

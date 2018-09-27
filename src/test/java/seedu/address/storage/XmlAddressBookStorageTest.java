@@ -2,9 +2,15 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+<<<<<<< HEAD
 import static seedu.address.testutil.TypicalRecords.ALICE;
 import static seedu.address.testutil.TypicalRecords.HOON;
 import static seedu.address.testutil.TypicalRecords.IDA;
+=======
+import static seedu.address.testutil.TypicalRecords.BURSARY;
+import static seedu.address.testutil.TypicalRecords.IDA;
+import static seedu.address.testutil.TypicalRecords.INDO;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import static seedu.address.testutil.TypicalRecords.getTypicalAddressBook;
 
 import java.io.IOException;
@@ -85,8 +91,13 @@ public class XmlAddressBookStorageTest {
         assertEquals(original, new AddressBook(readBack));
 
         //Modify data, overwrite exiting file, and read back
+<<<<<<< HEAD
         original.addRecord(HOON);
         original.removeRecord(ALICE);
+=======
+        original.addRecord(BURSARY);
+        original.removeRecord(INDO);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new AddressBook(readBack));

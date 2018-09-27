@@ -8,7 +8,11 @@ import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getRecord;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
+<<<<<<< HEAD
 import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_MEIER;
+=======
+import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 
 import org.junit.Test;
 
@@ -55,11 +59,24 @@ public class DeleteCommandSystemTest extends ExpenseBookSystemTest {
         /* Case: delete the middle record in the list -> deleted */
         Index middleRecordIndex = getMidIndex(getModel());
         assertCommandSuccess(middleRecordIndex);
+<<<<<<< HEAD
+=======
+
+        // Undo previous operation to prepare for further tests
+
+        command = UndoCommand.COMMAND_WORD;
+        expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
+        assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
         /* Case: filtered record list, delete index within bounds of address book and record list -> deleted */
+<<<<<<< HEAD
         showRecordsWithName(KEYWORD_MATCHING_MEIER);
+=======
+        showRecordsWithName(KEYWORD_MATCHING_BURSARY);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         Index index = INDEX_FIRST_RECORD;
         assertTrue(index.getZeroBased() < getModel().getFilteredRecordList().size());
         assertCommandSuccess(index);
@@ -67,7 +84,11 @@ public class DeleteCommandSystemTest extends ExpenseBookSystemTest {
         /* Case: filtered record list, delete index within bounds of address book but out of bounds of record list
          * -> rejected
          */
+<<<<<<< HEAD
         showRecordsWithName(KEYWORD_MATCHING_MEIER);
+=======
+        showRecordsWithName(KEYWORD_MATCHING_BURSARY);
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
         int invalidIndex = getModel().getAddressBook().getRecordList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_RECORD_DISPLAYED_INDEX);

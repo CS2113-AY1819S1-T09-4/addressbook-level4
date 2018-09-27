@@ -6,11 +6,18 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+<<<<<<< HEAD
+=======
+import seedu.address.model.record.Date;
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import seedu.address.model.record.Expense;
 import seedu.address.model.record.Income;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
+<<<<<<< HEAD
 import seedu.address.model.record.Date;
+=======
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
 import seedu.address.model.tag.Tag;
 
 /**
@@ -19,6 +26,7 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Record[] getSampleRecords() {
         return new Record[] {
+<<<<<<< HEAD
             new Record(new Name("Alex Yeoh"), new Date("17-9-2004"), new Income("101.30"),
                 new Expense("100.30"),
                 getTagSet("friends")),
@@ -36,6 +44,19 @@ public class SampleDataUtil {
                 getTagSet("classmates")),
             new Record(new Name("Roy Balakrishnan"), new Date("15-7-2005"), new Income("24.50"),
                 new Expense("23.50"),
+=======
+            new Record(new Name("Alex Yeoh"), new Date("17-9-2004"), new Income("+101.30"),
+                getTagSet("friends")),
+            new Record(new Name("Bernice Yu"), new Date("23-4-1869"), new Expense("-140.40"),
+                getTagSet("colleagues", "friends")),
+            new Record(new Name("Charlotte Oliveiro"), new Date("29-5-1999"), new Income("+24.49"),
+                getTagSet("neighbours")),
+            new Record(new Name("David Li"), new Date("30-6-2014"), new Expense("-437.49"),
+                getTagSet("family")),
+            new Record(new Name("Irfan Ibrahim"), new Date("31-9-2010"), new Expense("-437.58"),
+                getTagSet("classmates")),
+            new Record(new Name("Roy Balakrishnan"), new Date("15-7-2005"), new Income("+24.50"),
+>>>>>>> 12efdcfc71105647819ba78569b6ea0fdd33c31e
                 getTagSet("colleagues"))
         };
     }
