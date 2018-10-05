@@ -14,6 +14,18 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+<<<<<<< HEAD:src/test/java/seedu/address/logic/parser/AddressBookParserTest.java
+import seedu.address.logic.commands.*;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.record.NameContainsKeywordsPredicate;
+import seedu.address.model.record.Record;
+import seedu.address.testutil.EditRecordDescriptorBuilder;
+import seedu.address.testutil.RecordBuilder;
+import seedu.address.testutil.RecordUtil;
+import seedu.address.testutil.TypicalDates;
+
+public class AddressBookParserTest {
+=======
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.DeleteCommand;
@@ -34,6 +46,7 @@ import seedu.planner.testutil.RecordBuilder;
 import seedu.planner.testutil.RecordUtil;
 
 public class FinancialPlannerParserTest {
+>>>>>>> 936a266304811392cda80acfbf3d1820aac87fed:src/test/java/seedu/planner/logic/parser/FinancialPlannerParserTest.java
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -57,6 +70,13 @@ public class FinancialPlannerParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_RECORD.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_RECORD), command);
+    }
+
+    @Test
+    public void parseCommand_deleteByDateEntry() throws Exception {
+        DeleteCommandByDateEntry command = (DeleteCommandByDateEntry) parser.parseCommand(
+                DeleteCommandByDateEntry.COMMAND_WORD + " " + TypicalDates.DATE_FIRST_INDEX_DATE.value);
+        assertEquals(new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE), command);
     }
 
     @Test

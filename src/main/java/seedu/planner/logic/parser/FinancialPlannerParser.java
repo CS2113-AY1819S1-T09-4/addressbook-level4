@@ -6,6 +6,8 @@ import static seedu.planner.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.DeleteCommandByDateEntry;
+import seedu.address.logic.parser.DeleteCommandByDateEntryParser;
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.Command;
@@ -60,6 +62,9 @@ public class FinancialPlannerParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case DeleteCommandByDateEntry.COMMAND_WORD:
+            return new DeleteCommandByDateEntryParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
