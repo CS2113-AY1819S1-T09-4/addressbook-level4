@@ -70,6 +70,17 @@
 </li>
 <li><a href="#product-scope">Appendix B: Product Scope</a></li>
 <li><a href="#user-stories">Appendix C: User Stories</a></li>
+<li><a href="#use-cases">Appendix D: Use Cases</a></li>
+<li><a href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></li>
+<li><a href="#glossary">Appendix F: Glossary</a></li>
+<li><a href="#product-survey">Appendix G: Product Survey</a></li>
+<li><a href="#instructions-for-manual-testing">Appendix H: Instructions for Manual Testing</a>
+<ul class="sectlevel2">
+<li><a href="#launch-and-shutdown">H.1. Launch and Shutdown</a></li>
+<li><a href="#deleting-a-person">H.2. Deleting a person</a></li>
+<li><a href="#saving-data">H.3. Saving data</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -2135,287 +2146,978 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">archive my old expenses history</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">look back at my expenses history whenever I need it</p>
-<p class="tableblock"><em>{More to be added}</em></p>
-<p class="tableblock">[appendix]
-== Use Cases</p>
-<p class="tableblock">(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
-<p class="tableblock">[discrete]
-=== 1.  Use case: Input expense for a certain activity. [Vincent]</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to insert a spending amount
-2.  FinancialPlanner requests the amount of money
-3.  User enters the amount of money spent
-4.  FinancialPlanner requests for confirmation from user.
-5.  User confirms the amount.
-6.  FinancialPlanner requests the description of the item/activity that money was spent on
-7.  User enters the description of the item he spent on
-8.  FinancialPlanner requests for confirmation from user.
-9.  User confirms the description.
-10. FinancialPlanner processes the input and stores the information.
-11. FinancialPlanner shows the status update of the operation.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">* 3a. User’s input is of invalid form.
-    FinancialPlanner throws invalid format error and shows the format needed.
-    Use case resumes at step 2.</p>
-<p class="tableblock">* 5a. User declines the confirmation.
-<strong> Use case resumes at step 2.</p>
-<p class="tableblock">* 7a. User’s input is of invalid form.
-</strong> FinancialPlanner throws invalid format error.
-<strong> Use case resumes at step 6.</p>
-<p class="tableblock">* 9a. User declines the confirmation.
-</strong> Use case resumes at step 6.</p>
-<p class="tableblock">[discrete]
-=== 2.  Use case: Delete expense entry. [Linh Chi]</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to delete an entry
-2.  FinancialPlanner requests for date of entry to be deleted
-3.  User enters the date entry was added
-4.  FinancialPlanner shows list of entries and requests for entry to be deleted
-5.  User enters entry to be deleted
-6.  FinancialPlanner entry confirms entry to be deleted
-7.  User confirms the deletion
-8.  FinancialPlanner deletes the entry
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">* 1a. There are no entries to be delete.
-<strong> FinancialPlanner throws no entry error.
-</strong> Use Case Ends
-* 3a. User’s input is invalid.
-<strong> FinancialPlanner throws invalid format error and shows format needed.
-</strong> Use case resumes at step 2.
-* 3b User’s input date has no entries
-<strong> FinancialPlanner throws no entry error.
-</strong> Use case resumes at step 2.
-* 5a User’s input is not a valid entry.
-<strong> FinancialPlanner throws invalid data error and resumes at step 4.
-* 7a User declines the confirmation.
-</strong> Use case resumes at step 4.</p>
-<p class="tableblock">[discrete]
-=== 3.  Use case: See history of expenses for a certain period [Vincent]</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to see history within a certain date period.
-2.  FinancialPlanner returns the history of all expenses within the period.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">* 1a. User’s command is of invalid form.
-<strong> FinancialPlanner throws invalid command error.
-</strong> Use case resumes at step 1.
-* 1a. User does not specify any arguments.
-<strong> FinancialPlanner returns all records in the FinancialPlanner.
-</strong> Use case ends.
-* 1a. The arguments are of incorrect format
-<strong> FinancialPlanner throws invalid command error and shows an example of a correct command
-</strong> Use case resumes at step 1.
-* 2a. There is no history.
-<strong> FinancialPlanner shows a blank list.
-</strong> Use case ends.</p>
-<p class="tableblock">[discrete]
-=== 4.  Use case: Clear history of expenses</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to clear history of expenses.
-2.  FinancialPlanner requests for period of time of expenses to clear.
-3.  User enters period of time to clear expenses for.
-4.  FinancialPlanner deletes all entries within specific time period.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">* 3a. User’s input is not a valid period of time
-<strong> FinancialPlanner throws invalid input command
-</strong> Use case continues from step 2</p>
-<p class="tableblock">[discrete]
-=== 5.  Use case: Plan the total expenses for a period of time</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to plan expenses
-2.  FinancialPlanner requests for amount of money to be allocated
-3.  User inputs amount of money
-4.  FinancialPlanner requests for period of time for amount of money to be allocated
-5.  User inputs period of time
-6.  FinancialPlanner records amount of money for time period specified.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">* 3a User’s input is not a valid amount of money
-<strong> FinancialPlanner throws invalid input command
-</strong> Use case continues from step 2
-* 5a User’s input is not a valid period of time
-<strong> FinancialPlanner throws invalid input command
-</strong> Use case continues from step 4</p>
-<p class="tableblock">[discrete]
-=== 6.  Use case: Search expenses based on category [Zhi Thon]</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to search for expenses by category
-2.  FinancialPlanner requests for category of expenditure
-3.  User enters category desired
-4.  FinancialPlanner displays each expenditure with name category and the total expenditure.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">* 3a User’s input category cannot be found.
-<strong> FinancialPlanner shows no expenditure for selected category</p>
-<p class="tableblock">[discrete]
-=== 7.  Use case: Summary of expenditure by category [Vincent]</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests for Expenditure summary
-2.  FinancialPlanner requests for date of entry the user want to see
-3.  User enters the date they want to see
-4.  FinancialPlanner requests for confimation from the user
-5.  User confirms the date
-6.  FinancialDisplay displays the list of catrgories expenditure.
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">* 3a. User’s input is of invalid form.
-</strong> FinancialPlanner throws invalid format error and shows the format needed.
-<strong> Use case resumes at step 2.</p>
-<p class="tableblock">[discrete]
-=== 8.  Use case: Usage Instructions guide</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests for usage instructions
-2.  FinancialPlanner displays different commands
-3.  User inputs which command he wants to find out about
-4.  Financial displays infomration on selected command
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">* 3a User enter invalid command
-</strong> FinancialPlanner throws invalid command error.
-<strong> Use case resumes at step 2.</p>
-<p class="tableblock">[discrete]
-=== 9.  Use case: Undo expense entry</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests for undo
-2.  FinancialPlanner confirms the undo request
-3.  User enter the item they would like to undo
-4.  FinancialPlanner undo the deleted item
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">* 3a User enter invalid command
-</strong> FinancialPlanner throws invalid command error.
-<strong> Use case resumes at step 2</p>
-<p class="tableblock">[discrete]
-=== 10. Use case: Add notes to each expense</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests for adding notes
-2.  Financial Planner request for the date of entry and confirm the request
-3.  User enter the notes
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">* 3a User enter invalid command
-</strong> FinancialPlanner throws invalid command error.
-<strong> Use case resumes at step 2</p>
-<p class="tableblock">[discrete]
-=== 11. Use case: Create daily limit for expenses [Oscar]</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to create daily limit for expenses
-2.  FinancialPlanner requests for the maximum amount for the day
-3.  User enters the amount.
-4.  FinancialPlanner confirms amount with user.
-5.  User confirms the amount.
-6.  FinancialPlanner records the amount in the hard drive
-+
-Use case ends.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">* 6a. The location for the record is invalid.
-</strong> FinancialPlanner throws invalid location error and prompts for new location.
-<strong> User enters a new location.
-</strong> FinancialPlanner requests for confirmation.
-<strong> User confirms the location
-</strong> Use case ends.</p>
-<p class="tableblock">[discrete]
-=== 12. Use case: Export expenses into another format</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests export format.
-2.  FinancialPlanner shows list of possible formats for export.
-3.  User enters preferred export format.
-4.  FinancialPlanner exports the file in specified format.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">* 3a User input unsupported file format
-<strong> FinancialPlanner throws unsupported format error
-</strong> Use case resumes at step 2.</p>
-<p class="tableblock">[discrete]
-=== 13. Use case: Freely edit expenses tags</p>
-<p class="tableblock"><strong>MSS</strong></p>
-<p class="tableblock">1.  User requests to edit expenses tags.
-2.  FinancialPlanner requests for date of entry to edit tags
-3.  User enters date to edit entry for
-4.  FinancialPlanner shows list of entries on specified date
-5.  User enters entry to edit.
-6.  FinancialPlanner shows current tags of selected entry.
-7.  User enters tag to remove
-8.  FinancialPlanner removes tag entered.</p>
-<p class="tableblock"><strong>Extensions</strong></p>
-<p class="tableblock">* 3a User inputs invalid date
-<strong> FinancialPlanner throws invalid date error.
-</strong> Use case resumes at step 2.
-* 3b Date input has no entries to edit
-<strong> FinancialPlanner throws no entry error.
-</strong> Use case resumes at step 2.
-* 5a User’s input is not a valid entry.
-<strong> FinancialPlanner throws invalid data error and resumes at step 4.
-* 5a User’s input entry has no tags.
-</strong> FinancialPlanner displays ‘No tags’ and continues to step 7.
-* 7a User’s input tag does not exist
-<strong>* FinancialPlanner adds tag to entry.</p>
-<p class="tableblock">[appendix]
-== Non Functional Requirements</p>
-<p class="tableblock">.  Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>9</code> or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
-<p class="tableblock"><em>{More to be added}</em></p>
-<p class="tableblock">[appendix]
-== Glossary</p>
-<p class="tableblock"><a id="mainstream-os"></a> Mainstream OS::
-Windows, Linux, Unix, OS-X</p>
-<p class="tableblock"><a id="private-contact-detail"></a> Private contact detail::
-A contact detail that is not meant to be shared with others</p>
-<p class="tableblock">[appendix]
-== Product Survey</p>
-<p class="tableblock">*Product Name</strong></p>
-<p class="tableblock">Author: &#8230;&#8203;</p>
-<p class="tableblock">Pros:</p>
-<p class="tableblock">* &#8230;&#8203;
-* &#8230;&#8203;</p>
-<p class="tableblock">Cons:</p>
-<p class="tableblock">* &#8230;&#8203;
-* &#8230;&#8203;</p>
-<p class="tableblock">[appendix]
-== Instructions for Manual Testing</p>
-<p class="tableblock">Given below are instructions to test the app manually.</p>
-<p class="tableblock">[NOTE]
-These instructions only provide a starting point for testers to work on; testers are expected to do more <em>exploratory</em> testing.</p>
-<p class="tableblock">=== Launch and Shutdown</p>
-<p class="tableblock">. Initial launch</p>
-<p class="tableblock">.. Download the jar file and copy into an empty folder
-.. Double-click the jar file<br>
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
-<p class="tableblock">. Saving window preferences</p>
-<p class="tableblock">.. Resize the window to an optimum size. Move the window to a different location. Close the window.
-.. Re-launch the app by double-clicking the jar file.<br>
-   Expected: The most recent window size and location is retained.</p>
-<p class="tableblock"><em>{ more test cases &#8230;&#8203; }</em></p>
-<p class="tableblock">=== Deleting a person</p>
-<p class="tableblock">. Deleting a person while all persons are listed</p>
-<p class="tableblock">.. Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.
-.. Test case: <code>delete 1</code><br>
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: <code>delete 0</code><br>
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
-   Expected: Similar to previous.</p>
-<p class="tableblock"><em>{ more test cases &#8230;&#8203; }</em></p>
-<p class="tableblock">=== Saving data</p>
-<p class="tableblock">. Dealing with missing/corrupted data files</p>
-<p class="tableblock">.. <em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
-<p class="tableblock"><em>{ more test cases &#8230;&#8203; }</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">look back at my expenses history whenever I need it</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><em>{More to be added}</em></p>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-15 05:42:59 UTC</div></div></div></body></html>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-cases"><a class="link" href="#use-cases">Appendix D: Use Cases</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>(For all use cases below, the <strong>System</strong> is the <code>AddressBook</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+</div>
+<h3 id="1-use-case-input-expense-for-a-certain-activity-vincent" class="discrete">1.  Use case: Input expense for a certain activity. [Vincent]</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to insert a spending amount</p>
+</li>
+<li>
+<p>FinancialPlanner requests the amount of money</p>
+</li>
+<li>
+<p>User enters the amount of money spent</p>
+</li>
+<li>
+<p>FinancialPlanner requests for confirmation from user.</p>
+</li>
+<li>
+<p>User confirms the amount.</p>
+</li>
+<li>
+<p>FinancialPlanner requests the description of the item/activity that money was spent on</p>
+</li>
+<li>
+<p>User enters the description of the item he spent on</p>
+</li>
+<li>
+<p>FinancialPlanner requests for confirmation from user.</p>
+</li>
+<li>
+<p>User confirms the description.</p>
+</li>
+<li>
+<p>FinancialPlanner processes the input and stores the information.</p>
+</li>
+<li>
+<p>FinancialPlanner shows the status update of the operation.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a. User’s input is of invalid form.
+FinancialPlanner throws invalid format error and shows the format needed.
+Use case resumes at step 2.</p>
+</li>
+<li>
+<p>5a. User declines the confirmation.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>7a. User’s input is of invalid form.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid format error.</p>
+</li>
+<li>
+<p>Use case resumes at step 6.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>9a. User declines the confirmation.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Use case resumes at step 6.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="2-use-case-delete-expense-entry-whose-date-is-required-linh-chi" class="discrete">2.  Use case: Delete expense entry whose date is required. [Linh Chi]</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to delete records whose date is required.</p>
+</li>
+<li>
+<p>FinancialPlanner requests for date of entry to be deleted.</p>
+</li>
+<li>
+<p>User enters the date entry he/she wants to delete.</p>
+</li>
+<li>
+<p>FinancialPlanner entry confirms date to be deleted.</p>
+</li>
+<li>
+<p>User confirms the deletion</p>
+</li>
+<li>
+<p>FinancialPlanner deletes the entry</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. There are no entries to be delete.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws no entry error.</p>
+</li>
+<li>
+<p>Use Case Ends</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. User’s input is invalid.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid format error and shows format needed.</p>
+</li>
+<li>
+<p>Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. User’s input date has no entries</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws no entry error.</p>
+</li>
+<li>
+<p>Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>4a. User’s input is not a valid entry.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid data error and resumes at step 4.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>5a. User declines the confirmation.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Use case resumes at step 3.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="3-use-case-see-history-of-expenses-for-a-certain-period-vincent" class="discrete">3.  Use case: See history of expenses for a certain period [Vincent]</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to see history within a certain date period.</p>
+</li>
+<li>
+<p>FinancialPlanner returns the history of all expenses within the period.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s command is of invalid form.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid command error.</p>
+</li>
+<li>
+<p>Use case resumes at step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1a. User does not specify any arguments.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner returns all records in the FinancialPlanner.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1a. The arguments are of incorrect format</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid command error and shows an example of a correct command</p>
+</li>
+<li>
+<p>Use case resumes at step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>2a. There is no history.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner shows a blank list.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="4-use-case-clear-history-of-expenses" class="discrete">4.  Use case: Clear history of expenses</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to clear history of expenses.</p>
+</li>
+<li>
+<p>FinancialPlanner requests for period of time of expenses to clear.</p>
+</li>
+<li>
+<p>User enters period of time to clear expenses for.</p>
+</li>
+<li>
+<p>FinancialPlanner deletes all entries within specific time period.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a. User’s input is not a valid period of time</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid input command</p>
+</li>
+<li>
+<p>Use case continues from step 2</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="5-use-case-plan-the-total-expenses-for-a-period-of-time" class="discrete">5.  Use case: Plan the total expenses for a period of time</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to plan expenses</p>
+</li>
+<li>
+<p>FinancialPlanner requests for amount of money to be allocated</p>
+</li>
+<li>
+<p>User inputs amount of money</p>
+</li>
+<li>
+<p>FinancialPlanner requests for period of time for amount of money to be allocated</p>
+</li>
+<li>
+<p>User inputs period of time</p>
+</li>
+<li>
+<p>FinancialPlanner records amount of money for time period specified.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a User’s input is not a valid amount of money</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid input command</p>
+</li>
+<li>
+<p>Use case continues from step 2</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>5a User’s input is not a valid period of time</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid input command</p>
+</li>
+<li>
+<p>Use case continues from step 4</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="6-use-case-search-expenses-based-on-category-zhi-thon" class="discrete">6.  Use case: Search expenses based on category [Zhi Thon]</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to search for expenses by category</p>
+</li>
+<li>
+<p>FinancialPlanner requests for category of expenditure</p>
+</li>
+<li>
+<p>User enters category desired</p>
+</li>
+<li>
+<p>FinancialPlanner displays each expenditure with name category and the total expenditure.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a User’s input category cannot be found.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner shows no expenditure for selected category</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="7-use-case-summary-of-expenditure-by-category-vincent" class="discrete">7.  Use case: Summary of expenditure by category [Vincent]</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests for Expenditure summary</p>
+</li>
+<li>
+<p>FinancialPlanner requests for date of entry the user want to see</p>
+</li>
+<li>
+<p>User enters the date they want to see</p>
+</li>
+<li>
+<p>FinancialPlanner requests for confimation from the user</p>
+</li>
+<li>
+<p>User confirms the date</p>
+</li>
+<li>
+<p>FinancialDisplay displays the list of catrgories expenditure.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a. User’s input is of invalid form.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid format error and shows the format needed.</p>
+</li>
+<li>
+<p>Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="8-use-case-usage-instructions-guide" class="discrete">8.  Use case: Usage Instructions guide</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests for usage instructions</p>
+</li>
+<li>
+<p>FinancialPlanner displays different commands</p>
+</li>
+<li>
+<p>User inputs which command he wants to find out about</p>
+</li>
+<li>
+<p>Financial displays infomration on selected command</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a User enter invalid command</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid command error.</p>
+</li>
+<li>
+<p>Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="9-use-case-undo-expense-entry" class="discrete">9.  Use case: Undo expense entry</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests for undo</p>
+</li>
+<li>
+<p>FinancialPlanner confirms the undo request</p>
+</li>
+<li>
+<p>User enter the item they would like to undo</p>
+</li>
+<li>
+<p>FinancialPlanner undo the deleted item</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a User enter invalid command</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid command error.</p>
+</li>
+<li>
+<p>Use case resumes at step 2</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="10-use-case-add-notes-to-each-expense" class="discrete">10. Use case: Add notes to each expense</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests for adding notes</p>
+</li>
+<li>
+<p>Financial Planner request for the date of entry and confirm the request</p>
+</li>
+<li>
+<p>User enter the notes</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a User enter invalid command</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid command error.</p>
+</li>
+<li>
+<p>Use case resumes at step 2</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="11-use-case-create-daily-limit-for-expenses-oscar" class="discrete">11. Use case: Create daily limit for expenses [Oscar]</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to create daily limit for expenses</p>
+</li>
+<li>
+<p>FinancialPlanner requests for the maximum amount for the day</p>
+</li>
+<li>
+<p>User enters the amount.</p>
+</li>
+<li>
+<p>FinancialPlanner confirms amount with user.</p>
+</li>
+<li>
+<p>User confirms the amount.</p>
+</li>
+<li>
+<p>FinancialPlanner records the amount in the hard drive</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>6a. The location for the record is invalid.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid location error and prompts for new location.</p>
+</li>
+<li>
+<p>User enters a new location.</p>
+</li>
+<li>
+<p>FinancialPlanner requests for confirmation.</p>
+</li>
+<li>
+<p>User confirms the location</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="12-use-case-export-expenses-into-another-format" class="discrete">12. Use case: Export expenses into another format</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests export format.</p>
+</li>
+<li>
+<p>FinancialPlanner shows list of possible formats for export.</p>
+</li>
+<li>
+<p>User enters preferred export format.</p>
+</li>
+<li>
+<p>FinancialPlanner exports the file in specified format.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a User input unsupported file format</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws unsupported format error</p>
+</li>
+<li>
+<p>Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="13-use-case-freely-edit-expenses-tags" class="discrete">13. Use case: Freely edit expenses tags</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to edit expenses tags.</p>
+</li>
+<li>
+<p>FinancialPlanner requests for date of entry to edit tags</p>
+</li>
+<li>
+<p>User enters date to edit entry for</p>
+</li>
+<li>
+<p>FinancialPlanner shows list of entries on specified date</p>
+</li>
+<li>
+<p>User enters entry to edit.</p>
+</li>
+<li>
+<p>FinancialPlanner shows current tags of selected entry.</p>
+</li>
+<li>
+<p>User enters tag to remove</p>
+</li>
+<li>
+<p>FinancialPlanner removes tag entered.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a User inputs invalid date</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid date error.</p>
+</li>
+<li>
+<p>Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b Date input has no entries to edit</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws no entry error.</p>
+</li>
+<li>
+<p>Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>5a User’s input is not a valid entry.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws invalid data error and resumes at step 4.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>5a User’s input entry has no tags.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner displays ‘No tags’ and continues to step 7.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>7a User’s input tag does not exist</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner adds tag to entry.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="non-functional-requirements"><a class="link" href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>9</code> or higher installed.</p>
+</li>
+<li>
+<p>Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.</p>
+</li>
+<li>
+<p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>{More to be added}</em></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="glossary"><a class="link" href="#glossary">Appendix F: Glossary</a></h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a id="mainstream-os"></a> Mainstream OS</dt>
+<dd>
+<p>Windows, Linux, Unix, OS-X</p>
+</dd>
+<dt class="hdlist1"><a id="private-contact-detail"></a> Private contact detail</dt>
+<dd>
+<p>A contact detail that is not meant to be shared with others</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="product-survey"><a class="link" href="#product-survey">Appendix G: Product Survey</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Product Name</strong></p>
+</div>
+<div class="paragraph">
+<p>Author: &#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>Pros:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Cons:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="instructions-for-manual-testing"><a class="link" href="#instructions-for-manual-testing">Appendix H: Instructions for Manual Testing</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Given below are instructions to test the app manually.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+These instructions only provide a starting point for testers to work on; testers are expected to do more <em>exploratory</em> testing.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="launch-and-shutdown"><a class="link" href="#launch-and-shutdown">H.1. Launch and Shutdown</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Initial launch</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Download the jar file and copy into an empty folder</p>
+</li>
+<li>
+<p>Double-click the jar file<br>
+Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Saving window preferences</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Resize the window to an optimum size. Move the window to a different location. Close the window.</p>
+</li>
+<li>
+<p>Re-launch the app by double-clicking the jar file.<br>
+Expected: The most recent window size and location is retained.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">H.2. Deleting a person</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deleting a person while all persons are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+</li>
+<li>
+<p>Test case: <code>delete 1</code><br>
+Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+</li>
+<li>
+<p>Test case: <code>delete 0</code><br>
+Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+</li>
+<li>
+<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+Expected: Similar to previous.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">H.3. Saving data</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Dealing with missing/corrupted data files</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em>{ more test cases &#8230;&#8203; }</em></p>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-16 12:51:24 UTC</div></div></div></body></html>
