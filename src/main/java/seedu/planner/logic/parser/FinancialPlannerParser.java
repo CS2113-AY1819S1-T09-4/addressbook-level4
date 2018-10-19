@@ -13,6 +13,7 @@ import seedu.planner.logic.commands.DeleteCommand;
 import seedu.planner.logic.commands.DeleteCommandByDateEntry;
 import seedu.planner.logic.commands.EditCommand;
 import seedu.planner.logic.commands.ExitCommand;
+import seedu.planner.logic.commands.ExportExcelCommand;
 import seedu.planner.logic.commands.FindCommand;
 import seedu.planner.logic.commands.FindTagCommand;
 import seedu.planner.logic.commands.HelpCommand;
@@ -21,6 +22,8 @@ import seedu.planner.logic.commands.LimitCommand;
 import seedu.planner.logic.commands.ListCommand;
 import seedu.planner.logic.commands.RedoCommand;
 import seedu.planner.logic.commands.SelectCommand;
+import seedu.planner.logic.commands.SortCommand;
+import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
 
 import seedu.planner.logic.parser.exceptions.ParseException;
@@ -51,7 +54,8 @@ public class FinancialPlannerParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
+
+        switch (commandWord.toLowerCase()) {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
@@ -80,6 +84,9 @@ public class FinancialPlannerParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
 
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
+
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
 
@@ -98,9 +105,14 @@ public class FinancialPlannerParser {
         case LimitCommand.COMMAND_WORD:
             return new LimitCommandParser().parse(arguments);
 
+        case SummaryCommand.COMMAND_WORD:
+            return new SummaryCommandParser().parse(arguments);
+
+        case ExportExcelCommand.COMMAND_WORD:
+            return new ExportExcelCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
