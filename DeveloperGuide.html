@@ -30,12 +30,13 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
-<li><a href="#limit-feature">3.2. Limit feature</a></li>
-<li><a href="#list-history-feature">3.3. List history feature</a></li>
-<li><a href="#design-considerations-2">3.4. Design Considerations</a></li>
-<li><a href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.6. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.7. Configuration</a></li>
+<li><a href="#sort-records-feature">3.2. Sort records feature</a></li>
+<li><a href="#limit-feature">3.3. Limit feature</a></li>
+<li><a href="#list-history-feature">3.4. List history feature</a></li>
+<li><a href="#design-considerations-2">3.5. Design Considerations</a></li>
+<li><a href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.7. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.8. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -794,9 +795,94 @@ If the <code>currentStatePointer</code> is at index <code>addressBookStateList.s
 </div>
 </div>
 <div class="sect2">
-<h3 id="limit-feature"><a class="link" href="#limit-feature">3.2. Limit feature</a></h3>
+<h3 id="sort-records-feature"><a class="link" href="#sort-records-feature">3.2. Sort records feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The sort function is facilitated by <code>ModelManager</code>.
+It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between
+the commands and the <code>VersionedFinancialPlanner</code>.
+SortCommand calls <code>ModelManager#sortFilteredRecordList</code> and passes in the category to be sorted by and whether the sort
+order is to be in reversed.</p>
+</div>
+<div class="paragraph">
+<p>This feature has one keyword <code>sort</code> and takes in arguments of either category or order of sort. Keywords are not
+case sensitive.</p>
+</div>
+<div class="paragraph">
+<p>Category can be either of the following keywords:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>name</code> - To sort in lexicographical order by the name attribute of the record</p>
+</li>
+<li>
+<p><code>date</code> - To sort by the date attribute of the record</p>
+</li>
+<li>
+<p><code>money</code>/<code>moneyflow</code> - To sort by the expenditure or income of the record</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Order can be either of the following keywords:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>desc</code> - To sort in descending order</p>
+</li>
+<li>
+<p><code>asc</code> - To sort in ascending order</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This feature has 2 different kind of modes as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Single Argument Mode - Input argument can be either the category or the order of sort</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If category specified, records are sorted in ascending order of that category</p>
+</li>
+<li>
+<p>If order specified, records will be sorted by name in the specified order</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Duo Argument Mode - Input arguments must contain only 1 category and only 1 order, and can be input in no particular order</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The input given by the user is passed to <code>SortCommandParser</code> to split the input separated by whitespaces to ensure
+there is either only one or two arguments input by the user. These arguments are then stored in an array of strings and
+the size of the array determines the mode of the command.
+The strings are compared to two sets of strings containing the supported categories and orders of the function.
+The string of the category and a boolean representing whether the records are to be reversed will then be passed to
+<code>ModelManager</code> to sort the records.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the sort operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortSequenceDiagram.png" alt="width:800">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="limit-feature"><a class="link" href="#limit-feature">3.3. Limit feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The limit command is based on the data type "Date", which includes two dates and moneyFlow.
 Once the user execute the limit command, the program will read all the records from the memory.</p>
@@ -824,9 +910,9 @@ This string will be split into two strings and each of them will be construct as
 </div>
 </div>
 <div class="sect2">
-<h3 id="list-history-feature"><a class="link" href="#list-history-feature">3.3. List history feature</a></h3>
+<h3 id="list-history-feature"><a class="link" href="#list-history-feature">3.4. List history feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-3"><a class="link" href="#current-implementation-3">3.3.1. Current Implementation</a></h4>
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The list mechanism is facilitated by <code>ModelManager</code>.
 It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>.
@@ -895,9 +981,9 @@ The update of the UI <code>RecordListPanel</code> is done through the event syst
 </div>
 </div>
 <div class="sect2">
-<h3 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.4. Design Considerations</a></h3>
+<h3 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.5. Design Considerations</a></h3>
 <div class="sect3">
-<h4 id="aspect-data-structure-to-support-listing-of-records"><a class="link" href="#aspect-data-structure-to-support-listing-of-records">3.4.1. Aspect: Data structure to support listing of records</a></h4>
+<h4 id="aspect-data-structure-to-support-listing-of-records"><a class="link" href="#aspect-data-structure-to-support-listing-of-records">3.5.1. Aspect: Data structure to support listing of records</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -931,20 +1017,20 @@ The update of the UI <code>RecordListPanel</code> is done through the event syst
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.5. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.6. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.6. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.7. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.7, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.8, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -975,7 +1061,7 @@ The update of the UI <code>RecordListPanel</code> is done through the event syst
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.7. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.8. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3263,4 +3349,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-18 13:17:05 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-19 00:14:05 UTC</div></div></div></body></html>
