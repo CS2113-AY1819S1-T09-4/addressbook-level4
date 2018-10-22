@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.planner.commons.core.Messages;
@@ -24,25 +23,28 @@ import seedu.planner.testutil.TypicalDates;
 import seedu.planner.testutil.TypicalIndexes;
 import seedu.planner.testutil.TypicalRecords;
 
-@Ignore
 public class DeleteCommandByDateEntryTest {
     private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void execute_validDateUnfilteredList_success() {
-        List<Record> recordsToDelete = listAllRecordToDelete(model, TypicalDates.DATE_FIRST_INDEX_DATE);
+        Date targetDate = TypicalDates.DATE_FIRST_INDEX_DATE;
+        List<Record> records = filteredRecordList(model);
 
         DeleteCommandByDateEntry deleteCommandByDateEntry =
                 new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
 
         String expectedMessage = String.format(
-                DeleteCommandByDateEntry.MESSAGE_DELETE_RECORD_SUCCESS, TypicalDates.DATE_FIRST_INDEX_DATE);
+                DeleteCommandByDateEntry.MESSAGE_DELETE_RECORDS_SUCCESS, TypicalDates.DATE_FIRST_INDEX_DATE);
 
         ModelManager expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
-        expectedModel.deleteListRecord(recordsToDelete);
-        expectedModel.commitFinancialPlanner();
-
+        for (int i = records.size() - 1; i >= 0; i--) {
+            if (records.get(i).getDate().equals(targetDate)) {
+                expectedModel.deleteRecord(records.get(i));
+                expectedModel.commitFinancialPlanner();
+            }
+        }
         CommandTestUtil.assertCommandSuccess(
                 deleteCommandByDateEntry, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -73,18 +75,21 @@ public class DeleteCommandByDateEntryTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        List<Record> recordsToDelete = listAllRecordToDelete(model, TypicalDates.DATE_FIRST_INDEX_DATE);
+        Date targetDate = TypicalDates.DATE_FIRST_INDEX_DATE;
+        List<Record> recordsToDelete = listAllRecordToDelete(model, targetDate);
 
         DeleteCommandByDateEntry deleteCommandByDateEntry =
                 new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
         Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
-        expectedModel.deleteListRecord(recordsToDelete);
+        for (Record record : recordsToDelete) {
+            model.deleteRecord(record);
+        }
         expectedModel.commitFinancialPlanner();
 
         //delete the Records have required date
         deleteCommandByDateEntry.execute(model, commandHistory);
 
-        //undo -> reverts addressBook back to the prebious state and filtered record list to show all records
+        //undo -> reverts financialPlanner back to the prebious state and filtered record list to show all records
         expectedModel.undoFinancialPlanner();
         CommandTestUtil.assertCommandSuccess(
                 new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -118,13 +123,19 @@ public class DeleteCommandByDateEntryTest {
      */
 
     @Test
-    public void executeUndoRedo_exsistentDateFilteredList_sameRecordDeleted()
-            throws Exception {
+    public void executeUndoRedo_exsistentDateFilteredList_sameRecordDeleted() throws Exception {
         DeleteCommandByDateEntry deleteCommandByDateEntry =
                 new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
         Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
-        List<Record> recordsToDelete = listAllRecordToDelete(model, TypicalDates.DATE_FIRST_INDEX_DATE);
-        expectedModel.deleteListRecord(recordsToDelete);
+
+        Date date = TypicalDates.DATE_FIRST_INDEX_DATE;
+
+        List<Record> records = filteredRecordList(model);
+        List<Record> recordsToDelete = listAllRecordToDelete(model, date);
+
+        for (Record record : recordsToDelete) {
+            model.deleteRecord(record);
+        }
         expectedModel.commitFinancialPlanner();
 
         // delete -> deletes second record in unfiltered record list / first record in filtered record list

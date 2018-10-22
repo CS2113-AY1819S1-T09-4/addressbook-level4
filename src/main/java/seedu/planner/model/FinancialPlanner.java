@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
@@ -69,7 +68,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
         setRecords(newData.getRecordList());
         setSummaryMap(newData.getSummaryMap());
-        setLimits(newData.getLimitList());
+        //setLimits(newData.getLimitList());
     }
 
     /**
@@ -133,6 +132,22 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     }
 
     /**
+     * Removes {@code records} from this {@code Financial Planner}
+     * {@code records} must exist in the Financial Planner.
+     * That means that all the Records in the list must exist in the Finacial Planner.
+     */
+    public int removeRecordsSameDate(List<Record> records, Date targetDate) {
+        int count = 0;
+        for (Record record : records) {
+            if (record.getDate().equals(targetDate)) {
+                removeRecord(record);
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
      * Sorts the records in this {@code FinancialPlanner}.
      */
     public void sortRecords(String category, Boolean ascending) {
@@ -152,6 +167,17 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      */
     public void removeRecordFromSummary(Record key) {
         summaryMap.remove(key);
+    }
+
+    /**
+     * Remove the record from the summary map
+     */
+    public void removeRecordsFromSummarySameDate(List<Record> key, Date targetDate) {
+        for (Record record : key) {
+            if (record.getDate().equals(targetDate)) {
+                removeRecordFromSummary(record);
+            }
+        }
     }
 
     /**
@@ -234,7 +260,8 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FinancialPlanner // instanceof handles nulls
-                && records.equals(((FinancialPlanner) other).records));
+                && records.equals(((FinancialPlanner) other).records))
+                && summaryMap.equals(((FinancialPlanner) other).summaryMap);
     }
 
     @Override
