@@ -34,10 +34,12 @@
 <li><a href="#list-history-feature">3.3. List history feature</a></li>
 <li><a href="#find-records-by-tag-feature">3.4. Find records by tag feature</a></li>
 <li><a href="#limit-feature">3.5. Limit feature</a></li>
-<li><a href="#design-considerations-2">3.6. Design Considerations</a></li>
-<li><a href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.8. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.9. Configuration</a></li>
+<li><a href="#delete-by-date-entry">3.6. Delete By Date Entry</a></li>
+<li><a href="#export-into-excel-file">3.7. Export into Excel file</a></li>
+<li><a href="#design-considerations-2">3.8. Design Considerations</a></li>
+<li><a href="#proposed-data-encryption">3.9. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.10. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.11. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -404,7 +406,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Note how the <code>Model</code> simply raises a <code>FinancialPlannerChangedEvent</code> when the Address Book data are changed, instead of asking the <code>Storage</code> to save the updates to the hard disk.
+Note how the <code>Model</code> simply raises a <code>FinancialPlannerChangedEvent</code> when the Financial Planner data are changed, instead of asking the <code>Storage</code> to save the updates to the hard disk.
 </td>
 </tr>
 </table>
@@ -526,7 +528,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p>stores a <code>UserPref</code> object that represents the user&#8217;s preferences.</p>
 </li>
 <li>
-<p>stores the Address Book data.</p>
+<p>stores the Financial Planner data.</p>
 </li>
 <li>
 <p>exposes an unmodifiable <code>ObservableList&lt;Person&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</p>
@@ -543,7 +545,7 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-As a more OOP model, we can store a <code>Tag</code> list in <code>Address Book</code>, which <code>Person</code> can reference. This would allow <code>Address Book</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
+As a more OOP model, we can store a <code>Tag</code> list in <code>Financial Planner</code>, which <code>Record</code> can reference. This would allow <code>Financial Planner</code> to only require one <code>Tag</code> object per unique <code>Tag</code>, instead of each <code>Person</code> needing their own <code>Tag</code> object. An example of how such a model may look like is given below.<br>
 <br>
 <span class="image"><img src="images/ModelClassBetterOopDiagram.png" alt="ModelClassBetterOopDiagram" width="800"></span>
 </td>
@@ -1040,9 +1042,118 @@ This string will be split into two strings and each of them will be construct as
 </div>
 </div>
 <div class="sect2">
-<h3 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.6. Design Considerations</a></h3>
+<h3 id="delete-by-date-entry"><a class="link" href="#delete-by-date-entry">3.6. Delete By Date Entry</a></h3>
 <div class="sect3">
-<h4 id="aspect-data-structure-to-support-listing-of-records"><a class="link" href="#aspect-data-structure-to-support-listing-of-records">3.6.1. Aspect: Data structure to support listing of records</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current implementation</a></h4>
+<div class="paragraph">
+<p>The delete by date entry mechanism is facilitated by <code>ModelManager</code>.
+It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>.
+DeleteByDateEntryCommand calls <code>ModelManager#getFilteredRecordList</code>.</p>
+</div>
+<div class="paragraph">
+<p>This feature has only one keyword <code>delete_date</code> and implements only 1 argument mode.
+The three argument modes are as listed below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Single Argument mode&#8201;&#8212;&#8201;Requires only one date. It exports all records whose date is required and shows all records exported in the Financial Planner.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The mechanism that facilitates these modes can be found in the <code>DeleteByDateEntryCommandParser#parse</code>. Below is a overview of the mechanism:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The argument mode is determined and is further processed into <code>Date</code> objects, before creating and returning a <code>DeleteByDateEntryCommand</code> object.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the list operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/DeleteByDateEntrySequenceDiagram.png" alt="width:800">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="export-into-excel-file"><a class="link" href="#export-into-excel-file">3.7. Export into Excel file</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current implementation</a></h4>
+<div class="paragraph">
+<p>The export into excel file mechanism is facilitated by <code>ModelManager</code>.
+It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>.
+ExportExcelCommand calls <code>ModelManager#updateFilteredRecords</code> and passes in different predicates depending on the argument mode.</p>
+</div>
+<div class="paragraph">
+<p>This feature has only one keyword <code>export_excel</code> but implements 3 different argument modes to allow users to access multiple versions of the same command.
+The three argument modes are as listed below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>No Argument mode&#8201;&#8212;&#8201;It requires no arguments and exports the entire list of records in the FinancialPlanner and shows all the records in the Financial Planner.</p>
+</li>
+<li>
+<p>Single Argument mode&#8201;&#8212;&#8201;Requires only one date. It exports all records whose date is required and shows all records exported in the Financial Planner.</p>
+</li>
+<li>
+<p>Dual Argument mode&#8201;&#8212;&#8201;Requires 2 dates, a <code>start date</code> and an <code>end date</code>. It exports all records containing dates within the time frame of start date and end date, inclusive of both start date and end date and shows all records exported in the Financial Planner.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The mechanism that facilitates these modes can be found in the <code>ExportExcelCommandParser#parse</code>. Below is a overview of the mechanism:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The string associated is passed into <code>ExportExcelCommandParser#splitByWhitespace</code> for further processing and returns an array.</p>
+</li>
+<li>
+<p>The argument mode is determined by the size of this array and the elements are further processed into <code>Date</code> objects, before creating and returning a <code>ExportExcelCommand</code> object.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>ExportExcelCommand</code> has two constructors which makes use of overloading to reduce code complexity.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>One constructor has no arguments and assigns default predicate for the <code>FilteredList</code> in <code>ModelManager</code>,
+<code>PREDICATE_SHOW_ALL_RECORDS</code> which will show all items in the list.</p>
+</li>
+<li>
+<p>The second constructor takes in 2 <code>Date</code> arguments and assigns the predicate <code>DateIsWithinDateIntervalPredicate</code> which will only show items within the date interval.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the list operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ExportExcelSequenceDiagram.png" alt="ExportExcelSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>For simplicity, interactions with the UI is not shown in the diagram above.<br>
+The update of the UI <code>RecordListPanel</code> is done through the event system. <code>FilteredList</code> is a type of ObservableList
+implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
+listener is present in <code>RecordListPanel</code> and will update the UI list automatically.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.8. Design Considerations</a></h3>
+<div class="sect3">
+<h4 id="aspect-data-structure-to-support-listing-of-records"><a class="link" href="#aspect-data-structure-to-support-listing-of-records">3.8.1. Aspect: Data structure to support listing of records</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1076,20 +1187,20 @@ This string will be split into two strings and each of them will be construct as
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.7. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.9. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.8. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.10. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.9, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.11, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1120,7 +1231,7 @@ This string will be split into two strings and each of them will be construct as
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.9. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.11. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -1511,7 +1622,7 @@ e.g. <code>seedu.expense.logic.LogicManagerTest</code></p>
 <div class="sect2">
 <h3 id="managing-dependencies"><a class="link" href="#managing-dependencies">6.6. Managing Dependencies</a></h3>
 <div class="paragraph">
-<p>A project often depends on third-party libraries. For example, Address Book depends on the <a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
+<p>A project often depends on third-party libraries. For example, Financial Planner depends on the <a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)</p>
 </div>
@@ -3408,4 +3519,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-23 14:33:40 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-26 14:13:25 UTC</div></div></div></body></html>
