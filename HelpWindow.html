@@ -27,14 +27,15 @@
 <li><a href="#delete-records-in-same-date-code-delete_date-code">3.12. Delete records in same date. <code>delete_date</code></a></li>
 <li><a href="#export-the-records-into-the-excel-file-code-export_excel-code">3.13. Export the records into the Excel file. <code>export_excel</code></a></li>
 <li><a href="#showing-a-summary-table-of-all-financial-activity-in-a-given-time-code-summary-code">3.14. Showing a summary table of all financial activity in a given time: <code>summary</code></a></li>
-<li><a href="#selecting-a-record-code-select-code">3.15. Selecting a record : <code>select</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.16. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.17. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.18. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-entries-code-clear-code">3.19. Clearing all entries : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.20. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.21. Saving the data</a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.22. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#showing-a-breakdown-of-total-expenses-and-income-into-categories-code-stats-code">3.15. Showing a breakdown of total expenses and income into categories: <code>stats</code></a></li>
+<li><a href="#selecting-a-record-code-select-code">3.16. Selecting a record : <code>select</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.17. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.18. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.19. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-entries-code-clear-code">3.20. Clearing all entries : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.21. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.22. Saving the data</a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.23. Encrypting data files <code>[coming in v2.0]</code></a></li>
 </ul>
 </li>
 <li><a href="#faq">4. FAQ</a></li>
@@ -740,8 +741,7 @@ Format:<br></p>
 <code>yyyy</code> represents the year in its numerical form.</p>
 </li>
 <li>
-<p>Note that for mmm, it is case-insensitive, meaning both <strong>"APR"</strong> and <strong>"apr"</strong> are accepted
-*</p>
+<p>Note that for mmm, it is case-insensitive, meaning both <strong>"APR"</strong> and <strong>"apr"</strong> are accepted</p>
 </li>
 </ul>
 </div>
@@ -784,7 +784,61 @@ Format:<br></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="selecting-a-record-code-select-code"><a class="link" href="#selecting-a-record-code-select-code">3.15. Selecting a record : <code>select</code></a></h3>
+<h3 id="showing-a-breakdown-of-total-expenses-and-income-into-categories-code-stats-code"><a class="link" href="#showing-a-breakdown-of-total-expenses-and-income-into-categories-code-stats-code">3.15. Showing a breakdown of total expenses and income into categories: <code>stats</code></a></h3>
+<div class="paragraph">
+<p>Shows a breakdown of total expenses and income into categories and displays these information in a pie chart.<br>
+Format:`stats d/START_DATE END_DATE`</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>START_DATE/END_DATE follow the same configurations as date parameters required when adding records. It is in the form of
+<strong>dd-mm-yyyy</strong> where <strong>dd</strong> represents day, <strong>mm</strong> represents month and <strong>yyyy</strong> represents the year. <strong>dd</strong> and <strong>mm</strong> both require 1 to 2 digits while
+<strong>yyyy</strong> requires exactly 4 digits.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the command has been executed, 2 tabs will appear showing a pie chart containing data that is relevant in the range.<br>
+Note that due to label constraints, some labels may not be displaying correctly if they are overlapping with other labels. This happens when the pie slice
+is too small. To improve readability, we have decided to hide some labels in such scenarios.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>stats d/1-1-2018 12-12-2018</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Below are some screenshots of what you can see when the command has been accepted.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UiPieChartExpense.png" alt="UiPieChartExpense" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p>Screenshot of app displaying expense breakdown when <code>stats d/1-1-2018 12-12-2018</code> is run</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/UiPieChartIncome.png" alt="UiPieChartIncome" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p>Screenshot of app displaying income breakdown when <code>stats d/1-1-2018 12-12-2018</code> is run</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="selecting-a-record-code-select-code"><a class="link" href="#selecting-a-record-code-select-code">3.16. Selecting a record : <code>select</code></a></h3>
 <div class="paragraph">
 <p>Selects the record identified by the index number used in the displayed record list.<br>
 Format: <code>select INDEX</code></p>
@@ -825,7 +879,7 @@ Selects the 1st record in the results of the <code>find</code> command.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.16. Listing entered commands : <code>history</code></a></h3>
+<h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.17. Listing entered commands : <code>history</code></a></h3>
 <div class="paragraph">
 <p>Lists all the commands that you have entered in reverse chronological order.<br>
 Format: <code>history</code></p>
@@ -846,7 +900,7 @@ Format: <code>history</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.17. Undoing previous command : <code>undo</code></a></h3>
+<h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.18. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
 <p>Restores the expense book to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
@@ -891,7 +945,7 @@ The <code>undo</code> command fails as there are no undoable commands executed p
 </div>
 </div>
 <div class="sect2">
-<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.18. Redoing the previously undone command : <code>redo</code></a></h3>
+<h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.19. Redoing the previously undone command : <code>redo</code></a></h3>
 <div class="paragraph">
 <p>Reverses the most recent <code>undo</code> command.<br>
 Format: <code>redo</code></p>
@@ -923,28 +977,28 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 </div>
 </div>
 <div class="sect2">
-<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.19. Clearing all entries : <code>clear</code></a></h3>
+<h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.20. Clearing all entries : <code>clear</code></a></h3>
 <div class="paragraph">
 <p>Clears all entries from the expense book.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.20. Exiting the program : <code>exit</code></a></h3>
+<h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.21. Exiting the program : <code>exit</code></a></h3>
 <div class="paragraph">
 <p>Exits the program.<br>
 Format: <code>exit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.21. Saving the data</a></h3>
+<h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.22. Saving the data</a></h3>
 <div class="paragraph">
 <p>Financial Planner data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.22. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.23. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 <div class="paragraph">
 <p><em>{explain how the user can enable/disable data encryption}</em></p>
 </div>
@@ -1024,4 +1078,4 @@ e.g. <code>findtag friend</code></p>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-29 08:05:35 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-29 08:15:46 UTC</div></div></div></body></html>
