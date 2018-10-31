@@ -395,7 +395,7 @@ The <code>.pptx</code> files used to create diagrams in this document can be fou
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/SDforDeletePerson.png" alt="SDforDeletePerson" width="800">
+<img src="images/SDforDeleteRecord.png" alt="SDforDeleteRecord" width="800">
 </div>
 <div class="title">Figure 3. Component interactions for <code>delete 1</code> command (part 1)</div>
 </div>
@@ -416,7 +416,7 @@ Note how the <code>Model</code> simply raises a <code>FinancialPlannerChangedEve
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/SDforDeletePersonEventHandling.png" alt="SDforDeletePersonEventHandling" width="800">
+<img src="images/SDforDeleteRecordEventHandling.png" alt="SDforDeleteRecordEventHandling" width="800">
 </div>
 <div class="title">Figure 4. Component interactions for <code>delete 1</code> command (part 2)</div>
 </div>
@@ -448,10 +448,11 @@ Note how the event is propagated through the <code>EventsCenter</code> to the <c
 <p><strong>API</strong> : <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/Ui.java"><code>Ui.java</code></a></p>
 </div>
 <div class="paragraph">
-<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>PersonListPanel</code>, <code>StatusBarFooter</code>, <code>WelcomePanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class.</p>
 </div>
 <div class="paragraph">
-<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder. For example, the layout of the <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
+<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder.
+For example, the layout of the <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p>
 </div>
 <div class="paragraph">
 <p>The <code>UI</code> component,</p>
@@ -2400,38 +2401,50 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to input my expenses and income along with a timestamp with options (daily, monthly or yearly)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to input my expenses and income along with a timestamp</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">record how much I am spending</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be able to delete existing entries</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">edit my mistakes in the future</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">remove records which I do not need</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to see the history of my expenses</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Can keep track of my expense</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to edit existing entries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">update records with the correct information</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to create a limit for my daily expenses</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">stop myself from overspending</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to undo</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to undo and redo</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Revert any unwanted changes</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">user with many persons in the expense book</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sort persons by name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locate a person easily</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to retain my financial information when app shuts down</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Not have the app open all the time</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to see the history of my financial activities</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Can keep track of my financial activities</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with many records in the FinancialPlanner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have an ordered list of records</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">locate records easily</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user with many records in the FinancialPlanner</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">find a record easily by name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">access any record I want easily</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -2442,8 +2455,20 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to create a limit for my daily final activities</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">stop myself from overspending</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be able to see a summary expenditure of each category</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">see the areas where I am spending the most</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to see a summary of each day or month</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">see how much I am spending per day or month</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
@@ -2458,13 +2483,7 @@ for <code>RemarkCommandParser</code>.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">do not have the time to wait for the app to update</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* * *</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">advanced user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">add notes to each expense</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">know where my money went</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">`* * `</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">advanced user</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">be able to freely edit the tags</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">define my own categories</p></td>
@@ -2472,13 +2491,13 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to tag my expenses with a category</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to tag my financial activities with a category</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">To figure out in which part money spent on.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">advanced user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">export my expenses into other forms</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">export my financial activities into other forms</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">log it and store it in a place different from the app</p></td>
 </tr>
 <tr>
@@ -2502,8 +2521,14 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a visual representation of my spending habits</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a better idea of my expenditures</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a visual representation of daily and monthly financial activity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">visualise the amount spend each day or month</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a visual representation of financial activity broken down into categories</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">easily identify the areas where I am spending the most</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
@@ -2514,8 +2539,8 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">be able to edit my expenses</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">correct any mistakes when checking my accounts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know my current monthly financial activity</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a sense of how much I am spending currently</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
@@ -2526,8 +2551,20 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a nice representation of the categories</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">have a better idea of the expenses in each category</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have an intuitive user interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">so that I don&#8217;t have to think too much when using the app</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>* *</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have a visually appealing user interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">so that I feel happy when using the app</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">be able to access basic app configurations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">so that I can adjust the app to my liking</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
@@ -2538,20 +2575,29 @@ for <code>RemarkCommandParser</code>.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a secure place to store my expense records</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a secure place to store my finance records</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">keep my financial data safe</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">user</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">archive my old expenses history</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">look back at my expenses history whenever I need it</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">archive my old finance history</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">look back at my finance history whenever I need it</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">inexperienced user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">have command suggestions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">use the commands without having to remember them</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">advanced user</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">add notes to each finance record</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">know where my money went</p></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p><em>{More to be added}</em></p>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -2560,44 +2606,20 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="paragraph">
 <p>(For all use cases below, the <strong>System</strong> is the <code>FinancialPlanner</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
-<h3 id="1-use-case-input-expense-for-a-certain-activity-vincent" class="discrete">1.  Use case: Input expense for a certain activity. [Vincent]</h3>
+<h3 id="1-use-case-input-expense-for-a-certain-activity" class="discrete">1.  Use case: Input expense for a certain activity.</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to insert a spending amount</p>
+<p>User requests to add record into FinancialPlanner.</p>
 </li>
 <li>
-<p>FinancialPlanner requests the amount of money</p>
+<p>System adds the record into the system.</p>
 </li>
 <li>
-<p>User enters the amount of money spent</p>
-</li>
-<li>
-<p>FinancialPlanner requests for confirmation from user.</p>
-</li>
-<li>
-<p>User confirms the amount.</p>
-</li>
-<li>
-<p>FinancialPlanner requests the description of the item/activity that money was spent on</p>
-</li>
-<li>
-<p>User enters the description of the item he spent on</p>
-</li>
-<li>
-<p>FinancialPlanner requests for confirmation from user.</p>
-</li>
-<li>
-<p>User confirms the description.</p>
-</li>
-<li>
-<p>FinancialPlanner processes the input and stores the information.</p>
-</li>
-<li>
-<p>FinancialPlanner shows the status update of the operation.</p>
+<p>System displays the record added to the user.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2610,39 +2632,40 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>3a. User’s input is of invalid form.
-FinancialPlanner throws invalid format error and shows the format needed.
-Use case resumes at step 2.</p>
-</li>
-<li>
-<p>5a. User declines the confirmation.</p>
+<p>1a. User’s input command is invalid.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Use case resumes at step 2.</p>
+<p>FinancialPlanner throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>7a. User’s input is of invalid form.</p>
+<p>1a. User&#8217;s input parameters are missing or invalid.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid format error.</p>
+<p>FinancialPlanner throws invalid command error and notifies user of the correct format.</p>
 </li>
 <li>
-<p>Use case resumes at step 6.</p>
+<p>Use case ends.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>9a. User declines the confirmation.</p>
+<p>1a. The record to be added is a duplicate of existing record in the system.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Use case resumes at step 6.</p>
+<p>FinancialPlanner throws duplicated record error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
 </li>
 </ul>
 </div>
@@ -2797,7 +2820,7 @@ Use case resumes at step 2.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid command error and shows an example of a correct command</p>
+<p>FinancialPlanner throws invalid command error and notifies user of the correct format.</p>
 </li>
 <li>
 <p>Use case resumes at step 1.</p>
@@ -2863,29 +2886,20 @@ Use case resumes at step 2.</p>
 </li>
 </ul>
 </div>
-<h3 id="5-use-case-plan-the-total-expenses-for-a-period-of-time" class="discrete">5.  Use case: Plan the total expenses for a period of time</h3>
+<h3 id="5-use-case-view-breakdown-of-financial-activity-into-category-vincent" class="discrete">5.  Use case: View breakdown of financial activity into category [Vincent]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to plan expenses</p>
+<p>User requests for category breakdown within a period of time.</p>
 </li>
 <li>
-<p>FinancialPlanner requests for amount of money to be allocated</p>
+<p>System retrieves the category breakdown report.</p>
 </li>
 <li>
-<p>User inputs amount of money</p>
-</li>
-<li>
-<p>FinancialPlanner requests for period of time for amount of money to be allocated</p>
-</li>
-<li>
-<p>User inputs period of time</p>
-</li>
-<li>
-<p>FinancialPlanner records amount of money for time period specified.</p>
+<p>System shows the report to the user in format of pie charts.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -2898,27 +2912,40 @@ Use case resumes at step 2.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>3a User’s input is not a valid amount of money</p>
+<p>1a. User’s input command is invalid.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid input command</p>
+<p>System throws invalid command error and shows an example command input needed.</p>
 </li>
 <li>
-<p>Use case continues from step 2</p>
+<p>Use case ends.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>5a User’s input is not a valid period of time</p>
+<p>1a. User&#8217;s input parameters are missing or invalid.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid input command</p>
+<p>System throws invalid command error and notifies user of the correct format.</p>
 </li>
 <li>
-<p>Use case continues from step 4</p>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>2a. There are no records within the time range specified.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows an empty page with warning that nothing has been found.</p>
+</li>
+<li>
+<p>Use case ends.</p>
 </li>
 </ul>
 </div>
@@ -2965,29 +2992,20 @@ Use case resumes at step 2.</p>
 </li>
 </ul>
 </div>
-<h3 id="7-use-case-summary-of-expenditure-by-category-vincent" class="discrete">7.  Use case: Summary of expenditure by category [Vincent]</h3>
+<h3 id="7-use-case-view-daily-monthly-summary-within-a-period-of-time-vincent" class="discrete">7.  Use case: View daily/monthly summary within a period of time [Vincent]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests for Expenditure summary</p>
+<p>User requests for summary report within a period of time.</p>
 </li>
 <li>
-<p>FinancialPlanner requests for date of entry the user want to see</p>
+<p>System retrieves the summary report.</p>
 </li>
 <li>
-<p>User enters the date they want to see</p>
-</li>
-<li>
-<p>FinancialPlanner requests for confimation from the user</p>
-</li>
-<li>
-<p>User confirms the date</p>
-</li>
-<li>
-<p>FinancialDisplay displays the list of catrgories expenditure.</p>
+<p>System shows the report to the user in format of a table.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3000,14 +3018,40 @@ Use case resumes at step 2.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>3a. User’s input is of invalid form.</p>
+<p>1a. User’s input command is invalid.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid format error and shows the format needed.</p>
+<p>System throws invalid command error and shows an example command input needed.</p>
 </li>
 <li>
-<p>Use case resumes at step 2.</p>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1a. User&#8217;s input parameters are missing or invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and notifies user of the correct format.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>2a. There are no records within the time range specified.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows an empty table.</p>
+</li>
+<li>
+<p>Use case ends.</p>
 </li>
 </ul>
 </div>
@@ -3030,7 +3074,7 @@ Use case resumes at step 2.</p>
 <p>User inputs which command he wants to find out about</p>
 </li>
 <li>
-<p>Financial displays infomration on selected command</p>
+<p>Financial displays information on selected command</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3349,10 +3393,10 @@ Use case resumes at step 2.</p>
 <li>
 <p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
 </li>
+<li>
+<p>Should be able to retain data in the event of app exiting or crashing.</p>
+</li>
 </ol>
-</div>
-<div class="paragraph">
-<p><em>{More to be added}</em></p>
 </div>
 </div>
 </div>
@@ -3368,6 +3412,10 @@ Use case resumes at step 2.</p>
 <dt class="hdlist1"><a id="private-contact-detail"></a> Private contact detail</dt>
 <dd>
 <p>A contact detail that is not meant to be shared with others</p>
+</dd>
+<dt class="hdlist1"><a id="Finance-activity"></a> Finance Activity</dt>
+<dd>
+<p>Activity where an individual engage in exchange of money, can comprise of income or spending</p>
 </dd>
 </dl>
 </div>
@@ -3519,4 +3567,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 12:33:42 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-31 12:36:20 UTC</div></div></div></body></html>
