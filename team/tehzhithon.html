@@ -1,0 +1,340 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Teh Zhi Thon - Project Portfolio</title><link rel="stylesheet" href="../stylesheets//gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets//coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">FinancialPlanner-Level4</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level4"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Teh Zhi Thon - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-financialplanner"><a class="link" href="#project-financialplanner">PROJECT: FinancialPlanner</a></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="overview"><a class="link" href="#overview">Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>FinancialPlanner is a desktop financial planner application used for teaching Software Engineering
+principles. The user interacts with it using a command-line interface (CLI), and it has a graphical
+user interface created using JavaFX.</p>
+</div>
+<div class="paragraph">
+<p>We worked in groups of 4 - 5 members for the project and were each expected to make contributions to the project by a
+dding both minor enhancements and major features to the software. We were initially provided with the base code which
+is written in Java, and has about 10 kLoC. Our task was to morph the existing code into any other software we opted to.</p>
+</div>
+<div class="paragraph">
+<p>We would be evaluated based on our ability to work with existing base code and the quality of our new enhancements to
+the existing code. Besides code, we were expected to write a User Guide and Developer Guide as well for the product
+as though we were releasing an official product for public usage to simulate an actual work schedule.</p>
+</div>
+<div class="paragraph">
+<p>We choose to create our application FinancialPlanner to allow users keep track of their financial status using a
+desktop application and is targeted at users who enjoy typing and are keen on managing their finances responsibly.</p>
+</div>
+<div class="paragraph">
+<p>The application revolves around usage of the CLI to manage one&#8217;s finances. Users can store <code>name</code>, <code>moneyflow</code>, <code>date</code>
+and <code>tags</code> of any form of financial activity in the application as a <code>Record</code>. <code>Moneyflow</code> would be the expenditure
+or income of the financial activity, <code>date</code> would be the actual date the activity was performed on and <code>tags</code> is a
+system for users to label their data for easy access.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of Contributions</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="code-ongoing-code-strong-major-enhancement-1-strong-added-the-ability-to-autocomplete-text-input"><a class="link" href="#code-ongoing-code-strong-major-enhancement-1-strong-added-the-ability-to-autocomplete-text-input"><code>ongoing</code> <strong>Major Enhancement #1</strong>: added the ability to autocomplete text input</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: displays a popup-box of suggested words to autocomplete with when user inputs parts of a word.</p>
+</li>
+<li>
+<p>Justification: this feature improves the product significantly because users who may not be familiar with
+the software commands can save time using the software by keying in parts of a command word they want to use
+and simply complete the command using the list of suggested words. It also helps users to fill in some command
+parameters which may be commonly used or likely to repeated.</p>
+</li>
+<li>
+<p>Highlights: This enhancement was simple to implement but challenging to perfect in order to maximise the
+convenience it provides to users.
+We needed to accurately read the user input and provide a different range of suggestions depending on the
+command word input by the user as well as any other parameters that may be required by the command.</p>
+</li>
+<li>
+<p>Credits: The Java TextFields (AutoComplete) Library and its inner classes were recreated and tweaked
+to achieve the necessary aims of our product autocomplete functionality.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code-completed-code-strong-minor-enhancement-1-strong-added-the-ability-to-find-data-by-tags"><a class="link" href="#code-completed-code-strong-minor-enhancement-1-strong-added-the-ability-to-find-data-by-tags"><code>completed</code> <strong>Minor Enhancement #1</strong>: added the ability to find data by tags</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: allows users to find and display all data with a specific attribute <code>tag</code>.</p>
+</li>
+<li>
+<p>Justification: this feature improves the product by providing another means of filtering data that
+they may wish to hide and show according to their needs.</p>
+</li>
+<li>
+<p>Highlights: this enhancement was simple to implement but was a key enhancement that led to better use of
+every attribute of our data</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code-completed-code-strong-minor-enhancement-2-strong-added-the-ability-to-sort-data"><a class="link" href="#code-completed-code-strong-minor-enhancement-2-strong-added-the-ability-to-sort-data"><code>completed</code> <strong>Minor Enhancement #2</strong>: added the ability to sort data</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: allows users to sort their data by a specific category and in a specific order</p>
+</li>
+<li>
+<p>Justification: this feature improves the product by providing users with another means of manipulating
+and reorganising their data to display in their desired manner.</p>
+</li>
+<li>
+<p>Highlights: This enhancement was more challenging to implement than expected as it required use of
+multiple comparators as well as a suitable data structure that supported sorting. It sparked evaluation
+of the different ways to implement sorting as some structures used were not suitable or inefficient.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Code contributed</strong>:</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>[<a href="https://github.com">Functional Code</a>]<br></p>
+</li>
+<li>
+<p>[<a href="https://github.com">Test Code</a>]<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Other contributions</strong>:</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Helped to morph existing base code to new financial planner product
+(Pull Request <a href="https://github.com/CS2113-AY1819S1-T09-4/main/pull/38">#38</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Added and improved utility methods for comparison and sorting
+(Pull requests <a href="https://github.com/CS2113-AY1819S1-T09-4/main/pull/64/files">#64</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Made large changes to reorganise User Guide user readability
+(Pull Request <a href="https://github.com/CS2113-AY1819S1-T09-4/main/pull/114">#114</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pull Requests reviewed (with non-trivial review comments):
+<a href="https://github.com/CS2113-AY1819S1-T09-4/main/pull/17">#17</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="locating-records-by-tag-code-findtag-code"><a class="link" href="#locating-records-by-tag-code-findtag-code">Locating records by tag: <code>findtag</code></a></h3>
+<div class="paragraph">
+<p>Finds records with tags that match any of the given keywords.<br>
+Format: <code>findtag KEYWORD [MORE_KEYWORDS]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+</li>
+<li>
+<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+</li>
+<li>
+<p>Only the tags are searched.</p>
+</li>
+<li>
+<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+</li>
+<li>
+<p>Records with tags matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>friends food</code> will return
+all records tagged with either <code>friends</code> or <code>food</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>findtag friend</code><br>
+Returns any record tagged with <code>friend</code></p>
+</li>
+<li>
+<p><code>findtag friend food shopping</code><br>
+Returns all records having any of the tags <code>friend</code>, <code>food</code>, or <code>shopping</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sort"><a class="link" href="#sort">Sorting displayed records : <code>sort</code></a></h3>
+<div class="paragraph">
+<p>Sorts the list of records in the record book by a category.
+There are 3 categories to sort by <code>name</code>, <code>date</code>, <code>moneyflow</code>/<code>money</code> and
+records can be sorted in either ascending order <code>asc</code> or descending order <code>desc</code>.<br>
+Format: <code>sort [CATEGORY] [ORDER]</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Only the abovementioned keywords for category and order are supported.</p>
+</li>
+<li>
+<p>Keyword matching is case insensitive, e.g <code>sort Name Desc</code> will work the same as <code>sort name desc</code>.</p>
+</li>
+<li>
+<p>Either one or both of the optionals fields are to be provided.</p>
+</li>
+<li>
+<p>Order of the input fields is not significant, e.g. <code>sort name asc</code> will work the same as <code>sort
+asc name</code>.</p>
+</li>
+<li>
+<p>If order is not specified, default sort order is ascending.</p>
+</li>
+<li>
+<p>If category is not specified, default sort category is by name.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>sort date</code><br>
+Sorts the list of records by date in ascending order.</p>
+</li>
+<li>
+<p><code>sort desc</code><br>
+Sorts the list of records by name in descending order.</p>
+</li>
+<li>
+<p><code>sort name asc</code><br>
+Sorts the list of records by name in ascending order.</p>
+</li>
+<li>
+<p><code>sort moneyflow desc</code><br>
+Sorts the list of records by moneyflow in descending order.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="find-records-by-tag-feature"><a class="link" href="#find-records-by-tag-feature">Find records by tag feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The findtag mechanism is also facilitated by <code>ModelManager</code>. FindTagCommand calls <code>ModelManager#updateFilteredRecords</code>
+and passes in different predicates depending on the input by the user.</p>
+</div>
+<div class="paragraph">
+<p>This feature has only one keyword <code>findtag</code> and a single working mode which takes in any number of input arguments. The
+input given by the user is passed to <code>FindTagCommandParser#parse</code> to split the desired tags the user wants to search by
+into an array of strings. The array of strings is passed into <code>TagsContainsKeywordsPredicate</code> to create the predicate
+for <code>updateFilteredRecordList</code> required in <code>ModelManager</code>.</p>
+</div>
+<div class="paragraph">
+<p>In <code>TagsContainsKeywordsPredicate</code>, to compare for a match, every keyword in the array is compared
+against the set of tags of each record and as long as any tag matches any of the keywords,
+the predicate will evaluate to true and allows the <code>FilteredList</code> to filter out the records that do not fulfil the
+predicate.</p>
+</div>
+<div class="paragraph">
+<p><code>FindTagCommandParser</code> returns a <code>FindTagCommand</code> object which calls <code>updateFilteredRecordList</code> to set the new predicate
+and obtain a new <code>filteredRecords</code> based on the predicate, which will also trigger an event for the UI to read in and display the new records.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the limit operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/FindTagSequenceDiagram.png" alt="width:800">
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-02 01:07:35 UTC</div></div></div></body></html>
