@@ -32,14 +32,14 @@
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
 <li><a href="#sort-records-feature">3.2. Sort records feature</a></li>
 <li><a href="#list-history-feature">3.3. List history feature</a></li>
-<li><a href="#find-records-by-tag-feature">3.4. Find records by tag feature</a></li>
-<li><a href="#limit-feature">3.5. Limit feature</a></li>
-<li><a href="#deletelimit-feature">3.6. deleteLimit feature</a></li>
-<li><a href="#editlimit-feature">3.7. editLimit feature</a></li>
-<li><a href="#checklimit-feature">3.8. checkLimit feature</a></li>
-<li><a href="#delete-by-date-entry">3.9. Delete By Date Entry</a></li>
-<li><a href="#export-into-excel-file">3.10. Export into Excel file</a></li>
-<li><a href="#design-considerations-2">3.11. Design Considerations</a></li>
+<li><a href="#view-breakdown-of-total-income-and-expense-into-categories">3.4. View breakdown of total income and expense into categories</a></li>
+<li><a href="#find-records-by-tag-feature">3.5. Find records by tag feature</a></li>
+<li><a href="#limit-feature">3.6. Limit feature</a></li>
+<li><a href="#deletelimit-feature">3.7. deleteLimit feature</a></li>
+<li><a href="#editlimit-feature">3.8. editLimit feature</a></li>
+<li><a href="#checklimit-feature">3.9. checkLimit feature</a></li>
+<li><a href="#delete-by-date-entry">3.10. Delete By Date Entry</a></li>
+<li><a href="#export-into-excel-file">3.11. Export into Excel file</a></li>
 <li><a href="#proposed-data-encryption">3.12. [Proposed] Data Encryption</a></li>
 <li><a href="#logging">3.13. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.14. Configuration</a></li>
@@ -980,11 +980,140 @@ implemented by the Java 8 API and it will propagate any changes to the list to a
 listener is present in <code>RecordListPanel</code> and will update the UI list automatically.</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-data-structure-to-support-listing-of-records"><a class="link" href="#aspect-data-structure-to-support-listing-of-records">Aspect: Data structure to support listing of records</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Uses a FilteredList that is tracked by the UI. FilteredLIst is a wrapper around the ObservableList&lt;Record&gt; that is stored in UniquePersonList which allows for any changes in the observable list to be propagated to the filtered list automatically.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement</p>
+</li>
+<li>
+<p>Cons: May take a significantly longer time to list records if there are many records spanning across a large timeframe.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Implement a HashMap with Date as the key and Record as the value.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Allows for constant time complexity to access any elements. Hence, listing records can potentially be faster.</p>
+</li>
+<li>
+<p>Cons: Current UI implementation relies on <code>FilteredList</code>. In order for UI to be compatible with the new data structure, the UI may need to change its implementation to <code>ObservableMap</code> instead. Alternatively, one can utilise a <code>HashMap</code> to first generate the list and pass the list reference into <code>FilteredList</code>. However, there is a need to code a filter function.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 <div class="sect2">
-<h3 id="find-records-by-tag-feature"><a class="link" href="#find-records-by-tag-feature">3.4. Find records by tag feature</a></h3>
+<h3 id="view-breakdown-of-total-income-and-expense-into-categories"><a class="link" href="#view-breakdown-of-total-income-and-expense-into-categories">3.4. View breakdown of total income and expense into categories</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>This feature allows the user to view a pie chart breakdown of all expenses and all income within a date range which the user can specify.</p>
+</div>
+<div class="paragraph">
+<p>The corresponding command required for this feature is <code>stats</code>.For this feature, users have to enter 2 dates, one starting date and one ending date.
+This feature is facilitated by a few key components of FinancialPlanner, <code>Logic</code>, <code>Model</code>, <code>UI</code> and function executions can be split into 2 phases, the <code>Logic phase</code> and the <code>UI phase</code>.
+The detailed execution sequence of functions used for <code>Logic phase</code> are as shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StatisticLogicSequenceDiagram.png" alt="StatisticLogicSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>Consider the situation where the user enters <strong>"stats d/1-1-2018 12-12-2018"</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When user enters the command, the <code>LogicManager</code> recognises the command and calls the <code>FinancialPlannerParser</code> to process the new command as shown above.</p>
+</li>
+<li>
+<p>The FinancialPlannerParser will then search for the <code>stats</code> keyword required and once it is found, the rest of the command minus the keyword is passed in as a
+parameter to StatisticCommandParser.</p>
+</li>
+<li>
+<p>The StatisticCommandParser will then pass its input parameters through another component <code>ArgumentTokenizer</code> to split up the command into arguments associated with each
+prefix and store them in a map for reference later.</p>
+</li>
+<li>
+<p>The map is further processed and the specific arguments will be identified in this stage. After the arguments have been obtained, there is a further check to check the
+validity of the arguments before proceeding to split the arguments associated with <code>d/</code> into date arguments. These arguments are again checked for validity before being passed to the
+constructor of StatisticCommand.</p>
+</li>
+<li>
+<p>Once <code>StatisticCommand#execute</code> is called, it will then search through the in-memory data of FinancialPlanner and return a list containing all records within the date range and including
+both the start dates and end dates. This functionality is facilitated by the <code>ModelManager</code> which is the class that manages all interactions between
+<code>Logic</code> and <code>Model</code> component, by`ModelManager#updateFilteredRecords`. The command then retrieves the filteredList from ModelManager and passes it into
+the constructor of <code>CategoryStatisticsList</code>.</p>
+</li>
+<li>
+<p>In this constructor, it will loop through all the records in the list and add them into an internal map. The internal data structure in <code>CategoryStatisticsList</code> is a hash map,
+to aid in the adding process, however it only outputs lists and not the map. This functionality is facilitated by <code>CategoryStatisticsList#addToCategoryStatistics</code> which checks whether the record
+is in the map.</p>
+</li>
+<li>
+<p>If the record is not present, it creates a new <code>CategoryStatistic</code> object and adds that to the map. If the record is present, the record is then added to the existing <code>CategoryStatistic</code> object.</p>
+</li>
+<li>
+<p>The flow of control returns to StatisticCommand and StatisticCommand calls the read function of CategoryStatisticsList to obtain a read-only list and passes it into
+an event constructor before posting the event <code>ShowPieChartStatsEvent</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>After the event is posted, the execution proceeds to the <code>UI phase</code> where there is a listener in <code>MainWindow</code> listening to this event. This is facilitated by
+the event system in FinancialPlanner. The sequence diagram below details the program flow of the functions executed in <code>UI phase</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StatisticUiSequenceDiagram.png" alt="StatisticUiSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>When the event is caught by the listener in <code>MainWindow</code>, <code>MainWindow</code> looks through all children of the <code>MainWindow#mainUiPanelPlaceholder</code> and executes the hide function in them.
+This will make all children hidden from view in the UI which allows for the panel switching functionality, which replaces the current panel with the desired panel.
+The program flow is then as shown above where the <code>CategoryBreakdown</code> is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
+In the current implementation, whenever <code>stats</code> is called, 2 tabs will be created, one for total income and one for total expense. Thus, the same program sequence after construction for
+<code>CategoryBreakdown</code> is also repeated for total income, and the corresponding parameters would be incomeLabelData and incomeLegendData.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Note that the CustomLegend class is located within the CustomPieChart class which inherits from the JavaFX PieChart class. This legend class can
+only be accessed within CustomPieChart for security purposes.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The activity flow diagram below details the mechanism behind the creation of the category breakdown ui,
+starting from the point where the function <code>StatsDisplayPanel#`handleShowPieChartStatsEvent</code> is called.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="find-records-by-tag-feature"><a class="link" href="#find-records-by-tag-feature">3.5. Find records by tag feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The findtag mechanism is also facilitated by <code>ModelManager</code>. FindTagCommand calls <code>ModelManager#updateFilteredRecords</code>
 and passes in different predicates depending on the input by the user.</p>
@@ -1016,9 +1145,9 @@ and obtain a new <code>filteredRecords</code> based on the predicate, which will
 </div>
 </div>
 <div class="sect2">
-<h3 id="limit-feature"><a class="link" href="#limit-feature">3.5. Limit feature</a></h3>
+<h3 id="limit-feature"><a class="link" href="#limit-feature">3.6. Limit feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The limit command is based on the data type "Date", which includes two dates and "moneyFlow".
 Once the user execute the limit command, the Limit will be stored inside the LimitList.xml file by
@@ -1057,9 +1186,9 @@ This string will be split into two strings and each of them will be construct as
 </div>
 </div>
 <div class="sect2">
-<h3 id="deletelimit-feature"><a class="link" href="#deletelimit-feature">3.6. deleteLimit feature</a></h3>
+<h3 id="deletelimit-feature"><a class="link" href="#deletelimit-feature">3.7. deleteLimit feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>deleteLimit will delete the limit inside the limitList according to the dates input. The user inputs
 two dates, dateStart and dateEnd, and the parser will make it a limit which has a dummy money.
@@ -1091,9 +1220,9 @@ This string will be split into two strings and each of them will be construct as
 </div>
 </div>
 <div class="sect2">
-<h3 id="editlimit-feature"><a class="link" href="#editlimit-feature">3.7. editLimit feature</a></h3>
+<h3 id="editlimit-feature"><a class="link" href="#editlimit-feature">3.8. editLimit feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current Implementation</a></h4>
+<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.8.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The editLimit command is similar to limit command, has dateStart, dateEnd and moneyFlow.
 The command will do the replacement by deleting the limit with same dates and add the new limit.</p>
@@ -1124,9 +1253,9 @@ This string will be split into two strings and each of them will be construct as
 </div>
 </div>
 <div class="sect2">
-<h3 id="checklimit-feature"><a class="link" href="#checklimit-feature">3.8. checkLimit feature</a></h3>
+<h3 id="checklimit-feature"><a class="link" href="#checklimit-feature">3.9. checkLimit feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.8.1. Current Implementation</a></h4>
+<h4 id="current-implementation-9"><a class="link" href="#current-implementation-9">3.9.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>This feature is to help the user to check all the limits stored inside the limitList. The function will call
 manualLimitCheck(), which will generate a string that contains all limits' information.</p>
@@ -1145,9 +1274,9 @@ manualLimitCheck(), which will generate a string that contains all limits' infor
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-by-date-entry"><a class="link" href="#delete-by-date-entry">3.9. Delete By Date Entry</a></h3>
+<h3 id="delete-by-date-entry"><a class="link" href="#delete-by-date-entry">3.10. Delete By Date Entry</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-9"><a class="link" href="#current-implementation-9">3.9.1. Current implementation</a></h4>
+<h4 id="current-implementation-10"><a class="link" href="#current-implementation-10">3.10.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The delete by date entry mechanism is facilitated by <code>ModelManager</code>.
 It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>.
@@ -1185,9 +1314,9 @@ The three argument modes are as listed below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-into-excel-file"><a class="link" href="#export-into-excel-file">3.10. Export into Excel file</a></h3>
+<h3 id="export-into-excel-file"><a class="link" href="#export-into-excel-file">3.11. Export into Excel file</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-10"><a class="link" href="#current-implementation-10">3.10.1. Current implementation</a></h4>
+<h4 id="current-implementation-11"><a class="link" href="#current-implementation-11">3.11.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The export into excel file mechanism is facilitated by <code>ModelManager</code>.
 It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>.
@@ -1244,48 +1373,6 @@ The three argument modes are as listed below:</p>
 <div class="content">
 <img src="images/ExportExcelSequenceDiagram.png" alt="ExportExcelSequenceDiagram" width="800">
 </div>
-</div>
-<div class="paragraph">
-<p>For simplicity, interactions with the UI is not shown in the diagram above.<br>
-The update of the UI <code>RecordListPanel</code> is done through the event system. <code>FilteredList</code> is a type of ObservableList
-implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
-listener is present in <code>RecordListPanel</code> and will update the UI list automatically.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.11. Design Considerations</a></h3>
-<div class="sect3">
-<h4 id="aspect-data-structure-to-support-listing-of-records"><a class="link" href="#aspect-data-structure-to-support-listing-of-records">3.11.1. Aspect: Data structure to support listing of records</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Uses a FilteredList that is tracked by the UI. FilteredLIst is a wrapper around the ObservableList&lt;Record&gt; that is stored in UniquePersonList which allows for any changes in the observable list to be propagated to the filtered list automatically.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement</p>
-</li>
-<li>
-<p>Cons: May take a significantly longer time to list records if there are many records spanning across a large timeframe.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Implement a HashMap with Date as the key and Record as the value.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Allows for constant time complexity to access any elements. Hence, listing records can potentially be faster.</p>
-</li>
-<li>
-<p>Cons: Current UI implementation relies on <code>FilteredList</code>. In order for UI to be compatible with the new data structure, the UI may need to change its implementation to <code>ObservableMap</code> instead. Alternatively, one can utilise a <code>HashMap</code> to first generate the list and pass the list reference into <code>FilteredList</code>. However, there is a need to code a filter function.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
 </div>
 </div>
 </div>
@@ -3669,4 +3756,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-02 07:42:56 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-03 14:08:17 UTC</div></div></div></body></html>
