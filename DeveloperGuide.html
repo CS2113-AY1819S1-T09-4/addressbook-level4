@@ -40,9 +40,12 @@
 <li><a href="#checklimit-feature">3.9. checkLimit feature</a></li>
 <li><a href="#delete-by-date-entry">3.10. Delete By Date Entry</a></li>
 <li><a href="#export-into-excel-file">3.11. Export into Excel file</a></li>
-<li><a href="#proposed-data-encryption">3.12. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.13. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.14. Configuration</a></li>
+<li><a href="#import-from-excel-file">3.12. Import from Excel file</a></li>
+<li><a href="#archive-into-excel-file">3.13. Archive into Excel file</a></li>
+<li><a href="#design-considerations-3">3.14. Design Considerations</a></li>
+<li><a href="#proposed-data-encryption">3.15. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.16. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.17. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1279,8 +1282,13 @@ manualLimitCheck(), which will generate a string that contains all limits' infor
 <h4 id="current-implementation-10"><a class="link" href="#current-implementation-10">3.10.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The delete by date entry mechanism is facilitated by <code>ModelManager</code>.
-It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>.
-DeleteByDateEntryCommand calls <code>ModelManager#getFilteredRecordList</code>.</p>
+It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>.</p>
+</div>
+<div class="paragraph">
+<p>DeleteByDateEntryCommand calls <code>ModelManager#getFilteredRecordList</code> to retrieve the list of all current records in the Financial Planner. Then, it will loop through the list of records and call <code>ModelManger#deleteRecord(Record record)</code> to delete the record whose date is required.</p>
+</div>
+<div class="paragraph">
+<p>If there exists target records, <code>ModelManager#commitFinancialPlanner</code> will be called to update the current version of Financial Planner and the message, which states records have been deleted. Then, <code>ModelManager#autoLimitCheck</code> will be called to check the current change in limit as we delete some records exceeds the limit or not.</p>
 </div>
 <div class="paragraph">
 <p>This feature has only one keyword <code>delete_date</code> and implements only 1 argument mode.
@@ -1289,17 +1297,8 @@ The three argument modes are as listed below:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Single Argument mode&#8201;&#8212;&#8201;Requires only one date. It exports all records whose date is required and shows all records exported in the Financial Planner.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The mechanism that facilitates these modes can be found in the <code>DeleteByDateEntryCommandParser#parse</code>. Below is a overview of the mechanism:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The argument mode is determined and is further processed into <code>Date</code> objects, before creating and returning a <code>DeleteByDateEntryCommand</code> object.</p>
+<p>Single Argument mode&#8201;&#8212;&#8201;Requires only one date. It deletes all records whose date is required.
+The date must follow the format: dd-mm-yyyy, error will be thrown if the format is not correct or the date entered is not real.</p>
 </li>
 </ul>
 </div>
@@ -1318,51 +1317,164 @@ The three argument modes are as listed below:</p>
 <div class="sect3">
 <h4 id="current-implementation-11"><a class="link" href="#current-implementation-11">3.11.1. Current implementation</a></h4>
 <div class="paragraph">
-<p>The export into excel file mechanism is facilitated by <code>ModelManager</code>.
-It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>.
-ExportExcelCommand calls <code>ModelManager#updateFilteredRecords</code> and passes in different predicates depending on the argument mode.</p>
+<p>The export into excel file mechanism is facilitated by <code>ModelManager</code> with the help of <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, <code>ExcelUtil</code> and the <code>VersionedFinancialPlanner</code>.</p>
 </div>
 <div class="paragraph">
-<p>This feature has only one keyword <code>export_excel</code> but implements 3 different argument modes to allow users to access multiple versions of the same command.
-The three argument modes are as listed below:</p>
+<p>ExportExcelCommand calls <code>ModelManager#updateFilteredRecords</code> and passes in different predicates depending on the argument mode. The List&lt;Record&gt; is retrieved by calling <code>ModelManager#getFilteredRecordList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Meanwhile, it also called <code>ModelManager#getFinancialPlanner</code> to get the <code>ReadOnlyFinancialPlanner</code> Financial Planner.</p>
+</div>
+<div class="paragraph">
+<p>The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List&lt;SummaryEntry&gt; is easily retrieved from SummaryByDateList by calling <code>SummaryByDateList#getSummaryList</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>ExcelUtil#setNameExcelFile</code> is called to make the Excel name based on the condition of startDate and endDate.</p>
+</div>
+<div class="paragraph">
+<p>After that, <code>ExcelUtil#setPathFile</code> is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User&#8217;s Home Directory.</p>
+</div>
+<div class="paragraph">
+<p>With the sufficient information, <code>List&lt;Record&gt; records</code>, <code>List&lt;SummaryByDateEntry&gt; summaryList</code>, <code>file path</code>, <code>ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords</code> is called to start the processing of producing Excel file, containing 2 Excel sheet, namely <code>RECORD DATA</code> and <code>SUMMARY DATA</code>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>No Argument mode&#8201;&#8212;&#8201;It requires no arguments and exports the entire list of records in the FinancialPlanner and shows all the records in the Financial Planner.</p>
-</li>
-<li>
-<p>Single Argument mode&#8201;&#8212;&#8201;Requires only one date. It exports all records whose date is required and shows all records exported in the Financial Planner.</p>
-</li>
-<li>
-<p>Dual Argument mode&#8201;&#8212;&#8201;Requires 2 dates, a <code>start date</code> and an <code>end date</code>. It exports all records containing dates within the time frame of start date and end date, inclusive of both start date and end date and shows all records exported in the Financial Planner.</p>
+<p><code>RECORD DATA</code> stores all the data of record the user want to export, there are 4 columns: Name, date, money and tags, the tags names will be separated by &#8230;&#8203;, for visual benefit.</p>
 </li>
 </ul>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Export_Capture1_LinhChi.png" alt="width:800">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>SUMMARY DATA</code> stored the summary statistics for the period you exported, and there is a <strong>Line Chart</strong> next to the table for visual statistic [refer to <code>Draw line chart</code> part for more information]. As you can see in the picture, there are 3 series shown:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The first blue line named Series1 represents the Timeline (each component is one Date) versus the Income (each component is one income).</p>
+</li>
+<li>
+<p>The second orange line named Series2 represents the Timeline (each component is one Date) versus the Outcome (each component is one outcome).</p>
+</li>
+<li>
+<p>The third grey line named Series3 represents the Timeline (each component is one Date) versus the Net - Sum of income and outcome (each component is one net).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Export_Capture2_LinhChi.png" alt="width:800">
+</div>
+</div>
+<div class="paragraph">
+<p>This feature has only one keyword <code>export_excel</code> but implements 6 different argument modes to allow users to access multiple versions of the same command.
+The six argument modes are as listed below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>No argument mode</strong> <code>export_excel</code> will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default <strong>HOME DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Home Directory</strong>.</p>
+</li>
+<li>
+<p><strong>Single argument Date mode</strong> <code>export_excel d/DATE</code> will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default <strong>HOME DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Home Directory</strong>.</p>
+</li>
+<li>
+<p><strong>Dual argument Date mode</strong> <code>export_excel d/START_DATE END_DATE</code> will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default <strong>HOME DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Home Directory</strong>.</p>
+</li>
+<li>
+<p><strong>Single argument Directory Path mode</strong> <code>export_excel dir/DIRECTORY_PATH</code> will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.</p>
+</li>
+<li>
+<p><strong>Single argument Date mode + Single argument Directory path mode</strong> <code>export_excel d/DATE dir/DIRECTORY_PATH</code> will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.</p>
+</li>
+<li>
+<p><strong>Dual argument Date mode + Single argument Directory path mode</strong> <code>export_excel d/START_DATE END_DATE dir/DIRECTORY_PATH</code> will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.</p>
 <div class="paragraph">
 <p>The mechanism that facilitates these modes can be found in the <code>ExportExcelCommandParser#parse</code>. Below is a overview of the mechanism:</p>
 </div>
-<div class="ulist">
-<ul>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>The string associated is passed into <code>ExportExcelCommandParser#splitByWhitespace</code> for further processing and returns an array.</p>
+<p>Method <code>ExportExcelCommandParser#createExportExcelCommand</code> takes the input argument and further analyse it.</p>
 </li>
 <li>
-<p>The argument mode is determined by the size of this array and the elements are further processed into <code>Date</code> objects, before creating and returning a <code>ExportExcelCommand</code> object.</p>
+<p>The input given by the user is passed to <code>ArgumentTokeniser#tokenise</code> to split the input separated by prefixes.</p>
+</li>
+<li>
+<p>This returns a <code>ArgumentMultiMap</code> which contains a map with prefixes as keys and their associated input arguments as the value.</p>
+</li>
+<li>
+<p>The string associated with <code>d/</code></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>It is then passed into <code>ExportExcelCommandParser#splitByWhitespace</code> for further processing and returns an array. This string will be split into sub-strings and each of them will be construct as a date type variable. The the size of the array exceed 2, error wil be thrown to inform invalid command format.</p>
+</li>
+<li>
+<p>If the size of the string equals 1, it is constructed as a date type variable after being passed to <code>ParseUtil#parseDate</code>, it must follow the format dd-mm-yyyy. Error will be thrown if the format is not correct or the date entered is not real.</p>
+</li>
+<li>
+<p>If the size of the string equals 2, each sub-string is constructed as a date type variable after being passed to <code>ParseUtil#parseDate</code>, and an additional check is conducted to check if the first date entered, known as Start date is smaller than the second date entered, known as End Date.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>The String associated with <code>dir/</code></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>It is then passed into <code>ParseUtil#parseDirectoryString</code> to check if the Directory path given is existing.</p>
+</li>
+<li>
+<p>If the Directory is unreal, an error is thrown to inform the user.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Please take note that:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If the prefix <code>d/</code> is not entered in the input, meaning that all the records will be included in the Excel sheet.</p>
+</li>
+<li>
+<p>If the prefix <code>dir/</code> is not entered in the input, meaning that the Directory Path is default as the <strong>User&#8217;s Home Directory</strong>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>The <code>ExportExcelCommand</code> has two constructors which makes use of overloading to reduce code complexity.</p>
+<p>The <code>ExportExcelCommand</code> has four constructors which makes use of overloading to reduce code complexity.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>One constructor has no arguments and assigns default predicate for the <code>FilteredList</code> in <code>ModelManager</code>,
-<code>PREDICATE_SHOW_ALL_RECORDS</code> which will show all items in the list.</p>
+<code>PREDICATE_SHOW_ALL_RECORDS</code> which will show all items in the list and the Directory path is <strong>User&#8217;s Home Directory</strong>.</p>
 </li>
 <li>
-<p>The second constructor takes in 2 <code>Date</code> arguments and assigns the predicate <code>DateIsWithinDateIntervalPredicate</code> which will only show items within the date interval.</p>
+<p>The second constructor takes in 2 <code>Date</code> arguments and assigns the predicate <code>DateIsWithinDateIntervalPredicate</code> which will only show items within the date interval and the Directory path is <strong>User&#8217;s Home Directory</strong>.</p>
+</li>
+<li>
+<p>The third constructor takes in 1 <code>Directory Path</code> argument and assigns the predicate as <code>PREDICATE_SHOW_ALL_RECORDS</code>, which will show all items in the list and the Directory path is the entered directory path.</p>
+</li>
+<li>
+<p>The fourth constructor takes in 1 <code>Directory Path</code> and 2 <code>Date</code> arguments and assigns the predicate as <code>DateIsWithinDateIntervalPredicate</code> which will only show items within the date interval and the Directory path is the entered Directory Path.</p>
 </li>
 </ul>
 </div>
@@ -1374,23 +1486,391 @@ The three argument modes are as listed below:</p>
 <img src="images/ExportExcelSequenceDiagram.png" alt="ExportExcelSequenceDiagram" width="800">
 </div>
 </div>
+<div class="paragraph">
+<p>For simplicity, interactions with the UI is not shown in the diagram above.<br>
+The update of the UI <code>RecordListPanel</code> is done through the event system. <code>FilteredList</code> is a type of ObservableList
+implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
+listener is present in <code>RecordListPanel</code> and will update the UI list automatically.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.12. [Proposed] Data Encryption</a></h3>
+<h3 id="import-from-excel-file"><a class="link" href="#import-from-excel-file">3.12. Import from Excel file</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-12"><a class="link" href="#current-implementation-12">3.12.1. Current implementation</a></h4>
+<div class="paragraph">
+<p>The import from Excel file mechanism is facilitated by <code>ExcelUtil</code>, the utility created to handle all method relating to Excel.</p>
+</div>
+<div class="paragraph">
+<p>ImportExcelCommand calls <code>ExcelUtil#readExcelSheet</code> to read the Excel file and retrieve data of records from them to create a list of record List&lt;Record&gt;.</p>
+</div>
+<div class="paragraph">
+<p>After that, <code>ModelManager#addListUniqueRecord</code> is called to add the records in the List&lt;Record&gt;. If the record has already existed in the Financial Planner, it will be ignored and not added into the Financial Planner.</p>
+</div>
+<div class="paragraph">
+<p>Eventually, when all the records are added in the Financial Planner, <code>ModelManager#commitFinancialPlanner</code> will be called to update the current version of Financial Planner and the message, which states records have been added.</p>
+</div>
+<div class="paragraph">
+<p>This feature has only one keyword <code>archive</code> but implements 2 different argument modes to allow users to access multiple versions of the same command.
+The two argument modes are as listed below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Single argument File Path mode</strong> <code>import dir/FILE_PATH</code> will open the Excel file using the given File Path, import all records in the Financial Planner and check if these records exist in the Financial Planner, then exports all of non-existent records to Financial Planner.</p>
+</li>
+<li>
+<p><strong>Single argument File Path + single argument File name mode</strong> <code>import dir/DIRECTORY_PATH  n/NAME_FILE</code> will open the Excel file using the given Directory path and given file name, import all records in the Financial Planner and check if these records exist in the Financial Planner, then exports all of non-existent records to Financial Planner.</p>
+<div class="paragraph">
+<p>The mechanism that facilitates these modes can be found in the <code>ImportExcelCommandParser#parse</code>. Below is a overview of the mechanism:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Method <code>ImportExcelCommandParser#createArchiveCommand</code> takes the input argument and further analyse it.</p>
+</li>
+<li>
+<p>The input given by the user is passed to <code>ArgumentTokeniser#tokenise</code> to split the input separated by prefixes.</p>
+</li>
+<li>
+<p>This returns a <code>ArgumentMultiMap</code> which contains a map with prefixes as keys and their associated input arguments as the value.</p>
+</li>
+<li>
+<p>The String associated with <code>dir/</code></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>It is then passed into <code>ParseUtil#parseDirectoryString</code> to check if the Directory path given is existing.</p>
+</li>
+<li>
+<p>If the Directory is unreal, an error is thrown to inform the user.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>The String associated with <code>n/</code></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>It is then passed into <code>ExcelUtil#getPathFile</code> together with the String associated with <code>dir/</code> to create the File Path.</p>
+</li>
+<li>
+<p>The File Path is then passed into <code>ParseUtil#parseFilePathString</code> to check if the File path given is existing.</p>
+</li>
+<li>
+<p>If the File Path is unreal, an error is thrown to inform the user.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Please take note that:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>The String associated with <code>dir/</code> <strong>must</strong> be entered.</p>
+</li>
+<li>
+<p>The String associated with <code>n/</code> is optionally entered.</p>
+</li>
+<li>
+<p>Please note that User have to add the post-fix <code>.xlsx</code> at the end to indicate this is a Excel file.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>When performing <code>import</code> command to import all the records data from the Excel file to the Financial Planner, user should take note that there are some constraints which helps the <code>import</code> command performs smoothly.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The excel file can have multiple sheets, containing records data. The starting row of the table does not have to be first row of the sheet. This also applies to the column.</p>
+</li>
+<li>
+<p>There can be blank row blending in the table, but there must be <strong>no</strong> blank column.</p>
+</li>
+<li>
+<p>The First row of the table <strong>must</strong> have 4 cells, namely NAME, DATE, MONEY, TAGS. These 4 columns can be case-insensitive. The sheet with records data but does not have the first row, NAME, DATE, MONEY, TAGS will <strong>not</strong> be read.</p>
+</li>
+<li>
+<p>The information of NAME, DATE, MONEY columns should be fully filled, while the TAGS columns is optionally filled.</p>
+</li>
+<li>
+<p>Each tag should be separated by &#8230;&#8203; (3 <strong>consecutive</strong> dots). Beside &#8230;&#8203; , numbers and alphabet character, there should be no other character.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The picture below shows a good example for the Excel Sheet.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Export_Capture1_LinhChi.png" alt="width:800">
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>ImportExcelCommand</code> has only one constructor.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The constructor takes in file path argument and read the Excel file using that file path. After that, all the record data in the Excel file is retrieved and transform into Record object. The list of records are then added into the Model by using <code>ModelManager#addListUniqueRecord</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the list operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ImportExcelSequenceDiagram.png" alt="ImportExcelSequenceDiagram" width="800">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="archive-into-excel-file"><a class="link" href="#archive-into-excel-file">3.13. Archive into Excel file</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-13"><a class="link" href="#current-implementation-13">3.13.1. Current implementation</a></h4>
+<div class="paragraph">
+<p>The archive into excel file mechanism is facilitated by <code>ModelManager</code> with the help of <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, <code>ExcelUtil</code> and the <code>VersionedFinancialPlanner</code>.</p>
+</div>
+<div class="paragraph">
+<p>ArchiveCommand calls <code>ModelManager#updateFilteredRecords</code> and passes in different predicates depending on the argument mode. The List&lt;Record&gt; is retrieved by calling <code>ModelManager#getFilteredRecordList</code>.</p>
+</div>
+<div class="paragraph">
+<p>Meanwhile, it also called <code>ModelManager#getFinancialPlanner</code> to get the <code>ReadOnlyFinancialPlanner</code> Financial Planner.</p>
+</div>
+<div class="paragraph">
+<p>The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List&lt;SummaryEntry&gt; is easily retrieved from SummaryByDateList by calling <code>SummaryByDateList#getSummaryList</code>.</p>
+</div>
+<div class="paragraph">
+<p><code>ExcelUtil#setNameExcelFile</code> is called to make the Excel name based on the condition of startDate and endDate.</p>
+</div>
+<div class="paragraph">
+<p>After that, <code>ExcelUtil#setPathFile</code> is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User&#8217;s Home Directory.</p>
+</div>
+<div class="paragraph">
+<p>With the sufficient information, <code>List&lt;Record&gt; records</code>, <code>List&lt;SummaryByDateEntry&gt; summaryList</code>, <code>file path</code>, <code>ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords</code> is called to start the processing of producing Excel file, containing 2 Excel sheet, namely <code>RECORD DATA</code> and <code>SUMMARY DATA</code>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>RECORD DATA</code> stores all the data of record the user want to archive, there are 4 columns: Name, date, money and tags, the tags names will be separated by &#8230;&#8203;, for visual benefit.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Export_Capture1_LinhChi.png" alt="width:800">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>SUMMARY DATA</code> stored the summary statistics for the period you archived, and there is a <strong>Line Chart</strong> next to the table for visual statistic [refer to <code>Draw line chart</code> part for more information]. As you can see in the picture, there are 3 series shown:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The first blue line named Series1 represents the Timeline (each component is one Date) versus the Income (each component is one income).</p>
+</li>
+<li>
+<p>The second orange line named Series2 represents the Timeline (each component is one Date) versus the Outcome (each component is one outcome).</p>
+</li>
+<li>
+<p>The third grey line named Series3 represents the Timeline (each component is one Date) versus the Net - Sum of income and outcome (each component is one net).</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>After records are archived to Excel file, <code>ModelManager#deleteListRecord</code> is called to delete the archived records.If there exists target records, <code>ModelManager#commitFinancialPlanner</code> will be called to update the current version of Financial Planner and the message, which states records have been deleted.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Export_Capture2_LinhChi.png" alt="width:800">
+</div>
+</div>
+<div class="paragraph">
+<p>This feature has only one keyword <code>archive</code> but implements 6 different argument modes to allow users to access multiple versions of the same command.
+The six argument modes are as listed below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>No argument mode</strong> <code>archive</code> will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the default <strong>HOME DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Home Directory</strong>.</p>
+</li>
+<li>
+<p><strong>Single argument Date mode</strong> <code>archive d/DATE</code> will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default <strong>HOME DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Home Directory</strong>.</p>
+</li>
+<li>
+<p><strong>Dual argument Date mode</strong> <code>archive d/START_DATE END_DATE</code> will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default <strong>HOME DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Home Directory</strong>.</p>
+</li>
+<li>
+<p><strong>Single argument Directory Path mode</strong> <code>archive dir/DIRECTORY_PATH</code> will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the chosen Directory Path.</p>
+</li>
+<li>
+<p><strong>Single argument Date mode + Single argument Directory path mode</strong> <code>archive d/DATE dir/DIRECTORY_PATH</code> will list down all records with the specified date and archives all shown records to an Excel file and store the file in the chosen Directory Path.</p>
+</li>
+<li>
+<p><strong>Dual argument Date mode + Single argument Directory path mode</strong> <code>archive d/START_DATE END_DATE dir/DIRECTORY_PATH</code> will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the chosen Directory Path.</p>
+<div class="paragraph">
+<p>The mechanism that facilitates these modes can be found in the <code>ArchiveCommandParser#parse</code>. Below is a overview of the mechanism:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Method <code>ArchiveCommandParser#createArchiveCommand</code> takes the input argument and further analyse it.</p>
+</li>
+<li>
+<p>The input given by the user is passed to <code>ArgumentTokeniser#tokenise</code> to split the input separated by prefixes.</p>
+</li>
+<li>
+<p>This returns a <code>ArgumentMultiMap</code> which contains a map with prefixes as keys and their associated input arguments as the value.</p>
+</li>
+<li>
+<p>The string associated with <code>d/</code></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>It is then passed into <code>ArchiveCommandParser#splitByWhitespace</code> for further processing and returns an array. This string will be split into sub-strings and each of them will be construct as a date type variable. The the size of the array exceed 2, error wil be thrown to inform invalid command format.</p>
+</li>
+<li>
+<p>If the size of the string equals 1, it is constructed as a date type variable after being passed to <code>ParseUtil#parseDate</code>, it must follow the format dd-mm-yyyy. Error will be thrown if the format is not correct or the date entered is not real.</p>
+</li>
+<li>
+<p>If the size of the string equals 2, each sub-string is constructed as a date type variable after being passed to <code>ParseUtil#parseDate</code>, and an additional check is conducted to check if the first date entered, known as Start date is smaller than the second date entered, known as End Date.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>The String associated with <code>dir/</code></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>It is then passed into <code>ParseUtil#parseDirectoryString</code> to check if the Directory path given is existing.</p>
+</li>
+<li>
+<p>If the Directory is unreal, an error is thrown to inform the user.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Please take note that:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If the prefix <code>d/</code> is not entered in the input, meaning that all the records will be included in the Excel sheet.</p>
+</li>
+<li>
+<p>If the prefix <code>dir/</code> is not entered in the input, meaning that the Directory Path is default as the <strong>User&#8217;s Home Directory</strong>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>ArchiveCommand</code> has four constructors which makes use of overloading to reduce code complexity.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>One constructor has no arguments and assigns default predicate for the <code>FilteredList</code> in <code>ModelManager</code>,
+<code>PREDICATE_SHOW_ALL_RECORDS</code> which will show all items in the list and the Directory path is <strong>User&#8217;s Home Directory</strong>.</p>
+</li>
+<li>
+<p>The second constructor takes in 2 <code>Date</code> arguments and assigns the predicate <code>DateIsWithinDateIntervalPredicate</code> which will only show items within the date interval and the Directory path is <strong>User&#8217;s Home Directory</strong>.</p>
+</li>
+<li>
+<p>The third constructor takes in 1 <code>Directory Path</code> argument and assigns the predicate as <code>PREDICATE_SHOW_ALL_RECORDS</code>, which will show all items in the list and the Directory path is the entered directory path.</p>
+</li>
+<li>
+<p>The fourth constructor takes in 1 <code>Directory Path</code> and 2 <code>Date</code> arguments and assigns the predicate as <code>DateIsWithinDateIntervalPredicate</code> which will only show items within the date interval and the Directory path is the entered Directory Path.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the list operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ArchiveSequenceDiagram.png" alt="ArchiveSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>For simplicity, interactions with the UI is not shown in the diagram above.<br>
+The update of the UI <code>RecordListPanel</code> is done through the event system. <code>FilteredList</code> is a type of ObservableList
+implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
+listener is present in <code>RecordListPanel</code> and will update the UI list automatically.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.14. Design Considerations</a></h3>
+<div class="sect3">
+<h4 id="aspect-data-structure-to-support-listing-of-records-2"><a class="link" href="#aspect-data-structure-to-support-listing-of-records-2">3.14.1. Aspect: Data structure to support listing of records</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Uses a FilteredList that is tracked by the UI. FilteredLIst is a wrapper around the ObservableList&lt;Record&gt; that is stored in UniquePersonList which allows for any changes in the observable list to be propagated to the filtered list automatically.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement</p>
+</li>
+<li>
+<p>Cons: May take a significantly longer time to list records if there are many records spanning across a large timeframe.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Implement a HashMap with Date as the key and Record as the value.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Allows for constant time complexity to access any elements. Hence, listing records can potentially be faster.</p>
+</li>
+<li>
+<p>Cons: Current UI implementation relies on <code>FilteredList</code>. In order for UI to be compatible with the new data structure, the UI may need to change its implementation to <code>ObservableMap</code> instead. Alternatively, one can utilise a <code>HashMap</code> to first generate the list and pass the list reference into <code>FilteredList</code>. However, there is a need to code a filter function.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.15. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.13. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.16. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.14, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.17, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1421,7 +1901,7 @@ The three argument modes are as listed below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.14. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.17. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3431,7 +3911,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="12-use-case-export-expenses-into-another-format" class="discrete">12. Use case: Export expenses into another format</h3>
+<h3 id="12-use-case-export-expenses-into-excel-file-linh-chi" class="discrete">12. Use case: Export expenses into Excel file [Linh Chi]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -3447,7 +3927,7 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User enters preferred export format.</p>
 </li>
 <li>
-<p>FinancialPlanner exports the file in specified format.</p>
+<p>FinancialPlanner exports the records data in Excel file.</p>
 </li>
 </ol>
 </div>
@@ -3457,7 +3937,20 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>3a User input unsupported file format</p>
+<p>3a User input wrong directory path that the Excel file will be stored</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws unsupported format error</p>
+</li>
+<li>
+<p>Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b User input wrong date format or unreal date.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -3471,7 +3964,100 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="13-use-case-freely-edit-expenses-tags" class="discrete">13. Use case: Freely edit expenses tags</h3>
+<h4 id="14-use-case-import-the-excel-file-into-financial-planner-linh-chi" class="discrete">14. Use case: Import the Excel file into Financial Planner. [Linh Chi]</h4>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests import format.</p>
+</li>
+<li>
+<p>Financial Planner shows list of possible format for import.</p>
+</li>
+<li>
+<p>User enters preffered import format.</p>
+</li>
+<li>
+<p>Financial Planner reads the Excel file and transfer all the data in the Excel file into Record object and add them into current Financial Planner.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a User input wrong file path that the Excel file is stored</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws unsupported format error</p>
+</li>
+<li>
+<p>Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="15-use-case-archive-the-records-data-into-excel-file-linh-chi" class="discrete">15. Use case: Archive the records data into Excel file. [Linh Chi]</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests archive format.</p>
+</li>
+<li>
+<p>Financial Planner shows a list of possible format to arhive.</p>
+</li>
+<li>
+<p>User enters the preffered archive format.</p>
+</li>
+<li>
+<p>Financial Planner archives the record data into Excel file.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extension</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>3a User input wrong directory path that the Excel file will be stored</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws unsupported format error</p>
+</li>
+<li>
+<p>Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b User input wrong date format or unreal date.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>FinancialPlanner throws unsupported format error</p>
+</li>
+<li>
+<p>Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="16-use-case-freely-edit-expenses-tags" class="discrete">16. Use case: Freely edit expenses tags</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -3756,4 +4342,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-03 14:08:17 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-04 07:01:54 UTC</div></div></div></body></html>
