@@ -42,7 +42,7 @@
 <li><a href="#export-into-excel-file">3.11. Export into Excel file</a></li>
 <li><a href="#import-from-excel-file">3.12. Import from Excel file</a></li>
 <li><a href="#archive-into-excel-file">3.13. Archive into Excel file</a></li>
-<li><a href="#design-considerations-3">3.14. Design Considerations</a></li>
+<li><a href="#design-considerations-4">3.14. Design Considerations</a></li>
 <li><a href="#proposed-data-encryption">3.15. [Proposed] Data Encryption</a></li>
 <li><a href="#logging">3.16. Logging</a></li>
 <li><a href="#Implementation-Configuration">3.17. Configuration</a></li>
@@ -1050,14 +1050,18 @@ The detailed execution sequence of functions used for <code>Logic phase</code> a
 parameter to StatisticCommandParser.</p>
 </li>
 <li>
-<p>The StatisticCommandParser will then pass its input parameters through another component <code>ArgumentTokenizer</code> to split up the command into arguments associated with each
-prefix and store them in a map for reference later.</p>
+<p>The StatisticCommandParser will then parse the arguments and create a new StatisticCommand object before returning its reference. The activity diagram below details the mechanism
+within the <code>StatisticCommandParser#parse</code> method.</p>
 </li>
-<li>
-<p>The map is further processed and the specific arguments will be identified in this stage. After the arguments have been obtained, there is a further check to check the
-validity of the arguments before proceeding to split the arguments associated with <code>d/</code> into date arguments. These arguments are again checked for validity before being passed to the
-constructor of StatisticCommand.</p>
-</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StatisticParserActivityDiagram.png" alt="StatisticParserActivityDiagram" width="500">
+</div>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p>Once <code>StatisticCommand#execute</code> is called, it will then search through the in-memory data of FinancialPlanner and return a list containing all records within the date range and including
 both the start dates and end dates. This functionality is facilitated by the <code>ModelManager</code> which is the class that manages all interactions between
@@ -1087,12 +1091,35 @@ the event system in FinancialPlanner. The sequence diagram below details the pro
 <img src="images/StatisticUiSequenceDiagram.png" alt="StatisticUiSequenceDiagram" width="800">
 </div>
 </div>
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
 <p>When the event is caught by the listener in <code>MainWindow</code>, <code>MainWindow</code> looks through all children of the <code>MainWindow#mainUiPanelPlaceholder</code> and executes the hide function in them.
-This will make all children hidden from view in the UI which allows for the panel switching functionality, which replaces the current panel with the desired panel.
-The program flow is then as shown above where the <code>CategoryBreakdown</code> is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
+This will make all children hidden from view in the UI which ensures that the UI is displayed correctly.</p>
+</li>
+<li>
+<p>As shown above, the function <code>StatsDisplayPanel#handleShowPieChartDataEvent</code> is called which will call the constructor of <code>MixedPieChartData</code>. The detailed execution details within this class is as shown in
+the activity diagram below.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StatisticUiActivityDiagram.png" alt="StatisticUiActivityDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The program flow is then as shown above where the <code>CategoryBreakdown</code> is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
 In the current implementation, whenever <code>stats</code> is called, 2 tabs will be created, one for total income and one for total expense. Thus, the same program sequence after construction for
-<code>CategoryBreakdown</code> is also repeated for total income, and the corresponding parameters would be incomeLabelData and incomeLegendData.</p>
+<code>CategoryBreakdown</code> is also repeated for total income.</p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below details the program flow after the constructor of CategoryBreakdown class is called.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/StatisticUiDetailedSequenceDiagram.png" alt="StatisticUiDetailedSequenceDiagram" width="800">
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1107,10 +1134,10 @@ only be accessed within CustomPieChart for security purposes.
 </tr>
 </table>
 </div>
-<div class="paragraph">
-<p>The activity flow diagram below details the mechanism behind the creation of the category breakdown ui,
-starting from the point where the function <code>StatsDisplayPanel#`handleShowPieChartStatsEvent</code> is called.</p>
 </div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
+
 </div>
 </div>
 <div class="sect2">
@@ -1821,7 +1848,7 @@ listener is present in <code>RecordListPanel</code> and will update the UI list 
 </div>
 </div>
 <div class="sect2">
-<h3 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.14. Design Considerations</a></h3>
+<h3 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.14. Design Considerations</a></h3>
 <div class="sect3">
 <h4 id="aspect-data-structure-to-support-listing-of-records-2"><a class="link" href="#aspect-data-structure-to-support-listing-of-records-2">3.14.1. Aspect: Data structure to support listing of records</a></h4>
 <div class="ulist">
@@ -4342,4 +4369,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-04 12:51:04 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-04 16:11:33 UTC</div></div></div></body></html>
