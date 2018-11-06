@@ -1,0 +1,880 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><meta name="author" content="---"><title>Vincent Neo Guo Zhong - Project Portfolio</title><link rel="stylesheet" href="../stylesheets/gh-pages-vincent.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">FinancialPlanner-Level4</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level4"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Vincent Neo Guo Zhong - Project Portfolio</h1><div class="details"><span class="author" id="author">---</span><br></div></div><div id="content"><div class="sect1">
+<h2 id="project-financialplanner"><a class="link" href="#project-financialplanner">PROJECT: FinancialPlanner</a></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="what-financialplanner-is-about"><a class="link" href="#what-financialplanner-is-about">What FinancialPlanner is about:</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>FinancialPlanner is an application my team has created for the NUS module CS2113T. In this module, we were taught basic software
+engineering principles and object oriented programming. This project lasted for 10 weeks and we were tasked to develop a desktop application
+for a particular group of users.</p>
+</div>
+<div class="paragraph">
+<p>FinancialPlanner&#8217;s main target audience are students who need help managing their finances.
+They like typing and are often much more proficient in organising their data with command line interface (CLI). In FinancialPlanner,
+there is a text box located at the topmost part of the application which users can use to type commands into the system. Graphic user interface(GUI)
+created using JavaFX was also used to display the output of the system to create a more intuitive and engaging user experience.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>FinancialPlanner was adapted from <a href="https://nuscs2113-ay1819s1.github.io/addressbook-level4/">AddressBook Level 4</a>, a sample codebase given by the module.
+There were milestones to meet every fortnight and each milestone required a working product. Throughout this development cycle, I have made much contributions to the team and below shows a summary of my
+contributions.</p>
+</div>
+<div class="sect2">
+<h3 id="application-code-related-contributions"><a class="link" href="#application-code-related-contributions">Application Code related contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Major Enhancements</strong>: Facilitated the morph from AddressBook Level 4 to FinancialPlanner</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Reason for the enhancement</code> FinancialPlanner is mainly targeted at users who wants to store and keep track of their daily financial activity. This is significantly
+different from the original AddressBook Level 4, thus significant effort was needed to morph into FinancialPlanner.</p>
+</li>
+<li>
+<p><code>My contributions</code> I adapted all functions that involved addition, removal and editing of the app data into functions able to process data required. I also fixed
+all the tests that broke as a result of the morph.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Major Enhancements</strong>: Added a feature that allows users to display a summary of their expenses and income by day, month and categories in a table</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Reason for the enhancement</code> Users want to have a way to track daily or monthly financial activities without having to go through the list.</p>
+</li>
+<li>
+<p><code>Brief Description</code> To see the summary within any date range, the user needs to enter 2 dates or 2 months and the corresponding parameters and the system would
+generate a summary table.</p>
+</li>
+<li>
+<p><code>My contributions</code> I created the framework for this feature. It covers many components comprising of parsing, data manipulation, logic and graphic user interface as output. The
+report was generated on a table panel which can be switched around with other user interface panels as necessary. I created all java logic components and the Java fxml layout files for the
+user interface to display correctly.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Major Enhancements</strong>: Added a feature that shows the breakdown of financial activity into categories</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Reason for the enhancement</code> FinancialPlanner also allows users to tag each financial activity with a category that they can define. Sometimes, users
+would like to know where they are spending their money on in order to make informed decisions on their future finance activities. Since each record is tagged with
+an optional set of tags, these tags can be used as categories for users to classify each financial activity.</p>
+</li>
+<li>
+<p><code>Overview</code> To further empower users to make informed choices, the statistics feature was designed to provide a detailed breakdown of all financial
+activity within a given period.</p>
+</li>
+<li>
+<p><code>My contributions</code> For this feature, there were 3 main parts, the parsing and command logic, the model that supports the data manipulation and the user interface that
+allows the users to view the output. I created all the components necessary for this feature, with the most noteworthy implementation being user interface. Similar to summary,
+the Ui panel in this feature can be switched out for other panels. Furthermore, I created tabs to allow users to switch between expense and income for greater usability. The pie charts used
+were generated using JavaFX pie chart library. However, I overwrote some parts of the in to allow for greater functionality using Java&#8217;s overriding feature.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Major Enhancements</strong>: Added a feature that allows swapping of UI panels.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Reason for the enhancement</code> For increased user friendliness, FinancialPlanner supports commands which draws charts using the in built UI. This meant that sufficient space
+needed to be given to these UI panels for the chart to look right and the data points to be seen clearly. Thus, the usual approach of splitting the application in the panel is not effective.
+To overcome this challenge, swapping UI algorithms were designed.</p>
+</li>
+<li>
+<p><code>Overview</code> The swapping UI algorithm manages UI panels and decides which panels will be shown while keeping the rest hidden.</p>
+</li>
+<li>
+<p><code>My contributions</code> The main connections between UI components and the rest of FinancialPlanner is through Google&#8217;s event system. I created new classes and utilised interfaces to allow for
+the switching functionality in the main UI panels.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Major Enhancements</strong>: Added a welcome panel that displays breakdown for current month</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Reason for the enhancement</code>  Users may want to get a sense of their current financial status without having
+to type a single command. By having the panel updated, users can instantly get feedback on their current financial status whenever they add a new
+record to the system. This improved the user friendliness of our app significantly.</p>
+</li>
+<li>
+<p><code>Overview</code> This feature serves as the front page of the application. It displays the category breakdown of current month and is automatically
+updated whenever the data in the application is changed.</p>
+</li>
+<li>
+<p><code>My contributions</code> Since this feature is automatic and should not require any user input, I created new methods that can track the current date and cached all records associated with
+the current month in the <strong>ModelManager</strong> on start up. I also hooked up this cached list to main model to listen to any changes to the underlying list and update itself as necessary. Furthermore,
+I created the welcome panel UI layout and logic to read from this list whenever it updates and refresh the UI panel.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor Enhancements</strong>: Added an extension to list command</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Reason for the enhancement</code> Originally, the list command would list all records in the application. This may not be very convenient when the
+number of records become very large. Thus, a more specific and user friendly command is introduced.</p>
+</li>
+<li>
+<p><code>Overview</code> This list command allows users to specify the date range and will only show records in that range.</p>
+</li>
+<li>
+<p><code>My contributions</code> ListCommandParser of the original implementation was tweaked slightly to allow additional functionality.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Minor Enhancements</strong>: Helped to make storage more modular and combined storage for fellow teammates</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Reason for enhancement</code> The storage of AddressBook Level 4 was mainly targetted at storing only one thing and it was hard to extend the feature.</p>
+</li>
+<li>
+<p><code>My contributions</code> Thus, I created new interfaces which utilises Java&#8217;s generic type to allow for greater flexibility when calling the function that saves to XML.
+This broke many of the tests, and to preserve the coverage at a high level of 80%, I fixed all the tests relating to storage and combined storage for limitlist and recordlist together which is
+also used by other teammates.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="non-enhancement-related-contributions"><a class="link" href="#non-enhancement-related-contributions">Non-enhancement related contributions</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Managed releases for 4 milestones(<code>v1.0</code> - <code>v1.3</code>)</p>
+</li>
+<li>
+<p>Set up a workflow where pull requests are automatically blocked unless there is one other person who approved the request</p>
+</li>
+<li>
+<p>Ensured that milestone objectives are met and submit relevant PRs to module repo</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Tools</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Set up Continuous Integration, coverage tools and github website deployment</p>
+</li>
+<li>
+<p>PRs reviewed(with non trivial comments)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Debugging team members code</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Helped debug other team member&#8217;s code and offer suggestions when they are stuck</p>
+</li>
+<li>
+<p>Helped provide ideas for possible implementation for other team member&#8217;s features</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Team Management</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Coordinated some team meetings</p>
+</li>
+<li>
+<p>Ensured that team members meet feature deadlines set within the team</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Testing</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Wrote extensive tests to increase coverage of the project</p>
+</li>
+<li>
+<p>Wrote system tests to test integration of the system</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Did a few cosmetic tweaks to the User Guide</p>
+</li>
+<li>
+<p>Organised and ensured that documentation is coherent</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Below are some of my contributions to the User Guide. These show that I am able to write comprehensive User Guides.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="listing-all-records-within-a-date-range-code-list-code"><a class="link" href="#listing-all-records-within-a-date-range-code-list-code">Listing all records within a date range : <code>list</code></a></h3>
+<div class="paragraph">
+<p>Shows a list of all records in the financial planner which is within a certain date range.<br>
+There are 3 modes, default mode, single argument mode and dual argument mode.<br>
+Format:<br>
+Default mode: <code>list</code><br>
+Single argument mode: <code>list d/DATE</code><br>
+Dual argument mode: <code>list d/START_DATE END_DATE</code></p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Default mode will list down all records in the Financial Planner.<br></p>
+</li>
+<li>
+<p>Single argument mode will list down all records with the date specified.<br></p>
+</li>
+<li>
+<p>Dual argument mode will list down all records with the date that fall on either dates or between both dates.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>list</code></p>
+</li>
+<li>
+<p><code>list d/10-11-2018</code></p>
+</li>
+<li>
+<p><code>list d/10-11-2018 11-11-2018</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="data-analysis-features"><a class="link" href="#data-analysis-features">Data Analysis Features</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section describe features for the user to analyse his/her financial status in greater detail.</p>
+</div>
+<div class="sect2">
+<h3 id="showing-a-summary-table-of-all-financial-activity-in-a-time-period-code-summary-code"><a class="link" href="#showing-a-summary-table-of-all-financial-activity-in-a-time-period-code-summary-code">Showing a summary table of all financial activity in a time period: <code>summary</code></a></h3>
+<div class="paragraph">
+<p>Shows a summary table listing by day, month or categories within a given time specified by the user.<br>
+A <code>summary</code> is an item that contains information on the <strong>date or month that is represented</strong>, the <strong>total expense calculated</strong>, the <strong>total income calculated</strong> and
+the <strong>net money flow calculated.</strong> A <code>category</code> refers to any <code>set of tags</code> that are assigned to any records in the application.<br></p>
+</div>
+<div class="paragraph">
+<p>The summary command supports both listing by date, by month and by categories.<br>
+Format:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>By Date: <code>summary date d/START_DATE END_DATE</code></p>
+</li>
+<li>
+<p>By Month: <code>summary month d/START_MONTH END_MONTH</code></p>
+</li>
+<li>
+<p>By Category: <code>summary category d/START_DATE END_DATE</code></p>
+</li>
+</ul>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>Note that there are specific formats required for the dates and months entered.</p>
+</li>
+<li>
+<p>For the commands <strong>"summary date"</strong> and <strong>"summary category"</strong>, START_DATE/END_DATE must be in the format of
+<code>dd-mm-yyyy</code> where <code>dd</code> represents day, <code>mm</code> represents month, <code>yyyy</code> represents year. All parameters should be specified in numerical form.</p>
+</li>
+<li>
+<p>For command <strong>"summary month"</strong>, START_MONTH/END_MONTH must in the format of <code>mmm-yyyy</code>, <code>mmm</code> represents the month with its three letter representations, and
+<code>yyyy</code> represents the year in its numerical form.</p>
+</li>
+<li>
+<p>Note that for mmm, it is case-insensitive, meaning both <strong>"APR"</strong> and <strong>"apr"</strong> are accepted</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>summary date d/1-1-2018 12-12-2018</code></p>
+</li>
+<li>
+<p><code>summary month d/apr-2018 sep-2018</code></p>
+</li>
+<li>
+<p><code>summary month d/APR-2018 SeP-2018</code></p>
+</li>
+<li>
+<p><code>summary category d/1-1-2018 12-12-2018</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The screenshots below are examples of what you can see once the command has been accepted.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UiSummaryByDateTable.png" alt="UiSummaryByDateTable" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Screenshot of app when <code>summary date d/1-1-2018 12-12-2018</code> is run</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UiSummaryByMonthTable.png" alt="UiSummaryByMonthTable" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Screenshot of app when <code>summary month d/jan-2018 dec-2018</code> is run</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UiSummaryByCategoryTable.png" alt="UiSummaryByCategoryTable" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Screenshot of app when <code>summary category d/1-1-2018 12-12-2018</code> is run</strong></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="showing-a-breakdown-of-total-expenses-and-income-into-categories-code-stats-code"><a class="link" href="#showing-a-breakdown-of-total-expenses-and-income-into-categories-code-stats-code">Showing a breakdown of total expenses and income into categories: <code>stats</code></a></h3>
+<div class="paragraph">
+<p>Shows a breakdown of total expenses and income into categories and displays these information in a pie chart.<br>
+Format:`stats d/START_DATE END_DATE`</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>START_DATE/END_DATE follow the same configurations as date parameters required when adding records. It is in the form of
+<strong>dd-mm-yyyy</strong> where <strong>dd</strong> represents day, <strong>mm</strong> represents month and <strong>yyyy</strong> represents the year. <strong>dd</strong> and <strong>mm</strong> both require 1 to 2 digits while
+<strong>yyyy</strong> requires exactly 4 digits.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the command has been executed, 2 tabs will appear showing a pie chart containing data that is relevant in the range.<br></p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Due to label constraints, some labels may not be displaying correctly if they are overlapping with other labels. This happens when the pie slice
+is too small. To improve readability, we have decided to hide some labels in such scenarios. Also, when the label is too long, since the pie charts
+need to fit the labels, the pie chart may become small as a result. To prevent such situations, please keep your labels short. This will be improved in
+later versions of the product to remove the labels completely and use a mouse over input instead.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>stats d/1-1-2018 12-12-2018</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Below are some screenshots of what you can see when the command has been accepted.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UiPieChartExpense.png" alt="UiPieChartExpense" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Screenshot of app displaying expense breakdown when <code>stats d/1-1-2018 12-12-2018</code> is run</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/UiPieChartIncome.png" alt="UiPieChartIncome" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Screenshot of app displaying income breakdown when <code>stats d/1-1-2018 12-12-2018</code> is run</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Below are some of my contributions to the Developer Guide. These show that I am able to utilise modelling tools such as
+UML diagrams, sequence diagrams, activity flow which are crucial to Software Engineering Principles to illustrate to potential
+developers the architecture of my product.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="list-history-feature"><a class="link" href="#list-history-feature">List history feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The list mechanism is facilitated by <code>ModelManager</code>.
+It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>.
+ListCommand calls <code>ModelManager#updateFilteredRecords</code> and passes in different predicates depending on the argument mode.</p>
+</div>
+<div class="paragraph">
+<p>This feature has only one keyword <code>list</code> but implements 3 different argument modes to allow users to access multiple versions of the same command.
+The three argument modes are as listed below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>No Argument mode&#8201;&#8212;&#8201;Requires no arguments and returns the entire list of records in the FinancialPlanner.</p>
+</li>
+<li>
+<p>Single Argument mode&#8201;&#8212;&#8201;Requires a single date and returns all records containing that date</p>
+</li>
+<li>
+<p>Dual Argument mode&#8201;&#8212;&#8201;Requires 2 dates, a <code>start date</code> and an <code>end date</code>. It returns all records containing dates within the time frame of start date and end date, inclusive of both start date and end date
+The mechanism that facilitates these modes can be found in the <code>ListCommandParser#parse</code>. Below is a overview of the mechanism:</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The input given by the user is passed to <code>ArgumentTokeniser#tokenise</code> to split the input separated by prefixes.</p>
+</li>
+<li>
+<p>This returns a <code>ArgumentMultiMap</code> which contains a map with prefixes as keys and their associated input arguments as the value.</p>
+</li>
+<li>
+<p>The string associated with <code>d/</code> is then passed into <code>ListCommandParser#splitByWhitespace</code> for further processing and returns an array.</p>
+</li>
+<li>
+<p>The argument mode is determined by the size of this array and the elements are further processed into <code>Date</code> objects, before creating and returning a <code>ListCommand</code> object.</p>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The <code>ListCommand</code> has two constructors which makes use of overloading to reduce code complexity.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>One constructor has no arguments and assigns default predicate for the <code>FilteredList</code> in <code>ModelManager</code>,
+<code>PREDICATE_SHOW_ALL_RECORDS</code> which will show all items in the list.</p>
+</li>
+<li>
+<p>The second constructor takes in 2 <code>Date</code> arguments and assigns the predicate <code>DateIsWithinDateIntervalPredicate</code> which will only show items within the date interval.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the list operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/ListSequenceDiagram.png" alt="ListSequenceDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>For simplicity, interactions with the UI is not shown in the diagram above.<br>
+The update of the UI <code>RecordListPanel</code> is done through the event system. <code>FilteredList</code> is a type of ObservableList
+implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
+listener is present in <code>RecordListPanel</code> and will update the UI list automatically.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-data-structure-to-support-listing-of-records"><a class="link" href="#aspect-data-structure-to-support-listing-of-records">Aspect: Data structure to support listing of records</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Uses a FilteredList that is tracked by the UI. FilteredLIst is a wrapper around the ObservableList&lt;Record&gt; that is stored in UniquePersonList which allows for any changes in the observable list to be propagated to the filtered list automatically.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement</p>
+</li>
+<li>
+<p>Cons: May take a significantly longer time to list records if there are many records spanning across a large timeframe.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Implement a HashMap with Date as the key and Record as the value.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Allows for constant time complexity to access any elements. Hence, listing records can potentially be faster.</p>
+</li>
+<li>
+<p>Cons: Current UI implementation relies on <code>FilteredList</code>. In order for UI to be compatible with the new data structure, the UI may need to change its implementation to <code>ObservableMap</code> instead. Alternatively, one can utilise a <code>HashMap</code> to first generate the list and pass the list reference into <code>FilteredList</code>. However, there is a need to code a filter function.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="view-summary-feature"><a class="link" href="#view-summary-feature">View summary feature</a></h3>
+<div class="paragraph">
+<p>This feature allows the user to view a summary table of all their financial activity within a period of time. There are 3 different ways the user can
+view the summary, one is summary by date which means the summary of each day in the period will be provided, summary by month or summary by category.</p>
+</div>
+<div class="paragraph">
+<p>The corresponding command required for this feature is <code>summary</code> and the user will have to supply 2 dates and a compulsory parameter <code>mode</code> which determines whether
+they are viewing <strong>summary by date, by month or by category</strong>. This feature involves most components of FinancialPlanner with the exception of <code>Storage</code>. It can also be broadly split into
+2 phases, the logic phase which generates the summary and the UI phase which allows users to view the summary in a table.</p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below details the sequence of program executions for the logic phase.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SummarySequenceDiagram.png" alt="SummarySequenceDiagram" width="790">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>When the user types in the command "summary date d/1-1-2018 12-12-2018", the command is passed fron LogicManager to FinancialPlannerParser. In here,
+the system chooses which parser to use which is SummaryCommandParser and calls its parse method which is polymorphic, meaning that every parser has the same function but use different
+implementation.</p>
+</li>
+<li>
+<p>In this class, based on the <code>mode</code> parameter given, the system chooses a SummaryCommand to instantiate and pass the reference back to the Logic Manager. The various checks for the validity of the
+parameters also occur during this stage.</p>
+</li>
+<li>
+<p>After the SummaryCommandObject is created, <code>SummaryByDateCommand#execute</code> is called. The responsibility of SummaryByDateCommand is a manager that has retrieves information from model and passes it to other components.
+SummaryByDateCommand gets the filtered list from Model using <code>Model#getFilteredRecordList</code> and passes it to the constructor of SummaryByDateList. The creates <code>SummaryList</code> object which is then
+passed into a <code>ShowSummaryTableEvent</code> before trigger.</p>
+</li>
+<li>
+<p>The entire logic process is the same for SummaryByMonthCommand and SummaryByCategoryCommand but uses different lists.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The next phase of the program execution is performed in the UI components.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>MainWindow</code> will listen out of the <code>ShowSummaryTableEvent</code> and render all Main UI panels invisible before rendering <code>StatsDisplayPanel</code> visible.</p>
+</li>
+<li>
+<p>It then calls the handler function in <code>StatsDisplayPanel</code> which will create tabs and call the constructor of <code>SummaryDisplay</code>.</p>
+</li>
+<li>
+<p>Within the constructor of <code>SummaryDisplay</code>, the table is created and the SummaryList is converted into a Ui friendly list.</p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-method-of-generating-the-summary"><a class="link" href="#aspect-method-of-generating-the-summary">Aspect: Method of generating the summary</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Generate the summary list whenever the summary command is called.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement and maintain. Sufficient for the intended target audience of FinancialPlanner.</p>
+</li>
+<li>
+<p>Cons: This requires looping through each record in the filtered record list obtained from the <code>Model</code>.
+To aid in the time complexity, the internal implementation of SummaryList was done using hash maps instead with allowed for
+constant time random access unlike list. However, the initial filtering is close to linear time complexity which could slow down the app if many records are inside.
+Also, the list had to be created every time <code>summary</code> is called which could be slow if the command is called multiple times.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Morph the record list into a record hash map of record lists instead</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: A hash map allows for constant random access to a record list of a particular date assuming the key for the hash map is using dates.
+Thus, the filtering function does not need to loop through as many records and the time taken would be lower especially when the database in the application is large.</p>
+</li>
+<li>
+<p>Cons: Might be too specific to only 1 type of category like categorising by date. If any other types are required, another map may have to be added. This implementation may make the
+system rigid and hard to modify in the future. Also, the summary list still had to be generated every time command is called.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Cache the summary list in financial planner</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: By caching the summary list in the financial planner and assigning a boolean variable along with information on the filter predicate to it to determine if it is modified, we can
+reduce the number of times summary list is recreated every time the <code>summary</code> command is called. When the <code>summary</code> command is called, it checks the
+boolean variable to see if summary list needs to be modified. If it doesn&#8217;t need to be regenerated, the system will simply read directly from <code>ModelManager</code>.</p>
+</li>
+<li>
+<p>Cons: This implementation involves tracking of the state of the summary list. If it is not done systematically, it may have some hidden bugs which can be hard to test.
+Also, if the sequence of commands is as follows, <strong>summary, add, summary</strong>, the time required is still long.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-method-of-switching-ui-panels"><a class="link" href="#aspect-method-of-switching-ui-panels">Aspect: Method of switching UI panels</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1(current choice):</strong> Disable all UI panels within the Main UI placeholder before enabling the desired one</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement and apply it to other newly created panels. To make use of the current implementation, the panel can simply be the children of
+the main Ui placeholder and the event handler can be placed in main window.</p>
+</li>
+<li>
+<p>Cons: Might be inefficient when there are many panels or many switching as the same process must be repeated for all panels.
+However, this is unrealistic and it is unlikely that there are a lot of UI panels for it to make a significant impact.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Track which UI panel is visible and only hide that panel</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Might have some benefits if the amount of resources available is low</p>
+</li>
+<li>
+<p>Cons: Slightly harder to implement but unlikely to have visible benefits.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="view-category-breakdown-feature"><a class="link" href="#view-category-breakdown-feature">View category breakdown feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
+<div class="paragraph">
+<p>This feature allows the user to view a pie chart breakdown o
+f all expenses and all income within a date range which the user can specify.</p>
+</div>
+<div class="paragraph">
+<p>The corresponding command required for this feature is <code>stats</code>.For this feature, users have to enter 2 dates, one starting date and one ending date.
+This feature is facilitated by a few key components of FinancialPlanner, <code>Logic</code>, <code>Model</code>, <code>UI</code> and function executions can be split into 2 phases, the <code>Logic phase</code> and the <code>UI phase</code>.
+The detailed execution sequence of functions used for <code>Logic phase</code> are as shown below.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StatisticLogicSequenceDiagram.png" alt="StatisticLogicSequenceDiagram" width="790">
+</div>
+</div>
+<div class="paragraph">
+<p>Consider the situation where the user enters <strong>"stats d/1-1-2018 12-12-2018"</strong>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When user enters the command, the <code>LogicManager</code> recognises the command and calls the <code>FinancialPlannerParser</code> to process the new command as shown above.</p>
+</li>
+<li>
+<p>The FinancialPlannerParser will then search for the <code>stats</code> keyword required and once it is found, the rest of the command minus the keyword is passed in as a
+parameter to StatisticCommandParser.</p>
+</li>
+<li>
+<p>The StatisticCommandParser will then parse the arguments and create a new StatisticCommand object before returning its reference. The activity diagram below details the mechanism
+within the <code>StatisticCommandParser#parse</code> method.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StatisticParserActivityDiagram.png" alt="StatisticParserActivityDiagram" width="500">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Once <code>StatisticCommand#execute</code> is called, it will then search through the in-memory data of FinancialPlanner and return a list containing all records within the date range and including
+both the start dates and end dates. This functionality is facilitated by the <code>ModelManager</code> which is the class that manages all interactions between
+<code>Logic</code> and <code>Model</code> component, by`ModelManager#updateFilteredRecords`. The command then retrieves the filteredList from ModelManager and passes it into
+the constructor of <code>CategoryStatisticsList</code>.</p>
+</li>
+<li>
+<p>In this constructor, it will loop through all the records in the list and add them into an internal map. The internal data structure in <code>CategoryStatisticsList</code> is a hash map,
+to aid in the adding process, however it only outputs lists and not the map. This functionality is facilitated by <code>CategoryStatisticsList#addToCategoryStatistics</code> which checks whether the record
+is in the map.</p>
+</li>
+<li>
+<p>If the record is not present, it creates a new <code>CategoryStatistic</code> object and adds that to the map. If the record is present, the record is then added to the existing <code>CategoryStatistic</code> object.</p>
+</li>
+<li>
+<p>The flow of control returns to StatisticCommand and StatisticCommand calls the read function of CategoryStatisticsList to obtain a read-only list and passes it into
+an event constructor before posting the event <code>ShowPieChartStatsEvent</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>After the event is posted, the execution proceeds to the <code>UI phase</code> where there is a listener in <code>MainWindow</code> listening to this event. This is facilitated by
+the event system in FinancialPlanner. The sequence diagram below details the program flow of the functions executed in <code>UI phase</code>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StatisticUiSequenceDiagram.png" alt="StatisticUiSequenceDiagram" width="800">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>When the event is caught by the listener in <code>MainWindow</code>, <code>MainWindow</code> looks through all children of the <code>MainWindow#mainUiPanelPlaceholder</code> and executes the hide function in them.
+This will make all children hidden from view in the UI which ensures that the UI is displayed correctly.</p>
+</li>
+<li>
+<p>As shown above, the function <code>StatsDisplayPanel#handleShowPieChartDataEvent</code> is called which will call the constructor of <code>MixedPieChartData</code>. The detailed execution details within this class is as shown in
+the activity diagram below.</p>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StatisticUiActivityDiagram.png" alt="StatisticUiActivityDiagram" width="800">
+</div>
+</div>
+<div class="paragraph">
+<p>The program flow is then as shown above where the <code>CategoryBreakdown</code> is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
+In the current implementation, whenever <code>stats</code> is called, 2 tabs will be created, one for total income and one for total expense. Thus, the same program sequence after construction for
+<code>CategoryBreakdown</code> is also repeated for total income.</p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below details the program flow after the constructor of CategoryBreakdown class is called.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/StatisticUiDetailedSequenceDiagram.png" alt="StatisticUiDetailedSequenceDiagram" width="800">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Note that the CustomLegend class is located within the CustomPieChart class which inherits from the JavaFX PieChart class. This legend class can
+only be accessed within CustomPieChart for security purposes.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-06 10:06:12 UTC</div></div></div></body></html>

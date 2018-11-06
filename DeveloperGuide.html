@@ -32,20 +32,21 @@
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
 <li><a href="#sort-records-feature">3.2. Sort records feature</a></li>
 <li><a href="#list-history-feature">3.3. List history feature</a></li>
-<li><a href="#view-breakdown-of-total-income-and-expense-into-categories">3.4. View breakdown of total income and expense into categories</a></li>
-<li><a href="#find-records-by-tag-feature">3.5. Find records by tag feature</a></li>
-<li><a href="#addlimit-feature">3.6. addLimit feature</a></li>
-<li><a href="#deletelimit-feature">3.7. deleteLimit feature</a></li>
-<li><a href="#editlimit-feature">3.8. editLimit feature</a></li>
-<li><a href="#checklimit-feature">3.9. checkLimit feature</a></li>
-<li><a href="#delete-by-date-entry">3.10. Delete By Date Entry</a></li>
-<li><a href="#export-into-excel-file">3.11. Export into Excel file</a></li>
-<li><a href="#import-from-excel-file">3.12. Import from Excel file</a></li>
-<li><a href="#archive-into-excel-file">3.13. Archive into Excel file</a></li>
-<li><a href="#design-considerations-4">3.14. Design Considerations</a></li>
-<li><a href="#proposed-data-encryption">3.15. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.16. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.17. Configuration</a></li>
+<li><a href="#view-summary-feature">3.4. View summary feature</a></li>
+<li><a href="#view-category-breakdown-feature">3.5. View category breakdown feature</a></li>
+<li><a href="#find-records-by-tag-feature">3.6. Find records by tag feature</a></li>
+<li><a href="#addlimit-feature">3.7. addLimit feature</a></li>
+<li><a href="#deletelimit-feature">3.8. deleteLimit feature</a></li>
+<li><a href="#editlimit-feature">3.9. editLimit feature</a></li>
+<li><a href="#checklimit-feature">3.10. checkLimit feature</a></li>
+<li><a href="#delete-by-date-entry">3.11. Delete By Date Entry</a></li>
+<li><a href="#export-into-excel-file">3.12. Export into Excel file</a></li>
+<li><a href="#import-from-excel-file">3.13. Import from Excel file</a></li>
+<li><a href="#archive-into-excel-file">3.14. Archive into Excel file</a></li>
+<li><a href="#design-considerations-5">3.15. Design Considerations</a></li>
+<li><a href="#proposed-data-encryption">3.16. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.17. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.18. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -1021,11 +1022,161 @@ listener is present in <code>RecordListPanel</code> and will update the UI list 
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-breakdown-of-total-income-and-expense-into-categories"><a class="link" href="#view-breakdown-of-total-income-and-expense-into-categories">3.4. View breakdown of total income and expense into categories</a></h3>
-<div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<h3 id="view-summary-feature"><a class="link" href="#view-summary-feature">3.4. View summary feature</a></h3>
 <div class="paragraph">
-<p>This feature allows the user to view a pie chart breakdown of all expenses and all income within a date range which the user can specify.</p>
+<p>This feature allows the user to view a summary table of all their financial activity within a period of time. There are 3 different ways the user can
+view the summary, one is summary by date which means the summary of each day in the period will be provided, summary by month or summary by category.</p>
+</div>
+<div class="paragraph">
+<p>The corresponding command required for this feature is <code>summary</code> and the user will have to supply 2 dates and a compulsory parameter <code>mode</code> which determines whether
+they are viewing <strong>summary by date, by month or by category</strong>. This feature involves most components of FinancialPlanner with the exception of <code>Storage</code>. It can also be broadly split into
+2 phases, the logic phase which generates the summary and the UI phase which allows users to view the summary in a table.</p>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below details the sequence of program executions for the logic phase.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SummarySequenceDiagram.png" alt="SummarySequenceDiagram" width="790">
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>When the user types in the command "summary date d/1-1-2018 12-12-2018", the command is passed fron LogicManager to FinancialPlannerParser. In here,
+the system chooses which parser to use which is SummaryCommandParser and calls its parse method which is polymorphic, meaning that every parser has the same function but use different
+implementation.</p>
+</li>
+<li>
+<p>In this class, based on the <code>mode</code> parameter given, the system chooses a SummaryCommand to instantiate and pass the reference back to the Logic Manager. The various checks for the validity of the
+parameters also occur during this stage.</p>
+</li>
+<li>
+<p>After the SummaryCommandObject is created, <code>SummaryByDateCommand#execute</code> is called. The responsibility of SummaryByDateCommand is a manager that has retrieves information from model and passes it to other components.
+SummaryByDateCommand gets the filtered list from Model using <code>Model#getFilteredRecordList</code> and passes it to the constructor of SummaryByDateList. The creates <code>SummaryList</code> object which is then
+passed into a <code>ShowSummaryTableEvent</code> before trigger.</p>
+</li>
+<li>
+<p>The entire logic process is the same for SummaryByMonthCommand and SummaryByCategoryCommand but uses different lists.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The next phase of the program execution is performed in the UI components.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>MainWindow</code> will listen out of the <code>ShowSummaryTableEvent</code> and render all Main UI panels invisible before rendering <code>StatsDisplayPanel</code> visible.</p>
+</li>
+<li>
+<p>It then calls the handler function in <code>StatsDisplayPanel</code> which will create tabs and call the constructor of <code>SummaryDisplay</code>.</p>
+</li>
+<li>
+<p>Within the constructor of <code>SummaryDisplay</code>, the table is created and the SummaryList is converted into a Ui friendly list.</p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.1. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-method-of-generating-the-summary"><a class="link" href="#aspect-method-of-generating-the-summary">Aspect: Method of generating the summary</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Generate the summary list whenever the summary command is called.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easier to implement and maintain. Sufficient for the intended target audience of FinancialPlanner.</p>
+</li>
+<li>
+<p>Cons: This requires looping through each record in the filtered record list obtained from the <code>Model</code>.
+To aid in the time complexity, the internal implementation of SummaryList was done using hash maps instead with allowed for
+constant time random access unlike list. However, the initial filtering is close to linear time complexity which could slow down the app if many records are inside.
+Also, the list had to be created every time <code>summary</code> is called which could be slow if the command is called multiple times.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Morph the record list into a record hash map of record lists instead</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: A hash map allows for constant random access to a record list of a particular date assuming the key for the hash map is using dates.
+Thus, the filtering function does not need to loop through as many records and the time taken would be lower especially when the database in the application is large.</p>
+</li>
+<li>
+<p>Cons: Might be too specific to only 1 type of category like categorising by date. If any other types are required, another map may have to be added. This implementation may make the
+system rigid and hard to modify in the future. Also, the summary list still had to be generated every time command is called.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 3:</strong> Cache the summary list in financial planner</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: By caching the summary list in the financial planner and assigning a boolean variable along with information on the filter predicate to it to determine if it is modified, we can
+reduce the number of times summary list is recreated every time the <code>summary</code> command is called. When the <code>summary</code> command is called, it checks the
+boolean variable to see if summary list needs to be modified. If it doesn&#8217;t need to be regenerated, the system will simply read directly from <code>ModelManager</code>.</p>
+</li>
+<li>
+<p>Cons: This implementation involves tracking of the state of the summary list. If it is not done systematically, it may have some hidden bugs which can be hard to test.
+Also, if the sequence of commands is as follows, <strong>summary, add, summary</strong>, the time required is still long.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="aspect-method-of-switching-ui-panels"><a class="link" href="#aspect-method-of-switching-ui-panels">3.4.2. Aspect: Method of switching UI panels</a></h4>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1(current choice):</strong> Disable all UI panels within the Main UI placeholder before enabling the desired one</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement and apply it to other newly created panels. To make use of the current implementation, the panel can simply be the children of
+the main Ui placeholder and the event handler can be placed in main window.</p>
+</li>
+<li>
+<p>Cons: Might be inefficient when there are many panels or many switching as the same process must be repeated for all panels.
+However, this is unrealistic and it is unlikely that there are a lot of UI panels for it to make a significant impact.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Track which UI panel is visible and only hide that panel</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Might have some benefits if the amount of resources available is low</p>
+</li>
+<li>
+<p>Cons: Slightly harder to implement but unlikely to have visible benefits.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="view-category-breakdown-feature"><a class="link" href="#view-category-breakdown-feature">3.5. View category breakdown feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.5.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>This feature allows the user to view a pie chart breakdown o
+f all expenses and all income within a date range which the user can specify.</p>
 </div>
 <div class="paragraph">
 <p>The corresponding command required for this feature is <code>stats</code>.For this feature, users have to enter 2 dates, one starting date and one ending date.
@@ -1034,7 +1185,7 @@ The detailed execution sequence of functions used for <code>Logic phase</code> a
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/StatisticLogicSequenceDiagram.png" alt="StatisticLogicSequenceDiagram" width="800">
+<img src="images/StatisticLogicSequenceDiagram.png" alt="StatisticLogicSequenceDiagram" width="790">
 </div>
 </div>
 <div class="paragraph">
@@ -1136,14 +1287,14 @@ only be accessed within CustomPieChart for security purposes.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.2. Design Considerations</a></h4>
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.2. Design Considerations</a></h4>
 
 </div>
 </div>
 <div class="sect2">
-<h3 id="find-records-by-tag-feature"><a class="link" href="#find-records-by-tag-feature">3.5. Find records by tag feature</a></h3>
+<h3 id="find-records-by-tag-feature"><a class="link" href="#find-records-by-tag-feature">3.6. Find records by tag feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.5.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The findtag mechanism is also facilitated by <code>ModelManager</code>. FindTagCommand calls <code>ModelManager#updateFilteredRecords</code>
 and passes in different predicates depending on the input by the user.</p>
@@ -1175,9 +1326,9 @@ and obtain a new <code>filteredRecords</code> based on the predicate, which will
 </div>
 </div>
 <div class="sect2">
-<h3 id="addlimit-feature"><a class="link" href="#addlimit-feature">3.6. addLimit feature</a></h3>
+<h3 id="addlimit-feature"><a class="link" href="#addlimit-feature">3.7. addLimit feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.7.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The limit command is based on the data type "Date", which includes two dates and "moneyFlow".
 Once the user execute the limit command, the Limit will be stored inside the LimitList.xml file by
@@ -1216,9 +1367,9 @@ This string will be split into two strings and each of them will be construct as
 </div>
 </div>
 <div class="sect2">
-<h3 id="deletelimit-feature"><a class="link" href="#deletelimit-feature">3.7. deleteLimit feature</a></h3>
+<h3 id="deletelimit-feature"><a class="link" href="#deletelimit-feature">3.8. deleteLimit feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.7.1. Current Implementation</a></h4>
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.8.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>deleteLimit will delete the limit inside the limitList according to the dates input. The user inputs
 two dates, dateStart and dateEnd, and the parser will make it a limit which has a dummy money.
@@ -1250,9 +1401,9 @@ This string will be split into two strings and each of them will be construct as
 </div>
 </div>
 <div class="sect2">
-<h3 id="editlimit-feature"><a class="link" href="#editlimit-feature">3.8. editLimit feature</a></h3>
+<h3 id="editlimit-feature"><a class="link" href="#editlimit-feature">3.9. editLimit feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.8.1. Current Implementation</a></h4>
+<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.9.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The editLimit command is similar to limit command, has dateStart, dateEnd and moneyFlow.
 The command will do the replacement by deleting the limit with same dates and add the new limit.</p>
@@ -1283,9 +1434,9 @@ This string will be split into two strings and each of them will be construct as
 </div>
 </div>
 <div class="sect2">
-<h3 id="checklimit-feature"><a class="link" href="#checklimit-feature">3.9. checkLimit feature</a></h3>
+<h3 id="checklimit-feature"><a class="link" href="#checklimit-feature">3.10. checkLimit feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-9"><a class="link" href="#current-implementation-9">3.9.1. Current Implementation</a></h4>
+<h4 id="current-implementation-9"><a class="link" href="#current-implementation-9">3.10.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>This feature is to help the user to check all the limits stored inside the limitList. The function will call
 manualLimitCheck(), which will generate a string that contains all limits' information.</p>
@@ -1304,9 +1455,9 @@ manualLimitCheck(), which will generate a string that contains all limits' infor
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-by-date-entry"><a class="link" href="#delete-by-date-entry">3.10. Delete By Date Entry</a></h3>
+<h3 id="delete-by-date-entry"><a class="link" href="#delete-by-date-entry">3.11. Delete By Date Entry</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-10"><a class="link" href="#current-implementation-10">3.10.1. Current implementation</a></h4>
+<h4 id="current-implementation-10"><a class="link" href="#current-implementation-10">3.11.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The delete by date entry mechanism is facilitated by <code>ModelManager</code>.
 It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>.</p>
@@ -1340,9 +1491,9 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-into-excel-file"><a class="link" href="#export-into-excel-file">3.11. Export into Excel file</a></h3>
+<h3 id="export-into-excel-file"><a class="link" href="#export-into-excel-file">3.12. Export into Excel file</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-11"><a class="link" href="#current-implementation-11">3.11.1. Current implementation</a></h4>
+<h4 id="current-implementation-11"><a class="link" href="#current-implementation-11">3.12.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The export into excel file mechanism is facilitated by <code>ModelManager</code> with the help of <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, <code>ExcelUtil</code> and the <code>VersionedFinancialPlanner</code>.</p>
 </div>
@@ -1522,9 +1673,9 @@ listener is present in <code>RecordListPanel</code> and will update the UI list 
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-from-excel-file"><a class="link" href="#import-from-excel-file">3.12. Import from Excel file</a></h3>
+<h3 id="import-from-excel-file"><a class="link" href="#import-from-excel-file">3.13. Import from Excel file</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-12"><a class="link" href="#current-implementation-12">3.12.1. Current implementation</a></h4>
+<h4 id="current-implementation-12"><a class="link" href="#current-implementation-12">3.13.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The import from Excel file mechanism is facilitated by <code>ExcelUtil</code>, the utility created to handle all method relating to Excel.</p>
 </div>
@@ -1663,9 +1814,9 @@ The two argument modes are as listed below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="archive-into-excel-file"><a class="link" href="#archive-into-excel-file">3.13. Archive into Excel file</a></h3>
+<h3 id="archive-into-excel-file"><a class="link" href="#archive-into-excel-file">3.14. Archive into Excel file</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-13"><a class="link" href="#current-implementation-13">3.13.1. Current implementation</a></h4>
+<h4 id="current-implementation-13"><a class="link" href="#current-implementation-13">3.14.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The archive into excel file mechanism is facilitated by <code>ModelManager</code> with the help of <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, <code>ExcelUtil</code> and the <code>VersionedFinancialPlanner</code>.</p>
 </div>
@@ -1848,9 +1999,9 @@ listener is present in <code>RecordListPanel</code> and will update the UI list 
 </div>
 </div>
 <div class="sect2">
-<h3 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.14. Design Considerations</a></h3>
+<h3 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.15. Design Considerations</a></h3>
 <div class="sect3">
-<h4 id="aspect-data-structure-to-support-listing-of-records-2"><a class="link" href="#aspect-data-structure-to-support-listing-of-records-2">3.14.1. Aspect: Data structure to support listing of records</a></h4>
+<h4 id="aspect-data-structure-to-support-listing-of-records-2"><a class="link" href="#aspect-data-structure-to-support-listing-of-records-2">3.15.1. Aspect: Data structure to support listing of records</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1884,20 +2035,20 @@ listener is present in <code>RecordListPanel</code> and will update the UI list 
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.15. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.16. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.16. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.17. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.17, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.18, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -1928,7 +2079,7 @@ listener is present in <code>RecordListPanel</code> and will update the UI list 
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.17. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.18. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -4369,4 +4520,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-06 09:59:47 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-06 10:06:12 UTC</div></div></div></body></html>
