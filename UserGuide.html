@@ -1,80 +1,11 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Financial Planner - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Financial Planner - User Guide</title><link rel="stylesheet" href="./asciidoctor.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">FinancialPlanner-Level4</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level4"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Financial Planner - User Guide</h1></div><div id="content"><div id="preamble">
+<link rel="stylesheet" href="./coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">FinancialPlanner-Level4</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level4"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"></div><div id="content"><div class="sect1">
+<h2 id="financial-planner-user-guide"><a class="link" href="#financial-planner-user-guide">Financial Planner - User Guide</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>By: <code>T09-4</code>      Since: <code>Aug 2018</code>      Licence: <code>MIT</code></p>
 </div>
-</div>
-<div id="toc" class="toc">
-<div id="toctitle"></div>
-<ul class="sectlevel1">
-<li><a href="#introduction">1. Introduction</a></li>
-<li><a href="#quick-start">2. Quick Start</a></li>
-<li><a href="#Features">3. Basic Features</a>
-<ul class="sectlevel2">
-<li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
-<li><a href="#adding-a-record-code-add-code">3.2. Adding a record: <code>add</code></a></li>
-<li><a href="#listing-all-records-satisfying-a-criteria-code-list-code">3.3. Listing all records satisfying a criteria : <code>list</code></a></li>
-<li><a href="#locating-records-by-name-code-find-code">3.4. Locating records by name: <code>find</code></a></li>
-<li><a href="#findtag">3.5. Locating records by tag: <code>findtag</code></a></li>
-<li><a href="#selecting-a-record-code-select-code">3.6. Selecting a record : <code>select</code></a></li>
-<li><a href="#sort">3.7. Sorting displayed records : <code>sort</code></a></li>
-<li><a href="#editing-a-record-code-edit-code">3.8. Editing a record : <code>edit</code></a></li>
-<li><a href="#deleting-a-record-code-delete-code">3.9. Deleting a record : <code>delete</code></a></li>
-<li><a href="#deleting-records-by-date-code-delete_date-code">3.10. Deleting records by date. <code>delete_date</code></a></li>
-<li><a href="#listing-entered-commands-code-history-code">3.11. Listing entered commands : <code>history</code></a></li>
-<li><a href="#undoing-previous-command-code-undo-code">3.12. Undoing previous command : <code>undo</code></a></li>
-<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.13. Redoing the previously undone command : <code>redo</code></a></li>
-<li><a href="#clearing-all-records-code-clear-code">3.14. Clearing all records : <code>clear</code></a></li>
-<li><a href="#exiting-the-program-code-exit-code">3.15. Exiting the program : <code>exit</code></a></li>
-<li><a href="#saving-the-data">3.16. Saving the data</a></li>
-</ul>
-</li>
-<li><a href="#auto-complete-feature">4. Auto Complete Feature</a>
-<ul class="sectlevel2">
-<li><a href="#auto-complete-for-commands">4.1. Auto Complete for Commands</a></li>
-<li><a href="#auto-complete-for-tags">4.2. Auto Complete for Tags</a></li>
-<li><a href="#auto-complete-for-sort">4.3. Auto Complete for Sort</a></li>
-<li><a href="#showing-a-summary-table-of-all-financial-activity-in-a-given-time-code-summary-code">4.4. Showing a summary table of all financial activity in a given time: <code>summary</code></a></li>
-</ul>
-</li>
-<li><a href="#morefeatures">5. Data Analysis Features</a>
-<ul class="sectlevel2">
-<li><a href="#showing-a-summary-table-of-all-financial-activity-in-a-time-period-code-summary-code">5.1. Showing a summary table of all financial activity in a time period: <code>summary</code></a></li>
-<li><a href="#showing-a-breakdown-of-total-expenses-and-income-into-categories-code-stats-code">5.2. Showing a breakdown of total expenses and income into categories: <code>stats</code></a></li>
-</ul>
-</li>
-<li><a href="#data-management-features">6. Data management features:</a>
-<ul class="sectlevel2">
-<li><a href="#export-the-records-into-the-excel-file-code-export_excel-code">6.1. Export the records into the Excel file. <code>export_excel</code></a></li>
-<li><a href="#import-the-records-stored-from-the-excel-file-code-import-code">6.2. Import the records stored from the Excel file. <code>import</code></a></li>
-<li><a href="#archive-the-records-into-the-excel-file-code-archive-code">6.3. Archive the records into the Excel file. <code>archive</code></a></li>
-</ul>
-</li>
-<li><a href="#spending-limit-feature">7. Spending Limit Feature</a>
-<ul class="sectlevel2">
-<li><a href="#adding-a-limit-code-limit-code">7.1. Adding a limit: <code>limit</code></a></li>
-<li><a href="#viewing-all-limits-code-checklimit-code">7.2. Viewing all limits: <code>checkLimit</code></a></li>
-<li><a href="#deleting-a-limit-code-deletelimit-code">7.3. Deleting a limit: <code>deleteLimit</code></a></li>
-<li><a href="#editing-a-limit-code-editlimit-code">7.4. Editing a limit: <code>editLimit</code></a></li>
-</ul>
-</li>
-<li><a href="#upcoming-features">8. Upcoming Features</a>
-<ul class="sectlevel2">
-<li><a href="#showing-a-visual-representation-of-daily-monthly-summary-code-coming-in-v1-4-code">8.1. Showing a visual representation of daily/monthly summary <code>[Coming in v1.4]</code></a></li>
-<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">8.2. Encrypting data files <code>[coming in v2.0]</code></a></li>
-<li><a href="#adding-description-to-records-code-coming-in-v2-0-code">8.3. Adding description to records <code>[Coming in v2.0]</code></a></li>
-<li><a href="#changing-app-configurations-code-coming-in-v2-0-code">8.4. Changing app configurations <code>[Coming in v2.0]</code></a></li>
-<li><a href="#view-bank-balances-code-coming-in-v2-0-code">8.5. View bank balances <code>[Coming in v2.0]</code></a></li>
-<li><a href="#record-parties-to-make-payment-to-code-coming-in-v2-0-code">8.6. Record parties to make payment to <code>[Coming in v2.0]</code></a></li>
-<li><a href="#adding-regular-payments-income-to-be-automatically-recorded-code-coming-in-v2-0-code">8.7. Adding regular payments/income to be automatically recorded <code>[Coming in v2.0]</code></a></li>
-<li><a href="#auto-complete-for-wider-range-of-inputs-and-accuracy-code-coming-in-v2-0-code">8.8. Auto Complete for wider range of inputs and accuracy <code>[Coming in v2.0]</code></a></li>
-</ul>
-</li>
-<li><a href="#faq">9. FAQ</a></li>
-<li><a href="#command-summary">10. Command Summary</a></li>
-</ul>
 </div>
 </div>
 <div class="sect1">
@@ -1363,25 +1294,33 @@ Format:<br></p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This section describes the limit feature that allows users to set values to control their future spending.
-Constraints that apply to records also apply to each limit. Refer to <a href="#constraints">[constraints]</a> for more information.</p>
+Constraints that apply to records also apply to each limit. Refer to <a href="#constraints">[constraints]</a> for more information.
+`All the limit related commands are case insensitive. Users can input ADDlimit, addLimit and so on to execute the command.
+Besides that, in case some of the users who have programming background are used to using `</p>
 </div>
 <div class="sect2">
-<h3 id="adding-a-limit-code-limit-code"><a class="link" href="#adding-a-limit-code-limit-code">7.1. Adding a limit: <code>limit</code></a></h3>
+<h3 id="addlimit"><a class="link" href="#addlimit">7.1. Adding a limit: <code>addlimit</code></a></h3>
 <div class="paragraph">
-<p>Adds a spending limit for a time period to the FinancialPlanner.<br>
-Format: <code>limit d/START_DATE END_DATE m/MONEYFLOW</code><br></p>
+<p>Adds a spending limit for a time period or a particular day to the FinancialPlanner.<br>
+Format: <code>addlimit d/START_DATE END_DATE m/MONEYFLOW</code> (<code>limit d/DATE m/MONEYFLOW</code>)+</p>
 </div>
 <div class="paragraph">
-<p>START_DATE and END_DATE indicates the starting date and ending date for the limit.
-MONEYFLOW denotes the money limit for that period of time.
-FinancialPlanner will warn the user once the total amount of money spent during this time period exceeds the spending limit.</p>
+<p>When inputting two days, START_DATE and END_DATE indicates the starting date and ending date for the limit.
+If there is only one date, that day will be the time period.
+MONEYFLOW denotes the money spending limit for that period of time.
+After the limits have been set, Financial Planner will keep checking the latest condition of these limits.
+Once the total amount of money spent during this time period exceeds the spending limit,
+FinancialPlanner will warn the user by sending the warning message.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p>Moneyflow can only be a positive integer, and does not require a "+" or "-".</p>
+<p>DATE_START must be earlier or equal than DATE_END. When DATE_START and DATE_END are the same, this will be equivalent to single DATE.</p>
+</li>
+<li>
+<p>Moneyflow for limit features can only be a positive integer, and does not require a "+" or "-".</p>
 </li>
 <li>
 <p>Any date or period of time can only have at most 1 assigned limit.</p>
@@ -1396,23 +1335,43 @@ FinancialPlanner will warn the user once the total amount of money spent during 
 <div class="ulist">
 <ul>
 <li>
-<p><code>limit d/20-8-2018 30-8-2018 m/100</code></p>
+<p><code>addlimit d/20-8-2018 m/100</code></p>
+</li>
+<li>
+<p><code>addlimit d/20-8-2018 30-8-2018 m/632</code></p>
+</li>
+<li>
+<p><code>addLimit d/20-8-2018 20-8-2018 m/200</code></p>
+</li>
+<li>
+<p><code>add_limit d/20-8-2018 30-8-2018 m/100</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-all-limits-code-checklimit-code"><a class="link" href="#viewing-all-limits-code-checklimit-code">7.2. Viewing all limits: <code>checkLimit</code></a></h3>
+<h3 id="checklimit"><a class="link" href="#checklimit">7.2. Viewing all limits: <code>checkLimit</code></a></h3>
 <div class="paragraph">
 <p>Displays all limits information stored in FinancialPlanner<br>
-Format: <code>checkLimit</code></p>
+Format: <code>checklimit</code>
+Example:
+* <code>checklimit</code>
+* <code>checkLimit</code>
+* <code>check_limit</code></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-limit-code-deletelimit-code"><a class="link" href="#deleting-a-limit-code-deletelimit-code">7.3. Deleting a limit: <code>deleteLimit</code></a></h3>
+<h3 id="deletelimit"><a class="link" href="#deletelimit">7.3. Deleting a limit: <code>deleteLimit</code></a></h3>
 <div class="paragraph">
-<p>Deletes a spending limit from the FinancialPlanner<br>
-Format: <code>deleteLimit d/START_DATE END_DATE</code><br></p>
+<p>Deletes an existing spending limit from the FinancialPlanner<br>
+Format: <code>deleteLimit d/START_DATE END_DATE</code> (<code>deleteLimit d/START_DATE</code>)<br></p>
+</div>
+<div class="paragraph">
+<p>The deleting command is based on the date period, since there will be at most one limit
+for one period of time, user only need to enter a period of time or a single date. The limit
+with the same dates will be deleted. If there is no limit for that period, the program will
+throw errors.
+Delete</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1434,16 +1393,27 @@ Format: <code>deleteLimit d/START_DATE END_DATE</code><br></p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>deleteLimit d/20-8-2018 30-8-2018</code></p>
+<p><code>deletelimit d/20-8-2018</code></p>
+</li>
+<li>
+<p><code>deletelimit d/20-8-2018 30-8-2018</code></p>
+</li>
+<li>
+<p><code>delete_Limit d/20-8-2018 30-8-2018</code></p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-a-limit-code-editlimit-code"><a class="link" href="#editing-a-limit-code-editlimit-code">7.4. Editing a limit: <code>editLimit</code></a></h3>
+<h3 id="editlimit"><a class="link" href="#editlimit">7.4. Editing a limit: <code>editLimit</code></a></h3>
 <div class="paragraph">
 <p>Edit a limit to the FinancialPlanner<br>
-Format: <code>editLimit d/START_DATE END_DATE m/MONEYFLOW</code><br></p>
+Format: <code>editLimit d/START_DATE END_DATE m/MONEYFLOW</code> (<code>editLimit d/START_DATE END_DATE m/MONEYFLOW</code>)+</p>
+</div>
+<div class="paragraph">
+<p>Editlimit is similar to <a href="#deletelimit">Section 7.3, &#8220;Deleting a limit: <code>deleteLimit</code>&#8221;</a> command, it is also based on the date period.
+The editlimit command will check the input date period or the single day and
+replace the original moneyFlow with the new moneyFlow.</p>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1453,7 +1423,7 @@ Format: <code>editLimit d/START_DATE END_DATE m/MONEYFLOW</code><br></p>
 <p><code>MONEYFLOW</code> can only be a positive integer, and does not require a "+" or "-".</p>
 </li>
 <li>
-<p><code>START_DATE/END_DATE</code> must be exactly the same as when the limit was created.</p>
+<p><code>START_DATE/END_DATE</code> must match exactly the same as when the limit was created.</p>
 </li>
 </ul>
 </div>
@@ -1465,52 +1435,57 @@ Format: <code>editLimit d/START_DATE END_DATE m/MONEYFLOW</code><br></p>
 <div class="ulist">
 <ul>
 <li>
+<p><code>editlimit d/20-8-2018 m/200</code></p>
+</li>
+<li>
+<p><code>editlimit d/20-8-2018 30-8-2018 m/200</code></p>
+</li>
+<li>
 <p><code>editLimit d/20-8-2018 30-8-2018 m/200</code></p>
+</li>
+<li>
+<p><code>edit_limit d/20-8-2018 30-8-2018 m/200</code>
+== Upcoming Features</p>
 </li>
 </ul>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="upcoming-features"><a class="link" href="#upcoming-features">8. Upcoming Features</a></h2>
-<div class="sectionbody">
 <div class="sect2">
-<h3 id="showing-a-visual-representation-of-daily-monthly-summary-code-coming-in-v1-4-code"><a class="link" href="#showing-a-visual-representation-of-daily-monthly-summary-code-coming-in-v1-4-code">8.1. Showing a visual representation of daily/monthly summary <code>[Coming in v1.4]</code></a></h3>
+<h3 id="showing-a-visual-representation-of-daily-monthly-summary-code-coming-in-v1-4-code"><a class="link" href="#showing-a-visual-representation-of-daily-monthly-summary-code-coming-in-v1-4-code">7.5. Showing a visual representation of daily/monthly summary <code>[Coming in v1.4]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">8.2. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">7.6. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="adding-description-to-records-code-coming-in-v2-0-code"><a class="link" href="#adding-description-to-records-code-coming-in-v2-0-code">8.3. Adding description to records <code>[Coming in v2.0]</code></a></h3>
+<h3 id="adding-description-to-records-code-coming-in-v2-0-code"><a class="link" href="#adding-description-to-records-code-coming-in-v2-0-code">7.7. Adding description to records <code>[Coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="changing-app-configurations-code-coming-in-v2-0-code"><a class="link" href="#changing-app-configurations-code-coming-in-v2-0-code">8.4. Changing app configurations <code>[Coming in v2.0]</code></a></h3>
+<h3 id="changing-app-configurations-code-coming-in-v2-0-code"><a class="link" href="#changing-app-configurations-code-coming-in-v2-0-code">7.8. Changing app configurations <code>[Coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="view-bank-balances-code-coming-in-v2-0-code"><a class="link" href="#view-bank-balances-code-coming-in-v2-0-code">8.5. View bank balances <code>[Coming in v2.0]</code></a></h3>
+<h3 id="view-bank-balances-code-coming-in-v2-0-code"><a class="link" href="#view-bank-balances-code-coming-in-v2-0-code">7.9. View bank balances <code>[Coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="record-parties-to-make-payment-to-code-coming-in-v2-0-code"><a class="link" href="#record-parties-to-make-payment-to-code-coming-in-v2-0-code">8.6. Record parties to make payment to <code>[Coming in v2.0]</code></a></h3>
+<h3 id="record-parties-to-make-payment-to-code-coming-in-v2-0-code"><a class="link" href="#record-parties-to-make-payment-to-code-coming-in-v2-0-code">7.10. Record parties to make payment to <code>[Coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="adding-regular-payments-income-to-be-automatically-recorded-code-coming-in-v2-0-code"><a class="link" href="#adding-regular-payments-income-to-be-automatically-recorded-code-coming-in-v2-0-code">8.7. Adding regular payments/income to be automatically recorded <code>[Coming in v2.0]</code></a></h3>
+<h3 id="adding-regular-payments-income-to-be-automatically-recorded-code-coming-in-v2-0-code"><a class="link" href="#adding-regular-payments-income-to-be-automatically-recorded-code-coming-in-v2-0-code">7.11. Adding regular payments/income to be automatically recorded <code>[Coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="auto-complete-for-wider-range-of-inputs-and-accuracy-code-coming-in-v2-0-code"><a class="link" href="#auto-complete-for-wider-range-of-inputs-and-accuracy-code-coming-in-v2-0-code">8.8. Auto Complete for wider range of inputs and accuracy <code>[Coming in v2.0]</code></a></h3>
+<h3 id="auto-complete-for-wider-range-of-inputs-and-accuracy-code-coming-in-v2-0-code"><a class="link" href="#auto-complete-for-wider-range-of-inputs-and-accuracy-code-coming-in-v2-0-code">7.12. Auto Complete for wider range of inputs and accuracy <code>[Coming in v2.0]</code></a></h3>
 
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">9. FAQ</a></h2>
+<h2 id="faq"><a class="link" href="#faq">8. FAQ</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
@@ -1519,7 +1494,7 @@ Format: <code>editLimit d/START_DATE END_DATE m/MONEYFLOW</code><br></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">10. Command Summary</a></h2>
+<h2 id="command-summary"><a class="link" href="#command-summary">9. Command Summary</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
@@ -1609,18 +1584,24 @@ e.g. <code>summary d/20-12-2017 31-09-2018</code></p>
 e.g. <code>stats d/20-12-2017 31-09-2018</code></p>
 </li>
 <li>
-<p><strong>Add limit</strong> : <code>limit d/START_DATE END_DATE</code><br>
-e.g. <code>limit d/20-12-2017 31-09-2018</code></p>
+<p><strong>Add limit</strong> : <code>addlimit d/START_DATE END_DATE</code><br>
+e.g.<br>
+<code>limit d/20-12-2017</code>
+<code>limit d/20-12-2017 31-09-2018</code></p>
 </li>
 <li>
 <p><strong>Delete limit</strong> <code>deleteLimit d/START_DATE END_DATE</code><br>
-e.g. <code>deleteLimit d/20-12-2017 31-09-2018</code></p>
+e.g.<br>
+<code>deleteLimit d/20-12-2017</code>
+<code>deleteLimit d/20-12-2017 31-09-2018</code></p>
 </li>
 <li>
-<p><strong>Edit limit</strong> <code>editLimit d/START_DATE END_DATE</code><br>
-e.g. <code>editLimit d/20-12-2017 31-09-2018</code></p>
+<p><strong>Edit limit</strong> <code>editLimit d/START_DATE END_DATE m/MONEYFLOW</code><br>
+e.g.<br>
+<code>editLimit d/20-12-2017 m/100</code>
+<code>editLimit d/20-12-2017 31-09-2018 m/100</code></p>
 </li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-05 11:31:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-06 09:37:49 UTC</div></div></div></body></html>

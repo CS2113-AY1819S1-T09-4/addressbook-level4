@@ -1,0 +1,405 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>(Oscar)Zeng Hao - Project Portfolio</title><link rel="stylesheet" href="../stylesheets//gh-pages-oscar.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../stylesheets//coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="../images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="../index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">FinancialPlanner-Level4</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="../LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level4"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>(Oscar)Zeng Hao - Project Portfolio</h1></div><div id="content"><div class="sect1">
+<h2 id="project-financialplanner"><a class="link" href="#project-financialplanner">PROJECT: FinancialPlanner</a></h2>
+<div class="sectionbody">
+
+</div>
+</div>
+<div class="sect1">
+<h2 id="financial-planner-overview"><a class="link" href="#financial-planner-overview">Financial Planner Overview</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>FinancialPlanner is a PC software specially designed for students who love typing.
+This purpose of this product is to help users better manage their finances, including their daily spend and income.
+Users are able to record their finances and modify these records, set and modify limits, summarize their financial status and export their records into excel file.
+The product is based on Command Line Interface (CLI), users are able input their commands and related information at the TextBox.
+Graphic User Interface is used for displaying statistic and other information, which will provide user with a clear and direct understanding about their financial status.
+This product is user-friendly, the command can be automatically completed, limits will check automatically and report any exceeded limits' details.
+It is also an effective and helpful product, users are able to find check their records and limits, generate summary for any period of time and export the record
+to excel file to further manage these data and import excel file back.</p>
+</div>
+<div class="paragraph">
+<p>This project is under the NUS CS2113 (Software Engineering &amp; Object-Oriented Programming) module.
+This module provides students with basic knowledge about Object-Oriented Programming and necessary software engineering training.
+Students were asked to form a group with four members and develop a production with the base code <a href="https://nuscs2113-ay1819s1.github.io/addressbook-level4/">AddressBook Level 4</a> provided.
+As a group we decided to morph the original product into FinancialPlanner.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To better develop the product, each group member was assigned a main feature to develop. I made significant contribution to the product by constructing the limit functions.
+Detailed information about my contributions is listed below.</p>
+</div>
+<div class="sect2">
+<h3 id="code-completed-code-strong-major-enhancement-1-strong-added-the-ability-to-set-limits-for-multiple-periods-of-time"><a class="link" href="#code-completed-code-strong-major-enhancement-1-strong-added-the-ability-to-set-limits-for-multiple-periods-of-time"><code>completed</code> <strong>Major enhancement #1</strong>: added the ability to set limits for multiple periods of time.</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: allows the user to set multiple limits for different periods of time or a single day to better manage their spend.
+All the limits will be stored and automatically checked whenever the records were updated.
+The user will be reminded if any of the limits have been exceeded.</p>
+</li>
+<li>
+<p>Justification:This feature improves the product significantly because user will be able to make plans for their expense in advance and store all the limits.
+Since user may need to set limits for multiple periods of time while it is hard to remember all the limits they have set.
+This will help user better control their spend and keep their limits updated.
+This feature is challenging because it requires me to build a storage for limits to store limits' details and read from the storage.
+Besides that, I also need to keep limits' information updated whenever there is a change of records and generate output if any limit has been exceeded.</p>
+</li>
+<li>
+<p>Highlights: This enhancement is the foundation of all the features below. It affects existing commands, commands to be added in future, and storage. A new xml file will be created to store all the limits. It required an in-depth analysis of design alternatives.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code-completed-code-strong-minor-enhancement-1-strong-added-the-ability-to-delete-limits"><a class="link" href="#code-completed-code-strong-minor-enhancement-1-strong-added-the-ability-to-delete-limits"><code>completed</code> <strong>Minor enhancement #1</strong>: added the ability to delete limits.</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: allows the user to delete existing limits. Users are able to delete certain limits by according to the
+two dates.</p>
+</li>
+<li>
+<p>Justification: This feature improves the product significantly because the user need to delete the limits that will be no longer used in the future.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code-completed-code-strong-minor-enhancement-2-strong-added-the-ability-to-edit-limits"><a class="link" href="#code-completed-code-strong-minor-enhancement-2-strong-added-the-ability-to-edit-limits"><code>completed</code> <strong>Minor enhancement #2</strong>: added the ability to edit limits.</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: allows the user to change the limit money of existing limits. Users are able to edit certain limits by according to the two dates they.</p>
+</li>
+<li>
+<p>Justification: This feature improves the product significantly because the user may need to adjust their plan accordingly.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code-completed-code-strong-minor-enhancement-3-strong-added-the-ability-to-check-all-limits-condition"><a class="link" href="#code-completed-code-strong-minor-enhancement-3-strong-added-the-ability-to-check-all-limits-condition"><code>completed</code> <strong>Minor enhancement #3</strong>: added the ability to check all limits' condition.</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>What it does: allows the user to check all the existing limits' condition.</p>
+</li>
+<li>
+<p>Justification: This feature improves the product significantly because the user is able to check all the limit he/she had set.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Code contributed</strong>:
+Example:
+<a href="https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&amp;search=&amp;sort=displayName&amp;since=2018-09-12&amp;until=2018-11-05&amp;timeframe=day&amp;reverse=false&amp;repoSort=true">codes</a></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="strong-other-contributions-strong"><a class="link" href="#strong-other-contributions-strong"><strong>Other contributions</strong>:</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Project management:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Provide teammates with suggestions about their features.</p>
+</li>
+<li>
+<p>Arrange team meetings and discussion.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Enhancements to existing features:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Helped combine the storage of the FinancialPlanner.</p>
+</li>
+<li>
+<p>Fix bugs of tests.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Documentation:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Update limit related content and some other content of the User Guide and some other contents.</p>
+</li>
+<li>
+<p>Update limit related content and of Developer Guide.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Community:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>PRs reviewed.</p>
+</li>
+<li>
+<p>Contributed to forum discussions in Whatsapp group.</p>
+</li>
+<li>
+<p>Reported bugs and suggestions for other teams in the class both in Whatsapp and Github.(examples:  <a href="https://github.com">1</a>, <a href="https://github.com">2</a>, <a href="https://github.com">3</a>)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-user-guide"><a class="link" href="#contributions-to-the-user-guide">Contributions to the User Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users.</em></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="spending-limit-feature"><a class="link" href="#spending-limit-feature">Spending Limit Feature</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section describes the limit feature that allows users to set values to control their future spending.
+Constraints that apply to records also apply to each limit. Refer to <a href="#constraints">[constraints]</a> for more information.
+`All the limit related commands are case insensitive. Users can input ADDlimit, addLimit and so on to execute the command.
+Besides that, in case some of the users who have programming background are used to using `</p>
+</div>
+<div class="sect2">
+<h3 id="addlimit"><a class="link" href="#addlimit">Adding a limit: <code>addlimit</code></a></h3>
+<div class="paragraph">
+<p>Adds a spending limit for a time period or a particular day to the FinancialPlanner.<br>
+Format: <code>addlimit d/START_DATE END_DATE m/MONEYFLOW</code> (<code>limit d/DATE m/MONEYFLOW</code>)+</p>
+</div>
+<div class="paragraph">
+<p>When inputting two days, START_DATE and END_DATE indicates the starting date and ending date for the limit.
+If there is only one date, that day will be the time period.
+MONEYFLOW denotes the money spending limit for that period of time.
+After the limits have been set, Financial Planner will keep checking the latest condition of these limits.
+Once the total amount of money spent during this time period exceeds the spending limit,
+FinancialPlanner will warn the user by sending the warning message.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>DATE_START must be earlier or equal than DATE_END. When DATE_START and DATE_END are the same, this will be equivalent to single DATE.</p>
+</li>
+<li>
+<p>Moneyflow for limit features can only be a positive integer, and does not require a "+" or "-".</p>
+</li>
+<li>
+<p>Any date or period of time can only have at most 1 assigned limit.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Example:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>addlimit d/20-8-2018 m/100</code></p>
+</li>
+<li>
+<p><code>addlimit d/20-8-2018 30-8-2018 m/632</code></p>
+</li>
+<li>
+<p><code>addLimit d/20-8-2018 20-8-2018 m/200</code></p>
+</li>
+<li>
+<p><code>add_limit d/20-8-2018 30-8-2018 m/100</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="checklimit"><a class="link" href="#checklimit">Viewing all limits: <code>checkLimit</code></a></h3>
+<div class="paragraph">
+<p>Displays all limits information stored in FinancialPlanner<br>
+Format: <code>checklimit</code>
+Example:
+* <code>checklimit</code>
+* <code>checkLimit</code>
+* <code>check_limit</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deletelimit"><a class="link" href="#deletelimit">Deleting a limit: <code>deleteLimit</code></a></h3>
+<div class="paragraph">
+<p>Deletes an existing spending limit from the FinancialPlanner<br>
+Format: <code>deleteLimit d/START_DATE END_DATE</code> (<code>deleteLimit d/START_DATE</code>)<br></p>
+</div>
+<div class="paragraph">
+<p>The deleting command is based on the date period, since there will be at most one limit
+for one period of time, user only need to enter a period of time or a single date. The limit
+with the same dates will be deleted. If there is no limit for that period, the program will
+throw errors.
+Delete</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>START_DATE/END_DATE</code> must match exactly the same as when the limit was created.</p>
+</li>
+<li>
+<p>Limits cannot be partially deleted with incorrect dates.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>deletelimit d/20-8-2018</code></p>
+</li>
+<li>
+<p><code>deletelimit d/20-8-2018 30-8-2018</code></p>
+</li>
+<li>
+<p><code>delete_Limit d/20-8-2018 30-8-2018</code></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editlimit"><a class="link" href="#editlimit">Editing a limit: <code>editLimit</code></a></h3>
+<div class="paragraph">
+<p>Edit a limit to the FinancialPlanner<br>
+Format: <code>editLimit d/START_DATE END_DATE m/MONEYFLOW</code> (<code>editLimit d/START_DATE END_DATE m/MONEYFLOW</code>)+</p>
+</div>
+<div class="paragraph">
+<p>Editlimit is similar to <a href="#deletelimit">Deleting a limit: <code>deleteLimit</code></a> command, it is also based on the date period.
+The editlimit command will check the input date period or the single day and
+replace the original moneyFlow with the new moneyFlow.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>MONEYFLOW</code> can only be a positive integer, and does not require a "+" or "-".</p>
+</li>
+<li>
+<p><code>START_DATE/END_DATE</code> must match exactly the same as when the limit was created.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>editlimit d/20-8-2018 m/200</code></p>
+</li>
+<li>
+<p><code>editlimit d/20-8-2018 30-8-2018 m/200</code></p>
+</li>
+<li>
+<p><code>editLimit d/20-8-2018 30-8-2018 m/200</code></p>
+</li>
+<li>
+<p><code>edit_limit d/20-8-2018 30-8-2018 m/200</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributions-to-the-developer-guide"><a class="link" href="#contributions-to-the-developer-guide">Contributions to the Developer Guide</a></h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project.</em></p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="addlimit-feature"><a class="link" href="#addlimit-feature">addLimit feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
+<div class="paragraph">
+<p>The limit command is based on the data type "Date", which includes two dates and "moneyFlow".
+Once the user execute the limit command, the Limit will be stored inside the LimitList.xml file by
+calling the function model.add(limit). The input limit will be serialized and stored.
+Whenever the user change the recordList information, including adding a record, deleting a record
+and editing a record, all the limits will be checked automatically by calling the function model.autoLimitCheck,
+this function will generate a string which contains all the exceeded limits' information will be printed
+out to warn the user that they have overspent their money.</p>
+</div>
+<div class="paragraph">
+<p>The user enter two dates after the one "d/" index followed by money with m/ index.
+The user need to input two dates, the first one is dateStart while the second one is dateEnd.
+The dateStart must be earlier or equals to dateEnd, otherwise, the program will throw error.
+The user also need to input the limit money they want to set. Unlike the moneyFlow used
+by addCommand, the limit moneyFlow can only be normal real number, which does not have "-" or
+"+" in front of the number. After user input the normal real number, the parser will add a "-"
+at the beginning of the real number, which makes it a normal moneyFlow.
+If user input wrong form of limit moneyFlow, the program will throw error.</p>
+</div>
+<div class="paragraph">
+<p>The input given by the user is passed to <code>ArgumentTokeniser#tokenise</code> to split the input separated by prefixes.
+. This returns a <code>ArgumentMultiMap</code> which contains a map with prefixes as keys and their associated input arguments as the value.
+. The string associated with <code>d/</code> is then passed into <code>LimitCommandParser#splitByWhitespace</code> for further processing and returns an array.
+This string will be split into two strings and each of them will be construct as a date type variable.
+. After parsing the two dates, the parser will check whether the dateStart is small
+. The argument mode is determined by the size of this array and the elements are further processed into <code>Date</code> objects, before creating and returning a <code>ListCommand</code> object.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the limit operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/LimitSequenceDiagram.png" alt="width:800">
+</div>
+</div>
+<hr>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-06 09:37:49 UTC</div></div></div></body></html>
