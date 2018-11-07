@@ -35,10 +35,10 @@
 <li><a href="#view-summary-feature">3.4. View summary feature</a></li>
 <li><a href="#view-category-breakdown-feature">3.5. View category breakdown feature</a></li>
 <li><a href="#find-records-by-tag-feature">3.6. Find records by tag feature</a></li>
-<li><a href="#addlimit-feature">3.7. addLimit feature</a></li>
+<li><a href="#limit-features">3.7. Limit features</a></li>
 <li><a href="#deletelimit-feature">3.8. deleteLimit feature</a></li>
 <li><a href="#editlimit-feature">3.9. editLimit feature</a></li>
-<li><a href="#checklimit-feature">3.10. checkLimit feature</a></li>
+<li><a href="#addmonthlylimit-feature">3.10. addMonthlyLimit feature</a></li>
 <li><a href="#delete-by-date-entry">3.11. Delete By Date Entry</a></li>
 <li><a href="#export-into-excel-file">3.12. Export into Excel file</a></li>
 <li><a href="#import-from-excel-file">3.13. Import from Excel file</a></li>
@@ -888,7 +888,10 @@ case sensitive.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p>The input given by the user is passed to <code>SortCommandParser</code> to split the input separated by whitespaces to ensure
+<p>The input given by the user</p>
+</div>
+<div class="paragraph">
+<p>is passed to <code>SortCommandParser</code> to split the input separated by whitespaces to ensure
 there is either only one or two arguments input by the user. These arguments are stored in an array of strings and
 the size of the array determines the mode of the command.</p>
 </div>
@@ -1043,7 +1046,7 @@ they are viewing <strong>summary by date, by month or by category</strong>. This
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>When the user types in the command "summary date d/1-1-2018 12-12-2018", the command is passed fron LogicManager to FinancialPlannerParser. In here,
+<p>When the user types in the command "summary date d/1-1-2018 12-12-2018", the command is passed from LogicManager to FinancialPlannerParser. In here,
 the system chooses which parser to use which is SummaryCommandParser and calls its parse method which is polymorphic, meaning that every parser has the same function but use different
 implementation.</p>
 </li>
@@ -1326,34 +1329,50 @@ and obtain a new <code>filteredRecords</code> based on the predicate, which will
 </div>
 </div>
 <div class="sect2">
-<h3 id="addlimit-feature"><a class="link" href="#addlimit-feature">3.7. addLimit feature</a></h3>
-<div class="sect3">
-<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.7.1. Current Implementation</a></h4>
-<div class="paragraph">
-<p>The limit command is based on the data type "Date", which includes two dates and "moneyFlow".
-Once the user execute the limit command, the Limit will be stored inside the LimitList.xml file by
-calling the function model.add(limit). The input limit will be serialized and stored.
+<h3 id="limit-features"><a class="link" href="#limit-features">3.7. Limit features</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>Limit Storage</code>:
+The limit features are based on the data type "Limit", which includes two dates and "moneyFlow".
+When entering only one date, the parser will let the date be both dateStart and dateEnd.
+It is equivalent to entering two same dates.
+The limit storage is based on the dates, which means there
+should be at most one limit for one period of time.</p>
+</li>
+<li>
+<p><code>Limit check</code>:
 Whenever the user change the recordList information, including adding a record, deleting a record
-and editing a record, all the limits will be checked automatically by calling the function model.autoLimitCheck,
-this function will generate a string which contains all the exceeded limits' information will be printed
-out to warn the user that they have overspent their money.</p>
-</div>
-<div class="paragraph">
-<p>The user enter two dates after the one "d/" index followed by money with m/ index.
-The user need to input two dates, the first one is dateStart while the second one is dateEnd.
-The dateStart must be earlier or equals to dateEnd, otherwise, the program will throw error.
-The user also need to input the limit money they want to set. Unlike the moneyFlow used
-by addCommand, the limit moneyFlow can only be normal real number, which does not have "-" or
+and editing a record, all the limits will be checked automatically by calling the function model.autoLimitCheck().
+The function will look through all the records and calculate the total money for each limit inside using a loop which will
+execute the isExceeded().
+This function will generate a string which contains all the exceeded limits' information will be printed
+out to warn the user that they have overspent.</p>
+</li>
+<li>
+<p>``
+Unlike the moneyFlow used by addCommand, the limit moneyFlow can only be normal real number, which does not have "-" or
 "+" in front of the number. After user input the normal real number, the parser will add a "-"
 at the beginning of the real number, which makes it a normal moneyFlow.
-If user input wrong form of limit moneyFlow, the program will throw error.</p>
+If user input wrong form of limit moneyFlow, the program will throw an error.
+==== addLimit feature
+===== Current Implementation
+Once the user execute the addLimit command, the Limit will be stored inside the LimitList.xml file by
+calling the function model.addLimit(limit). The input limit will be serialized and stored.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The user enters two dates after the one "d/" index followed by money with m/ index.
+The dateStart must be earlier or equals to dateEnd, otherwise, the program will throw an error.
+The user also need to input the limit money they want to set.</p>
 </div>
 <div class="paragraph">
 <p>The input given by the user is passed to <code>ArgumentTokeniser#tokenise</code> to split the input separated by prefixes.
 . This returns a <code>ArgumentMultiMap</code> which contains a map with prefixes as keys and their associated input arguments as the value.
 . The string associated with <code>d/</code> is then passed into <code>LimitCommandParser#splitByWhitespace</code> for further processing and returns an array.
 This string will be split into two strings and each of them will be construct as a date type variable.
-. After parsing the two dates, the parser will check whether the dateStart is small
+. After parsing the two dates, the parser will check whether the dateStart is earlier than dateEnd.
 . The argument mode is determined by the size of this array and the elements are further processed into <code>Date</code> objects, before creating and returning a <code>ListCommand</code> object.</p>
 </div>
 <div class="paragraph">
@@ -1365,21 +1384,21 @@ This string will be split into two strings and each of them will be construct as
 </div>
 </div>
 </div>
-</div>
 <div class="sect2">
 <h3 id="deletelimit-feature"><a class="link" href="#deletelimit-feature">3.8. deleteLimit feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.8.1. Current Implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.8.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>deleteLimit will delete the limit inside the limitList according to the dates input. The user inputs
 two dates, dateStart and dateEnd, and the parser will make it a limit which has a dummy money.
+Similar to the addLimit feature, the parser will set the dateStart and dateEnd same date if the user input only one date.
 Then call the getSameDatesLimit() to get the limit with the same dates. Afterwards, the command will
 call deleteLimit(sameDatesLimit) to delete the limit.</p>
 </div>
 <div class="paragraph">
-<p>The user enter two dates after the one "d/" index.
+<p>The user enter two dates (or one date) after the one "d/" index.
 The user need to input two dates, the first one is dateStart while the second one is dateEnd.
-The dateStart must be earlier or equals to dateEnd, otherwise, the program will throw error.
+The dateStart must be earlier or equal to dateEnd, otherwise, the program will throw an error.
 If there is no limits inside the limitList has the same dates, the program will throw an error.</p>
 </div>
 <div class="paragraph">
@@ -1403,17 +1422,20 @@ This string will be split into two strings and each of them will be construct as
 <div class="sect2">
 <h3 id="editlimit-feature"><a class="link" href="#editlimit-feature">3.9. editLimit feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.9.1. Current Implementation</a></h4>
+<h4 id="current-implementation-7"><a class="link" href="#current-implementation-7">3.9.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The editLimit command is similar to limit command, has dateStart, dateEnd and moneyFlow.
-The command will do the replacement by deleting the limit with same dates and add the new limit.</p>
+The command will do the replacement by deleting the limit with same dates and add the new limit by calling model.updateLimit().
+The parser will return the new limit and check whether there is a limit sharing the same dates. If there is a limit, it will
+change the replace the original limit with the new limit. If there is no limit with the same date, the program will throw error.</p>
 </div>
 <div class="paragraph">
 <p>The user enter two dates after the one "d/" index followed by money with m/ index.
 The user need to input two dates, the first one is dateStart while the second one is dateEnd.
+Similar to the addLimit feature, the parser will set the dateStart and dateEnd same date if the user input only one date.
 The dateStart must be earlier or equals to dateEnd, otherwise, the program will throw error.
 If there is no limits inside the limitList has the same dates, the program will throw an error.
-The user also need to input the limit money they want to reset.</p>
+The user also need to input the limit money they want to reset. The money has the same requirement as addLimit command.</p>
 </div>
 <div class="paragraph">
 <p>The input given by the user is passed to <code>ArgumentTokeniser#tokenise</code> to split the input separated by prefixes.
@@ -1434,11 +1456,47 @@ This string will be split into two strings and each of them will be construct as
 </div>
 </div>
 <div class="sect2">
-<h3 id="checklimit-feature"><a class="link" href="#checklimit-feature">3.10. checkLimit feature</a></h3>
+<h3 id="addmonthlylimit-feature"><a class="link" href="#addmonthlylimit-feature">3.10. addMonthlyLimit feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-9"><a class="link" href="#current-implementation-9">3.10.1. Current Implementation</a></h4>
+<h4 id="current-implementation-8"><a class="link" href="#current-implementation-8">3.10.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>This feature is to help the user to check all the limits stored inside the limitList. The function will call
+<p>The addMonthlyLimit command is to add a continuous limit always for this month. The limit will always check
+the spend of the month according to the current time. For example, if the limit was set to be 200 at April, the
+limit will check the total spend for April. When the time comes to May, the limit will no longer check April, instead, the limit
+will check the total spend of May until the last second of May. The user will input only the money they want to set.
+The parser will make the limit with a special date "01-01-9999", which is not likely to be used. Then call the model.addLimit() function
+to add the limit. Once the limit is going to be checked, the function generateThisMonthLimit() will be called, which
+will generate a new limit according to the current date. Then use this date to do the limit check and generate output.</p>
+</div>
+<div class="paragraph">
+<p>Unlike the moneyFlow used by addCommand, the limit moneyFlow can only be normal real number, which does not have "-" or
+"+" in front of the number. After user input the normal real number, the parser will add a "-"
+at the beginning of the real number, which makes it a normal moneyFlow.
+If user input wrong form of limit moneyFlow, the program will throw error.</p>
+</div>
+<div class="paragraph">
+<p>The input given by the user is passed to <code>ArgumentTokeniser#tokenise</code> to split the input separated by prefixes.
+This returns a <code>ArgumentMultiMap</code> which contains a map with prefixes as keys and their associated input arguments as the value.
+The parser will generate the limit with special date and the moneyFlow according to the user input.
+=== editMonthlyLimit feature
+==== Current Implementation
+The editMonthlyLimit command it to edit the monthly limit money. The command function is similar to the
+editLimit command. The parser is similar to the addMonthlyLimit command parser, which will generate the
+limit with the special date.</p>
+</div>
+<div class="paragraph">
+<p>Unlike the moneyFlow used by addCommand, the limit moneyFlow can only be normal real number, which does not have "-" or
+"+" in front of the number. After user input the normal real number, the parser will add a "-"
+at the beginning of the real number, which makes it a normal moneyFlow.
+If user input wrong form of limit moneyFlow, the program will throw error.</p>
+</div>
+<div class="paragraph">
+<p>The input given by the user is passed to <code>ArgumentTokeniser#tokenise</code> to split the input separated by prefixes.
+This returns a <code>ArgumentMultiMap</code> which contains a map with prefixes as keys and their associated input arguments as the value.
+The parser will generate the limit with special date and the moneyFlow according to the user input.
+=== checkLimit feature
+==== Current Implementation
+This feature is to help the user to check all the limits stored inside the limitList. The function will call
 manualLimitCheck(), which will generate a string that contains all limits' information.</p>
 </div>
 <div class="paragraph">
@@ -1457,7 +1515,7 @@ manualLimitCheck(), which will generate a string that contains all limits' infor
 <div class="sect2">
 <h3 id="delete-by-date-entry"><a class="link" href="#delete-by-date-entry">3.11. Delete By Date Entry</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-10"><a class="link" href="#current-implementation-10">3.11.1. Current implementation</a></h4>
+<h4 id="current-implementation-9"><a class="link" href="#current-implementation-9">3.11.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The delete by date entry mechanism is facilitated by <code>ModelManager</code>.
 It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>.</p>
@@ -1493,7 +1551,7 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 <div class="sect2">
 <h3 id="export-into-excel-file"><a class="link" href="#export-into-excel-file">3.12. Export into Excel file</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-11"><a class="link" href="#current-implementation-11">3.12.1. Current implementation</a></h4>
+<h4 id="current-implementation-10"><a class="link" href="#current-implementation-10">3.12.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The export into excel file mechanism is facilitated by <code>ModelManager</code> with the help of <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, <code>ExcelUtil</code> and the <code>VersionedFinancialPlanner</code>.</p>
 </div>
@@ -1675,7 +1733,7 @@ listener is present in <code>RecordListPanel</code> and will update the UI list 
 <div class="sect2">
 <h3 id="import-from-excel-file"><a class="link" href="#import-from-excel-file">3.13. Import from Excel file</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-12"><a class="link" href="#current-implementation-12">3.13.1. Current implementation</a></h4>
+<h4 id="current-implementation-11"><a class="link" href="#current-implementation-11">3.13.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The import from Excel file mechanism is facilitated by <code>ExcelUtil</code>, the utility created to handle all method relating to Excel.</p>
 </div>
@@ -1816,7 +1874,7 @@ The two argument modes are as listed below:</p>
 <div class="sect2">
 <h3 id="archive-into-excel-file"><a class="link" href="#archive-into-excel-file">3.14. Archive into Excel file</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-13"><a class="link" href="#current-implementation-13">3.14.1. Current implementation</a></h4>
+<h4 id="current-implementation-12"><a class="link" href="#current-implementation-12">3.14.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The archive into excel file mechanism is facilitated by <code>ModelManager</code> with the help of <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, <code>ExcelUtil</code> and the <code>VersionedFinancialPlanner</code>.</p>
 </div>
@@ -4520,4 +4578,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 06:53:35 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 07:26:41 UTC</div></div></div></body></html>
