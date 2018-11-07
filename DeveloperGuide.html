@@ -1568,7 +1568,7 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 <p><code>ExcelUtil#setNameExcelFile</code> is called to make the Excel name based on the condition of startDate and endDate.</p>
 </div>
 <div class="paragraph">
-<p>After that, <code>ExcelUtil#setPathFile</code> is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User&#8217;s Home Directory.</p>
+<p>After that, <code>ExcelUtil#setPathFile</code> is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User&#8217;s Working Directory.</p>
 </div>
 <div class="paragraph">
 <p>With the sufficient information, <code>List&lt;Record&gt; records</code>, <code>List&lt;SummaryByDateEntry&gt; summaryList</code>, <code>file path</code>, <code>ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords</code> is called to start the processing of producing Excel file, containing 2 Excel sheet, namely <code>RECORD DATA</code> and <code>SUMMARY DATA</code>.</p>
@@ -1617,13 +1617,13 @@ The six argument modes are as listed below:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>No argument mode</strong> <code>export_excel</code> will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default <strong>HOME DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Home Directory</strong>.</p>
+<p><strong>No argument mode</strong> <code>export_excel</code> will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
-<p><strong>Single argument Date mode</strong> <code>export_excel d/DATE</code> will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default <strong>HOME DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Home Directory</strong>.</p>
+<p><strong>Single argument Date mode</strong> <code>export_excel d/DATE</code> will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
-<p><strong>Dual argument Date mode</strong> <code>export_excel d/START_DATE END_DATE</code> will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default <strong>HOME DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Home Directory</strong>.</p>
+<p><strong>Dual argument Date mode</strong> <code>export_excel d/START_DATE END_DATE</code> will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
 <p><strong>Single argument Directory Path mode</strong> <code>export_excel dir/DIRECTORY_PATH</code> will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.</p>
@@ -1684,7 +1684,7 @@ The six argument modes are as listed below:</p>
 <p>If the prefix <code>d/</code> is not entered in the input, meaning that all the records will be included in the Excel sheet.</p>
 </li>
 <li>
-<p>If the prefix <code>dir/</code> is not entered in the input, meaning that the Directory Path is default as the <strong>User&#8217;s Home Directory</strong>.</p>
+<p>If the prefix <code>dir/</code> is not entered in the input, meaning that the Directory Path is default as the <strong>User&#8217;s Working Directory</strong>.</p>
 </li>
 </ol>
 </div>
@@ -1701,10 +1701,10 @@ The six argument modes are as listed below:</p>
 <ul>
 <li>
 <p>One constructor has no arguments and assigns default predicate for the <code>FilteredList</code> in <code>ModelManager</code>,
-<code>PREDICATE_SHOW_ALL_RECORDS</code> which will show all items in the list and the Directory path is <strong>User&#8217;s Home Directory</strong>.</p>
+<code>PREDICATE_SHOW_ALL_RECORDS</code> which will show all items in the list and the Directory path is <strong>User&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
-<p>The second constructor takes in 2 <code>Date</code> arguments and assigns the predicate <code>DateIsWithinDateIntervalPredicate</code> which will only show items within the date interval and the Directory path is <strong>User&#8217;s Home Directory</strong>.</p>
+<p>The second constructor takes in 2 <code>Date</code> arguments and assigns the predicate <code>DateIsWithinDateIntervalPredicate</code> which will only show items within the date interval and the Directory path is <strong>User&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
 <p>The third constructor takes in 1 <code>Directory Path</code> argument and assigns the predicate as <code>PREDICATE_SHOW_ALL_RECORDS</code>, which will show all items in the list and the Directory path is the entered directory path.</p>
@@ -1891,7 +1891,7 @@ The two argument modes are as listed below:</p>
 <p><code>ExcelUtil#setNameExcelFile</code> is called to make the Excel name based on the condition of startDate and endDate.</p>
 </div>
 <div class="paragraph">
-<p>After that, <code>ExcelUtil#setPathFile</code> is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User&#8217;s Home Directory.</p>
+<p>After that, <code>ExcelUtil#setPathFile</code> is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User&#8217;s Working Directory.</p>
 </div>
 <div class="paragraph">
 <p>With the sufficient information, <code>List&lt;Record&gt; records</code>, <code>List&lt;SummaryByDateEntry&gt; summaryList</code>, <code>file path</code>, <code>ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords</code> is called to start the processing of producing Excel file, containing 2 Excel sheet, namely <code>RECORD DATA</code> and <code>SUMMARY DATA</code>.</p>
@@ -1943,13 +1943,13 @@ The six argument modes are as listed below:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>No argument mode</strong> <code>archive</code> will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the default <strong>HOME DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Home Directory</strong>.</p>
+<p><strong>No argument mode</strong> <code>archive</code> will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
-<p><strong>Single argument Date mode</strong> <code>archive d/DATE</code> will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default <strong>HOME DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Home Directory</strong>.</p>
+<p><strong>Single argument Date mode</strong> <code>archive d/DATE</code> will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
-<p><strong>Dual argument Date mode</strong> <code>archive d/START_DATE END_DATE</code> will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default <strong>HOME DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Home Directory</strong>.</p>
+<p><strong>Dual argument Date mode</strong> <code>archive d/START_DATE END_DATE</code> will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
 <p><strong>Single argument Directory Path mode</strong> <code>archive dir/DIRECTORY_PATH</code> will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the chosen Directory Path.</p>
@@ -2010,7 +2010,7 @@ The six argument modes are as listed below:</p>
 <p>If the prefix <code>d/</code> is not entered in the input, meaning that all the records will be included in the Excel sheet.</p>
 </li>
 <li>
-<p>If the prefix <code>dir/</code> is not entered in the input, meaning that the Directory Path is default as the <strong>User&#8217;s Home Directory</strong>.</p>
+<p>If the prefix <code>dir/</code> is not entered in the input, meaning that the Directory Path is default as the <strong>User&#8217;s Working Directory</strong>.</p>
 </li>
 </ol>
 </div>
@@ -2027,10 +2027,10 @@ The six argument modes are as listed below:</p>
 <ul>
 <li>
 <p>One constructor has no arguments and assigns default predicate for the <code>FilteredList</code> in <code>ModelManager</code>,
-<code>PREDICATE_SHOW_ALL_RECORDS</code> which will show all items in the list and the Directory path is <strong>User&#8217;s Home Directory</strong>.</p>
+<code>PREDICATE_SHOW_ALL_RECORDS</code> which will show all items in the list and the Directory path is <strong>User&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
-<p>The second constructor takes in 2 <code>Date</code> arguments and assigns the predicate <code>DateIsWithinDateIntervalPredicate</code> which will only show items within the date interval and the Directory path is <strong>User&#8217;s Home Directory</strong>.</p>
+<p>The second constructor takes in 2 <code>Date</code> arguments and assigns the predicate <code>DateIsWithinDateIntervalPredicate</code> which will only show items within the date interval and the Directory path is <strong>User&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
 <p>The third constructor takes in 1 <code>Directory Path</code> argument and assigns the predicate as <code>PREDICATE_SHOW_ALL_RECORDS</code>, which will show all items in the list and the Directory path is the entered directory path.</p>
@@ -4578,4 +4578,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 07:26:41 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 12:41:06 UTC</div></div></div></body></html>
