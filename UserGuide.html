@@ -1,11 +1,80 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Financial Planner - User Guide</title><link rel="stylesheet" href="./asciidoctor.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Financial Planner - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="./coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">FinancialPlanner-Level4</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level4"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"></div><div id="content"><div class="sect1">
-<h2 id="financial-planner-user-guide"><a class="link" href="#financial-planner-user-guide">Financial Planner - User Guide</a></h2>
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="seedu-header"><nav class="navbar navbar-lg navbar-light bg-lighter"><div class="container"><a class="navbar-brand" href="https://se-edu.github.io/"><img src="images/SeEduLogo.png" alt="SE-EDU"></a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level1">AB-1</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level2">AB-2</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/addressbook-level3">AB-3</a></li><li class="nav-item"><a class="nav-link active" href="index.html">AB-4</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/collate">Collate</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/se-book">Book</a></li><li class="nav-item"><a class="nav-link" href="https://se-edu.github.io/learningresources">Resources</a></li></ul></div></nav></div><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="index.html">FinancialPlanner-Level4</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link active" href="UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link" href="LearningOutcomes.html">LOs</a></li><li class="nav-item"><a class="nav-link" href="AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/se-edu/addressbook-level4"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Financial Planner - User Guide</h1></div><div id="content"><div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>By: <code>T09-4</code>      Since: <code>Aug 2018</code>      Licence: <code>MIT</code></p>
 </div>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle"></div>
+<ul class="sectlevel1">
+<li><a href="#introduction">1. Introduction</a></li>
+<li><a href="#quick-start">2. Quick Start</a></li>
+<li><a href="#Features">3. Basic Features</a>
+<ul class="sectlevel2">
+<li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
+<li><a href="#adding-a-record-code-add-code">3.2. Adding a record: <code>add</code></a></li>
+<li><a href="#listing-all-records-within-a-date-range-code-list-code">3.3. Listing all records within a date range : <code>list</code></a></li>
+<li><a href="#locating-records-by-name-code-find-code">3.4. Locating records by name: <code>find</code></a></li>
+<li><a href="#findtag">3.5. Locating records by tag: <code>findtag</code></a></li>
+<li><a href="#selecting-a-record-code-select-code">3.6. Selecting a record : <code>select</code></a></li>
+<li><a href="#sort">3.7. Sorting displayed records : <code>sort</code></a></li>
+<li><a href="#editing-a-record-code-edit-code">3.8. Editing a record : <code>edit</code></a></li>
+<li><a href="#deleting-a-record-code-delete-code">3.9. Deleting a record : <code>delete</code></a></li>
+<li><a href="#deleting-records-by-date-code-delete_date-code">3.10. Deleting records by date. <code>delete_date</code></a></li>
+<li><a href="#listing-entered-commands-code-history-code">3.11. Listing entered commands : <code>history</code></a></li>
+<li><a href="#undoing-previous-command-code-undo-code">3.12. Undoing previous command : <code>undo</code></a></li>
+<li><a href="#redoing-the-previously-undone-command-code-redo-code">3.13. Redoing the previously undone command : <code>redo</code></a></li>
+<li><a href="#clearing-all-records-code-clear-code">3.14. Clearing all records : <code>clear</code></a></li>
+<li><a href="#exiting-the-program-code-exit-code">3.15. Exiting the program : <code>exit</code></a></li>
+<li><a href="#saving-the-data">3.16. Saving the data</a></li>
+</ul>
+</li>
+<li><a href="#auto-complete-feature">4. Auto Complete Feature</a>
+<ul class="sectlevel2">
+<li><a href="#auto-complete-for-commands">4.1. Auto Complete for Commands</a></li>
+<li><a href="#auto-complete-for-tags">4.2. Auto Complete for Tags</a></li>
+<li><a href="#auto-complete-for-sort">4.3. Auto Complete for Sort</a></li>
+</ul>
+</li>
+<li><a href="#morefeatures">5. Data Analysis Features</a>
+<ul class="sectlevel2">
+<li><a href="#showing-a-summary-table-of-all-financial-activity-in-a-time-period-code-summary-code">5.1. Showing a summary table of all financial activity in a time period: <code>summary</code></a></li>
+<li><a href="#showing-a-breakdown-of-total-expenses-and-income-into-categories-code-stats-code">5.2. Showing a breakdown of total expenses and income into categories: <code>stats</code></a></li>
+<li><a href="#showing-a-breakdown-of-total-expenses-and-income-into-categories-of-this-month-code-no-command-required-code">5.3. Showing a breakdown of total expenses and income into categories of this month: <code>NO COMMAND REQUIRED</code></a></li>
+</ul>
+</li>
+<li><a href="#data-management-features">6. Data management features:</a>
+<ul class="sectlevel2">
+<li><a href="#export-the-records-into-the-excel-file-code-export_excel-code">6.1. Export the records into the Excel file. <code>export_excel</code></a></li>
+<li><a href="#import-the-records-stored-from-the-excel-file-code-import-code">6.2. Import the records stored from the Excel file. <code>import</code></a></li>
+<li><a href="#archive-the-records-into-the-excel-file-code-archive-code">6.3. Archive the records into the Excel file. <code>archive</code></a></li>
+<li><a href="#draw-a-line-chart-automatically-inside-the-excel-sheet">6.4. Draw a line chart automatically inside the Excel sheet</a></li>
+</ul>
+</li>
+<li><a href="#spending-limit-features">7. Spending Limit Features</a>
+<ul class="sectlevel2">
+<li><a href="#addlimit">7.1. Adding a limit: <code>addlimit</code></a></li>
+<li><a href="#checklimit">7.2. Viewing all limits: <code>checkLimit</code></a></li>
+<li><a href="#deletelimit">7.3. Deleting a limit: <code>deleteLimit</code></a></li>
+<li><a href="#editlimit">7.4. Editing a limit: <code>editLimit</code></a></li>
+<li><a href="#adding-a-monthly-limit-code-addmonthlylimit-code">7.5. Adding a monthly limit: <code>addmonthlylimit</code></a></li>
+<li><a href="#editing-the-monthly-limit-code-editmonthlylimit-code">7.6. Editing the monthly limit: <code>editmonthlylimit</code></a></li>
+<li><a href="#deleting-the-monthly-limit-code-deletemonthlylimit-code">7.7. Deleting the monthly limit: <code>deletemonthlylimit</code></a></li>
+<li><a href="#showing-a-visual-representation-of-daily-monthly-summary-code-coming-in-v2-0-code">7.8. Showing a visual representation of daily/monthly summary <code>[Coming in v2.0]</code></a></li>
+<li><a href="#encrypting-data-files-code-coming-in-v2-0-code">7.9. Encrypting data files <code>[coming in v2.0]</code></a></li>
+<li><a href="#adding-description-to-records-code-coming-in-v2-0-code">7.10. Adding description to records <code>[Coming in v2.0]</code></a></li>
+<li><a href="#changing-app-configurations-code-coming-in-v2-0-code">7.11. Changing app configurations <code>[Coming in v2.0]</code></a></li>
+<li><a href="#view-bank-balances-code-coming-in-v2-0-code">7.12. View bank balances <code>[Coming in v2.0]</code></a></li>
+<li><a href="#record-parties-to-make-payment-to-code-coming-in-v2-0-code">7.13. Record parties to make payment to <code>[Coming in v2.0]</code></a></li>
+<li><a href="#adding-regular-payments-income-to-be-automatically-recorded-code-coming-in-v2-0-code">7.14. Adding regular payments/income to be automatically recorded <code>[Coming in v2.0]</code></a></li>
+<li><a href="#auto-complete-for-wider-range-of-inputs-and-accuracy-code-coming-in-v2-0-code">7.15. Auto Complete for wider range of inputs and accuracy <code>[Coming in v2.0]</code></a></li>
+</ul>
+</li>
+<li><a href="#faq">8. FAQ</a></li>
+<li><a href="#command-summary">9. Command Summary</a></li>
+</ul>
 </div>
 </div>
 <div class="sect1">
@@ -32,7 +101,7 @@ that is required.</p>
 <p>Ensure you have Java version <code>9</code> or later installed in your Computer.</p>
 </li>
 <li>
-<p>Download the latest <code>addressbook.jar</code> <a href="https://github.com/CS2113-AY1819S1-T09-4/main/releases">here</a>.</p>
+<p>Download the latest <code>financialplanner.jar</code> <a href="https://github.com/CS2113-AY1819S1-T09-4/main/releases">here</a>.</p>
 </li>
 <li>
 <p>Copy the file to the folder you want to use as the home folder for your Financial Planner.</p>
@@ -57,7 +126,7 @@ e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> wil
 <p><strong><code>list</code></strong> : lists all records</p>
 </li>
 <li>
-<p><strong><code>add</code></strong><code>n/Grocery shoppings m/-70 d/20-9-2018 t/Shopping</code> : adds a contact named <code>Grocery shopping</code> to the Financial Planner.</p>
+<p><strong><code>add</code></strong><code>n/Grocery shopping m/-70 d/20-9-2018 t/Shopping</code> : adds a contact named <code>Grocery shopping</code> to the Financial Planner.</p>
 </li>
 <li>
 <p><strong><code>delete</code></strong><code>3</code> : deletes the 3rd record shown in the current list</p>
@@ -118,17 +187,21 @@ which can be used as <code>add n/Grocery shopping</code>.</p>
 <p><code>NAME</code> can be any word, phrase or sentence.</p>
 </li>
 <li>
-<p><code>MONEYFLOW</code> must be made up of only digits, a single "+" or "-" and at most one decimal point.</p>
+<p><code>MONEYFLOW</code> must be made up of only digits, a single "+" or "-" and at most one decimal point. Also, note that the maximum number of
+digits the whole number part of this parameter can have is 12 digits.</p>
 </li>
 <li>
 <p><code>DATE</code> is in the form of <strong>dd-mm-yyyy</strong> where <strong>dd</strong> represents day, <strong>mm</strong> represents month and <strong>yyyy</strong> represents the year.
 <strong>dd</strong> and <strong>mm</strong> both require 1 to 2 digits while <strong>yyyy</strong> requires exactly 4 digits.</p>
 </li>
 <li>
-<p><code>DATE</code> entered must also be a valid date, no fake dates e.g. 60-11-2018, 30-02-2018</p>
+<p><code>DATE</code> entered must also be a valid date, no fake dates e.g. <strong>60-11-2018</strong>, <strong>30-02-2018</strong>. Leap years are also accounted for, meaning that you
+can enter <strong>29-2-2016</strong> and it will still be accepted.</p>
 </li>
 <li>
-<p><code>TAG</code> is completely optional and can be any alphanumerical word, but limited to only 1 whole word, no whitespaces are allowed.</p>
+<p><code>TAG</code> is completely optional and can be any alphanumerical word, but limited to only 1 whole word, no whitespaces are allowed. Also,
+the maximum character length of the tag is 50 characters long. The maximum allowed tags is 2 as these tags will be used to categorise each
+record, to reduce effort on user&#8217;s part in specifying another field.</p>
 </li>
 <li>
 <p><code>INDEX</code> <strong>must be a positive integer</strong> <code>1, 2, 3, &#8230;&#8203;</code></p>
@@ -154,8 +227,8 @@ Format: <code>add n/NAME d/DATE m/MONEYFLOW [t/TAG]&#8230;&#8203;</code><br></p>
 </div>
 <div class="paragraph">
 <p>Name denotes the name of the financial activity, moneyflow denotes the money spent or gained in the financial activity
-and date denotes the date the financial activity was completed. Each financial activity can be labelled with any number
-of tags.</p>
+and date denotes the date the financial activity was completed. Each financial activity can be labelled with maximum of 2
+of tags as these tags will be used to categorise each record to remove the need for user to specify another field.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -242,19 +315,19 @@ Format: <code>find KEYWORD [MORE_KEYWORDS]</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>The search is case insensitive. e.g <code>hans</code> will match <code>Hans</code></p>
+<p>The search is case insensitive. e.g <code>grocery</code> will match <code>Grocery</code></p>
 </li>
 <li>
-<p>The order of the keywords does not matter. e.g. <code>Hans Bo</code> will match <code>Bo Hans</code></p>
+<p>The order of the keywords does not matter. e.g. <code>Grocery Shopping</code> will match <code>Shopping Grocery</code></p>
 </li>
 <li>
-<p>Only the name is searched.</p>
+<p>Only the name of the record is searched.</p>
 </li>
 <li>
-<p>Only full words will be matched e.g. <code>Han</code> will not match <code>Hans</code></p>
+<p>Only full words will be matched e.g. <code>Grocer</code> will not match <code>Grocery</code></p>
 </li>
 <li>
-<p>Records matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Hans Bo</code> will return <code>Hans Gruber</code>, <code>Bo Yang</code></p>
+<p>Records matching at least one keyword will be returned (i.e. <code>OR</code> search). e.g. <code>Grocery Shopping</code> will return <code>Grocery</code>, <code>Shirt Shopping</code></p>
 </li>
 </ul>
 </div>
@@ -558,7 +631,7 @@ Format: <code>history</code></p>
 <div class="sect2">
 <h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.12. Undoing previous command : <code>undo</code></a></h3>
 <div class="paragraph">
-<p>Restores the expense book to the state before the previous <em>undoable</em> command was executed.<br>
+<p>Restores the FinancialPlanner to the state before the previous <em>undoable</em> command was executed.<br>
 Format: <code>undo</code></p>
 </div>
 <div class="admonitionblock note">
@@ -569,7 +642,8 @@ Format: <code>undo</code></p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Undoable commands: those commands that modify the expense book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+<p>Undoable commands: those commands that modify the FinancialPlanner&#8217;s stored content (
+<code>add</code>, <code>delete</code>, <code>deletedate</code>, <code>edit</code>, <code>addlimit</code>, <code>deletelimit</code>, <code>editlimit</code> and <code>clear</code>).</p>
 </div>
 </td>
 </tr>
@@ -629,7 +703,7 @@ The <code>redo</code> command fails as there are no <code>undo</code> commands e
 <div class="sect2">
 <h3 id="clearing-all-records-code-clear-code"><a class="link" href="#clearing-all-records-code-clear-code">3.14. Clearing all records : <code>clear</code></a></h3>
 <div class="paragraph">
-<p>Clears all records from the expense book.<br>
+<p>Clears all records from the FinancialPlanner.<br>
 Format: <code>clear</code></p>
 </div>
 </div>
@@ -822,7 +896,8 @@ Format:<br></p>
 </ul>
 </div>
 <div class="paragraph">
-<p>The screenshots below are examples of what you can see once the command has been accepted.</p>
+<p>The screenshots below are examples of what you can see once the command has been accepted. The commands entered have been left
+in for visualisation purposes.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -897,7 +972,8 @@ later versions of the product to remove the labels completely and use a mouse ov
 </ul>
 </div>
 <div class="paragraph">
-<p>Below are some screenshots of what you can see when the command has been accepted.</p>
+<p>Below are some screenshots of what you can see when the command has been accepted. The commands entered have been left
+in for visualisation purposes.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1634,50 +1710,46 @@ Format: <code>deletemonthlylimit</code></p>
 </div>
 <div class="paragraph">
 <p>Examples:
-* <code>deletemonthlylimit</code></p>
+* <code>deletemonthlylimit</code>
+== Upcoming Features</p>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="upcoming-features"><a class="link" href="#upcoming-features">8. Upcoming Features</a></h2>
-<div class="sectionbody">
 <div class="sect2">
-<h3 id="showing-a-visual-representation-of-daily-monthly-summary-code-coming-in-v1-4-code"><a class="link" href="#showing-a-visual-representation-of-daily-monthly-summary-code-coming-in-v1-4-code">8.1. Showing a visual representation of daily/monthly summary <code>[Coming in v1.4]</code></a></h3>
+<h3 id="showing-a-visual-representation-of-daily-monthly-summary-code-coming-in-v2-0-code"><a class="link" href="#showing-a-visual-representation-of-daily-monthly-summary-code-coming-in-v2-0-code">7.8. Showing a visual representation of daily/monthly summary <code>[Coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">8.2. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+<h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">7.9. Encrypting data files <code>[coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="adding-description-to-records-code-coming-in-v2-0-code"><a class="link" href="#adding-description-to-records-code-coming-in-v2-0-code">8.3. Adding description to records <code>[Coming in v2.0]</code></a></h3>
+<h3 id="adding-description-to-records-code-coming-in-v2-0-code"><a class="link" href="#adding-description-to-records-code-coming-in-v2-0-code">7.10. Adding description to records <code>[Coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="changing-app-configurations-code-coming-in-v2-0-code"><a class="link" href="#changing-app-configurations-code-coming-in-v2-0-code">8.4. Changing app configurations <code>[Coming in v2.0]</code></a></h3>
+<h3 id="changing-app-configurations-code-coming-in-v2-0-code"><a class="link" href="#changing-app-configurations-code-coming-in-v2-0-code">7.11. Changing app configurations <code>[Coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="view-bank-balances-code-coming-in-v2-0-code"><a class="link" href="#view-bank-balances-code-coming-in-v2-0-code">8.5. View bank balances <code>[Coming in v2.0]</code></a></h3>
+<h3 id="view-bank-balances-code-coming-in-v2-0-code"><a class="link" href="#view-bank-balances-code-coming-in-v2-0-code">7.12. View bank balances <code>[Coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="record-parties-to-make-payment-to-code-coming-in-v2-0-code"><a class="link" href="#record-parties-to-make-payment-to-code-coming-in-v2-0-code">8.6. Record parties to make payment to <code>[Coming in v2.0]</code></a></h3>
+<h3 id="record-parties-to-make-payment-to-code-coming-in-v2-0-code"><a class="link" href="#record-parties-to-make-payment-to-code-coming-in-v2-0-code">7.13. Record parties to make payment to <code>[Coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="adding-regular-payments-income-to-be-automatically-recorded-code-coming-in-v2-0-code"><a class="link" href="#adding-regular-payments-income-to-be-automatically-recorded-code-coming-in-v2-0-code">8.7. Adding regular payments/income to be automatically recorded <code>[Coming in v2.0]</code></a></h3>
+<h3 id="adding-regular-payments-income-to-be-automatically-recorded-code-coming-in-v2-0-code"><a class="link" href="#adding-regular-payments-income-to-be-automatically-recorded-code-coming-in-v2-0-code">7.14. Adding regular payments/income to be automatically recorded <code>[Coming in v2.0]</code></a></h3>
 
 </div>
 <div class="sect2">
-<h3 id="auto-complete-for-wider-range-of-inputs-and-accuracy-code-coming-in-v2-0-code"><a class="link" href="#auto-complete-for-wider-range-of-inputs-and-accuracy-code-coming-in-v2-0-code">8.8. Auto Complete for wider range of inputs and accuracy <code>[Coming in v2.0]</code></a></h3>
+<h3 id="auto-complete-for-wider-range-of-inputs-and-accuracy-code-coming-in-v2-0-code"><a class="link" href="#auto-complete-for-wider-range-of-inputs-and-accuracy-code-coming-in-v2-0-code">7.15. Auto Complete for wider range of inputs and accuracy <code>[Coming in v2.0]</code></a></h3>
 
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="faq"><a class="link" href="#faq">9. FAQ</a></h2>
+<h2 id="faq"><a class="link" href="#faq">8. FAQ</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
@@ -1686,36 +1758,16 @@ Format: <code>deletemonthlylimit</code></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="command-summary"><a class="link" href="#command-summary">10. Command Summary</a></h2>
+<h2 id="command-summary"><a class="link" href="#command-summary">9. Command Summary</a></h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Add</strong> <code>add n/NAME d/DATE m/MONEYFLOW [t/TAG]&#8230;&#8203;</code><br>
+<p><strong>Help</strong> : <code>help</code></p>
+</li>
+<li>
+<p><strong>Add</strong> : <code>add n/NAME d/DATE m/MONEYFLOW [t/TAG]&#8230;&#8203;</code><br>
 e.g. <code>add n/Dinner with family d/20-12-2017 m/-10 t/food t/family</code></p>
-</li>
-<li>
-<p><strong>Clear</strong> : <code>clear</code></p>
-</li>
-<li>
-<p><strong>Delete</strong> : <code>delete INDEX</code><br>
-e.g. <code>delete 3</code></p>
-</li>
-<li>
-<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]&#8230;&#8203;</code><br>
-e.g. <code>edit 2 n/James Lee e/jameslee@example.com</code></p>
-</li>
-<li>
-<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
-e.g. <code>find James Jake</code></p>
-</li>
-<li>
-<p><strong>Find Tag</strong> : <code>findtag KEYWORD [MORE_KEYWORDS]</code><br>
-e.g. <code>findtag friend</code></p>
-</li>
-<li>
-<p><strong>sort</strong> : <code>sort [CATEGORY] [ORDER]</code><br>
-e.g. <code>sort name asc</code></p>
 </li>
 <li>
 <p><strong>List</strong> : <code>list [d/DATE] [DATE]</code><br>
@@ -1735,28 +1787,32 @@ e.g.<br></p>
 </div>
 </li>
 <li>
-<p><strong>Export into Excel</strong> : <code>export_excel</code><br>
-e.g.<br></p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>export_excel</code></p>
+<p><strong>Find</strong> : <code>find KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>find James Jake</code></p>
 </li>
 <li>
-<p><code>export_excel d/20-12-2017</code></p>
-</li>
-<li>
-<p><code>export_excel d/20-12-2017 31-09-2018</code></p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p><strong>Help</strong> : <code>help</code></p>
+<p><strong>Find tag</strong> : <code>findtag KEYWORD [MORE_KEYWORDS]</code><br>
+e.g. <code>findtag friend</code></p>
 </li>
 <li>
 <p><strong>Select</strong> : <code>select INDEX</code><br>
 e.g. <code>select 2</code></p>
+</li>
+<li>
+<p><strong>Sort</strong> : <code>sort [CATEGORY] [ORDER]</code><br>
+e.g. <code>sort name asc</code></p>
+</li>
+<li>
+<p><strong>Edit</strong> : <code>edit INDEX [n/NAME] [d/DATE] [m/MONEYFLOW] [t/TAG]&#8230;&#8203;</code><br>
+e.g. <code>edit 2 n/Present d/12-11-2018</code></p>
+</li>
+<li>
+<p><strong>Delete</strong> : <code>delete INDEX</code><br>
+e.g. <code>delete 3</code></p>
+</li>
+<li>
+<p><strong>Delete by date</strong> : <code>deletedate DATE</code><br>
+e.g. <code>delete 31-7-2018</code></p>
 </li>
 <li>
 <p><strong>History</strong> : <code>history</code></p>
@@ -1768,7 +1824,13 @@ e.g. <code>select 2</code></p>
 <p><strong>Redo</strong> : <code>redo</code></p>
 </li>
 <li>
-<p><strong>Summary</strong> : <code>summary</code><br>
+<p><strong>Clear</strong> : <code>clear</code></p>
+</li>
+<li>
+<p><strong>Exit</strong> : <code>exit</code></p>
+</li>
+<li>
+<p><strong>View summary</strong> : multiple modes of <code>summary</code><br>
 e.g.</p>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1788,29 +1850,127 @@ e.g.</p>
 </div>
 </li>
 <li>
-<p><strong>Finances Statistics</strong> : <code>stats</code><br>
+<p><strong>View pie chart breakdown</strong> : <code>stats d/DATE DATE</code><br>
 e.g. <code>stats d/20-12-2017 31-09-2018</code></p>
 </li>
 <li>
-<p><strong>Add limit</strong> : <code>addlimit d/START_DATE END_DATE m/MONEYFLOW</code><br>
-e.g.<br>
-<code>addlimit d/20-12-2017 m/100</code>
-<code>addlimit d/20-12-2017 31-09-2018 m/100</code></p>
+<p><strong>Export into Excel</strong> : multiple modes of <code>exportexcel</code><br>
+e.g.<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>export_excel</code></p>
 </li>
 <li>
-<p><strong>Delete limit</strong> <code>deleteLimit d/START_DATE END_DATE</code><br>
-e.g.<br>
-<code>deleteLimit d/20-12-2017</code>
-<code>deleteLimit d/20-12-2017 31-09-2018</code></p>
+<p><code>export_excel d/31-3-1999</code></p>
 </li>
 <li>
-<p><strong>Edit limit</strong> <code>editLimit d/START_DATE END_DATE m/MONEYFLOW</code><br>
-e.g.<br>
-<code>editLimit d/20-12-2017 m/100</code>
-<code>editLimit d/20-12-2017 31-09-2018 m/100</code><br></p>
+<p><code>export_excel d/31-3-1999 31-03-2019</code></p>
 </li>
 <li>
-<p><strong>Check limit</strong> : <code>checklimit</code></p>
+<p><code>export_excel d/31-3-1999 dir/C:\</code></p>
+</li>
+<li>
+<p><code>export_excel d/31-3-1999 31-3-2019 dir/C:\</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><strong>Import into app</strong> : multiple modes of <code>import</code><br>
+e.g.<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>import dir/C:\Financial_Planner_ALL.xlsx</code></p>
+</li>
+<li>
+<p><code>import dir/C:\ n/Financial_Planner_All.xlsx</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><strong>Archive records</strong> : multiple modes of <code>archive</code><br>
+e.g.<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>archive</code></p>
+</li>
+<li>
+<p><code>archive d/31-3-1999</code></p>
+</li>
+<li>
+<p><code>archive d/31-3-1999 31-03-2019</code></p>
+</li>
+<li>
+<p><code>archive d/31-3-1999 dir/C:\</code></p>
+</li>
+<li>
+<p><code>archive d/31-3-1999 31-3-2019 dir/C:\</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><strong>Add limit</strong> : <code>addlimit d/DATE [DATE] m/MONEYFLOW</code><br>
+e.g.<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>addlimit d/20-12-2017</code></p>
+</li>
+<li>
+<p><code>addlimit d/20-12-2017 31-09-2018</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><strong>Check limit</strong> : <code>checklimit d/DATE [DATE]</code><br></p>
+</li>
+<li>
+<p><strong>Delete limit</strong> <code>deletelimit d/DATE [DATE]</code><br>
+e.g.<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>deleteLimit d/20-12-2017</code></p>
+</li>
+<li>
+<p><code>deleteLimit d/20-12-2017 31-09-2018</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><strong>Edit limit</strong> <code>editlimit d/DATE [DATE] m/MONEYFLOW</code><br>
+e.g.<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>editLimit d/20-12-2017 m/100</code></p>
+</li>
+<li>
+<p><code>editLimit d/20-12-2017 31-09-2018 m/100</code></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><strong>Check limit</strong> : <code>checklimit</code>
+e.g.<br></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>checklimit d/20-12-2017</code></p>
+</li>
+<li>
+<p><code>checklimit d/20-12-2018 31-09-2018</code></p>
+</li>
+</ol>
+</div>
 </li>
 <li>
 <p><strong>Add monthly limit</strong> : <code>addmonthlylimit m/MONEYFLOW</code><br>
@@ -1828,4 +1988,4 @@ e.g.<br>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 15:05:28 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 15:19:47 UTC</div></div></div></body></html>
