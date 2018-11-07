@@ -1403,13 +1403,15 @@ Format:<br></p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="spending-limit-feature"><a class="link" href="#spending-limit-feature">7. Spending Limit Feature</a></h2>
+<h2 id="spending-limit-features"><a class="link" href="#spending-limit-features">7. Spending Limit Features</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
 <p>This section describes the limit feature that allows users to set values to control their future spending.
-Constraints that apply to records also apply to each limit. Refer to <a href="#constraints">[constraints]</a> for more information.
-`All the limit related commands are case insensitive. Users can input ADDlimit, addLimit and so on to execute the command.
-Besides that, in case some of the users who have programming background are used to using `</p>
+Constraints that apply to records also apply to each limit. Refer to <a href="#constraints">[constraints]</a> for more information.</p>
+</li>
+</ul>
 </div>
 <div class="sect2">
 <h3 id="addlimit"><a class="link" href="#addlimit">7.1. Adding a limit: <code>addlimit</code></a></h3>
@@ -1420,10 +1422,16 @@ Format: <code>addlimit d/START_DATE END_DATE m/MONEYFLOW</code> (<code>limit d/D
 <div class="paragraph">
 <p>When inputting two days, START_DATE and END_DATE indicates the starting date and ending date for the limit.
 If there is only one date, that day will be the time period.
-MONEYFLOW denotes the money spending limit for that period of time.
-After the limits have been set, Financial Planner will keep checking the latest condition of these limits.
+MONEYFLOW denotes the money spending limit for that period of time.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>After the limits have been added, Financial Planner will keep checking the latest condition of these limits.
 Once the total amount of money spent during this time period exceeds the spending limit,
 FinancialPlanner will warn the user by sending the warning message.</p>
+</li>
+</ul>
 </div>
 <div class="sidebarblock">
 <div class="content">
@@ -1454,10 +1462,7 @@ FinancialPlanner will warn the user by sending the warning message.</p>
 <p><code>addlimit d/20-8-2018 30-8-2018 m/632</code></p>
 </li>
 <li>
-<p><code>addLimit d/20-8-2018 20-8-2018 m/200</code></p>
-</li>
-<li>
-<p><code>add_limit d/20-8-2018 30-8-2018 m/100</code></p>
+<p><code>addlimit d/20-8-2018 30-8-2018 m/100</code></p>
 </li>
 </ul>
 </div>
@@ -1468,9 +1473,7 @@ FinancialPlanner will warn the user by sending the warning message.</p>
 <p>Displays all limits information stored in FinancialPlanner<br>
 Format: <code>checklimit</code>
 Example:
-* <code>checklimit</code>
-* <code>checkLimit</code>
-* <code>check_limit</code></p>
+* <code>checklimit</code></p>
 </div>
 </div>
 <div class="sect2">
@@ -1491,7 +1494,7 @@ Delete</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>START_DATE/END_DATE</code> must match exactly the same as when the limit was created.</p>
+<p>There must be a limit with the same dates.</p>
 </li>
 <li>
 <p>Limits cannot be partially deleted with incorrect dates.</p>
@@ -1510,9 +1513,6 @@ Delete</p>
 </li>
 <li>
 <p><code>deletelimit d/20-8-2018 30-8-2018</code></p>
-</li>
-<li>
-<p><code>delete_Limit d/20-8-2018 30-8-2018</code></p>
 </li>
 </ul>
 </div>
@@ -1536,7 +1536,7 @@ replace the original moneyFlow with the new moneyFlow.</p>
 <p><code>MONEYFLOW</code> can only be a positive integer, and does not require a "+" or "-".</p>
 </li>
 <li>
-<p><code>START_DATE/END_DATE</code> must match exactly the same as when the limit was created.</p>
+<p>There must be a limit with the same dates.</p>
 </li>
 </ul>
 </div>
@@ -1553,13 +1553,88 @@ replace the original moneyFlow with the new moneyFlow.</p>
 <li>
 <p><code>editlimit d/20-8-2018 30-8-2018 m/200</code></p>
 </li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-monthly-limit-code-addmonthlylimit-code"><a class="link" href="#adding-a-monthly-limit-code-addmonthlylimit-code">7.5. Adding a monthly limit: <code>addmonthlylimit</code></a></h3>
+<div class="paragraph">
+<p>Add a continuous monthly limit always for the current month.
+Format: <code>addmonthlylimit m/MONEYFLOW</code></p>
+</div>
+<div class="paragraph">
+<p>The monthly limit will always check the spend of the current month according to the current time.
+For example, if the limit was set to be 200 at April, the limit will check the total spend for April.
+When the time comes to May, the limit will no longer check April, instead, the limit
+will check the total spend of May until the last second of May.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
 <li>
-<p><code>editLimit d/20-8-2018 30-8-2018 m/200</code></p>
-</li>
-<li>
-<p><code>edit_limit d/20-8-2018 30-8-2018 m/200</code></p>
+<p><code>MONEYFLOW</code> can only be a positive integer, and does not require a "+" or "-".</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:
+* <code>addmonthlylimit m/200</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-the-monthly-limit-code-editmonthlylimit-code"><a class="link" href="#editing-the-monthly-limit-code-editmonthlylimit-code">7.6. Editing the monthly limit: <code>editmonthlylimit</code></a></h3>
+<div class="paragraph">
+<p>Edit an existing monthly limit.
+Format: <code>editmonthlylimit m/MONEYFLOW</code></p>
+</div>
+<div class="paragraph">
+<p>The monthly limit will be replaced by the new monthly limit.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p><code>MONEYFLOW</code> can only be a positive integer, and does not require a "+" or "-".</p>
+</li>
+<li>
+<p>There must be an existing monthly limit.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:
+* <code>editmonthlylimit m/200</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-the-monthly-limit-code-deletemonthlylimit-code"><a class="link" href="#deleting-the-monthly-limit-code-deletemonthlylimit-code">7.7. Deleting the monthly limit: <code>deletemonthlylimit</code></a></h3>
+<div class="paragraph">
+<p>Delete the monthly limit.
+Format: <code>deletemonthlylimit</code></p>
+</div>
+<div class="paragraph">
+<p>The monthly limit will be deleted and no longer check the spend of the current month.</p>
+</div>
+<div class="sidebarblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>There must be an existing monthly limit.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Examples:
+* <code>deletemonthlylimit</code></p>
 </div>
 </div>
 </div>
@@ -1719,8 +1794,8 @@ e.g. <code>stats d/20-12-2017 31-09-2018</code></p>
 <li>
 <p><strong>Add limit</strong> : <code>addlimit d/START_DATE END_DATE</code><br>
 e.g.<br>
-<code>limit d/20-12-2017</code>
-<code>limit d/20-12-2017 31-09-2018</code></p>
+<code>addlimit d/20-12-2017</code>
+<code>addlimit d/20-12-2017 31-09-2018</code></p>
 </li>
 <li>
 <p><strong>Delete limit</strong> <code>deleteLimit d/START_DATE END_DATE</code><br>
@@ -1732,9 +1807,25 @@ e.g.<br>
 <p><strong>Edit limit</strong> <code>editLimit d/START_DATE END_DATE m/MONEYFLOW</code><br>
 e.g.<br>
 <code>editLimit d/20-12-2017 m/100</code>
-<code>editLimit d/20-12-2017 31-09-2018 m/100</code></p>
+<code>editLimit d/20-12-2017 31-09-2018 m/100</code><br></p>
+</li>
+<li>
+<p><strong>Check limit</strong> : <code>checklimit</code></p>
+</li>
+<li>
+<p><strong>Add monthly limit</strong> : <code>addmonthlylimit m/MONEYFLOW</code><br>
+e.g.<br>
+<code>addmonthlylimit m/500</code><br></p>
+</li>
+<li>
+<p><strong>Edit monthly limit</strong> : <code>editmonthlylimit m/MONEYFLOW</code><br>
+e.g.<br>
+<code>editmonthlylimit m/300</code><br></p>
+</li>
+<li>
+<p><strong>Delete monthly limit</strong> : <code>deletemonthlylimit</code></p>
 </li>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 12:41:06 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-07 14:01:25 UTC</div></div></div></body></html>
