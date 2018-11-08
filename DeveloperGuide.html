@@ -40,10 +40,11 @@
 <li><a href="#export-into-excel-file">3.9. Export into Excel file</a></li>
 <li><a href="#import-from-excel-file">3.10. Import from Excel file</a></li>
 <li><a href="#archive-into-excel-file">3.11. Archive into Excel file</a></li>
-<li><a href="#design-considerations-5">3.12. Design Considerations</a></li>
-<li><a href="#proposed-data-encryption">3.13. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.14. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.15. Configuration</a></li>
+<li><a href="#draw-a-line-chart-automatically-inside-the-excel-sheet">3.12. Draw a line chart automatically inside the Excel sheet</a></li>
+<li><a href="#design-considerations-5">3.13. Design Considerations</a></li>
+<li><a href="#proposed-data-encryption">3.14. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.15. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.16. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -589,7 +590,7 @@ As a more OOP model, we can store a <code>Tag</code> list in <code>Financial Pla
 <div class="sect2">
 <h3 id="Design-Commons"><a class="link" href="#Design-Commons">2.6. Common classes</a></h3>
 <div class="paragraph">
-<p>Classes used by multiple components are in the <code>seedu.addressbook.commons</code> package.</p>
+<p>Classes used by multiple components are in the <code>seedu.planner.commons</code> package.</p>
 </div>
 </div>
 </div>
@@ -1669,7 +1670,7 @@ It represents an in-memory model of the FinancialPlanner and is the component wh
 <p>If there exists target records, <code>ModelManager#commitFinancialPlanner</code> will be called to update the current version of Financial Planner and the message, which states records have been deleted. Then, <code>ModelManager#autoLimitCheck</code> will be called to check the current change in limit as we delete some records exceeds the limit or not.</p>
 </div>
 <div class="paragraph">
-<p>This feature has only one keyword <code>delete_date</code> and implements only 1 argument mode.
+<p>This feature has only one keyword <code>deletedate</code> and implements only 1 argument mode.
 The three argument modes are as listed below:</p>
 </div>
 <div class="ulist">
@@ -1730,7 +1731,7 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 <div class="ulist">
 <ul>
 <li>
-<p><code>SUMMARY DATA</code> stored the summary statistics for the period you exported, and there is a <strong>Line Chart</strong> next to the table for visual statistic [refer to <code>Draw line chart</code> part for more information]. As you can see in the picture, there are 3 series shown:</p>
+<p><code>SUMMARY DATA</code> stored the summary statistics for the period you exported, and there is a <strong>Line Chart</strong> next to the table for visual statistic [refer to <code>Draw a line chart automatically inside the Excel sheet</code> part for more information]. As you can see in the picture, there are 3 series shown:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1753,28 +1754,28 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 </div>
 </div>
 <div class="paragraph">
-<p>This feature has only one keyword <code>export_excel</code> but implements 6 different argument modes to allow users to access multiple versions of the same command.
+<p>This feature has only one keyword <code>exportexcel</code> but implements 6 different argument modes to allow users to access multiple versions of the same command.
 The six argument modes are as listed below:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>No argument mode</strong> <code>export_excel</code> will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Working Directory</strong>.</p>
+<p><strong>No argument mode</strong> <code>exportexcel</code> will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
-<p><strong>Single argument Date mode</strong> <code>export_excel d/DATE</code> will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.</p>
+<p><strong>Single argument Date mode</strong> <code>exportexcel d/DATE</code> will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
-<p><strong>Dual argument Date mode</strong> <code>export_excel d/START_DATE END_DATE</code> will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Working Directory</strong>.</p>
+<p><strong>Dual argument Date mode</strong> <code>exportexcel d/START_DATE END_DATE</code> will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
-<p><strong>Single argument Directory Path mode</strong> <code>export_excel dir/DIRECTORY_PATH</code> will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.</p>
+<p><strong>Single argument Directory Path mode</strong> <code>exportexcel dir/DIRECTORY_PATH</code> will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.</p>
 </li>
 <li>
-<p><strong>Single argument Date mode + Single argument Directory path mode</strong> <code>export_excel d/DATE dir/DIRECTORY_PATH</code> will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.</p>
+<p><strong>Single argument Date mode + Single argument Directory path mode</strong> <code>exportexcel d/DATE dir/DIRECTORY_PATH</code> will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.</p>
 </li>
 <li>
-<p><strong>Dual argument Date mode + Single argument Directory path mode</strong> <code>export_excel d/START_DATE END_DATE dir/DIRECTORY_PATH</code> will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.</p>
+<p><strong>Dual argument Date mode + Single argument Directory path mode</strong> <code>exportexcel d/START_DATE END_DATE dir/DIRECTORY_PATH</code> will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.</p>
 <div class="paragraph">
 <p>The mechanism that facilitates these modes can be found in the <code>ExportExcelCommandParser#parse</code>. Below is a overview of the mechanism:</p>
 </div>
@@ -1881,6 +1882,15 @@ listener is present in <code>RecordListPanel</code> and will update the UI list 
 </div>
 <div class="paragraph">
 <p>ImportExcelCommand calls <code>ExcelUtil#readExcelSheet</code> to read the Excel file and retrieve data of records from them to create a list of record List&lt;Record&gt;.</p>
+</div>
+<div class="paragraph">
+<p>In <code>ExcelUtil#readExcelSheet</code>, by using method <code>XSSFWorkbook#setMissingCellPolicy</code>, every missing cell will be considered as Null cell, quite useful when you export or archive the record data if the record does not have tag.</p>
+</div>
+<div class="paragraph">
+<p>If blank row is found, the <code>ExcelUtil#readExcelSheet</code> will ignore and read the next line, until the last line is read. This concept also applies to read multiple sheets until all sheets have been read.</p>
+</div>
+<div class="paragraph">
+<p>However, please take note that in order to prevent errors, every sheet that user want to read have to set the First row of the table <strong>must</strong> have 4 cells, namely NAME, DATE, MONEY, TAGS. These 4 columns can be case-insensitive. The sheet with records data but does not have the first row, NAME, DATE, MONEY, TAGS will <strong>not</strong> be read.</p>
 </div>
 <div class="paragraph">
 <p>After that, <code>ModelManager#addListUniqueRecord</code> is called to add the records in the List&lt;Record&gt;. If the record has already existed in the Financial Planner, it will be ignored and not added into the Financial Planner.</p>
@@ -2053,7 +2063,7 @@ The two argument modes are as listed below:</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>SUMMARY DATA</code> stored the summary statistics for the period you archived, and there is a <strong>Line Chart</strong> next to the table for visual statistic [refer to <code>Draw line chart</code> part for more information]. As you can see in the picture, there are 3 series shown:</p>
+<p><code>SUMMARY DATA</code> stored the summary statistics for the period you archived, and there is a <strong>Line Chart</strong> next to the table for visual statistic [refer to <code>Draw a line chart automatically inside the Excel sheet</code> part for more information]. As you can see in the picture, there are 3 series shown:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -2199,9 +2209,62 @@ listener is present in <code>RecordListPanel</code> and will update the UI list 
 </div>
 </div>
 <div class="sect2">
-<h3 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.12. Design Considerations</a></h3>
+<h3 id="draw-a-line-chart-automatically-inside-the-excel-sheet"><a class="link" href="#draw-a-line-chart-automatically-inside-the-excel-sheet">3.12. Draw a line chart automatically inside the Excel sheet</a></h3>
 <div class="sect3">
-<h4 id="aspect-data-structure-to-support-listing-of-records-2"><a class="link" href="#aspect-data-structure-to-support-listing-of-records-2">3.12.1. Aspect: Data structure to support listing of records</a></h4>
+<h4 id="current-implementation-17"><a class="link" href="#current-implementation-17">3.12.1. Current implementation</a></h4>
+<div class="paragraph">
+<p>This feature will automatically uses the the summary data from the <code>SUMMARY DATA</code> sheet in the Excel sheet after the command <code>archive</code> or <code>export_excel</code> is called.</p>
+</div>
+<div class="paragraph">
+<p>The feature mechanism is facilitated by <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It is the component which manages the interactions between the ExportExcelCommand or the ArchiveCommand with <code>ExcelUtil#drawChart</code>.</p>
+</div>
+<div class="paragraph">
+<p>As you can see the screenshot below, in the <code>SUMMARY DATA</code> sheet (refer to <code>Export into Excel file</code> or <code>Archive into Excel file</code> feature), next to the summary table:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The size of the line chart (based on default column width and default row height) is:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The width is 15 columns</p>
+</li>
+<li>
+<p>The height is 30 rows.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>On the top left of the chart, the legend shows 3 lines, namely Income, Outcome, and Net.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>The first blue line shows the Income based on Date.</p>
+</li>
+<li>
+<p>The second orange line shows the Outcome based on Date</p>
+</li>
+<li>
+<p>The third grey line shows the Net (total of income and outcome) based on Date.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/Export_Capture2_LinhChi.png" alt="width:800">
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.13. Design Considerations</a></h3>
+<div class="sect3">
+<h4 id="aspect-data-structure-to-support-listing-of-records-2"><a class="link" href="#aspect-data-structure-to-support-listing-of-records-2">3.13.1. Aspect: Data structure to support listing of records</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -2235,20 +2298,20 @@ listener is present in <code>RecordListPanel</code> and will update the UI list 
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.13. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.14. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.14. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.15. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.15, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.16, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -2279,7 +2342,7 @@ listener is present in <code>RecordListPanel</code> and will update the UI list 
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.15. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.16. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -4720,4 +4783,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-08 14:04:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-08 15:07:37 UTC</div></div></div></body></html>

@@ -12,115 +12,140 @@
 <div class="paragraph">
 <p>In semester 1 year 2, I had a chance to learn NUS CS2113T - Software Engineering and Object Oriented Programming module. Thanks to this module, I had an hand-on experience to develop a desktop application with my teammate. Guidelines are given during 10 weeks to assist us create the application focusing on a particular group of users.</p>
 </div>
+<div class="paragraph">
+<p>4 - 5 students from all walk of life are assigned to one group. We adjust each other working style within few weeks and support each other to develop the project. Be it minor enhancement or major enhancement, we are expected to contribute to the team.</p>
+</div>
+<div class="paragraph">
+<p>Initially, a source code <a href="https://nuscs2113-ay1819s1.github.io/addressbook-level4/">AddressBook Level 4</a> is given to us at the beginning of the CS2113T module. This has about 10 kLoc (10000 lines of code). Choosing the morphing direction, we were tasked to modify the existing code into other software we opted to.</p>
+</div>
+<div class="paragraph">
+<p>We would be evaluated based on our ability to work with existing base code and the quality of our new enhancements to
+the existing code. Besides code, we were expected to write a User Guide and Developer Guide as well for the product
+as though we were releasing an official product for public usage to simulate an actual work schedule.</p>
+</div>
+<div class="paragraph">
+<p>FinancialPlanner&#8217;s target is for everyone who needs help to manage their financial status, but we focus mainly on <strong>students</strong>. As a NUS student, I understand how great impact finance can impose on a student. With this application, I, myself and my teammate, hopes to bring positive support to users.</p>
+</div>
+<div class="paragraph">
+<p>This application is perfectly designed for users who like typing and are proficient in organizing their data with command line interface (CLI). User can store <code>name</code>, <code>date</code>, <code>money flow</code>, and optional <code>tag</code>. With 3 compulsory components, namely, <code>name</code>, <code>date</code>, <code>money flow</code>, we create a <code>Record</code>. The <code>date</code> component refers to the actual date when the financial activity is performed and <code>money flow</code> component refers to the income or expenditure of the user on the specific date. Typing might be time-consuming but it allows user have a glimpse back to the expense user spent or received. Hence, the user will have a chance to recall their expenses as well as be more aware about their financial status.</p>
+</div>
+<div class="paragraph">
+<p>Locating at the topmost of the Financial Planner application is the text box, which user can use to type the command into the system. Graphic User Interface (GUI) created by JavaFX is the main component used to display output of the system to create a instinctive and engaging user experience.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Milestone is set every fortnight. Be it minor enhancement or major enhancement, every member is expected to contribute to the project every milestone. Working as a team, I am so happy to see the development of my teammate, and also satisfied to see myself grow through the progress.</p>
+</div>
+<div class="paragraph">
+<p>A summary of my contributions is given below.</p>
+</div>
 <div class="sect2">
-<h3 id="code-completed-code-strong-major-enhancement-1-strong-added-the-ability-to-delete-all-the-records-whose-date-is-required"><a class="link" href="#code-completed-code-strong-major-enhancement-1-strong-added-the-ability-to-delete-all-the-records-whose-date-is-required"><code>completed</code> <strong>Major enhancement #1</strong>: added the ability to delete all the records whose date is required.</a></h3>
+<h3 id="enhancements"><a class="link" href="#enhancements">Enhancements:</a></h3>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to delete all records whose date is required at a time.</p>
+<p><strong>Major enhancements</strong>: Assisted morph the AddressBook4 to FinancialPlanner</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Reason for enhancement</code>: Different from the AddressBook4, which stores the contact data, our app mainly aims supporting users who prefer to keep track of their daily financial activity.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can make mistakes in date keyed for records and the app should provide a convenient way to rectify them.</p>
+<p><code>Overview</code>: Significant effort is required to morph this application.</p>
 </li>
 <li>
-<p>Highlights: This enhancement affects existing commands, commands to be added in future, and records stored. It required an in-depth analysis of design alternatives.</p>
+<p><code>Highlights</code>: This major enhancement requires large amount of time as I have to read through all 10 kLoc and understand them before making any modifications.</p>
+</li>
+<li>
+<p><code>My contributions</code>: I refactored function together with variables across classes, to make these components compatible and consistent for the application. Along the way I developed my code, I had to adjust to the new structure of the Financial Planner, as not only we did rename the variable, methods, classes, we also build up our own structure for the application.</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="code-completed-code-strong-major-enhancement-2-strong-added-the-ability-to-export-the-data-of-records-into-excel-file"><a class="link" href="#code-completed-code-strong-major-enhancement-2-strong-added-the-ability-to-export-the-data-of-records-into-excel-file"><code>completed</code> <strong>Major enhancement #2</strong>: added the ability to export the data of records into Excel file.</a></h3>
+</li>
+<li>
+<p><strong>Major enhancements</strong>: Added the feature that allows the user delete all the record whose date is required.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to export data into Excel file for the summary purpose.</p>
+<p><code>Reason for enhancement</code>: As this application is designed for daily expense/income management and in case when user type in wrong date at the beginning. This feature allows user to delete multiple records at the same time, compared to the original delete one record at the time.</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can export data into Excel file and the app should provide a convenient way to rectify them. The implementation was challenging as it required Developer to get used to third-party Library in the short time as this project is time-restricted.</p>
+<p><code>Overview</code>: I developed this enhancement with the hope to increase the user-friendliness of the application by decreasing the time spent on delete feature.</p>
 </li>
 <li>
-<p>Highlights: This enhancement is the foundation for other minor enhancements below. It required in-depth analysis of design alternative.</p>
+<p><code>Highlights</code>: This major enhancement was unexpectedly difficult as it requires a in-depth knowledge for the Internal List structure building up the list of records, and pointer when looping through the list and deleting records.</p>
 </li>
 <li>
-<p>Credits: I would like to extend my thank you to the Third-party library: Apache poi.</p>
+<p><code>My contributions</code>: I wrote the code for the command, parser, and tests, and modify other classes and codes to adjust when a new command is added.</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect2">
-<h3 id="code-ongoing-code-strong-minor-enhancement-1-strong-added-the-ability-to-archive-the-data-into-excel-file"><a class="link" href="#code-ongoing-code-strong-minor-enhancement-1-strong-added-the-ability-to-archive-the-data-into-excel-file"><code>ongoing</code> <strong>Minor enhancement #1</strong>: added the ability to archive the data into Excel file</a></h3>
-<div class="sect4">
-<h5 id="code-sub-part-of-major-enhancement-2-code"><a class="link" href="#code-sub-part-of-major-enhancement-2-code"><code>sub-part of Major enhancement #2</code></a></h5>
+</li>
+<li>
+<p><strong>Major enhancements</strong>: Export the records data into</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: In case your Financial planner storage too large, and you want to archive based on year, month or period. This feature is designed specifically for you.</p>
+<p><code>Reason for enhancement</code>:</p>
 </li>
 <li>
-<p>Justification: This feature improves the product significantly because a user can export data into Excel file for the purpose of reducing the storage and planning systematically (archive based on year, month, or day).</p>
+<p><code>Overview</code>:</p>
+</li>
+<li>
+<p><code>Highlights</code>:</p>
+</li>
+<li>
+<p><code>My contributions</code>:</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="code-ongoing-code-strong-minor-enhancement-2-strong-added-the-ability-to-set-directory-for-the-excel-file"><a class="link" href="#code-ongoing-code-strong-minor-enhancement-2-strong-added-the-ability-to-set-directory-for-the-excel-file"><code>ongoing</code>  <strong>Minor enhancement #2</strong>: added the ability to set-directory for the Excel file.</a></h3>
-<div class="sect4">
-<h5 id="code-sub-part-of-major-enhancement-2-code-2"><a class="link" href="#code-sub-part-of-major-enhancement-2-code-2"><code>sub-part of Major enhancement #2</code></a></h5>
+</li>
+<li>
+<p><strong>Major enhancements</strong>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows user to store Excel file they want to export in directory they want or default Home directory.</p>
+<p><code>Reason for enhancement</code>:</p>
 </li>
 <li>
-<p>Justification: The implementation was challenging as it required Developer make global change in the project.</p>
+<p><code>Overview</code>:</p>
+</li>
+<li>
+<p><code>Highlights</code>:</p>
+</li>
+<li>
+<p><code>My contributions</code>:</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="code-ongoing-code-strong-minor-enhancement-3-strong-added-the-ability-to-create-excel-sheet"><a class="link" href="#code-ongoing-code-strong-minor-enhancement-3-strong-added-the-ability-to-create-excel-sheet"><code>ongoing</code> <strong>Minor enhancement #3</strong>: added the ability to create Excel sheet.</a></h3>
-<div class="sect4">
-<h5 id="code-sub-part-of-major-enhancement-2-code-3"><a class="link" href="#code-sub-part-of-major-enhancement-2-code-3"><code>sub-part of Major enhancement #2</code></a></h5>
+</li>
+<li>
+<p><strong>Major enhancements</strong>:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: helps the user to calculate the sum of money spent/received within period/month/year.</p>
+<p><code>Reason for enhancement</code>:</p>
 </li>
 <li>
-<p>Justification: This implementation will help the user to manage their expense more effectively and have more overview look for their financial planner by summarizing the data from the exporting Excel file and calculating the sum of money flow (money spent/received) of the records.</p>
+<p><code>Overview</code>:</p>
+</li>
+<li>
+<p><code>Highlights</code>:</p>
+</li>
+<li>
+<p><code>My contributions</code>:</p>
 </li>
 </ul>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="code-ongoing-code-strong-minor-enhancement-4-strong-added-the-ability-to-color-the-cells-whose-date-exceeds-the-limit-of-the-day"><a class="link" href="#code-ongoing-code-strong-minor-enhancement-4-strong-added-the-ability-to-color-the-cells-whose-date-exceeds-the-limit-of-the-day"><code>ongoing</code> <strong>Minor enhancement #4</strong>: added the ability to color the cells whose date exceeds the limit of the day.</a></h3>
-<div class="sect4">
-<h5 id="code-sub-part-of-major-enhancement-2-code-4"><a class="link" href="#code-sub-part-of-major-enhancement-2-code-4"><code>sub-part of Major enhancement #2</code></a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p>What it does: allows user to choose the color they want to color for the cells which exceed limit.</p>
 </li>
-<li>
-<p>Justification: This enhancement will combine with Limit Command and help the user to justify their expense for the future as they see the amount of money exceeded.</p>
-<div class="ulist">
-<ul>
 <li>
 <p><strong>Code contributed</strong>:</p>
 </li>
 </ul>
-</div>
-</li>
-</ul>
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -228,7 +253,7 @@ Format: <code>undo</code></p>
 <td class="content">
 <div class="paragraph">
 <p>Undoable commands: those commands that modify the FinancialPlanner&#8217;s stored content (
-<code>add</code>, <code>delete</code>, <code>deletedate</code>, <code>edit</code>, <code>addlimit</code>, <code>deletelimit</code>, <code>editlimit</code> and <code>clear</code>).</p>
+<code>add</code>, <code>delete</code>, <code>deletedate</code>, <code>exportexcel</code>, <code>archive</code>, <code>import</code>, <code>edit</code>, <code>addlimit</code>, <code>deletelimit</code>, <code>editlimit</code> and <code>clear</code>).</p>
 </div>
 </td>
 </tr>
@@ -539,4 +564,4 @@ to check if this is the case. If so, it will return an error to the user rather 
 <p><em>{Optionally, you may include other projects in your portfolio.}</em></p>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-08 14:04:55 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-08 15:07:37 UTC</div></div></div></body></html>
