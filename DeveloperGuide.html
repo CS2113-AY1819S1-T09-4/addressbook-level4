@@ -1327,8 +1327,10 @@ and obtain a new <code>filteredRecords</code> based on the predicate, which will
 </div>
 <div class="sect2">
 <h3 id="limit-features"><a class="link" href="#limit-features">3.7. Limit features</a></h3>
-<div class="sect4">
-<h5 id="limit-features-storage"><a class="link" href="#limit-features-storage">Limit features' storage:</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p>Limit features' storage:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1345,9 +1347,9 @@ period of time is not allowed.</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect4">
-<h5 id="limit-features-s-check"><a class="link" href="#limit-features-s-check">Limit features&#8217;s check:</a></h5>
+</li>
+<li>
+<p>Limit features&#8217;s check:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1366,9 +1368,9 @@ and combine all the limits' output into one string.</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect4">
-<h5 id="limit-features-moneyflow"><a class="link" href="#limit-features-moneyflow">Limit features' MoneyFlow:</a></h5>
+</li>
+<li>
+<p>Limit features' MoneyFlow:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1384,9 +1386,9 @@ at the beginning of the real number, which makes it a normal moneyFlow.</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect4">
-<h5 id="limit-features-parsers"><a class="link" href="#limit-features-parsers">Limit features' parsers:</a></h5>
+</li>
+<li>
+<p>Limit features' parsers:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1420,9 +1422,9 @@ If there is only one date string, this date will be set to both dateStart and da
 </li>
 </ul>
 </div>
-</div>
-<div class="sect4">
-<h5 id="monthly-limit"><a class="link" href="#monthly-limit">Monthly Limit:</a></h5>
+</li>
+<li>
+<p>Monthly Limit:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -1443,9 +1445,11 @@ will generate a temporary limit according to the current date. Then use this tem
 </li>
 </ul>
 </div>
+</li>
+</ul>
 </div>
 <div class="sect3">
-<h4 id="addlimit-feature"><a class="link" href="#addlimit-feature">3.7.6. addLimit feature</a></h4>
+<h4 id="addlimit-feature"><a class="link" href="#addlimit-feature">3.7.1. addLimit feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-6"><a class="link" href="#current-implementation-6">Current Implementation</a></h5>
 <div class="paragraph">
@@ -1473,7 +1477,7 @@ The command will read in a limit and store the limit by calling the <code>addLim
 </div>
 </div>
 <div class="sect3">
-<h4 id="deletelimit-feature"><a class="link" href="#deletelimit-feature">3.7.7. deleteLimit feature</a></h4>
+<h4 id="deletelimit-feature"><a class="link" href="#deletelimit-feature">3.7.2. deleteLimit feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-7"><a class="link" href="#current-implementation-7">Current Implementation</a></h5>
 <div class="paragraph">
@@ -1504,7 +1508,7 @@ The command will read in a limit with the input dates and delete the limit with 
 </div>
 </div>
 <div class="sect3">
-<h4 id="editlimit-feature"><a class="link" href="#editlimit-feature">3.7.8. editLimit feature</a></h4>
+<h4 id="editlimit-feature"><a class="link" href="#editlimit-feature">3.7.3. editLimit feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-8"><a class="link" href="#current-implementation-8">Current Implementation</a></h5>
 <div class="paragraph">
@@ -1532,7 +1536,7 @@ The command will read in a limit and replace the limit with the same dates by ca
 </div>
 </div>
 <div class="sect3">
-<h4 id="addmonthlylimit-feature"><a class="link" href="#addmonthlylimit-feature">3.7.9. addMonthlyLimit feature</a></h4>
+<h4 id="addmonthlylimit-feature"><a class="link" href="#addmonthlylimit-feature">3.7.4. addMonthlyLimit feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-9"><a class="link" href="#current-implementation-9">Current Implementation</a></h5>
 <div class="paragraph">
@@ -1563,7 +1567,7 @@ The command will read in the monthly limit and store it by calling the <code>add
 </div>
 </div>
 <div class="sect3">
-<h4 id="editmonthlylimit-feature"><a class="link" href="#editmonthlylimit-feature">3.7.10. editMonthlyLimit feature</a></h4>
+<h4 id="editmonthlylimit-feature"><a class="link" href="#editmonthlylimit-feature">3.7.5. editMonthlyLimit feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-10"><a class="link" href="#current-implementation-10">Current Implementation</a></h5>
 <div class="paragraph">
@@ -1594,7 +1598,7 @@ The command will read in the monthly limit and update the monthly limit by calli
 </div>
 </div>
 <div class="sect3">
-<h4 id="deletemonthlylimit-feature"><a class="link" href="#deletemonthlylimit-feature">3.7.11. deleteMonthlyLimit feature</a></h4>
+<h4 id="deletemonthlylimit-feature"><a class="link" href="#deletemonthlylimit-feature">3.7.6. deleteMonthlyLimit feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-11"><a class="link" href="#current-implementation-11">Current Implementation</a></h5>
 <div class="paragraph">
@@ -1625,7 +1629,7 @@ The command will read in the monthly limit and update the monthly limit by calli
 </div>
 </div>
 <div class="sect3">
-<h4 id="checklimit-feature"><a class="link" href="#checklimit-feature">3.7.12. checkLimit feature</a></h4>
+<h4 id="checklimit-feature"><a class="link" href="#checklimit-feature">3.7.7. checkLimit feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-12"><a class="link" href="#current-implementation-12">Current Implementation</a></h5>
 <div class="paragraph">
@@ -4716,4 +4720,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-08 14:03:46 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-08 14:04:55 UTC</div></div></div></body></html>
