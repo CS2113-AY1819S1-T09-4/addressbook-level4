@@ -36,10 +36,10 @@
 <li><a href="#view-category-breakdown-feature">3.5. View category breakdown feature</a></li>
 <li><a href="#find-records-by-tag-feature">3.6. Find records by tag feature</a></li>
 <li><a href="#limit-features">3.7. Limit features</a></li>
-<li><a href="#delete-by-date-entry">3.8. Delete By Date Entry</a></li>
-<li><a href="#export-into-excel-file">3.9. Export into Excel file</a></li>
-<li><a href="#import-from-excel-file">3.10. Import from Excel file</a></li>
-<li><a href="#archive-into-excel-file">3.11. Archive into Excel file</a></li>
+<li><a href="#delete-all-the-record-whose-date-is-required">3.8. Delete all the record whose date is required</a></li>
+<li><a href="#export-the-records-from-financial-planner-into-the-excel-file">3.9. Export the records from Financial Planner into the Excel file.</a></li>
+<li><a href="#import-the-record-data-from-the-excel-file-to-the-financial-planner">3.10. Import the record data from the Excel file to the Financial Planner</a></li>
+<li><a href="#archive-the-record-data-from-financial-planner-to-the-excel-file">3.11. Archive the record data from Financial Planner to the Excel file</a></li>
 <li><a href="#draw-a-line-chart-automatically-inside-the-excel-sheet">3.12. Draw a line chart automatically inside the Excel sheet</a></li>
 <li><a href="#design-considerations-5">3.13. Design Considerations</a></li>
 <li><a href="#proposed-data-encryption">3.14. [Proposed] Data Encryption</a></li>
@@ -1656,7 +1656,7 @@ manualLimitCheck(), which will generate a string that contains all limits' infor
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-by-date-entry"><a class="link" href="#delete-by-date-entry">3.8. Delete By Date Entry</a></h3>
+<h3 id="delete-all-the-record-whose-date-is-required"><a class="link" href="#delete-all-the-record-whose-date-is-required">3.8. Delete all the record whose date is required</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-13"><a class="link" href="#current-implementation-13">3.8.1. Current implementation</a></h4>
 <div class="paragraph">
@@ -1692,7 +1692,7 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-into-excel-file"><a class="link" href="#export-into-excel-file">3.9. Export into Excel file</a></h3>
+<h3 id="export-the-records-from-financial-planner-into-the-excel-file"><a class="link" href="#export-the-records-from-financial-planner-into-the-excel-file">3.9. Export the records from Financial Planner into the Excel file.</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-14"><a class="link" href="#current-implementation-14">3.9.1. Current implementation</a></h4>
 <div class="paragraph">
@@ -1714,68 +1714,8 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 <p>After that, <code>ExcelUtil#setPathFile</code> is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User&#8217;s Working Directory.</p>
 </div>
 <div class="paragraph">
-<p>With the sufficient information, <code>List&lt;Record&gt; records</code>, <code>List&lt;SummaryByDateEntry&gt; summaryList</code>, <code>file path</code>, <code>ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords</code> is called to start the processing of producing Excel file, containing 2 Excel sheet, namely <code>RECORD DATA</code> and <code>SUMMARY DATA</code>.</p>
+<p>With the sufficient information, <code>List&lt;Record&gt; records</code>, <code>List&lt;SummaryByDateEntry&gt; summaryList</code>, <code>file path</code>, <code>ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords</code> is called to start the processing of producing Excel file.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>RECORD DATA</code> stores all the data of record the user want to export, there are 4 columns: Name, date, money and tags, the tags names will be separated by &#8230;&#8203;, for visual benefit.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/Export_Capture1_LinhChi.png" alt="width:800">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>SUMMARY DATA</code> stored the summary statistics for the period you exported, and there is a <strong>Line Chart</strong> next to the table for visual statistic [refer to <code>Draw a line chart automatically inside the Excel sheet</code> part for more information]. As you can see in the picture, there are 3 series shown:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The first blue line named Income represents the relation between Timeline (each component is one Date) and the Income (each component is one income).</p>
-</li>
-<li>
-<p>The second orange line named Outcome represents the relation between Timeline (each component is one Date) and the Outcome (each component is one outcome).</p>
-</li>
-<li>
-<p>The third grey line named Net represents the relation Timeline (each component is one Date) and the Net - Sum of income and outcome (each component is one net).</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/Export_Capture2_LinhChi.png" alt="width:800">
-</div>
-</div>
-<div class="paragraph">
-<p>This feature has only one keyword <code>exportexcel</code> but implements 6 different argument modes to allow users to access multiple versions of the same command.
-The six argument modes are as listed below:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>No argument mode</strong> <code>exportexcel</code> will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Working Directory</strong>.</p>
-</li>
-<li>
-<p><strong>Single argument Date mode</strong> <code>exportexcel d/DATE</code> will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.</p>
-</li>
-<li>
-<p><strong>Dual argument Date mode</strong> <code>exportexcel d/START_DATE END_DATE</code> will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Working Directory</strong>.</p>
-</li>
-<li>
-<p><strong>Single argument Directory Path mode</strong> <code>exportexcel dir/DIRECTORY_PATH</code> will list down all records in the Financial Planner and exports all of them to an Excel file and store the file in the chosen Directory Path.</p>
-</li>
-<li>
-<p><strong>Single argument Date mode + Single argument Directory path mode</strong> <code>exportexcel d/DATE dir/DIRECTORY_PATH</code> will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.</p>
-</li>
-<li>
-<p><strong>Dual argument Date mode + Single argument Directory path mode</strong> <code>exportexcel d/START_DATE END_DATE dir/DIRECTORY_PATH</code> will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.</p>
 <div class="paragraph">
 <p>The mechanism that facilitates these modes can be found in the <code>ExportExcelCommandParser#parse</code>. Below is a overview of the mechanism:</p>
 </div>
@@ -1834,9 +1774,6 @@ The six argument modes are as listed below:</p>
 </li>
 </ol>
 </div>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>The <code>ExportExcelCommand</code> has four constructors which makes use of overloading to reduce code complexity.</p>
 </div>
@@ -1862,19 +1799,25 @@ The six argument modes are as listed below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/ExportExcelSequenceDiagram.png" alt="ExportExcelSequenceDiagram" width="800">
+<img src="images/ExportExcelSequenceDiagram.png" alt="width:800">
 </div>
 </div>
-<div class="paragraph">
-<p>For simplicity, interactions with the UI is not shown in the diagram above.<br>
-The update of the UI <code>RecordListPanel</code> is done through the event system. <code>FilteredList</code> is a type of ObservableList
-implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
-listener is present in <code>RecordListPanel</code> and will update the UI list automatically.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Please note that the <code>undo</code> and <code>redo</code> command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter <code>undo</code> command after you enter the <code>exportexcel</code> command, the Excel file created will not be deleted.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-from-excel-file"><a class="link" href="#import-from-excel-file">3.10. Import from Excel file</a></h3>
+<h3 id="import-the-record-data-from-the-excel-file-to-the-financial-planner"><a class="link" href="#import-the-record-data-from-the-excel-file-to-the-financial-planner">3.10. Import the record data from the Excel file to the Financial Planner</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-15"><a class="link" href="#current-implementation-15">3.10.1. Current implementation</a></h4>
 <div class="paragraph">
@@ -1968,40 +1911,13 @@ The two argument modes are as listed below:</p>
 </ol>
 </div>
 </li>
+<li>
+<p>If the string associated with <code>n/</code>, method <code>ExcelUtil#setPathFile</code> is called to combine the name of the Excel file to the string associated with <code>dir/</code>.</p>
+</li>
 </ol>
 </div>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>When performing <code>import</code> command to import all the records data from the Excel file to the Financial Planner, user should take note that there are some constraints which helps the <code>import</code> command performs smoothly.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The excel file can have multiple sheets, containing records data. The starting row of the table does not have to be first row of the sheet. This also applies to the column.</p>
-</li>
-<li>
-<p>There can be blank row blending in the table, but there must be <strong>no</strong> blank column.</p>
-</li>
-<li>
-<p>The First row of the table <strong>must</strong> have 4 cells, namely NAME, DATE, MONEY, TAGS. These 4 columns can be case-insensitive. The sheet with records data but does not have the first row, NAME, DATE, MONEY, TAGS will <strong>not</strong> be read.</p>
-</li>
-<li>
-<p>The information of NAME, DATE, MONEY columns should be fully filled, while the TAGS columns is optionally filled.</p>
-</li>
-<li>
-<p>Each tag should be separated by &#8230;&#8203; (3 <strong>consecutive</strong> dots). Beside &#8230;&#8203; , numbers and alphabet character, there should be no other character.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The picture below shows a good example for the Excel Sheet.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/Export_Capture1_LinhChi.png" alt="width:800">
-</div>
 </div>
 <div class="paragraph">
 <p>The <code>ImportExcelCommand</code> has only one constructor.</p>
@@ -2018,13 +1934,13 @@ The two argument modes are as listed below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/ImportExcelSequenceDiagram.png" alt="ImportExcelSequenceDiagram" width="800">
+<img src="images/ImportExcelSequenceDiagram.png" alt="width:800">
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="archive-into-excel-file"><a class="link" href="#archive-into-excel-file">3.11. Archive into Excel file</a></h3>
+<h3 id="archive-the-record-data-from-financial-planner-to-the-excel-file"><a class="link" href="#archive-the-record-data-from-financial-planner-to-the-excel-file">3.11. Archive the record data from Financial Planner to the Excel file</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-16"><a class="link" href="#current-implementation-16">3.11.1. Current implementation</a></h4>
 <div class="paragraph">
@@ -2046,71 +1962,11 @@ The two argument modes are as listed below:</p>
 <p>After that, <code>ExcelUtil#setPathFile</code> is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User&#8217;s Working Directory.</p>
 </div>
 <div class="paragraph">
-<p>With the sufficient information, <code>List&lt;Record&gt; records</code>, <code>List&lt;SummaryByDateEntry&gt; summaryList</code>, <code>file path</code>, <code>ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords</code> is called to start the processing of producing Excel file, containing 2 Excel sheet, namely <code>RECORD DATA</code> and <code>SUMMARY DATA</code>.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>RECORD DATA</code> stores all the data of record the user want to archive, there are 4 columns: Name, date, money and tags, the tags names will be separated by &#8230;&#8203;, for visual benefit.</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/Export_Capture1_LinhChi.png" alt="width:800">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>SUMMARY DATA</code> stored the summary statistics for the period you archived, and there is a <strong>Line Chart</strong> next to the table for visual statistic [refer to <code>Draw a line chart automatically inside the Excel sheet</code> part for more information]. As you can see in the picture, there are 3 series shown:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The first blue line named Income represents the relation between Timeline (each component is one Date) and the Income (each component is one income).</p>
-</li>
-<li>
-<p>The second orange line named Outcome represents the relation between Timeline (each component is one Date) and the Outcome (each component is one outcome).</p>
-</li>
-<li>
-<p>The third grey line named Net represents the relation Timeline (each component is one Date) and the Net - Sum of income and outcome (each component is one net).</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
+<p>With the sufficient information, <code>List&lt;Record&gt; records</code>, <code>List&lt;SummaryByDateEntry&gt; summaryList</code>, <code>file path</code>, <code>ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords</code> is called to start the processing of producing Excel file.</p>
 </div>
 <div class="paragraph">
 <p>After records are archived to Excel file, <code>ModelManager#deleteListRecord</code> is called to delete the archived records.If there exists target records, <code>ModelManager#commitFinancialPlanner</code> will be called to update the current version of Financial Planner and the message, which states records have been deleted.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="images/Export_Capture2_LinhChi.png" alt="width:800">
-</div>
-</div>
-<div class="paragraph">
-<p>This feature has only one keyword <code>archive</code> but implements 6 different argument modes to allow users to access multiple versions of the same command.
-The six argument modes are as listed below:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>No argument mode</strong> <code>archive</code> will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Working Directory</strong>.</p>
-</li>
-<li>
-<p><strong>Single argument Date mode</strong> <code>archive d/DATE</code> will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.</p>
-</li>
-<li>
-<p><strong>Dual argument Date mode</strong> <code>archive d/START_DATE END_DATE</code> will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically User&#8217;s Working Directory</strong>.</p>
-</li>
-<li>
-<p><strong>Single argument Directory Path mode</strong> <code>archive dir/DIRECTORY_PATH</code> will list down all records in the Financial Planner and archives all of them to an Excel file and store the file in the chosen Directory Path.</p>
-</li>
-<li>
-<p><strong>Single argument Date mode + Single argument Directory path mode</strong> <code>archive d/DATE dir/DIRECTORY_PATH</code> will list down all records with the specified date and archives all shown records to an Excel file and store the file in the chosen Directory Path.</p>
-</li>
-<li>
-<p><strong>Dual argument Date mode + Single argument Directory path mode</strong> <code>archive d/START_DATE END_DATE dir/DIRECTORY_PATH</code> will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the chosen Directory Path.</p>
 <div class="paragraph">
 <p>The mechanism that facilitates these modes can be found in the <code>ArchiveCommandParser#parse</code>. Below is a overview of the mechanism:</p>
 </div>
@@ -2169,9 +2025,6 @@ The six argument modes are as listed below:</p>
 </li>
 </ol>
 </div>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>The <code>ArchiveCommand</code> has four constructors which makes use of overloading to reduce code complexity.</p>
 </div>
@@ -2197,14 +2050,20 @@ The six argument modes are as listed below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/ArchiveSequenceDiagram.png" alt="ArchiveSequenceDiagram" width="800">
+<img src="images/ArchiveSequenceDiagram.png" alt="width:800">
 </div>
 </div>
-<div class="paragraph">
-<p>For simplicity, interactions with the UI is not shown in the diagram above.<br>
-The update of the UI <code>RecordListPanel</code> is done through the event system. <code>FilteredList</code> is a type of ObservableList
-implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
-listener is present in <code>RecordListPanel</code> and will update the UI list automatically.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Please note that the <code>undo</code> and <code>redo</code> command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter <code>undo</code> command after you enter the <code>archive</code> command, the records archived will be added again back to the Financial Planner but the Excel file created will not be deleted.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -2217,47 +2076,6 @@ listener is present in <code>RecordListPanel</code> and will update the UI list 
 </div>
 <div class="paragraph">
 <p>The feature mechanism is facilitated by <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It is the component which manages the interactions between the ExportExcelCommand or the ArchiveCommand with <code>ExcelUtil#drawChart</code>.</p>
-</div>
-<div class="paragraph">
-<p>As you can see the screenshot below, in the <code>SUMMARY DATA</code> sheet (refer to <code>Export into Excel file</code> or <code>Archive into Excel file</code> feature), next to the summary table:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>The size of the line chart (based on default column width and default row height) is:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The width is 15 columns</p>
-</li>
-<li>
-<p>The height is 30 rows.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>On the top left of the chart, the legend shows 3 lines, namely Income, Outcome, and Net.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>The first blue line shows the Income based on Date.</p>
-</li>
-<li>
-<p>The second orange line shows the Outcome based on Date</p>
-</li>
-<li>
-<p>The third grey line shows the Net (total of income and outcome) based on Date.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/Export_Capture2_LinhChi.png" alt="width:800">
-</div>
 </div>
 </div>
 </div>
@@ -4783,4 +4601,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 09:55:11 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 10:49:32 UTC</div></div></div></body></html>
