@@ -275,8 +275,8 @@ also used by other teammates.</p>
 <div class="sect2">
 <h3 id="listing-all-records-within-a-date-range-code-list-code"><a class="link" href="#listing-all-records-within-a-date-range-code-list-code">Listing all records within a date range : <code>list</code></a></h3>
 <div class="paragraph">
-<p>Shows a list of all records in the financial planner which is within a certain date range.<br>
-There are 3 modes, default mode, single argument mode and dual argument mode.<br>
+<p>Shows a list of all records in Savee which is within a certain date range.<br>
+There are 3 modes, <strong>default</strong> mode, <strong>single argument</strong> mode and <strong>dual argument</strong> mode.<br>
 Format:<br>
 Default mode: <code>list</code><br>
 Single argument mode: <code>list d/DATE</code><br>
@@ -287,13 +287,16 @@ Dual argument mode: <code>list d/START_DATE END_DATE</code></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Default mode will list down all records in the Financial Planner.<br></p>
+<p>Default mode will list down all records in Savee.<br></p>
 </li>
 <li>
 <p>Single argument mode will list down all records with the date specified.<br></p>
 </li>
 <li>
 <p>Dual argument mode will list down all records with the date that fall on either dates or between both dates.</p>
+</li>
+<li>
+<p>Refer to <a href="#constraints">[constraints]</a> for the more information on the parameters.</p>
 </li>
 </ul>
 </div>
@@ -357,18 +360,38 @@ Format:<br></p>
 </li>
 <li>
 <p>For the commands <strong>"summary date"</strong> and <strong>"summary category"</strong>, START_DATE/END_DATE must be in the format of
-<code>dd-mm-yyyy</code> where <code>dd</code> represents day, <code>mm</code> represents month, <code>yyyy</code> represents year. All parameters should be specified in numerical form.</p>
+<code>dd-mm-yyyy</code> where <code>dd</code> represents day, <code>mm</code> represents month, <code>yyyy</code> represents year.</p>
 </li>
 <li>
 <p>For command <strong>"summary month"</strong>, START_MONTH/END_MONTH must in the format of <code>mmm-yyyy</code>, <code>mmm</code> represents the month with its three letter representations, and
 <code>yyyy</code> represents the year in its numerical form.</p>
 </li>
 <li>
-<p>Note that for mmm, it is case-insensitive, meaning both <strong>"APR"</strong> and <strong>"apr"</strong> are accepted</p>
+<p>Refer to <a href="#constraints">[constraints]</a> for the more information on the parameters.</p>
+</li>
+<li>
+<p>Note that for mmm, it is case-insensitive, meaning both <strong>"APR"</strong> and <strong>"apr"</strong> are accepted.</p>
 </li>
 </ul>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>Once the command has been executed, a panel will appear showing the summary table containing data that is relevant in the range.<br>
+At the same time, currently selected record will be unselected to reduce confusion for the user.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The table listing is currently non-resizable. If either the date, month or category is too long, the default behaviour of this app is to truncate
+those words and replace the parts truncated with ellipses("&#8230;&#8203;").
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -391,7 +414,7 @@ Format:<br></p>
 </div>
 <div class="paragraph">
 <p>The screenshots below are examples of what you can see once the command has been accepted. The commands entered have been left
-in for visualisation purposes.</p>
+in for visualisation purposes. These screenshots are taken in <strong>fullscreen mode</strong>  at 1080p resolution.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -433,12 +456,17 @@ Format:`stats d/START_DATE END_DATE`</p>
 <strong>dd-mm-yyyy</strong> where <strong>dd</strong> represents day, <strong>mm</strong> represents month and <strong>yyyy</strong> represents the year. <strong>dd</strong> and <strong>mm</strong> both require 1 to 2 digits while
 <strong>yyyy</strong> requires exactly 4 digits.</p>
 </li>
+<li>
+<p>Refer to <a href="#constraints">[constraints]</a> for the more information on the parameters.</p>
+</li>
 </ul>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Once the command has been executed, 2 tabs will appear showing a pie chart containing data that is relevant in the range.<br></p>
+<p>Once the command has been executed, 2 tabs will appear showing a pie chart containing data that is relevant in the range.<br>
+At the same time, currently selected record will be unselected to reduce confusion for the user. If there are many categories shown and
+the box is not large enough, you can use the scroll bar at the side of each legend to view the other categories which are not in view.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -467,7 +495,7 @@ later versions of the product to remove the labels completely and use a mouse ov
 </div>
 <div class="paragraph">
 <p>Below are some screenshots of what you can see when the command has been accepted. The commands entered have been left
-in for visualisation purposes.</p>
+in for visualisation purposes. These screenshots are taken in <strong>fullscreen mode</strong> at 1080p resolution.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -487,14 +515,15 @@ in for visualisation purposes.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="showing-a-breakdown-of-total-expenses-and-income-into-categories-of-this-month-code-no-command-required-code"><a class="link" href="#showing-a-breakdown-of-total-expenses-and-income-into-categories-of-this-month-code-no-command-required-code">Showing a breakdown of total expenses and income into categories of this month: <code>NO COMMAND REQUIRED</code></a></h3>
+<h3 id="showing-a-breakdown-of-total-expenses-and-income-into-categories-of-this-month-code-no-command-required-to-be-typed-code"><a class="link" href="#showing-a-breakdown-of-total-expenses-and-income-into-categories-of-this-month-code-no-command-required-to-be-typed-code">Showing a breakdown of total expenses and income into categories of this month: <code>NO COMMAND REQUIRED TO BE TYPED</code></a></h3>
 <div class="paragraph">
 <p>Shows a breakdown of total expenses and income into categories using data of this month.<br>
-No format is required for this feature as the feature is automatically triggered when there is any changes to the list of records within the application.</p>
+No format is required for this feature as the feature is automatically triggered when there is any changes to the list of records within the application.
+Another way of returning to the welcome panel from anywhere in the app is to press <code>HOME</code> on the keyboard or click <code>Home</code> on the menu.</p>
 </div>
 <div class="paragraph">
-<p>This feature automatically tracks the current date and ensures that the data presented is updated regardless regardless of whether the application is off or on for
-prolonged periods of time.<br></p>
+<p>This feature automatically tracks the <strong>current date</strong> and ensures that the data presented is updated regardless regardless of whether the application is <strong>off</strong> or <strong>on for
+prolonged periods of time</strong>. This feature also works offline and retrieves information from the system clock to determine the current date.<br></p>
 </div>
 <div class="paragraph">
 <p>Even in the event where the user is using the application at close to 12 midnight of the last day of a particular month and the clocks strikes 12,
@@ -507,8 +536,8 @@ the application will update the data whenever it detects any record data modific
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The data used to represent the pie charts in the welcome panel is <strong>only updated</strong> whenever there are any changes to records within the FinancialPlanner.<br>
-This includes adding records, deleting records and editing records in the FinancialPlanner.
+The data used to represent the pie charts in the welcome panel is <strong>only updated</strong> whenever there are any changes to records within Savee.<br>
+This includes adding records, deleting records and editing records in Savee.
 </td>
 </tr>
 </table>
@@ -922,4 +951,4 @@ only be accessed within CustomPieChart for security purposes.
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 10:49:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 11:02:51 UTC</div></div></div></body></html>
