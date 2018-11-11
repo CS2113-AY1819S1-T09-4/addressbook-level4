@@ -1508,7 +1508,7 @@ The command will read in a limit with the input dates and delete the limit with 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/deleteLimitSequenceDiagram.png" alt="width:800">
+<img src="images/DeleteLimitSequenceDiagram.png" alt="width:800">
 </div>
 </div>
 </div>
@@ -1536,7 +1536,7 @@ The command will read in a limit and replace the limit with the same dates by ca
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/editLimitSequenceDiagram.png" alt="width:800">
+<img src="images/EditLimitSequenceDiagram.png" alt="width:800">
 </div>
 </div>
 </div>
@@ -1567,7 +1567,7 @@ The command will read in the monthly limit and store it by calling the <code>add
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/addMonthlyLimitSequenceDiagram.png" alt="width:800">
+<img src="images/AddMonthlyLimitSequenceDiagram.png" alt="width:800">
 </div>
 </div>
 </div>
@@ -1598,7 +1598,7 @@ The command will read in the monthly limit and update the monthly limit by calli
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/editMonthlyLimitSequenceDiagram.png" alt="width:800">
+<img src="images/EditMonthlyLimitSequenceDiagram.png" alt="width:800">
 </div>
 </div>
 </div>
@@ -1629,7 +1629,7 @@ The command will read in the monthly limit and update the monthly limit by calli
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/deleteMonthlyLimitSequenceDiagram.png" alt="width:800">
+<img src="images/DeleteMonthlyLimitSequenceDiagram.png" alt="width:800">
 </div>
 </div>
 </div>
@@ -4081,29 +4081,29 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="11-use-case-create-daily-limit-for-expenses-oscar" class="discrete">11. Use case: Create daily limit for expenses [Oscar]</h3>
+<h3 id="11-use-case-create-a-normal-limit-for-a-period-of-time-or-a-day-oscar" class="discrete">11. Use case: Create a normal limit for a period of time or a day [Oscar]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to create daily limit for expenses</p>
+<p>User requests to create a normal limit for expenses different period of time or a day.</p>
 </li>
 <li>
-<p>FinancialPlanner requests for the maximum amount for the day</p>
+<p>FinancialPlanner requests for the dateStart and dateEnd of that period of time or the date of the day and the maximum amount of spending.</p>
 </li>
 <li>
-<p>User enters the amount.</p>
+<p>User enters the dateStart and dateEnd or the date and the amount of spending.</p>
 </li>
 <li>
-<p>FinancialPlanner confirms amount with user.</p>
+<p>FinancialPlanner records the limit in the hard drive.</p>
 </li>
 <li>
-<p>User confirms the amount.</p>
+<p>FinancialPlanner keeps tracking the spending during limit&#8217;s date period of time or that day.</p>
 </li>
 <li>
-<p>FinancialPlanner records the amount in the hard drive</p>
+<p>FinancialPlanner warns user when the total spend exceeds the limit amount of spending.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -4116,20 +4116,50 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>6a. The location for the record is invalid.</p>
+<p>1a. User’s input command is invalid.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid location error and prompts for new location.</p>
+<p>System throws invalid command error and shows an example command input needed.</p>
 </li>
 <li>
-<p>User enters a new location.</p>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
 </li>
 <li>
-<p>FinancialPlanner requests for confirmation.</p>
+<p>3a. User&#8217;s input parameters are missing or invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and notifies user of the correct format.</p>
 </li>
 <li>
-<p>User confirms the location</p>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. The dateStart is later than dateEnd.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows date error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3c. There is already a limit for the time period or the day.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows redundant limit error.</p>
 </li>
 <li>
 <p>Use case ends.</p>
@@ -4139,7 +4169,428 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="12-use-case-export-expenses-into-excel-file-linh-chi" class="discrete">12. Use case: Export expenses into Excel file [Linh Chi]</h3>
+<h3 id="12-use-case-edit-an-existing-normal-limit-oscar" class="discrete">12. Use case: Edit an existing normal limit [Oscar]</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to edit an existing normal limit.</p>
+</li>
+<li>
+<p>FinancialPlanner requests for the new maximum amount of spending for the period of time or the day.</p>
+</li>
+<li>
+<p>User enters the dateStart and dateEnd or the date and the new amount of spending.</p>
+</li>
+<li>
+<p>FinancialPlanner updates the new limit in the hard drive.</p>
+</li>
+<li>
+<p>FinancialPlanner keeps tracking the spending during the limit&#8217;s date period of time or that day.</p>
+</li>
+<li>
+<p>FinancialPlanner warns user when the total spend exceeds the limit amount of spending.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s input command is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. User&#8217;s input parameters are missing or invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and notifies user of the correct format.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. The dateStart is later than dateEnd.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows date error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3c. There is no existing limit for the time period or the day.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows no existing limit error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3d. The edit limit is exactly the same as the original one.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows same limit error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="13-use-case-delete-an-existing-limit-oscar" class="discrete">13. Use case: Delete an existing limit [Oscar]</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to delete an existing limit.</p>
+</li>
+<li>
+<p>FinancialPlanner requests for the date period of the limit to be deleted.</p>
+</li>
+<li>
+<p>User enters the dateStart and dateEnd or the date.</p>
+</li>
+<li>
+<p>FinancialPlanner deletes the limit in the hard drive.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s input command is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. User&#8217;s input parameters are missing or invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and notifies user of the correct format.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. The dateStart is later than dateEnd.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows date error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3c. There is no existing limit for the time period or the day.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows no existing limit error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="14-use-case-add-a-monthly-limit-oscar" class="discrete">14. Use case: Add a monthly limit [Oscar]</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add the monthly limit.</p>
+</li>
+<li>
+<p>FinancialPlanner requests the monthly maximum amount of spending.</p>
+</li>
+<li>
+<p>User enters the maximum amount of spending.</p>
+</li>
+<li>
+<p>FinancialPlanner adds the monthly limit.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s input command is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. User&#8217;s input parameters are missing or invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and notifies user of the correct format.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. There is already a monthly limit.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows existing monthly limit error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="15-use-case-edit-the-monthly-limit-oscar" class="discrete">15. Use case: Edit the monthly limit [Oscar]</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to edit the monthly limit.</p>
+</li>
+<li>
+<p>FinancialPlanner requests the new monthly maximum amount of spending.</p>
+</li>
+<li>
+<p>User enters the new maximum amount of spending.</p>
+</li>
+<li>
+<p>FinancialPlanner updates the monthly limit.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s input command is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. User&#8217;s input parameters are missing or invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and notifies user of the correct format.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. There is no monthly limit.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows no monthly limit error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="16-use-case-delete-the-monthly-limit-oscar" class="discrete">16. Use case: Delete the monthly limit [Oscar]</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to delete the monthly limit.</p>
+</li>
+<li>
+<p>FinancialPlanner updates the monthly limit.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s input command is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>2a. There is no monthly limit.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows no monthly limit error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="17-use-case-check-all-the-existing-limits-oscar" class="discrete">17. Use case: Check all the existing limits [Oscar]</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to check all the existing limits.</p>
+</li>
+<li>
+<p>FinancialPlanner displays all the existing limits.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s input command is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>2a. There is no limit stored.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows no limit error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="18-use-case-export-expenses-into-excel-file-linh-chi" class="discrete">18. Use case: Export expenses into Excel file [Linh Chi]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4192,7 +4643,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h4 id="14-use-case-import-the-excel-file-into-financial-planner-linh-chi" class="discrete">14. Use case: Import the Excel file into Financial Planner. [Linh Chi]</h4>
+<h4 id="19-use-case-import-the-excel-file-into-financial-planner-linh-chi" class="discrete">19. Use case: Import the Excel file into Financial Planner. [Linh Chi]</h4>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4232,7 +4683,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="15-use-case-archive-the-records-data-into-excel-file-linh-chi" class="discrete">15. Use case: Archive the records data into Excel file. [Linh Chi]</h3>
+<h3 id="20-use-case-archive-the-records-data-into-excel-file-linh-chi" class="discrete">20. Use case: Archive the records data into Excel file. [Linh Chi]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4285,7 +4736,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="16-use-case-freely-edit-expenses-tags" class="discrete">16. Use case: Freely edit expenses tags</h3>
+<h3 id="21-use-case-freely-edit-expenses-tags" class="discrete">21. Use case: Freely edit expenses tags</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4570,4 +5021,4 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-10 11:02:50 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 04:31:39 UTC</div></div></div></body></html>
