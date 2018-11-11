@@ -82,11 +82,7 @@
 </li>
 <li><a href="#product-scope">Appendix B: Product Scope</a></li>
 <li><a href="#user-stories">Appendix C: User Stories</a></li>
-<li><a href="#use-cases">Appendix D: Use Cases</a>
-<ul class="sectlevel2">
-<li><a href="#26-adjust-configurations">26. Adjust configurations</a></li>
-</ul>
-</li>
+<li><a href="#use-cases">Appendix D: Use Cases</a></li>
 <li><a href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></li>
 <li><a href="#glossary">Appendix F: Glossary</a></li>
 <li><a href="#product-survey">Appendix G: Product Survey</a></li>
@@ -98,7 +94,11 @@
 <li><a href="#viewing-statistics-about-category-breakdown">H.4. Viewing statistics about category breakdown</a></li>
 <li><a href="#viewing-current-month-s-breakdown">H.5. Viewing current month&#8217;s breakdown</a></li>
 <li><a href="#deleting-a-person">H.6. Deleting a person</a></li>
-<li><a href="#saving-data">H.7. Saving data</a></li>
+<li><a href="#deleting-all-records-whose-date-is-required">H.7. Deleting all records whose date is required.</a></li>
+<li><a href="#archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.8. Archiving records data from Savee to Excel file and store it in a specific directory.</a></li>
+<li><a href="#import-all-record-data-from-excel-file-to-savee">H.9. Import all record data from Excel file to Savee</a></li>
+<li><a href="#exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.10. Exporting records data from Savee to Excel file and store it in a specific directory.</a></li>
+<li><a href="#saving-data">H.11. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -3827,22 +3827,13 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to delete records whose date is required.</p>
+<p>User requests to delete records whose date is required. User enters the date entry he/she wants to delete.</p>
 </li>
 <li>
-<p>Savee requests for date of entry to be deleted.</p>
+<p>Savee checks whether the day required is valid.</p>
 </li>
 <li>
-<p>User enters the date entry he/she wants to delete.</p>
-</li>
-<li>
-<p>Savee entry confirms date to be deleted.</p>
-</li>
-<li>
-<p>User confirms the deletion</p>
-</li>
-<li>
-<p>Savee deletes the entry</p>
+<p>Savee deletes all records whose date is required.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3855,60 +3846,40 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>1a. There are no entries to be delete.</p>
+<p>1a. User’s command is of invalid.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Savee throws no entry error.</p>
+<p>Savee throws invalid command error.</p>
 </li>
 <li>
-<p>Use Case Ends</p>
+<p>Use case resumes at step 1.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>3a. User’s input is invalid.</p>
+<p>1b. The date entered is of incorrect format.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Savee throws invalid format error and shows format needed.</p>
+<p>Savee throws invalid command error and notifies user of the correct format.</p>
 </li>
 <li>
-<p>Use case resumes at step 2.</p>
+<p>Use case resumes at step 1.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>3b. User’s input date has no entries</p>
+<p>1c. There is no date entered.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Savee throws no entry error.</p>
+<p>Savee throws invalid command error.</p>
 </li>
 <li>
-<p>Use case resumes at step 2.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>4a. User’s input is not a valid entry.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Savee throws invalid data error and resumes at step 4.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>5a. User declines the confirmation.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Use case resumes at step 3.</p>
+<p>Use case resumes at step 1.</p>
 </li>
 </ul>
 </div>
@@ -4188,19 +4159,19 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to create a normal limit for expenses different period of time or a day.</p>
 </li>
 <li>
-<p>FinancialPlanner requests for the dateStart and dateEnd of that period of time or the date of the day and the maximum amount of spending.</p>
+<p>Savee requests for the dateStart and dateEnd of that period of time or the date of the day and the maximum amount of spending.</p>
 </li>
 <li>
 <p>User enters the dateStart and dateEnd or the date and the amount of spending.</p>
 </li>
 <li>
-<p>FinancialPlanner records the limit in the hard drive.</p>
+<p>Savee records the limit in the hard drive.</p>
 </li>
 <li>
-<p>FinancialPlanner keeps tracking the spending during limit&#8217;s date period of time or that day.</p>
+<p>Savee keeps tracking the spending during limit&#8217;s date period of time or that day.</p>
 </li>
 <li>
-<p>FinancialPlanner warns user when the total spend exceeds the limit amount of spending.</p>
+<p>Savee warns user when the total spend exceeds the limit amount of spending.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -4276,19 +4247,19 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to edit an existing normal limit.</p>
 </li>
 <li>
-<p>FinancialPlanner requests for the new maximum amount of spending for the period of time or the day.</p>
+<p>Savee requests for the new maximum amount of spending for the period of time or the day.</p>
 </li>
 <li>
 <p>User enters the dateStart and dateEnd or the date and the new amount of spending.</p>
 </li>
 <li>
-<p>FinancialPlanner updates the new limit in the hard drive.</p>
+<p>Savee updates the new limit in the hard drive.</p>
 </li>
 <li>
-<p>FinancialPlanner keeps tracking the spending during the limit&#8217;s date period of time or that day.</p>
+<p>Savee keeps tracking the spending during the limit&#8217;s date period of time or that day.</p>
 </li>
 <li>
-<p>FinancialPlanner warns user when the total spend exceeds the limit amount of spending.</p>
+<p>Savee warns user when the total spend exceeds the limit amount of spending.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -4377,13 +4348,13 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to delete an existing limit.</p>
 </li>
 <li>
-<p>FinancialPlanner requests for the date period of the limit to be deleted.</p>
+<p>Savee requests for the date period of the limit to be deleted.</p>
 </li>
 <li>
 <p>User enters the dateStart and dateEnd or the date.</p>
 </li>
 <li>
-<p>FinancialPlanner deletes the limit in the hard drive.</p>
+<p>Savee deletes the limit in the hard drive.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -4459,13 +4430,13 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to add the monthly limit.</p>
 </li>
 <li>
-<p>FinancialPlanner requests the monthly maximum amount of spending.</p>
+<p>Savee requests the monthly maximum amount of spending.</p>
 </li>
 <li>
 <p>User enters the maximum amount of spending.</p>
 </li>
 <li>
-<p>FinancialPlanner adds the monthly limit.</p>
+<p>Savee adds the monthly limit.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -4528,13 +4499,13 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to edit the monthly limit.</p>
 </li>
 <li>
-<p>FinancialPlanner requests the new monthly maximum amount of spending.</p>
+<p>Savee requests the new monthly maximum amount of spending.</p>
 </li>
 <li>
 <p>User enters the new maximum amount of spending.</p>
 </li>
 <li>
-<p>FinancialPlanner updates the monthly limit.</p>
+<p>Savee updates the monthly limit.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -4597,7 +4568,7 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to delete the monthly limit.</p>
 </li>
 <li>
-<p>FinancialPlanner updates the monthly limit.</p>
+<p>Savee updates the monthly limit.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -4647,30 +4618,27 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to check all the existing limits.</p>
 </li>
 <li>
-<p>FinancialPlanner displays all the existing limits.</p>
+<p>Savee displays all the existing limits.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 </ol>
 </div>
-<h3 id="20-use-case-export-expenses-into-excel-file-linh-chi" class="discrete">20. Use case: Export expenses into Excel file [Linh Chi]</h3>
+<h3 id="20-use-case-export-record-data-from-savee-to-excel-file-linh-chi" class="discrete">20. Use case: Export record data from Savee to Excel file [Linh Chi]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests export format.</p>
-</li>
-<li>
-<p>Savee shows list of possible formats for export.</p>
-</li>
-<li>
-<p>User enters preferred export format.</p>
+<p>User requests to export the data from Savee to Excel file.</p>
 </li>
 <li>
 <p>Savee exports the records data in Excel file.</p>
+</li>
+<li>
+<p>Savee informs the user the directory where the Excel file is saved.</p>
 </li>
 </ol>
 </div>
@@ -4680,27 +4648,92 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>3a User input wrong directory path that the Excel file will be stored</p>
+<p>1a. User’s command is of invalid form.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Savee throws unsupported format error</p>
+<p>Savee throws invalid command error.</p>
 </li>
 <li>
-<p>Use case resumes at step 2.</p>
+<p>Use case resumes at step 1.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>3b User input wrong date format or unreal date.</p>
+<p>1b. The parameters entered is of incorrect format.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Savee throws unsupported format error</p>
+<p>Savee throws invalid command error and notifies user of the correct format.</p>
 </li>
 <li>
-<p>Use case resumes at step 2.</p>
+<p>Use case resumes at step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1c. The directory path parameters entered is non-existent.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid command error and notifies user of the user non-existent directory path.</p>
+</li>
+<li>
+<p>Use case resumes at step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1d. The user enters the parameters but does not enter the prefix.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid command error.</p>
+</li>
+<li>
+<p>Use case resumes at the step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1e. The user enters the prefix but does not enter the parameters.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid command error.</p>
+</li>
+<li>
+<p>Use case resumes at the step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1f. The user enters more than 3 dates.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid command error and notifies user the maximum number of dates enter is 2.</p>
+</li>
+<li>
+<p>Use case resumes at step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1g. The user enters exact 2 dates and the first date is later than the second date.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid command error and notifies user the first data should be earlier or equal to the second date.</p>
+</li>
+<li>
+<p>Use case resumes at step 1.</p>
 </li>
 </ul>
 </div>
@@ -4714,16 +4747,10 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests import format.</p>
+<p>User requests to import the record data from Excel file to Financial Planner.</p>
 </li>
 <li>
-<p>Financial Planner shows list of possible format for import.</p>
-</li>
-<li>
-<p>User enters preffered import format.</p>
-</li>
-<li>
-<p>Financial Planner reads the Excel file and transfer all the data in the Excel file into Record object and add them into current Financial Planner.</p>
+<p>Savee reads the Excel file and transfer all the data in the Excel file into Record object and add them into current Savee.</p>
 </li>
 </ol>
 </div>
@@ -4733,14 +4760,40 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>3a User input wrong file path that the Excel file is stored</p>
+<p>1a. User’s command is of invalid form.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Savee throws unsupported format error</p>
+<p>Savee throws invalid command error.</p>
 </li>
 <li>
-<p>Use case resumes at step 2.</p>
+<p>Use case resumes at step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1b. User input wrong file path that the Excel file is stored.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid command error and notifies the user the directory path is not existent.</p>
+</li>
+<li>
+<p>Use case resumes at step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1c. User input the parameter but does not enter the prefix.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid command error.</p>
+</li>
+<li>
+<p>Use case resumes at step 1.</p>
 </li>
 </ul>
 </div>
@@ -4754,46 +4807,108 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests archive format.</p>
+<p>User requests to archive the record from Savee to Excel file.</p>
 </li>
 <li>
-<p>Financial Planner shows a list of possible format to arhive.</p>
+<p>Savee archives the records data in Excel file.</p>
 </li>
 <li>
-<p>User enters the preffered archive format.</p>
-</li>
-<li>
-<p>Financial Planner archives the record data into Excel file.</p>
+<p>Savee informs the user the directory where the Excel file is saved.</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p><strong>Extension</strong></p>
+<p><strong>Extensions</strong></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>3a User input wrong directory path that the Excel file will be stored</p>
+<p>1a. User’s command is of invalid form.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Savee throws unsupported format error</p>
+<p>Savee throws invalid command error.</p>
 </li>
 <li>
-<p>Use case resumes at step 2.</p>
+<p>Use case resumes at step 1.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>3b User input wrong date format or unreal date.</p>
+<p>1b. The parameters entered is of incorrect format.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Savee throws unsupported format error</p>
+<p>Savee throws invalid command error and notifies user of the correct format.</p>
 </li>
 <li>
-<p>Use case resumes at step 2.</p>
+<p>Use case resumes at step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1c. The directory path parameters entered is non-existent.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid command error and notifies user of the user non-existent directory path.</p>
+</li>
+<li>
+<p>Use case resumes at step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1d. The user enters the parameters but does not enter the prefix.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid command error.</p>
+</li>
+<li>
+<p>Use case resumes at the step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1e. The user enters the prefix but does not enter the parameters.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid command error.</p>
+</li>
+<li>
+<p>Use case resumes at the step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1f. The user enters more than 3 dates.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid command error and notifies user the maximum number of dates enter is 2.</p>
+</li>
+<li>
+<p>Use case resumes at step 1.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1g. The user enters exact 2 dates and the first date is later than the second date.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid command error and notifies user the first data should be earlier or equal to the second date.</p>
+</li>
+<li>
+<p>Use case resumes at step 1.</p>
 </li>
 </ul>
 </div>
@@ -4824,25 +4939,25 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to edit expenses tags.</p>
 </li>
 <li>
-<p>FinancialPlanner requests for date of entry to edit tags</p>
+<p>Savee requests for date of entry to edit tags</p>
 </li>
 <li>
 <p>User enters date to edit entry for</p>
 </li>
 <li>
-<p>FinancialPlanner shows list of entries on specified date</p>
+<p>Savee shows list of entries on specified date</p>
 </li>
 <li>
 <p>User enters entry to edit.</p>
 </li>
 <li>
-<p>FinancialPlanner shows current tags of selected entry.</p>
+<p>Savee shows current tags of selected entry.</p>
 </li>
 <li>
 <p>User enters tag to remove</p>
 </li>
 <li>
-<p>FinancialPlanner removes tag entered.</p>
+<p>Savee removes tag entered.</p>
 </li>
 </ol>
 </div>
@@ -4856,7 +4971,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid date error.</p>
+<p>Savee throws invalid date error.</p>
 </li>
 <li>
 <p>Use case resumes at step 2.</p>
@@ -4869,7 +4984,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws no entry error.</p>
+<p>Savee throws no entry error.</p>
 </li>
 <li>
 <p>Use case resumes at step 2.</p>
@@ -4882,7 +4997,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid data error and resumes at step 4.</p>
+<p>Savee throws invalid data error and resumes at step 4.</p>
 </li>
 </ul>
 </div>
@@ -4892,7 +5007,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner displays ‘No tags’ and continues to step 7.</p>
+<p>Savee displays ‘No tags’ and continues to step 7.</p>
 </li>
 </ul>
 </div>
@@ -4902,7 +5017,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner adds tag to entry.</p>
+<p>Savee adds tag to entry.</p>
 </li>
 </ul>
 </div>
@@ -4959,8 +5074,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
-<div class="sect2">
-<h3 id="26-adjust-configurations"><a class="link" href="#26-adjust-configurations">26. Adjust configurations</a></h3>
+<h3 id="26-adjust-configurations" class="discrete">26. Adjust configurations</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4996,7 +5110,6 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </li>
 </ol>
-</div>
 </div>
 </div>
 </div>
@@ -5607,7 +5720,200 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">H.7. Saving data</a></h3>
+<h3 id="deleting-all-records-whose-date-is-required"><a class="link" href="#deleting-all-records-whose-date-is-required">H.7. Deleting all records whose date is required.</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deleting all records whose date is required when all records are listed.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all records using the <code>list</code> command. Multiple records in the list.</p>
+</li>
+<li>
+<p>Test case: <code>deletedate 31-3-1999</code><br>
+Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be deleted. The message of successful deleting records will be shown. Timestamp in the status bar is updated.<br>
+If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record existing will be shown. Status bar remains the same.</p>
+</li>
+<li>
+<p>Incorrect delete commands to try: <code>delete 30-2-2018</code><br>
+Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.</p>
+</li>
+<li>
+<p>Incorrect delete commands to try: <code>delete 30-2A-2018</code><br>
+Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.</p>
+</li>
+<li>
+<p>Incorrect delete commands to try: <code>deletedate</code>+
+Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.</p>
+</li>
+<li>
+<p>Incorrect delete commands to try: <code>deletedate x</code> (where x is invalid date, meaning that date have alphabetical character or non-existent date)<br>
+Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory"><a class="link" href="#archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.8. Archiving records data from Savee to Excel file and store it in a specific directory.</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Archiving records whose date is required when all records are listed.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all records using the <code>list</code> command. Multiple records in the list.</p>
+</li>
+<li>
+<p>Test case: <code>archive</code><br>
+Expected: All records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated.<br></p>
+</li>
+<li>
+<p>Test case: <code>archive d/31-3-1999</code><br>
+Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated.<br>
+If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record archived will be shown. Status bar remains the same.<br></p>
+</li>
+<li>
+<p>Test case: <code>archive d/31-3-1999 31-03-2019</code><br>
+Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated.<br>
+If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record archived will be shown. Status bar remains the same.<br></p>
+</li>
+<li>
+<p>Test case: <code>archive dir/C:\</code><br>
+Expected: All records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated.<br></p>
+</li>
+<li>
+<p>Test case: <code>archive dir/C:\ d/31-3-1999</code><br>
+Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated.<br>
+If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record archived will be shown. Status bar remains the same.<br></p>
+</li>
+<li>
+<p>Test case: <code>archive dir/C:\ d/31-3-1999 31-03-2019</code><br>
+Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful archiving records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated.<br>
+If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record archived will be shown. Status bar remains the same.<br></p>
+</li>
+<li>
+<p>Incorrect archive commands to try: <code>archive d/30-2-2018</code><br>
+Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.</p>
+</li>
+<li>
+<p>Incorrect archive commands to try: <code>archive d/30-2A-2018</code><br>
+Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.</p>
+</li>
+<li>
+<p>Incorrect archive commands to try: <code>archive 31-3-1999</code>+
+Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.</p>
+</li>
+<li>
+<p>Incorrect archive commands to try: <code>archive C:\</code>+
+Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="import-all-record-data-from-excel-file-to-savee"><a class="link" href="#import-all-record-data-from-excel-file-to-savee">H.9. Import all record data from Excel file to Savee</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Import record data from Excel file into Savee.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: <code>archive dir/C:\</code><br></p>
+</li>
+<li>
+<p>Test case: <code>import dir/C:\ n/Financial_Planner_ALL.xlsx</code><br>
+Expected: All record data from the Excel file are shown in Savee.</p>
+</li>
+<li>
+<p>Test case: <code>import dir/C:\ n/Financial_Planner_ALL</code><br>
+Expected: All record data from the Excel file are shown in Savee.</p>
+</li>
+<li>
+<p>Test case: <code>import dir/C:\Financial_Planner_ALL.xlsx</code><br>
+Expected: All record data from the Excel file are shown in Savee.</p>
+</li>
+<li>
+<p>Incorrect import commands to try: <code>import</code><br>
+Expected: Invalid date entered. Error indicating invalid command format. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory"><a class="link" href="#exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.10. Exporting records data from Savee to Excel file and store it in a specific directory.</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Exporting records whose date is required when all records are listed.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all records using the <code>list</code> command. Multiple records in the list.</p>
+</li>
+<li>
+<p>Test case: <code>exportexcel</code><br>
+Expected: All records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated.<br></p>
+</li>
+<li>
+<p>Test case: <code>exportexcel d/31-3-1999</code><br>
+Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated.<br>
+If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record exported will be shown. Status bar remains the same.<br></p>
+</li>
+<li>
+<p>Test case: <code>exportexcel d/31-3-1999 31-03-2019</code><br>
+Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated.<br>
+If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record exported will be shown. Status bar remains the same.<br></p>
+</li>
+<li>
+<p>Test case: <code>exportexcel dir/C:\</code><br>
+Expected: All records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated.<br></p>
+</li>
+<li>
+<p>Test case: <code>exportexcel dir/C:\ d/31-3-1999</code><br>
+Expected: If there are any record whose date is 31-3-1999 or 31-03-1999, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated.<br>
+If there is no records whose date is 31-3-1999 or 31-03-1999, the message of no record exported will be shown. Status bar remains the same.<br></p>
+</li>
+<li>
+<p>Test case: <code>exportexcel dir/C:\ d/31-3-1999 31-03-2019</code><br>
+Expected: If there are any record whose date is within period from 31-3-1999 to 31-03-2019, these records will be shown. The message of successful exporting records will be shown together with the Excel file name and the directory path it will be shown. Timestamp in the status bar is updated.<br>
+If there is no records whose date is is within period from 31-3-1999 to 31-03-2019, the message of no record exported will be shown. Status bar remains the same.<br></p>
+</li>
+<li>
+<p>Incorrect export commands to try: <code>exportexcel d/30-2-2018</code><br>
+Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.</p>
+</li>
+<li>
+<p>Incorrect export commands to try: <code>exportexcel d/30-2A-2018</code><br>
+Expected: Invalid date entered. Error indicating invalid command format and notifies user that the date entered is of invalid format. Status bar remains the same.</p>
+</li>
+<li>
+<p>Incorrect export commands to try: <code>exportexcel 31-3-1999</code>+
+Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.</p>
+</li>
+<li>
+<p>Incorrect export commands to try: <code>exportexcel C:\</code>+
+Expected: Invalid command entered. Error indicating invalid command format is shown. Status bar remains the same.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">H.11. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5637,4 +5943,4 @@ Then, open the app.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 05:37:14 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 12:41:17 UTC</div></div></div></body></html>
