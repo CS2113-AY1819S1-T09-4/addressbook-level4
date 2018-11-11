@@ -34,16 +34,17 @@
 <li><a href="#list-history-feature">3.3. List history feature</a></li>
 <li><a href="#view-summary-feature">3.4. View summary feature</a></li>
 <li><a href="#view-category-breakdown-feature">3.5. View category breakdown feature</a></li>
-<li><a href="#find-records-by-tag-feature">3.6. Find records by tag feature</a></li>
-<li><a href="#limit-features">3.7. Limit features</a></li>
-<li><a href="#delete-all-the-record-whose-date-is-required">3.8. Delete all the record whose date is required</a></li>
-<li><a href="#export-the-records-from-financial-planner-into-the-excel-file">3.9. Export the records from Financial Planner into the Excel file.</a></li>
-<li><a href="#import-the-record-data-from-the-excel-file-to-the-financial-planner">3.10. Import the record data from the Excel file to the Financial Planner</a></li>
-<li><a href="#archive-the-record-data-from-financial-planner-to-the-excel-file">3.11. Archive the record data from Financial Planner to the Excel file</a></li>
-<li><a href="#draw-a-line-chart-automatically-inside-the-excel-sheet">3.12. Draw a line chart automatically inside the Excel sheet</a></li>
-<li><a href="#proposed-data-encryption">3.13. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.14. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.15. Configuration</a></li>
+<li><a href="#view-current-month-s-breakdown">3.6. View current month&#8217;s breakdown</a></li>
+<li><a href="#find-records-by-tag-feature">3.7. Find records by tag feature</a></li>
+<li><a href="#limit-features">3.8. Limit features</a></li>
+<li><a href="#delete-all-the-record-whose-date-is-required">3.9. Delete all the record whose date is required</a></li>
+<li><a href="#export-the-records-from-financial-planner-into-the-excel-file">3.10. Export the records from Financial Planner into the Excel file.</a></li>
+<li><a href="#import-the-record-data-from-the-excel-file-to-the-financial-planner">3.11. Import the record data from the Excel file to the Financial Planner</a></li>
+<li><a href="#archive-the-record-data-from-financial-planner-to-the-excel-file">3.12. Archive the record data from Financial Planner to the Excel file</a></li>
+<li><a href="#draw-a-line-chart-automatically-inside-the-excel-sheet">3.13. Draw a line chart automatically inside the Excel sheet</a></li>
+<li><a href="#proposed-data-encryption">3.14. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.15. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.16. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -81,15 +82,23 @@
 </li>
 <li><a href="#product-scope">Appendix B: Product Scope</a></li>
 <li><a href="#user-stories">Appendix C: User Stories</a></li>
-<li><a href="#use-cases">Appendix D: Use Cases</a></li>
+<li><a href="#use-cases">Appendix D: Use Cases</a>
+<ul class="sectlevel2">
+<li><a href="#26-adjust-configurations">26. Adjust configurations</a></li>
+</ul>
+</li>
 <li><a href="#non-functional-requirements">Appendix E: Non Functional Requirements</a></li>
 <li><a href="#glossary">Appendix F: Glossary</a></li>
 <li><a href="#product-survey">Appendix G: Product Survey</a></li>
 <li><a href="#instructions-for-manual-testing">Appendix H: Instructions for Manual Testing</a>
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">H.1. Launch and Shutdown</a></li>
-<li><a href="#deleting-a-person">H.2. Deleting a person</a></li>
-<li><a href="#saving-data">H.3. Saving data</a></li>
+<li><a href="#listing-by-date">H.2. Listing by date</a></li>
+<li><a href="#viewing-summary">H.3. Viewing summary</a></li>
+<li><a href="#viewing-statistics-about-category-breakdown">H.4. Viewing statistics about category breakdown</a></li>
+<li><a href="#viewing-current-month-s-breakdown">H.5. Viewing current month&#8217;s breakdown</a></li>
+<li><a href="#deleting-a-person">H.6. Deleting a person</a></li>
+<li><a href="#saving-data">H.7. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -496,7 +505,7 @@ For example, the layout of the <a href="https://github.com/CS2113-AY1819S1-T09-4
 <p>This results in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</p>
 </li>
 <li>
-<p>The command execution can affect the <code>Model</code> (e.g. adding a person) and/or raise events.</p>
+<p>The command execution can affect the <code>Model</code> (e.g. adding a record) and/or raise events.</p>
 </li>
 <li>
 <p>The result of the command execution is encapsulated as a <code>CommandResult</code> object which is passed back to the <code>Ui</code>.</p>
@@ -1060,7 +1069,7 @@ parameters also occur during this stage.</p>
 <li>
 <p>After the SummaryCommandObject is created, <code>SummaryByDateCommand#execute</code> is called. The responsibility of SummaryByDateCommand is a manager that has retrieves information from model and passes it to other components.
 SummaryByDateCommand gets the filtered list from Model using <code>Model#getFilteredRecordList</code> and passes it to the constructor of SummaryByDateList. The creates <code>SummaryList</code> object which is then
-passed into a <code>ShowSummaryTableEvent</code> before trigger.</p>
+passed into a <code>ShowSummaryTableEvent</code> before triggering the event.</p>
 </li>
 <li>
 <p>The entire logic process is the same for SummaryByMonthCommand and SummaryByCategoryCommand but uses different lists.</p>
@@ -1073,7 +1082,7 @@ passed into a <code>ShowSummaryTableEvent</code> before trigger.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>MainWindow</code> will listen out of the <code>ShowSummaryTableEvent</code> and render all Main UI panels invisible before rendering <code>StatsDisplayPanel</code> visible.</p>
+<p><code>MainWindow</code> will listen for the <code>ShowSummaryTableEvent</code> and render all Main UI panels invisible before rendering <code>StatsDisplayPanel</code> visible.</p>
 </li>
 <li>
 <p>It then calls the handler function in <code>StatsDisplayPanel</code> which will create tabs and call the constructor of <code>SummaryDisplay</code>.</p>
@@ -1214,7 +1223,7 @@ within the <code>StatisticCommandParser#parse</code> method.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/StatisticParserActivityDiagram.png" alt="StatisticParserActivityDiagram" width="500">
+<img src="images/StatisticParserActivityDiagram.png" alt="StatisticParserActivityDiagram" width="790">
 </div>
 </div>
 <div class="ulist">
@@ -1245,7 +1254,7 @@ the event system in FinancialPlanner. The sequence diagram below details the pro
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/StatisticUiSequenceDiagram.png" alt="StatisticUiSequenceDiagram" width="800">
+<img src="images/StatisticUiSequenceDiagram.png" alt="StatisticUiSequenceDiagram" width="790">
 </div>
 </div>
 <div class="ulist">
@@ -1262,7 +1271,7 @@ the activity diagram below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/StatisticUiActivityDiagram.png" alt="StatisticUiActivityDiagram" width="800">
+<img src="images/StatisticUiActivityDiagram.png" alt="StatisticUiActivityDiagram" width="790">
 </div>
 </div>
 <div class="paragraph">
@@ -1275,7 +1284,7 @@ In the current implementation, whenever <code>stats</code> is called, 2 tabs wil
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/StatisticUiDetailedSequenceDiagram.png" alt="StatisticUiDetailedSequenceDiagram" width="800">
+<img src="images/StatisticUiDetailedSequenceDiagram.png" alt="StatisticUiDetailedSequenceDiagram" width="790">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1294,13 +1303,66 @@ only be accessed within CustomPieChart for security purposes.
 </div>
 <div class="sect3">
 <h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.2. Design Considerations</a></h4>
-
+<div class="sect4">
+<h5 id="aspect-data-structure-to-support-statistic-command"><a class="link" href="#aspect-data-structure-to-support-statistic-command">Aspect: Data structure to support statistic command</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> The pie chart breakdown is regenerated from the filtered list every time this command is called.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Reduce overhead during normal operations like adding, deleting and editing if we do not have to update the statistics in real time.</p>
+</li>
+<li>
+<p>Cons: If the command is called multiple times, this process could be repeated many times which may make the app sluggish when there are many records.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use a data structure to store the statistic information when there is mutation of data</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Since the statistics are constantly updated, whenever the command is called, system can read directly and not have to recompute.</p>
+</li>
+<li>
+<p>Cons: Adds overhead to usual operations. Benefits may not be visible if the command is not called frequently.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="find-records-by-tag-feature"><a class="link" href="#find-records-by-tag-feature">3.6. Find records by tag feature</a></h3>
+<h3 id="view-current-month-s-breakdown"><a class="link" href="#view-current-month-s-breakdown">3.6. View current month&#8217;s breakdown</a></h3>
+<div class="paragraph">
+<p>This feature does not require user to type any command into the command box or update manually. It provides information about the category breakdown for
+the current month, presenting income and expense statistics together in one panel. In addition, to improve usability, accelerators were assigned to the menu bar
+and <strong>HOME</strong> key is the corresponding accelerator for this feature.</p>
+</div>
+<div class="paragraph">
+<p>The current implementation of this feature closely follows the <strong>observer design pattern</strong>. Whenever the system detects changes to the underlying list, like adding, deleting or editing
+records, it updates a listener which is attached to the <code>FilteredList</code> recordsInCurrentMonth present in ModelManager. To check if the current month is the same as the cached month,
+the listener will run a check by creating a separate <code>DateIsWithinIntervalPredicate</code> and comparing it with the current <code>Predicate</code> of the filtered list.
+This listener will then process changes in the list and compute a <code>CategoryStatisticsList</code> before passing it into the constructor of <code>UpdateWelcomePanelEvent</code>.
+Then the event is triggered, and the corresponding listener on the UI side is called.</p>
+</div>
+<div class="paragraph">
+<p>The program flow on the UI side is similar to that of viewing category breakdown of a time period with the exception that tabs are not created.</p>
+</div>
+<div class="paragraph">
+<p>The accelerators and the menu bar is connected to the UI component and will trigger <code>MainWindow#handleHome</code> whenever the accelerator <strong>HOME</strong> key or <strong>Home</strong> is selected using the menu.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="find-records-by-tag-feature"><a class="link" href="#find-records-by-tag-feature">3.7. Find records by tag feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.6.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.7.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The findtag mechanism is also facilitated by <code>ModelManager</code>. FindTagCommand calls <code>ModelManager#updateFilteredRecords</code>
 and passes in different predicates depending on the input by the user.</p>
@@ -1332,7 +1394,7 @@ and obtain a new <code>filteredRecords</code> based on the predicate, which will
 </div>
 </div>
 <div class="sect2">
-<h3 id="limit-features"><a class="link" href="#limit-features">3.7. Limit features</a></h3>
+<h3 id="limit-features"><a class="link" href="#limit-features">3.8. Limit features</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1455,7 +1517,7 @@ will generate a temporary limit according to the current date. Then use this tem
 </ul>
 </div>
 <div class="sect3">
-<h4 id="addlimit-feature"><a class="link" href="#addlimit-feature">3.7.1. addLimit feature</a></h4>
+<h4 id="addlimit-feature"><a class="link" href="#addlimit-feature">3.8.1. addLimit feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-6"><a class="link" href="#current-implementation-6">Current Implementation</a></h5>
 <div class="paragraph">
@@ -1483,7 +1545,7 @@ The command will read in a limit and store the limit by calling the <code>addLim
 </div>
 </div>
 <div class="sect3">
-<h4 id="deletelimit-feature"><a class="link" href="#deletelimit-feature">3.7.2. deleteLimit feature</a></h4>
+<h4 id="deletelimit-feature"><a class="link" href="#deletelimit-feature">3.8.2. deleteLimit feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-7"><a class="link" href="#current-implementation-7">Current Implementation</a></h5>
 <div class="paragraph">
@@ -1514,7 +1576,7 @@ The command will read in a limit with the input dates and delete the limit with 
 </div>
 </div>
 <div class="sect3">
-<h4 id="editlimit-feature"><a class="link" href="#editlimit-feature">3.7.3. editLimit feature</a></h4>
+<h4 id="editlimit-feature"><a class="link" href="#editlimit-feature">3.8.3. editLimit feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-8"><a class="link" href="#current-implementation-8">Current Implementation</a></h5>
 <div class="paragraph">
@@ -1542,7 +1604,7 @@ The command will read in a limit and replace the limit with the same dates by ca
 </div>
 </div>
 <div class="sect3">
-<h4 id="addmonthlylimit-feature"><a class="link" href="#addmonthlylimit-feature">3.7.4. addMonthlyLimit feature</a></h4>
+<h4 id="addmonthlylimit-feature"><a class="link" href="#addmonthlylimit-feature">3.8.4. addMonthlyLimit feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-9"><a class="link" href="#current-implementation-9">Current Implementation</a></h5>
 <div class="paragraph">
@@ -1573,7 +1635,7 @@ The command will read in the monthly limit and store it by calling the <code>add
 </div>
 </div>
 <div class="sect3">
-<h4 id="editmonthlylimit-feature"><a class="link" href="#editmonthlylimit-feature">3.7.5. editMonthlyLimit feature</a></h4>
+<h4 id="editmonthlylimit-feature"><a class="link" href="#editmonthlylimit-feature">3.8.5. editMonthlyLimit feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-10"><a class="link" href="#current-implementation-10">Current Implementation</a></h5>
 <div class="paragraph">
@@ -1604,7 +1666,7 @@ The command will read in the monthly limit and update the monthly limit by calli
 </div>
 </div>
 <div class="sect3">
-<h4 id="deletemonthlylimit-feature"><a class="link" href="#deletemonthlylimit-feature">3.7.6. deleteMonthlyLimit feature</a></h4>
+<h4 id="deletemonthlylimit-feature"><a class="link" href="#deletemonthlylimit-feature">3.8.6. deleteMonthlyLimit feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-11"><a class="link" href="#current-implementation-11">Current Implementation</a></h5>
 <div class="paragraph">
@@ -1635,7 +1697,7 @@ The command will read in the monthly limit and update the monthly limit by calli
 </div>
 </div>
 <div class="sect3">
-<h4 id="checklimit-feature"><a class="link" href="#checklimit-feature">3.7.7. checkLimit feature</a></h4>
+<h4 id="checklimit-feature"><a class="link" href="#checklimit-feature">3.8.7. checkLimit feature</a></h4>
 <div class="sect4">
 <h5 id="current-implementation-12"><a class="link" href="#current-implementation-12">Current Implementation</a></h5>
 <div class="paragraph">
@@ -1661,9 +1723,9 @@ manualLimitCheck(), which will generate a string that contains all limits' infor
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-all-the-record-whose-date-is-required"><a class="link" href="#delete-all-the-record-whose-date-is-required">3.8. Delete all the record whose date is required</a></h3>
+<h3 id="delete-all-the-record-whose-date-is-required"><a class="link" href="#delete-all-the-record-whose-date-is-required">3.9. Delete all the record whose date is required</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-13"><a class="link" href="#current-implementation-13">3.8.1. Current implementation</a></h4>
+<h4 id="current-implementation-13"><a class="link" href="#current-implementation-13">3.9.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The delete by date entry mechanism is facilitated by <code>ModelManager</code>.
 It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>.</p>
@@ -1697,9 +1759,9 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-the-records-from-financial-planner-into-the-excel-file"><a class="link" href="#export-the-records-from-financial-planner-into-the-excel-file">3.9. Export the records from Financial Planner into the Excel file.</a></h3>
+<h3 id="export-the-records-from-financial-planner-into-the-excel-file"><a class="link" href="#export-the-records-from-financial-planner-into-the-excel-file">3.10. Export the records from Financial Planner into the Excel file.</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-14"><a class="link" href="#current-implementation-14">3.9.1. Current implementation</a></h4>
+<h4 id="current-implementation-14"><a class="link" href="#current-implementation-14">3.10.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The export into excel file mechanism is facilitated by <code>ModelManager</code> with the help of <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, <code>ExcelUtil</code> and the <code>VersionedFinancialPlanner</code>.</p>
 </div>
@@ -1822,9 +1884,9 @@ Please note that the <code>undo</code> and <code>redo</code> command can only af
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-the-record-data-from-the-excel-file-to-the-financial-planner"><a class="link" href="#import-the-record-data-from-the-excel-file-to-the-financial-planner">3.10. Import the record data from the Excel file to the Financial Planner</a></h3>
+<h3 id="import-the-record-data-from-the-excel-file-to-the-financial-planner"><a class="link" href="#import-the-record-data-from-the-excel-file-to-the-financial-planner">3.11. Import the record data from the Excel file to the Financial Planner</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-15"><a class="link" href="#current-implementation-15">3.10.1. Current implementation</a></h4>
+<h4 id="current-implementation-15"><a class="link" href="#current-implementation-15">3.11.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The import from Excel file mechanism is facilitated by <code>ExcelUtil</code>, the utility created to handle all method relating to Excel.</p>
 </div>
@@ -1945,9 +2007,9 @@ The two argument modes are as listed below:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="archive-the-record-data-from-financial-planner-to-the-excel-file"><a class="link" href="#archive-the-record-data-from-financial-planner-to-the-excel-file">3.11. Archive the record data from Financial Planner to the Excel file</a></h3>
+<h3 id="archive-the-record-data-from-financial-planner-to-the-excel-file"><a class="link" href="#archive-the-record-data-from-financial-planner-to-the-excel-file">3.12. Archive the record data from Financial Planner to the Excel file</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-16"><a class="link" href="#current-implementation-16">3.11.1. Current implementation</a></h4>
+<h4 id="current-implementation-16"><a class="link" href="#current-implementation-16">3.12.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The archive into excel file mechanism is facilitated by <code>ModelManager</code> with the help of <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, <code>ExcelUtil</code> and the <code>VersionedFinancialPlanner</code>.</p>
 </div>
@@ -2073,9 +2135,9 @@ Please note that the <code>undo</code> and <code>redo</code> command can only af
 </div>
 </div>
 <div class="sect2">
-<h3 id="draw-a-line-chart-automatically-inside-the-excel-sheet"><a class="link" href="#draw-a-line-chart-automatically-inside-the-excel-sheet">3.12. Draw a line chart automatically inside the Excel sheet</a></h3>
+<h3 id="draw-a-line-chart-automatically-inside-the-excel-sheet"><a class="link" href="#draw-a-line-chart-automatically-inside-the-excel-sheet">3.13. Draw a line chart automatically inside the Excel sheet</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-17"><a class="link" href="#current-implementation-17">3.12.1. Current implementation</a></h4>
+<h4 id="current-implementation-17"><a class="link" href="#current-implementation-17">3.13.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>This feature will automatically uses the the summary data from the <code>SUMMARY DATA</code> sheet in the Excel sheet after the command <code>archive</code> or <code>export_excel</code> is called.</p>
 </div>
@@ -2085,20 +2147,20 @@ Please note that the <code>undo</code> and <code>redo</code> command can only af
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.13. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.14. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.14. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.15. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.15, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.16, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -2129,7 +2191,7 @@ Please note that the <code>undo</code> and <code>redo</code> command can only af
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.15. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.16. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -2423,7 +2485,7 @@ See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run 
 <p><em>System Tests</em> that test the entire App by simulating user actions on the GUI. These are in the <code>systemtests</code> package.</p>
 </li>
 <li>
-<p><em>Unit tests</em> that test the individual components. These are in <code>seedu.expense.ui</code> package.</p>
+<p><em>Unit tests</em> that test the individual components. These are in <code>seedu.planner.ui</code> package.</p>
 </li>
 </ol>
 </div>
@@ -2434,15 +2496,15 @@ See <a href="UsingGradle.html">UsingGradle.adoc</a> for more info on how to run 
 <ol class="loweralpha" type="a">
 <li>
 <p><em>Unit tests</em> targeting the lowest level methods/classes.<br>
-e.g. <code>seedu.expense.commons.StringUtilTest</code></p>
+e.g. <code>seedu.planner.commons.StringUtilTest</code></p>
 </li>
 <li>
 <p><em>Integration tests</em> that are checking the integration of multiple code units (those code units are assumed to be working).<br>
-e.g. <code>seedu.expense.storage.StorageManagerTest</code></p>
+e.g. <code>seedu.planner.storage.StorageManagerTest</code></p>
 </li>
 <li>
 <p>Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together.<br>
-e.g. <code>seedu.expense.logic.LogicManagerTest</code></p>
+e.g. <code>seedu.planner.logic.LogicManagerTest</code></p>
 </li>
 </ol>
 </div>
@@ -2567,7 +2629,7 @@ Do take a look at <a href="#Design-Logic">Section 2.3, &#8220;Logic component&#8
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add a shorthand equivalent alias for each of the individual commands. For example, besides typing <code>clear</code>, the user can also type <code>c</code> to remove all persons in the list.</p>
+<p>Add a shorthand equivalent alias for each of the individual commands. For example, besides typing <code>clear</code>, the user can also type <code>c</code> to remove all records in the list.</p>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
@@ -2577,10 +2639,10 @@ Do take a look at <a href="#Design-Logic">Section 2.3, &#8220;Logic component&#8
 <div class="ulist">
 <ul>
 <li>
-<p>Just like we store each individual command word constant <code>COMMAND_WORD</code> inside <code>*Command.java</code> (e.g.  <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/logic/commands/FindCommand.java"><code>FindCommand#COMMAND_WORD</code></a>, <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/logic/commands/DeleteCommand.java"><code>DeleteCommand#COMMAND_WORD</code></a>), you need a new constant for aliases as well (e.g. <code>FindCommand#COMMAND_ALIAS</code>).</p>
+<p>Just like we store each individual command word constant <code>COMMAND_WORD</code> inside <code>*Command.java</code> (e.g.  <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/logic/commands/FindCommand.java"><code>FindCommand#COMMAND_WORD</code></a>, <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/logic/commands/DeleteCommand.java"><code>DeleteCommand#COMMAND_WORD</code></a>), you need a new constant for aliases as well (e.g. <code>FindCommand#COMMAND_ALIAS</code>).</p>
 </li>
 <li>
-<p><a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/logic/parser/FinancialPlannerParser.java"><code>FinancialPlannerParser</code></a> is responsible for analyzing command words.</p>
+<p><a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/logic/parser/FinancialPlannerParser.java"><code>FinancialPlannerParser</code></a> is responsible for analyzing command words.</p>
 </li>
 </ul>
 </div>
@@ -2590,7 +2652,7 @@ Do take a look at <a href="#Design-Logic">Section 2.3, &#8220;Logic component&#8
 <div class="ulist">
 <ul>
 <li>
-<p>Modify the switch statement in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/logic/parser/FinancialPlannerParser.java"><code>FinancialPlannerParser#parseCommand(String)</code></a> such that both the proper command word and alias can be used to execute the same intended command.</p>
+<p>Modify the switch statement in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/logic/parser/FinancialPlannerParser.java"><code>FinancialPlannerParser#parseCommand(String)</code></a> such that both the proper command word and alias can be used to execute the same intended command.</p>
 </li>
 <li>
 <p>Add new tests for each of the aliases that you have added.</p>
@@ -2613,7 +2675,7 @@ Do take a look at <a href="#Design-Logic">Section 2.3, &#8220;Logic component&#8
 </div>
 <h4 id="code-model-code-component" class="discrete"><code>Model</code> component</h4>
 <div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>model</code>. One day, the <code>logic</code>-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the expense book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.</p>
+<p><strong>Scenario:</strong> You are in charge of <code>model</code>. One day, the <code>logic</code>-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the financial planner, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2630,7 +2692,7 @@ Do take a look at <a href="#Design-Model">Section 2.4, &#8220;Model component&#8
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add a <code>removeTag(Tag)</code> method. The specified tag will be removed from everyone in the expense book.</p>
+<p>Add a <code>removeTag(Tag)</code> method. The specified tag will be removed from everyone in the financial planner.</p>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
@@ -2640,13 +2702,13 @@ Do take a look at <a href="#Design-Model">Section 2.4, &#8220;Model component&#8
 <div class="ulist">
 <ul>
 <li>
-<p>The <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/Model.java"><code>Model</code></a> and the <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/FinancialPlanner.java"><code>FinancialPlanner</code></a> API need to be updated.</p>
+<p>The <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/model/Model.java"><code>Model</code></a> and the <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/model/FinancialPlanner.java"><code>FinancialPlanner</code></a> API need to be updated.</p>
 </li>
 <li>
 <p>Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?</p>
 </li>
 <li>
-<p>Find out which of the existing API methods in  <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/FinancialPlanner.java"><code>FinancialPlanner</code></a> and <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/person/Person.java"><code>Person</code></a> classes can be used to implement the tag removal logic. <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/FinancialPlanner.java"><code>FinancialPlanner</code></a> allows you to update a person, and <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/person/Person.java"><code>Person</code></a> allows you to update the tags.</p>
+<p>Find out which of the existing API methods in  <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/model/FinancialPlanner.java"><code>FinancialPlanner</code></a> and <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/model/record/Record.java"><code>Record</code></a> classes can be used to implement the tag removal logic. <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/model/FinancialPlanner.java"><code>FinancialPlanner</code></a> allows you to update a record, and <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/model/record/Record.java"><code>Record</code></a> allows you to update the tags.</p>
 </li>
 </ul>
 </div>
@@ -2656,10 +2718,10 @@ Do take a look at <a href="#Design-Model">Section 2.4, &#8220;Model component&#8
 <div class="ulist">
 <ul>
 <li>
-<p>Implement a <code>removeTag(Tag)</code> method in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/FinancialPlanner.java"><code>FinancialPlanner</code></a>. Loop through each person, and remove the <code>tag</code> from each person.</p>
+<p>Implement a <code>removeTag(Tag)</code> method in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/model/FinancialPlanner.java"><code>FinancialPlanner</code></a>. Loop through each record, and remove the <code>tag</code> from each record.</p>
 </li>
 <li>
-<p>Add a new API method <code>deleteTag(Tag)</code> in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/ModelManager.java"><code>ModelManager</code></a>. Your <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/ModelManager.java"><code>ModelManager</code></a> should call <code>FinancialPlanner#removeTag(Tag)</code>.</p>
+<p>Add a new API method <code>deleteTag(Tag)</code> in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/model/ModelManager.java"><code>ModelManager</code></a>. Your <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/model/ModelManager.java"><code>ModelManager</code></a> should call <code>FinancialPlanner#removeTag(Tag)</code>.</p>
 </li>
 <li>
 <p>Add new tests for each of the new public methods that you have added.</p>
@@ -2679,7 +2741,7 @@ Do take a look at <a href="#Design-Model">Section 2.4, &#8220;Model component&#8
 </div>
 <h4 id="code-ui-code-component" class="discrete"><code>Ui</code> component</h4>
 <div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>ui</code>. During a beta testing session, your team is observing how the users use your expense book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn&#8217;t prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last person in the list. Your job is to implement improvements to the UI to solve all these problems.</p>
+<p><strong>Scenario:</strong> You are in charge of <code>ui</code>. During a beta testing session, your team is observing how the users use your financial planner application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn&#8217;t prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last person in the list. Your job is to implement improvements to the UI to solve all these problems.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2696,7 +2758,7 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Use different colors for different tags inside person cards. For example, <code>friends</code> tags can be all in brown, and <code>colleagues</code> tags can be all in yellow.</p>
+<p>Use different colors for different tags inside record cards. For example, <code>friends</code> tags can be all in brown, and <code>colleagues</code> tags can be all in yellow.</p>
 <div class="paragraph">
 <p><strong>Before</strong></p>
 </div>
@@ -2722,13 +2784,13 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <div class="ulist">
 <ul>
 <li>
-<p>The tag labels are created inside <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/PersonCard.java">the <code>PersonCard</code> constructor</a> (<code>new Label(tag.tagName)</code>). <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html">JavaFX&#8217;s <code>Label</code> class</a> allows you to modify the style of each Label, such as changing its color.</p>
+<p>The tag labels are created inside <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/ui/RecordCard.java">the <code>RecordCard</code> constructor</a> (<code>new Label(tag.tagName)</code>). <a href="https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html">JavaFX&#8217;s <code>Label</code> class</a> allows you to modify the style of each Label, such as changing its color.</p>
 </li>
 <li>
 <p>Use the .css attribute <code>-fx-background-color</code> to add a color.</p>
 </li>
 <li>
-<p>You may wish to modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/resources/view/DarkTheme.css"><code>DarkTheme.css</code></a> to include some pre-defined colors using css, especially if you have experience with web-based css.</p>
+<p>You may wish to modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/resources/view/DarkTheme.css"><code>DarkTheme.css</code></a> to include some pre-defined colors using css, especially if you have experience with web-based css.</p>
 </li>
 </ul>
 </div>
@@ -2738,7 +2800,7 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <div class="ulist">
 <ul>
 <li>
-<p>You can modify the existing test methods for <code>PersonCard</code> 's to include testing the tag&#8217;s color as well.</p>
+<p>You can modify the existing test methods for <code>RecordCard</code> 's to include testing the tag&#8217;s color as well.</p>
 </li>
 <li>
 <p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/798">PR</a> for the full solution.</p>
@@ -2759,7 +2821,7 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 </div>
 </li>
 <li>
-<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> such that <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/ResultDisplay.java"><code>ResultDisplay</code></a> can show a different style on error (currently it shows the same regardless of errors).</p>
+<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> such that <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/ui/ResultDisplay.java"><code>ResultDisplay</code></a> can show a different style on error (currently it shows the same regardless of errors).</p>
 <div class="paragraph">
 <p><strong>Before</strong></p>
 </div>
@@ -2785,10 +2847,10 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> is raised by <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/CommandBox.java"><code>CommandBox</code></a> which also knows whether the result is a success or failure, and is caught by <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/ResultDisplay.java"><code>ResultDisplay</code></a> which is where we want to change the style to.</p>
+<p><a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> is raised by <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/ui/CommandBox.java"><code>CommandBox</code></a> which also knows whether the result is a success or failure, and is caught by <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/ui/ResultDisplay.java"><code>ResultDisplay</code></a> which is where we want to change the style to.</p>
 </li>
 <li>
-<p>Refer to <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/CommandBox.java"><code>CommandBox</code></a> for an example on how to display an error.</p>
+<p>Refer to <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/ui/CommandBox.java"><code>CommandBox</code></a> for an example on how to display an error.</p>
 </li>
 </ul>
 </div>
@@ -2798,10 +2860,10 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <div class="ulist">
 <ul>
 <li>
-<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> 's constructor so that users of the event can indicate whether an error has occurred.</p>
+<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/commons/events/ui/NewResultAvailableEvent.java"><code>NewResultAvailableEvent</code></a> 's constructor so that users of the event can indicate whether an error has occurred.</p>
 </li>
 <li>
-<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/ResultDisplay.java"><code>ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)</code></a> to react to this event appropriately.</p>
+<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/ui/ResultDisplay.java"><code>ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)</code></a> to react to this event appropriately.</p>
 </li>
 <li>
 <p>You can write two different kinds of tests to ensure that the functionality works:</p>
@@ -2811,7 +2873,7 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <p>The unit tests for <code>ResultDisplay</code> can be modified to include verification of the color.</p>
 </li>
 <li>
-<p>The system tests <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/test/java/systemtests/FinancialPlannerSystemTest.java"><code>FinancialPlannerSystemTest#assertCommandBoxShowsDefaultStyle() and FinancialPlannerSystemTest#assertCommandBoxShowsErrorStyle()</code></a> to include verification for <code>ResultDisplay</code> as well.</p>
+<p>The system tests <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/test/java/systemtests/FinancialPlannerSystemTest.java"><code>FinancialPlannerSystemTest#assertCommandBoxShowsDefaultStyle() and FinancialPlannerSystemTest#assertCommandBoxShowsErrorStyle()</code></a> to include verification for <code>ResultDisplay</code> as well.</p>
 </li>
 </ul>
 </div>
@@ -2835,7 +2897,7 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 </div>
 </li>
 <li>
-<p>Modify the <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to show the total number of people in the expense book.</p>
+<p>Modify the <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to show the total number of people in the financial planner</p>
 <div class="paragraph">
 <p><strong>Before</strong></p>
 </div>
@@ -2861,10 +2923,10 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <div class="ulist">
 <ul>
 <li>
-<p><a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/resources/view/StatusBarFooter.fxml"><code>StatusBarFooter.fxml</code></a> will need a new <code>StatusBar</code>. Be sure to set the <code>GridPane.columnIndex</code> properly for each <code>StatusBar</code> to avoid misalignment!</p>
+<p><a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/resources/view/StatusBarFooter.fxml"><code>StatusBarFooter.fxml</code></a> will need a new <code>StatusBar</code>. Be sure to set the <code>GridPane.columnIndex</code> properly for each <code>StatusBar</code> to avoid misalignment!</p>
 </li>
 <li>
-<p><a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> needs to initialize the status bar on application start, and to update it accordingly whenever the expense book is updated.</p>
+<p><a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> needs to initialize the status bar on application start, and to update it accordingly whenever the financial planner is updated.</p>
 </li>
 </ul>
 </div>
@@ -2874,16 +2936,16 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 <div class="ulist">
 <ul>
 <li>
-<p>Modify the constructor of <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to take in the number of persons when the application just started.</p>
+<p>Modify the constructor of <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/ui/StatusBarFooter.java"><code>StatusBarFooter</code></a> to take in the number of records when the application just started.</p>
 </li>
 <li>
-<p>Use <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/StatusBarFooter.java"><code>StatusBarFooter#handleFinancialPlannerChangedEvent(FinancialPlannerChangedEvent)</code></a> to update the number of persons whenever there are new changes to the addressbook.</p>
+<p>Use <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/ui/StatusBarFooter.java"><code>StatusBarFooter#handleFinancialPlannerChangedEvent(FinancialPlannerChangedEvent)</code></a> to update the number of records whenever there are new changes to the financial planner.</p>
 </li>
 <li>
-<p>For tests, modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/test/java/guitests/guihandles/StatusBarFooterHandle.java"><code>StatusBarFooterHandle</code></a> by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.</p>
+<p>For tests, modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/test/java/guitests/guihandles/StatusBarFooterHandle.java"><code>StatusBarFooterHandle</code></a> by adding a state-saving functionality for the total number of record status, just like what we did for save location and sync status.</p>
 </li>
 <li>
-<p>For system tests, modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/test/java/systemtests/FinancialPlannerSystemTest.java"><code>FinancialPlannerSystemTest</code></a> to also verify the new total number of persons status bar.</p>
+<p>For system tests, modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/test/java/systemtests/FinancialPlannerSystemTest.java"><code>FinancialPlannerSystemTest</code></a> to also verify the new total number of records status bar.</p>
 </li>
 <li>
 <p>See this <a href="https://github.com/se-edu/addressbook-level4/pull/803">PR</a> for the full solution.</p>
@@ -2900,7 +2962,7 @@ Do take a look at <a href="#Design-Ui">Section 2.2, &#8220;UI component&#8221;</
 </div>
 <h4 id="code-storage-code-component" class="discrete"><code>Storage</code> component</h4>
 <div class="paragraph">
-<p><strong>Scenario:</strong> You are in charge of <code>storage</code>. For your next project milestone, your team plans to implement a new feature of saving the expense book to the cloud. However, the current implementation of the application constantly saves the expense book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the expense book storage.</p>
+<p><strong>Scenario:</strong> You are in charge of <code>storage</code>. For your next project milestone, your team plans to implement a new feature of saving the financial planner to the cloud. However, the current implementation of the application constantly saves the financial planner after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the financial planner storage.</p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -2917,7 +2979,7 @@ Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage componen
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add a new method <code>backupFinancialPlanner(ReadOnlyFinancialPlanner)</code>, so that the expense book can be saved in a fixed temporary location.</p>
+<p>Add a new method <code>backupFinancialPlanner(ReadOnlyFinancialPlanner)</code>, so that the financial planner can be saved in a fixed temporary location.</p>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
@@ -2927,10 +2989,10 @@ Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage componen
 <div class="ulist">
 <ul>
 <li>
-<p>Add the API method in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/storage/FinancialPlannerStorage.java"><code>FinancialPlannerStorage</code></a> interface.</p>
+<p>Add the API method in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/storage/FinancialPlannerStorage.java"><code>FinancialPlannerStorage</code></a> interface.</p>
 </li>
 <li>
-<p>Implement the logic in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/storage/StorageManager.java"><code>StorageManager</code></a> and <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/storage/XmlFinancialPlannerStorage.java"><code>XmlFinancialPlannerStorage</code></a> class.</p>
+<p>Implement the logic in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/storage/StorageManager.java"><code>StorageManager</code></a> and <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/storage/XmlFinancialPlannerStorage.java"><code>XmlFinancialPlannerStorage</code></a> class.</p>
 </li>
 </ul>
 </div>
@@ -2959,12 +3021,12 @@ Do take a look at <a href="#Design-Storage">Section 2.5, &#8220;Storage componen
 <p>By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.</p>
 </div>
 <div class="paragraph">
-<p><strong>Scenario:</strong> You are a software maintainer for <code>addressbook</code>, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible <code>remark</code> field for each contact, rather than relying on tags alone. After designing the specification for the <code>remark</code> command, you are convinced that this feature is worth implementing. Your job is to implement the <code>remark</code> command.</p>
+<p><strong>Scenario:</strong> You are a software maintainer for <code>financialplanner</code>, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible <code>remark</code> field for each contact, rather than relying on tags alone. After designing the specification for the <code>remark</code> command, you are convinced that this feature is worth implementing. Your job is to implement the <code>remark</code> command.</p>
 </div>
 <div class="sect3">
 <h4 id="description"><a class="link" href="#description">A.2.1. Description</a></h4>
 <div class="paragraph">
-<p>Edits the remark for a person specified in the <code>INDEX</code>.<br>
+<p>Edits the remark for a record specified in the <code>INDEX</code>.<br>
 Format: <code>remark INDEX r/[REMARK]</code></p>
 </div>
 <div class="paragraph">
@@ -2974,11 +3036,11 @@ Format: <code>remark INDEX r/[REMARK]</code></p>
 <ul>
 <li>
 <p><code>remark 1 r/Likes to drink coffee.</code><br>
-Edits the remark for the first person to <code>Likes to drink coffee.</code></p>
+Edits the remark for the first record to <code>Likes to drink coffee.</code></p>
 </li>
 <li>
 <p><code>remark 1 r/</code><br>
-Removes the remark for the first person.</p>
+Removes the remark for the first record.</p>
 </li>
 </ul>
 </div>
@@ -2996,10 +3058,10 @@ Removes the remark for the first person.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add a <code>RemarkCommand</code> that extends <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/logic/commands/Command.java"><code>Command</code></a>. Upon execution, it should just throw an <code>Exception</code>.</p>
+<p>Add a <code>RemarkCommand</code> that extends <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/logic/commands/Command.java"><code>Command</code></a>. Upon execution, it should just throw an <code>Exception</code>.</p>
 </li>
 <li>
-<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/logic/parser/FinancialPlannerParser.java"><code>FinancialPlannerParser</code></a> to accept a <code>RemarkCommand</code>.</p>
+<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/logic/parser/FinancialPlannerParser.java"><code>FinancialPlannerParser</code></a> to accept a <code>RemarkCommand</code>.</p>
 </li>
 </ol>
 </div>
@@ -3012,7 +3074,7 @@ Removes the remark for the first person.</p>
 <p>Add <code>RemarkCommandTest</code> that tests that <code>execute()</code> throws an Exception.</p>
 </li>
 <li>
-<p>Add new test method to <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/test/java/seedu/expense/logic/parser/FinancialPlannerParserTest.java"><code>FinancialPlannerParserTest</code></a>, which tests that typing "remark" returns an instance of <code>RemarkCommand</code>.</p>
+<p>Add new test method to <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/test/java/seedu/planner/logic/parser/FinancialPlannerParserTest.java"><code>FinancialPlannerParserTest</code></a>, which tests that typing "remark" returns an instance of <code>RemarkCommand</code>.</p>
 </li>
 </ol>
 </div>
@@ -3034,7 +3096,7 @@ Removes the remark for the first person.</p>
 <p>Add <code>RemarkCommandParser</code> that knows how to parse two arguments, one index and one with prefix 'r/'.</p>
 </li>
 <li>
-<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/logic/parser/FinancialPlannerParser.java"><code>FinancialPlannerParser</code></a> to use the newly implemented <code>RemarkCommandParser</code>.</p>
+<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/logic/parser/FinancialPlannerParser.java"><code>FinancialPlannerParser</code></a> to use the newly implemented <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
@@ -3051,15 +3113,15 @@ Removes the remark for the first person.</p>
 for <code>RemarkCommandParser</code>.</p>
 </li>
 <li>
-<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/test/java/seedu/expense/logic/parser/FinancialPlannerParserTest.java"><code>FinancialPlannerParserTest</code></a> to test that the correct command is generated according to the user input.</p>
+<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/test/java/seedu/planner/logic/parser/FinancialPlannerParserTest.java"><code>FinancialPlannerParserTest</code></a> to test that the correct command is generated according to the user input.</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect4">
-<h5 id="step-3-ui-add-a-placeholder-for-remark-in-code-personcard-code"><a class="link" href="#step-3-ui-add-a-placeholder-for-remark-in-code-personcard-code">[Step 3] Ui: Add a placeholder for remark in <code>PersonCard</code></a></h5>
+<h5 id="step-3-ui-add-a-placeholder-for-remark-in-code-recordcard-code"><a class="link" href="#step-3-ui-add-a-placeholder-for-remark-in-code-recordcard-code">[Step 3] Ui: Add a placeholder for remark in <code>RecordCard</code></a></h5>
 <div class="paragraph">
-<p>Let&#8217;s add a placeholder on all our <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/PersonCard.java"><code>PersonCard</code></a> s to display a remark for each person later.</p>
+<p>Let&#8217;s add a placeholder on all our <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/ui/RecordCard.java"><code>RecordCard</code></a> s to display a remark for each record later.</p>
 </div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
@@ -3067,10 +3129,10 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add a <code>Label</code> with any random text inside <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/resources/view/PersonListCard.fxml"><code>PersonListCard.fxml</code></a>.</p>
+<p>Add a <code>Label</code> with any random text inside <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/resources/view/RecordListCard.fxml"><code>RecordListCard.fxml</code></a>.</p>
 </li>
 <li>
-<p>Add FXML annotation in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/PersonCard.java"><code>PersonCard</code></a> to tie the variable to the actual label.</p>
+<p>Add FXML annotation in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/ui/RecordCard.java"><code>RecordCard</code></a> to tie the variable to the actual label.</p>
 </li>
 </ol>
 </div>
@@ -3080,7 +3142,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/test/java/guitests/guihandles/PersonCardHandle.java"><code>PersonCardHandle</code></a> so that future tests can read the contents of the remark label.</p>
+<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/test/java/guitests/guihandles/RecordCardHandle.java"><code>RecordCardHandle</code></a> so that future tests can read the contents of the remark label.</p>
 </li>
 </ol>
 </div>
@@ -3088,7 +3150,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="sect4">
 <h5 id="step-4-model-add-code-remark-code-class"><a class="link" href="#step-4-model-add-code-remark-code-class">[Step 4] Model: Add <code>Remark</code> class</a></h5>
 <div class="paragraph">
-<p>We have to properly encapsulate the remark in our <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/person/Person.java"><code>Person</code></a> class. Instead of just using a <code>String</code>, let&#8217;s follow the conventional class structure that the codebase already uses by adding a <code>Remark</code> class.</p>
+<p>We have to properly encapsulate the remark in our <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/model/record/Record.java"><code>Record</code></a> class. Instead of just using a <code>String</code>, let&#8217;s follow the conventional class structure that the codebase already uses by adding a <code>Remark</code> class.</p>
 </div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
@@ -3096,7 +3158,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add <code>Remark</code> to model component (you can copy from <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/person/Address.java"><code>Address</code></a>, remove the regex and change the names accordingly).</p>
+<p>Add <code>Remark</code> to model component (you can copy from <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/model/record/Name.java"><code>Name</code></a>, remove the regex and change the names accordingly).</p>
 </li>
 <li>
 <p>Modify <code>RemarkCommand</code> to now take in a <code>Remark</code> instead of a <code>String</code>.</p>
@@ -3115,9 +3177,9 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="step-5-model-modify-code-person-code-to-support-a-code-remark-code-field"><a class="link" href="#step-5-model-modify-code-person-code-to-support-a-code-remark-code-field">[Step 5] Model: Modify <code>Person</code> to support a <code>Remark</code> field</a></h5>
+<h5 id="step-5-model-modify-code-record-code-to-support-a-code-remark-code-field"><a class="link" href="#step-5-model-modify-code-record-code-to-support-a-code-remark-code-field">[Step 5] Model: Modify <code>Record</code> to support a <code>Remark</code> field</a></h5>
 <div class="paragraph">
-<p>Now we have the <code>Remark</code> class, we need to actually use it inside <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/person/Person.java"><code>Person</code></a>.</p>
+<p>Now we have the <code>Remark</code> class, we need to actually use it inside <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/model/record/Record.java"><code>Record</code></a>.</p>
 </div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
@@ -3125,21 +3187,21 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add <code>getRemark()</code> in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/person/Person.java"><code>Person</code></a>.</p>
+<p>Add <code>getRemark()</code> in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/model/record/Record.java"><code>Record</code></a>.</p>
 </li>
 <li>
 <p>You may assume that the user will not be able to use the <code>add</code> and <code>edit</code> commands to modify the remarks field (i.e. the person will be created without a remark).</p>
 </li>
 <li>
-<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/util/SampleDataUtil.java/"><code>SampleDataUtil</code></a> to add remarks for the sample data (delete your <code>financialPlanner.xml</code> so that the application will load the sample data when you launch it.)</p>
+<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/expense/model/util/SampleDataUtil.java/"><code>SampleDataUtil</code></a> to add remarks for the sample data (delete your <code>financialPlanner.xml</code> so that the application will load the sample data when you launch it.)</p>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect4">
-<h5 id="step-6-storage-add-code-remark-code-field-to-code-xmladaptedperson-code-class"><a class="link" href="#step-6-storage-add-code-remark-code-field-to-code-xmladaptedperson-code-class">[Step 6] Storage: Add <code>Remark</code> field to <code>XmlAdaptedPerson</code> class</a></h5>
+<h5 id="step-6-storage-add-code-remark-code-field-to-code-xmladaptedrecord-code-class"><a class="link" href="#step-6-storage-add-code-remark-code-field-to-code-xmladaptedrecord-code-class">[Step 6] Storage: Add <code>Remark</code> field to <code>XmlAdaptedRecord</code> class</a></h5>
 <div class="paragraph">
-<p>We now have <code>Remark</code> s for <code>Person</code> s, but they will be gone when we exit the application. Let&#8217;s modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/storage/XmlAdaptedPerson.java"><code>XmlAdaptedPerson</code></a> to include a <code>Remark</code> field so that it will be saved.</p>
+<p>We now have <code>Remark</code> s for <code>Record</code> s, but they will be gone when we exit the application. Let&#8217;s modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/storage/XmlAdaptedRecord.java"><code>XmlAdaptedPerson</code></a> to include a <code>Remark</code> field so that it will be saved.</p>
 </div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
@@ -3163,9 +3225,9 @@ for <code>RemarkCommandParser</code>.</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="step-6b-test-add-withremark-for-code-personbuilder-code"><a class="link" href="#step-6b-test-add-withremark-for-code-personbuilder-code">[Step 6b] Test: Add withRemark() for <code>PersonBuilder</code></a></h5>
+<h5 id="step-6b-test-add-withremark-for-code-recordbuilder-code"><a class="link" href="#step-6b-test-add-withremark-for-code-recordbuilder-code">[Step 6b] Test: Add withRemark() for <code>RecordBuilder</code></a></h5>
 <div class="paragraph">
-<p>Since <code>Person</code> can now have a <code>Remark</code>, we should add a helper method to <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/test/java/seedu/expense/testutil/PersonBuilder.java"><code>PersonBuilder</code></a>, so that users are able to create remarks when building a <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/model/person/Person.java"><code>Person</code></a>.</p>
+<p>Since <code>Record</code> can now have a <code>Remark</code>, we should add a helper method to <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/test/java/seedu/planner/testutil/PersonBuilder.java"><code>RecordBuilder</code></a>, so that users are able to create remarks when building a <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/model/record/Record.java"><code>Record</code></a>.</p>
 </div>
 <div class="paragraph">
 <p><strong>Tests:</strong></p>
@@ -3173,10 +3235,10 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add a new method <code>withRemark()</code> for <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/test/java/seedu/expense/testutil/PersonBuilder.java"><code>PersonBuilder</code></a>. This method will create a new <code>Remark</code> for the person that it is currently building.</p>
+<p>Add a new method <code>withRemark()</code> for <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/test/java/seedu/planner/testutil/RecordBuilder.java"><code>RecordBuilder</code></a>. This method will create a new <code>Remark</code> for the record that it is currently building.</p>
 </li>
 <li>
-<p>Try and use the method on any sample <code>Person</code> in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/test/java/seedu/expense/testutil/TypicalPersons.java"><code>TypicalPersons</code></a>.</p>
+<p>Try and use the method on any sample <code>Record</code> in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/test/java/seedu/planner/testutil/TypicalRecords.java"><code>TypicalRecords</code></a>.</p>
 </li>
 </ol>
 </div>
@@ -3184,7 +3246,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="sect4">
 <h5 id="step-7-ui-connect-code-remark-code-field-to-code-personcard-code"><a class="link" href="#step-7-ui-connect-code-remark-code-field-to-code-personcard-code">[Step 7] Ui: Connect <code>Remark</code> field to <code>PersonCard</code></a></h5>
 <div class="paragraph">
-<p>Our remark label in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/PersonCard.java"><code>PersonCard</code></a> is still a placeholder. Let&#8217;s bring it to life by binding it with the actual <code>remark</code> field.</p>
+<p>Our remark label in <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/ui/RecordCard.java"><code>RecordCard</code></a> is still a placeholder. Let&#8217;s bring it to life by binding it with the actual <code>remark</code> field.</p>
 </div>
 <div class="paragraph">
 <p><strong>Main:</strong></p>
@@ -3192,7 +3254,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/main/java/seedu/expense/ui/PersonCard.java"><code>PersonCard</code></a>'s constructor to bind the <code>Remark</code> field to the <code>Person</code> 's remark.</p>
+<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/main/java/seedu/planner/ui/RecordCard.java"><code>RecordCard</code></a>'s constructor to bind the <code>Remark</code> field to the <code>Record</code> 's remark.</p>
 </li>
 </ol>
 </div>
@@ -3202,7 +3264,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/src/test/java/seedu/expense/ui/testutil/GuiTestAssert.java"><code>GuiTestAssert#assertCardDisplaysPerson(&#8230;&#8203;)</code></a> so that it will compare the now-functioning remark label.</p>
+<p>Modify <a href="https://github.com/CS2113-AY1819S1-T09-4/main/tree/master/src/test/java/seedu/planner/ui/testutil/GuiTestAssert.java"><code>GuiTestAssert#assertCardDisplaysPerson(&#8230;&#8203;)</code></a> so that it will compare the now-functioning remark label.</p>
 </li>
 </ol>
 </div>
@@ -3252,7 +3314,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>has a need to manage a significant number of contacts</p>
+<p>has a need to manage his finances using other means because user is not as good at saving</p>
 </li>
 <li>
 <p>prefer desktop apps over other types</p>
@@ -3269,7 +3331,7 @@ for <code>RemarkCommandParser</code>.</p>
 </ul>
 </div>
 <div class="paragraph">
-<p><strong>Value proposition</strong>: manage contacts faster than a typical mouse/GUI driven app</p>
+<p><strong>Value proposition</strong>: manage income and spending faster than a typical mouse/GUI driven app</p>
 </div>
 </div>
 </div>
@@ -3501,7 +3563,7 @@ for <code>RemarkCommandParser</code>.</p>
 <h2 id="use-cases"><a class="link" href="#use-cases">Appendix D: Use Cases</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>(For all use cases below, the <strong>System</strong> is the <code>FinancialPlanner</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
+<p>(For all use cases below, the <strong>System</strong> is the <code>Savee</code> and the <strong>Actor</strong> is the <code>user</code>, unless specified otherwise)</p>
 </div>
 <h3 id="1-use-case-input-expense-for-a-certain-activity" class="discrete">1.  Use case: Input expense for a certain activity.</h3>
 <div class="paragraph">
@@ -3510,7 +3572,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to add record into FinancialPlanner.</p>
+<p>User requests to add record into Savee.</p>
 </li>
 <li>
 <p>System adds the record into the system.</p>
@@ -3533,7 +3595,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid command error and shows an example command input needed.</p>
+<p>Savee throws invalid command error and shows an example command input needed.</p>
 </li>
 <li>
 <p>Use case ends.</p>
@@ -3546,7 +3608,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid command error and notifies user of the correct format.</p>
+<p>Savee throws invalid command error and notifies user of the correct format.</p>
 </li>
 <li>
 <p>Use case ends.</p>
@@ -3559,7 +3621,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws duplicated record error.</p>
+<p>Savee throws duplicated record error.</p>
 </li>
 <li>
 <p>Use case ends.</p>
@@ -3569,29 +3631,17 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="2-use-case-delete-expense-entry-whose-date-is-required-linh-chi" class="discrete">2.  Use case: Delete expense entry whose date is required. [Linh Chi]</h3>
+<h3 id="2-use-case-delete-past-finance-records" class="discrete">2.  Use case: delete past finance records</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to delete records whose date is required.</p>
+<p>User requests to delete record.</p>
 </li>
 <li>
-<p>FinancialPlanner requests for date of entry to be deleted.</p>
-</li>
-<li>
-<p>User enters the date entry he/she wants to delete.</p>
-</li>
-<li>
-<p>FinancialPlanner entry confirms date to be deleted.</p>
-</li>
-<li>
-<p>User confirms the deletion</p>
-</li>
-<li>
-<p>FinancialPlanner deletes the entry</p>
+<p>System deletes the record from the system and shows the user the result.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3604,67 +3654,97 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>1a. There are no entries to be delete.</p>
+<p>1a. User’s input command is invalid.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws no entry error.</p>
+<p>Savee throws invalid command error and shows an example command input needed.</p>
 </li>
 <li>
-<p>Use Case Ends</p>
+<p>Use case ends.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>3a. User’s input is invalid.</p>
+<p>1a. User&#8217;s input parameters are missing or invalid.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid format error and shows format needed.</p>
+<p>Savee throws invalid command error and notifies user of the correct format.</p>
 </li>
 <li>
-<p>Use case resumes at step 2.</p>
+<p>Use case ends.</p>
 </li>
 </ul>
 </div>
 </li>
+</ul>
+</div>
+<h3 id="3-use-case-update-past-finance-records-with-information" class="discrete">3.  Use case: update past finance records with information</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>3b. User’s input date has no entries</p>
+<p>User requests to update records and enters the parameters needed.</p>
+</li>
+<li>
+<p>System updates the record in the system and shows the user the result.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws no entry error.</p>
-</li>
-<li>
-<p>Use case resumes at step 2.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>4a. User’s input is not a valid entry.</p>
+<p>1a. User’s input command is invalid.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid data error and resumes at step 4.</p>
+<p>Savee throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>5a. User declines the confirmation.</p>
+<p>1a. User&#8217;s input parameters are missing or invalid.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>Use case resumes at step 3.</p>
+<p>Savee throws invalid command error and notifies user of the correct format.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>1a. The record to be added is a duplicate of existing record in the system.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws duplicated record error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<h3 id="3-use-case-see-history-of-expenses-for-a-certain-period-vincent" class="discrete">3.  Use case: See history of expenses for a certain period [Vincent]</h3>
+<h3 id="4-use-case-see-history-of-expenses-for-a-certain-period" class="discrete">4.  Use case: See history of expenses for a certain period</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -3674,7 +3754,7 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to see history within a certain date period.</p>
 </li>
 <li>
-<p>FinancialPlanner returns the history of all expenses within the period.</p>
+<p>Savee returns the history of all expenses within the period.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3691,7 +3771,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid command error.</p>
+<p>Savee throws invalid command error.</p>
 </li>
 <li>
 <p>Use case resumes at step 1.</p>
@@ -3704,7 +3784,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner returns all records in the FinancialPlanner.</p>
+<p>Savee returns all records in the Savee.</p>
 </li>
 <li>
 <p>Use case ends.</p>
@@ -3717,7 +3797,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid command error and notifies user of the correct format.</p>
+<p>Savee throws invalid command error and notifies user of the correct format.</p>
 </li>
 <li>
 <p>Use case resumes at step 1.</p>
@@ -3730,7 +3810,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner shows a blank list.</p>
+<p>Savee shows a blank list.</p>
 </li>
 <li>
 <p>Use case ends.</p>
@@ -3740,23 +3820,29 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="4-use-case-clear-history-of-expenses" class="discrete">4.  Use case: Clear history of expenses</h3>
+<h3 id="5-use-case-delete-expense-entry-whose-date-is-required-linh-chi" class="discrete">5.  Use case: Delete expense entry whose date is required. [Linh Chi]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to clear history of expenses.</p>
+<p>User requests to delete records whose date is required.</p>
 </li>
 <li>
-<p>FinancialPlanner requests for period of time of expenses to clear.</p>
+<p>Savee requests for date of entry to be deleted.</p>
 </li>
 <li>
-<p>User enters period of time to clear expenses for.</p>
+<p>User enters the date entry he/she wants to delete.</p>
 </li>
 <li>
-<p>FinancialPlanner deletes all entries within specific time period.</p>
+<p>Savee entry confirms date to be deleted.</p>
+</li>
+<li>
+<p>User confirms the deletion</p>
+</li>
+<li>
+<p>Savee deletes the entry</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3769,21 +3855,84 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>3a. User’s input is not a valid period of time</p>
+<p>1a. There are no entries to be delete.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid input command</p>
+<p>Savee throws no entry error.</p>
 </li>
 <li>
-<p>Use case continues from step 2</p>
+<p>Use Case Ends</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. User’s input is invalid.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid format error and shows format needed.</p>
+</li>
+<li>
+<p>Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. User’s input date has no entries</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws no entry error.</p>
+</li>
+<li>
+<p>Use case resumes at step 2.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>4a. User’s input is not a valid entry.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid data error and resumes at step 4.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>5a. User declines the confirmation.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Use case resumes at step 3.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<h3 id="5-use-case-view-breakdown-of-financial-activity-into-category-vincent" class="discrete">5.  Use case: View breakdown of financial activity into category [Vincent]</h3>
+<h3 id="6-use-case-clear-history-of-expenses" class="discrete">6.  Use case: Clear history of expenses</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to clear history of expenses.</p>
+</li>
+<li>
+<p>System clears the history</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="7-use-case-view-breakdown-of-financial-activity-into-category" class="discrete">7.  Use case: View breakdown of financial activity into category</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -3849,7 +3998,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="6-use-case-search-expenses-based-on-category-zhi-thon" class="discrete">6.  Use case: Search expenses based on category [Zhi Thon]</h3>
+<h3 id="8-use-case-search-expenses-based-on-category-zhi-thon" class="discrete">8.  Use case: Search expenses based on category [Zhi Thon]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -3859,13 +4008,13 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to search for expenses by category</p>
 </li>
 <li>
-<p>FinancialPlanner requests for category of expenditure</p>
+<p>Savee requests for category of expenditure</p>
 </li>
 <li>
 <p>User enters category desired</p>
 </li>
 <li>
-<p>FinancialPlanner displays each expenditure with name category and the total expenditure.</p>
+<p>Savee displays each expenditure with name category and the total expenditure.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3882,14 +4031,14 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner shows no expenditure for selected category</p>
+<p>Savee shows no expenditure for selected category</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<h3 id="7-use-case-view-daily-monthly-summary-within-a-period-of-time-vincent" class="discrete">7.  Use case: View daily/monthly summary within a period of time [Vincent]</h3>
+<h3 id="9-use-case-view-daily-monthly-summary-within-a-period-of-time" class="discrete">9.  Use case: View daily/monthly summary within a period of time</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -3955,7 +4104,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="8-use-case-usage-instructions-guide" class="discrete">8.  Use case: Usage Instructions guide</h3>
+<h3 id="10-use-case-usage-instructions-guide" class="discrete">10.  Use case: Usage Instructions guide</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -3965,40 +4114,14 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests for usage instructions</p>
 </li>
 <li>
-<p>FinancialPlanner displays different commands</p>
-</li>
-<li>
-<p>User inputs which command he wants to find out about</p>
-</li>
-<li>
-<p>Financial displays information on selected command</p>
+<p>System returns a help window with all the instructions.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>3a User enter invalid command</p>
-<div class="ulist">
-<ul>
-<li>
-<p>FinancialPlanner throws invalid command error.</p>
-</li>
-<li>
-<p>Use case resumes at step 2.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="9-use-case-undo-expense-entry" class="discrete">9.  Use case: Undo expense entry</h3>
+<h3 id="11-use-case-undo-record-entry" class="discrete">11.  Use case: Undo record entry</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4008,53 +4131,24 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests for undo</p>
 </li>
 <li>
-<p>FinancialPlanner confirms the undo request</p>
-</li>
-<li>
-<p>User enter the item they would like to undo</p>
-</li>
-<li>
-<p>FinancialPlanner undo the deleted item</p>
+<p>Savee undo the last undoable command</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>3a User enter invalid command</p>
-<div class="ulist">
-<ul>
-<li>
-<p>FinancialPlanner throws invalid command error.</p>
-</li>
-<li>
-<p>Use case resumes at step 2</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="10-use-case-add-notes-to-each-expense" class="discrete">10. Use case: Add notes to each expense</h3>
+<h3 id="12-use-case-add-notes-to-each-expense" class="discrete">12. Use case: Add notes to each expense</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests for adding notes</p>
+<p>User requests for adding notes and enters the notes</p>
 </li>
 <li>
-<p>Financial Planner request for the date of entry and confirm the request</p>
-</li>
-<li>
-<p>User enter the notes</p>
+<p>Savee adds the notes into the system and notifies the user.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -4062,26 +4156,29 @@ for <code>RemarkCommandParser</code>.</p>
 </ol>
 </div>
 <div class="paragraph">
-<p><strong>Extensions</strong></p>
+<p><strong>Extensions</strong>
+* 1a. User’s input command is invalid.<br>
+<strong> Savee throws invalid command error and shows an example command input needed.
+</strong> Use case ends.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>3a User enter invalid command</p>
+<p>1a. User&#8217;s input parameters are missing or invalid.<br></p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws invalid command error.</p>
+<p>Savee throws invalid command error and notifies user of the correct format.</p>
 </li>
 <li>
-<p>Use case resumes at step 2</p>
+<p>Use case ends.</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<h3 id="11-use-case-create-a-normal-limit-for-a-period-of-time-or-a-day-oscar" class="discrete">11. Use case: Create a normal limit for a period of time or a day [Oscar]</h3>
+<h3 id="13-use-case-create-a-normal-limit-for-a-period-of-time-or-a-day-oscar" class="discrete">13. Use case: Create a normal limit for a period of time or a day [Oscar]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4169,7 +4266,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="12-use-case-edit-an-existing-normal-limit-oscar" class="discrete">12. Use case: Edit an existing normal limit [Oscar]</h3>
+<h3 id="14-use-case-edit-an-existing-normal-limit-oscar" class="discrete">14. Use case: Edit an existing normal limit [Oscar]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4270,7 +4367,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="13-use-case-delete-an-existing-limit-oscar" class="discrete">13. Use case: Delete an existing limit [Oscar]</h3>
+<h3 id="15-use-case-delete-an-existing-limit-oscar" class="discrete">15. Use case: Delete an existing limit [Oscar]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4352,7 +4449,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="14-use-case-add-a-monthly-limit-oscar" class="discrete">14. Use case: Add a monthly limit [Oscar]</h3>
+<h3 id="16-use-case-add-a-monthly-limit-oscar" class="discrete">16. Use case: Add a monthly limit [Oscar]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4421,7 +4518,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="15-use-case-edit-the-monthly-limit-oscar" class="discrete">15. Use case: Edit the monthly limit [Oscar]</h3>
+<h3 id="17-use-case-edit-the-monthly-limit-oscar" class="discrete">17. Use case: Edit the monthly limit [Oscar]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4490,7 +4587,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="16-use-case-delete-the-monthly-limit-oscar" class="discrete">16. Use case: Delete the monthly limit [Oscar]</h3>
+<h3 id="18-use-case-delete-the-monthly-limit-oscar" class="discrete">18. Use case: Delete the monthly limit [Oscar]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4540,7 +4637,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="17-use-case-check-all-the-existing-limits-oscar" class="discrete">17. Use case: Check all the existing limits [Oscar]</h3>
+<h3 id="19-use-case-check-all-the-existing-limits-oscar" class="discrete">19. Use case: Check all the existing limits [Oscar]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4557,40 +4654,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><strong>Extensions</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>1a. User’s input command is invalid.<br></p>
-<div class="ulist">
-<ul>
-<li>
-<p>System throws invalid command error and shows an example command input needed.</p>
-</li>
-<li>
-<p>Use case ends.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>2a. There is no limit stored.<br></p>
-<div class="ulist">
-<ul>
-<li>
-<p>System shows no limit error.</p>
-</li>
-<li>
-<p>Use case ends.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-<h3 id="18-use-case-export-expenses-into-excel-file-linh-chi" class="discrete">18. Use case: Export expenses into Excel file [Linh Chi]</h3>
+<h3 id="20-use-case-export-expenses-into-excel-file-linh-chi" class="discrete">20. Use case: Export expenses into Excel file [Linh Chi]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4600,13 +4664,13 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests export format.</p>
 </li>
 <li>
-<p>FinancialPlanner shows list of possible formats for export.</p>
+<p>Savee shows list of possible formats for export.</p>
 </li>
 <li>
 <p>User enters preferred export format.</p>
 </li>
 <li>
-<p>FinancialPlanner exports the records data in Excel file.</p>
+<p>Savee exports the records data in Excel file.</p>
 </li>
 </ol>
 </div>
@@ -4620,7 +4684,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws unsupported format error</p>
+<p>Savee throws unsupported format error</p>
 </li>
 <li>
 <p>Use case resumes at step 2.</p>
@@ -4633,7 +4697,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws unsupported format error</p>
+<p>Savee throws unsupported format error</p>
 </li>
 <li>
 <p>Use case resumes at step 2.</p>
@@ -4643,7 +4707,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h4 id="19-use-case-import-the-excel-file-into-financial-planner-linh-chi" class="discrete">19. Use case: Import the Excel file into Financial Planner. [Linh Chi]</h4>
+<h4 id="21-use-case-import-the-excel-file-into-financial-planner-linh-chi" class="discrete">21. Use case: Import the Excel file into Financial Planner. [Linh Chi]</h4>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4673,7 +4737,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws unsupported format error</p>
+<p>Savee throws unsupported format error</p>
 </li>
 <li>
 <p>Use case resumes at step 2.</p>
@@ -4683,7 +4747,7 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="20-use-case-archive-the-records-data-into-excel-file-linh-chi" class="discrete">20. Use case: Archive the records data into Excel file. [Linh Chi]</h3>
+<h3 id="22-use-case-archive-the-records-data-into-excel-file-linh-chi" class="discrete">22. Use case: Archive the records data into Excel file. [Linh Chi]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4713,7 +4777,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws unsupported format error</p>
+<p>Savee throws unsupported format error</p>
 </li>
 <li>
 <p>Use case resumes at step 2.</p>
@@ -4726,7 +4790,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>FinancialPlanner throws unsupported format error</p>
+<p>Savee throws unsupported format error</p>
 </li>
 <li>
 <p>Use case resumes at step 2.</p>
@@ -4736,7 +4800,21 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="21-use-case-freely-edit-expenses-tags" class="discrete">21. Use case: Freely edit expenses tags</h3>
+<h3 id="23-use-case-see-monthly-financial-activity" class="discrete">23. Use case: See monthly financial activity</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to see monthly financial activity.</p>
+</li>
+<li>
+<p>Savee returns a report on monthly financial activity.</p>
+</li>
+</ol>
+</div>
+<h3 id="24-use-case-freely-edit-expenses-tags" class="discrete">24. Use case: Freely edit expenses tags</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
@@ -4831,6 +4909,95 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
+<h3 id="25-view-bank-balance" class="discrete">25. View bank balance</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to view bank balance.</p>
+</li>
+<li>
+<p>Savee asks for authentication.</p>
+</li>
+<li>
+<p>User provides authentication.</p>
+</li>
+<li>
+<p>Savee verifies the authentication and shows the bank balance.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s input command is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. User&#8217;s authentication is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee returns error and asks for authentication again.</p>
+</li>
+<li>
+<p>Use case resumes at 2.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="sect2">
+<h3 id="26-adjust-configurations"><a class="link" href="#26-adjust-configurations">26. Adjust configurations</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to change application configurations.</p>
+</li>
+<li>
+<p>Savee returns the configuration page.</p>
+</li>
+<li>
+<p>User changes configuration.</p>
+</li>
+<li>
+<p>Savee confirms the configuration and applies it to the system.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s input command is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Savee throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -4842,13 +5009,22 @@ for <code>RemarkCommandParser</code>.</p>
 <p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>9</code> or higher installed.</p>
 </li>
 <li>
-<p>Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.</p>
+<p>Should be able to hold up to 1000 records without a noticeable sluggishness in performance for typical usage.</p>
 </li>
 <li>
 <p>A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.</p>
 </li>
 <li>
 <p>Should be able to retain data in the event of app exiting or crashing.</p>
+</li>
+<li>
+<p>The data is not expected to be secure.</p>
+</li>
+<li>
+<p>The application can function as per normal in the absence of network.</p>
+</li>
+<li>
+<p>For best view, the optimal resolution is 1080p (1920 x 1080).</p>
 </li>
 </ol>
 </div>
@@ -4872,6 +5048,15 @@ for <code>RemarkCommandParser</code>.</p>
 <p>Activity where an individual engage in exchange of money, can comprise of income or spending</p>
 </dd>
 </dl>
+</div>
+<div class="paragraph">
+<p><a id="Resolution"></a> Resolution:
+Resolution refers to the number of pixels that are available in the screen. It determines how wide or tall a screen will look like.</p>
+</div>
+<div class="paragraph">
+<p><a id="Appname"></a> App Name: (FinancialPlanner/Savee)
+Both FinancialPlanner and Savee refers to the app. Savee is the official name of the app when it is marketed for the users. FInancialPlanner
+is the name used when referring to the app in the developer guide and code.</p>
 </div>
 </div>
 </div>
@@ -4943,7 +5128,7 @@ These instructions only provide a starting point for testers to work on; testers
 </li>
 <li>
 <p>Double-click the jar file<br>
-Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.</p>
+Expected: Shows the GUI with a set of sample records. The window size may not be optimum.</p>
 </li>
 </ol>
 </div>
@@ -4964,31 +5149,455 @@ Expected: The most recent window size and location is retained.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">H.2. Deleting a person</a></h3>
+<h3 id="listing-by-date"><a class="link" href="#listing-by-date">H.2. Listing by date</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Deleting a person while all persons are listed</p>
+<p>Listing with no argument</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Prerequisites: List all persons using the <code>list</code> command. Multiple persons in the list.</p>
+<p>Test case: Enter <code>list</code></p>
+</li>
+<li>
+<p>Expected: System would list down all the records along with a result saying that it has listed all records.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Listing with arguments but no prefix</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>list abcd</code></p>
+</li>
+<li>
+<p>Expected: System will throw error saying invalid command and show the correct format</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Listing with arguments but wrong prefix</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>list m/1-1-2018 12-12-2018</code></p>
+</li>
+<li>
+<p>Expected: System will throw error saying invalid command and show the correct format</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Listing with valid prefix but invalid arguments</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>list d/1-1-201</code></p>
+</li>
+<li>
+<p>Expected: System will throw error saying invalid command and show the correct format</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Listing with valid prefix but 1 date</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>list d/1-1-2018</code></p>
+</li>
+<li>
+<p>Expected: System will list only records of that date and show a command result stating the date that the records are listed by</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Listing with valid prefix and 2nd date earlier than 1st date</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>list d/1-1-2018 12-12-2017</code></p>
+</li>
+<li>
+<p>Expected: System will throw error saying invalid command and show the correct format</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Listing with valid prefix and 1st date earlier than 2nd date</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>list d/1-1-2018 12-12-2018</code></p>
+</li>
+<li>
+<p>Expected: System will list all records equal to or between the 2 dates</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-summary"><a class="link" href="#viewing-summary">H.3. Viewing summary</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Entering <code>summary</code> command without modes</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>summary abcd</code></p>
+</li>
+<li>
+<p>Expected: System would throw an error saying invalid command and provide the error message for the generic summary command</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Entering <code>summary</code> command with modes but no arguments</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>summary date</code> or <code>summary month</code> or <code>summary category</code></p>
+</li>
+<li>
+<p>Expected:</p>
+</li>
+<li>
+<p>System would throw an error saying invalid command.</p>
+</li>
+<li>
+<p>System will provide a different error message depending on the mode and provide more information about the format of
+the command in that specific mode.</p>
+</li>
+<li>
+<p>for e.g. <code>summary date</code> will give you an error message specific to viewing summary by date and <code>summary month</code> will give you
+and error message specific to viewing summary by month.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Entering <code>summary</code> command with modes and invalid prefixes or no prefix</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>summary date m/</code> or <code>summary month m/</code> or <code>summary category m/</code></p>
+</li>
+<li>
+<p>Expected: System would throw error saying invalid command and provide the error message for the generic summary command</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Entering <code>summary</code> command with modes and date prefix but only 1 argument</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>summary date d/1-1-2018</code> or <code>summary month d/1-1</code> or <code>summary category d/1-1-1</code></p>
+</li>
+<li>
+<p>Expected:</p>
+</li>
+<li>
+<p>System would throw an error saying invalid command.</p>
+</li>
+<li>
+<p>System will provide a different error message depending on the mode and provide more information about the format of
+the command in that specific mode.</p>
+</li>
+<li>
+<p>for e.g. <code>summary date</code> will give you an error message specific to viewing summary by date and <code>summary month</code> will give you
+and error message specific to viewing summary by month.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Entering <code>summary</code> command with modes and 2 arguments with either invalid</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>summary date d/1&#8212;&#8203;1 1&#8212;&#8203;1</code> or <code>summary month d/1---1 1&#8212;&#8203;1</code> or summary category d/apr-2018 1&#8212;&#8203;1`</p>
+</li>
+<li>
+<p>Expected:</p>
+</li>
+<li>
+<p>System would throw error regarding the constraints of dates/months depending on the mode. If mode is <code>date</code> or <code>category</code>, the error message is
+about the date. If mode is <code>month</code>, the error message will be about the month.</p>
+</li>
+<li>
+<p>The error message should give reasons why the argument is invalid.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>View summary of range with no records inside</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisite: Choose 2 dates/months such that no records are inside that range and select a record in the list.</p>
+</li>
+<li>
+<p>Test case: Execute the summary command.</p>
+</li>
+<li>
+<p>Expected: The table should be empty with just an entry saying total is 0 for all the money columns and record should be unselected.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>View summary of range with some records inside</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisite: Choose 2 dates/months such that records have these characteristics and select a record in the list.</p>
+</li>
+<li>
+<p>Test case: Execute the summary command.</p>
+</li>
+<li>
+<p>Expected:</p>
+</li>
+<li>
+<p>Record should be unselected.</p>
+</li>
+<li>
+<p>The table would be filled and the total is reflective of all the entries within the table.</p>
+</li>
+<li>
+<p>If the table is too long, the scrollbars should allow you to view all the entries.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-statistics-about-category-breakdown"><a class="link" href="#viewing-statistics-about-category-breakdown">H.4. Viewing statistics about category breakdown</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Entering <code>stats</code> command without arguments and prefixes</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>stats</code></p>
+</li>
+<li>
+<p>Expected: System would throw an error saying invalid command and show the format the command should have been in.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Entering <code>stats</code> command with valid prefixes but no arguments</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>stats d/</code></p>
+</li>
+<li>
+<p>Expected: System would throw an error saying invalid command and show the format the command should have been in.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Entering <code>stats</code> command with invalid prefixes</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>stats m/</code></p>
+</li>
+<li>
+<p>Expected: System would throw an error saying invalid command and show the format the command should have been in.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Entering <code>stats</code> command with valid prefixes but invalid arguments</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: Enter <code>stats d/1&#8212;&#8203;1</code></p>
+</li>
+<li>
+<p>Expected: System would throw an error regarding the dates entered and give reasons for why the argument is invalid.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>View statistics of a range with no records inside</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisite: Choose 2 dates such that no records are inside that range and select a random record in the list.</p>
+</li>
+<li>
+<p>Test case: Execute the stats command.</p>
+</li>
+<li>
+<p>Expected:</p>
+</li>
+<li>
+<p>The record would be unselected.</p>
+</li>
+<li>
+<p>The 2 tabs should still be created but have a message that tells user that nothing has been found.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>View statistics of a range with some records inside but all income/expense</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Choose 2 dates such that the records have these characteristics and select a random record in the list.</p>
+</li>
+<li>
+<p>Test case: Execute the stats command.</p>
+</li>
+<li>
+<p>Expected:</p>
+</li>
+<li>
+<p>The record would be unselected.</p>
+</li>
+<li>
+<p>The 2 tabs should still be created but 1 of the tab would have a message telling user that nothing has been found</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>View statistics of a range with records with income and records with expense</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Choose 2 dates such that the records have these characteristics and select a random record in the list</p>
+</li>
+<li>
+<p>Test case: Execute the stats command.</p>
+</li>
+<li>
+<p>Expected:</p>
+</li>
+<li>
+<p>The record would be unselected.</p>
+</li>
+<li>
+<p>The 2 tabs should be created with pie charts.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>View statistics of a range with too many tags</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Choose 2 dates such that the records have these characteristics and select a random record in the list</p>
+</li>
+<li>
+<p>Test case: Execute the stats command</p>
+</li>
+<li>
+<p>Expected:</p>
+</li>
+<li>
+<p>The record would be unselected.</p>
+</li>
+<li>
+<p>The 2 tabs should be created with pie charts. The legends should have scrollbars attached if there are too many tags. These scrollbars
+should allow you to navigate to the hidden tags within the legend.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-current-month-s-breakdown"><a class="link" href="#viewing-current-month-s-breakdown">H.5. Viewing current month&#8217;s breakdown</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigating to welcome screen from anywhere using keyboard</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Click on any record in the list. Panel should change to display details of the record along with an image.</p>
+</li>
+<li>
+<p>Test case: Press <code>HOME</code> on the keyboard</p>
+</li>
+<li>
+<p>Expected: Panel should show the welcome screen.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Navigating to welcome screen from anywhere automatically</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Same as before. Just need to change the panel to see the effect.</p>
+</li>
+<li>
+<p>Test case: Add any record with date in current month/ Delete any record with date in current month/ Edit any record to a date in current month/ Clear</p>
+</li>
+<li>
+<p>Expected: Panel should show the welcome screen.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">H.6. Deleting a person</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deleting a records while all records are listed</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: List all records using the <code>list</code> command. Multiple persons in the list.</p>
 </li>
 <li>
 <p>Test case: <code>delete 1</code><br>
-Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.</p>
+Expected: First record is deleted from the list. Details of the deleted record shown in the status message. Timestamp in the status bar is updated.</p>
 </li>
 <li>
 <p>Test case: <code>delete 0</code><br>
-Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.</p>
+Expected: No record is deleted. Error details shown in the status message. Status bar remains the same.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size) <em>{give more}</em><br>
+<p>Other incorrect delete commands to try: <code>delete</code>, <code>delete x</code> (where x is larger than the list size)<br>
 Expected: Similar to previous.</p>
 </li>
 </ol>
@@ -4996,12 +5605,9 @@ Expected: Similar to previous.</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
-</div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">H.3. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">H.7. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5009,16 +5615,26 @@ Expected: Similar to previous.</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p><em>{explain how to simulate a missing/corrupted file and the expected behavior}</em></p>
+<p>Prerequisites: Have a data file ready. Go to the application and add a record. A data xml file should be created.</p>
+</li>
+<li>
+<p>Test case: Go to the file and remove 1 of the field tags. It should look like "&lt;name&gt;&lt;/name&gt;" where name is the name of the field.
+Then, open the app.</p>
+</li>
+<li>
+<p>Expected: The app should initialise with an empty record list.</p>
+</li>
+<li>
+<p>Test case: Delete the data file</p>
+</li>
+<li>
+<p>Expected: The app should initialise with a sample record list.</p>
 </li>
 </ol>
 </div>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><em>{ more test cases &#8230;&#8203; }</em></p>
 </div>
 </div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 04:31:39 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 05:37:14 UTC</div></div></div></body></html>

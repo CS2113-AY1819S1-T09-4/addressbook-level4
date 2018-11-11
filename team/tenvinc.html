@@ -378,6 +378,7 @@ Format:<br></p>
 </div>
 <div class="paragraph">
 <p>Once the command has been executed, a panel will appear showing the summary table containing data that is relevant in the range.<br>
+The table entries are sorted according to either date, month or category depending on the mode used in ascending order.<br>
 At the same time, currently selected record will be unselected to reduce confusion for the user.</p>
 </div>
 <div class="admonitionblock note">
@@ -518,7 +519,7 @@ in for visualisation purposes. These screenshots are taken in <strong>fullscreen
 <h3 id="showing-a-breakdown-of-total-expenses-and-income-into-categories-of-this-month-code-no-command-required-to-be-typed-code"><a class="link" href="#showing-a-breakdown-of-total-expenses-and-income-into-categories-of-this-month-code-no-command-required-to-be-typed-code">Showing a breakdown of total expenses and income into categories of this month: <code>NO COMMAND REQUIRED TO BE TYPED</code></a></h3>
 <div class="paragraph">
 <p>Shows a breakdown of total expenses and income into categories using data of this month.<br>
-No format is required for this feature as the feature is automatically triggered when there is any changes to the list of records within the application.
+No format is required for this feature as the feature is automatically triggered when there is any mutation of data within the application.
 Another way of returning to the welcome panel from anywhere in the app is to press <code>HOME</code> on the keyboard or click <code>Home</code> on the menu.</p>
 </div>
 <div class="paragraph">
@@ -537,7 +538,7 @@ the application will update the data whenever it detects any record data modific
 </td>
 <td class="content">
 The data used to represent the pie charts in the welcome panel is <strong>only updated</strong> whenever there are any changes to records within Savee.<br>
-This includes adding records, deleting records and editing records in Savee.
+This includes adding records, deleting records and editing records in Savee, but not sorting, listing, summary, stats, etc.
 </td>
 </tr>
 </table>
@@ -713,7 +714,7 @@ parameters also occur during this stage.</p>
 <li>
 <p>After the SummaryCommandObject is created, <code>SummaryByDateCommand#execute</code> is called. The responsibility of SummaryByDateCommand is a manager that has retrieves information from model and passes it to other components.
 SummaryByDateCommand gets the filtered list from Model using <code>Model#getFilteredRecordList</code> and passes it to the constructor of SummaryByDateList. The creates <code>SummaryList</code> object which is then
-passed into a <code>ShowSummaryTableEvent</code> before trigger.</p>
+passed into a <code>ShowSummaryTableEvent</code> before triggering the event.</p>
 </li>
 <li>
 <p>The entire logic process is the same for SummaryByMonthCommand and SummaryByCategoryCommand but uses different lists.</p>
@@ -726,7 +727,7 @@ passed into a <code>ShowSummaryTableEvent</code> before trigger.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>MainWindow</code> will listen out of the <code>ShowSummaryTableEvent</code> and render all Main UI panels invisible before rendering <code>StatsDisplayPanel</code> visible.</p>
+<p><code>MainWindow</code> will listen for the <code>ShowSummaryTableEvent</code> and render all Main UI panels invisible before rendering <code>StatsDisplayPanel</code> visible.</p>
 </li>
 <li>
 <p>It then calls the handler function in <code>StatsDisplayPanel</code> which will create tabs and call the constructor of <code>SummaryDisplay</code>.</p>
@@ -867,7 +868,7 @@ within the <code>StatisticCommandParser#parse</code> method.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/StatisticParserActivityDiagram.png" alt="StatisticParserActivityDiagram" width="500">
+<img src="../images/StatisticParserActivityDiagram.png" alt="StatisticParserActivityDiagram" width="790">
 </div>
 </div>
 <div class="ulist">
@@ -898,7 +899,7 @@ the event system in FinancialPlanner. The sequence diagram below details the pro
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/StatisticUiSequenceDiagram.png" alt="StatisticUiSequenceDiagram" width="800">
+<img src="../images/StatisticUiSequenceDiagram.png" alt="StatisticUiSequenceDiagram" width="790">
 </div>
 </div>
 <div class="ulist">
@@ -915,7 +916,7 @@ the activity diagram below.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/StatisticUiActivityDiagram.png" alt="StatisticUiActivityDiagram" width="800">
+<img src="../images/StatisticUiActivityDiagram.png" alt="StatisticUiActivityDiagram" width="790">
 </div>
 </div>
 <div class="paragraph">
@@ -928,7 +929,7 @@ In the current implementation, whenever <code>stats</code> is called, 2 tabs wil
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/StatisticUiDetailedSequenceDiagram.png" alt="StatisticUiDetailedSequenceDiagram" width="800">
+<img src="../images/StatisticUiDetailedSequenceDiagram.png" alt="StatisticUiDetailedSequenceDiagram" width="790">
 </div>
 </div>
 <div class="admonitionblock note">
@@ -947,8 +948,61 @@ only be accessed within CustomPieChart for security purposes.
 </div>
 <div class="sect3">
 <h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
-
+<div class="sect4">
+<h5 id="aspect-data-structure-to-support-statistic-command"><a class="link" href="#aspect-data-structure-to-support-statistic-command">Aspect: Data structure to support statistic command</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> The pie chart breakdown is regenerated from the filtered list every time this command is called.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Reduce overhead during normal operations like adding, deleting and editing if we do not have to update the statistics in real time.</p>
+</li>
+<li>
+<p>Cons: If the command is called multiple times, this process could be repeated many times which may make the app sluggish when there are many records.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use a data structure to store the statistic information when there is mutation of data</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Since the statistics are constantly updated, whenever the command is called, system can read directly and not have to recompute.</p>
+</li>
+<li>
+<p>Cons: Adds overhead to usual operations. Benefits may not be visible if the command is not called frequently.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 04:31:39 UTC</div></div></div></body></html>
+</div>
+<div class="sect2">
+<h3 id="view-current-month-s-breakdown"><a class="link" href="#view-current-month-s-breakdown">View current month&#8217;s breakdown</a></h3>
+<div class="paragraph">
+<p>This feature does not require user to type any command into the command box or update manually. It provides information about the category breakdown for
+the current month, presenting income and expense statistics together in one panel. In addition, to improve usability, accelerators were assigned to the menu bar
+and <strong>HOME</strong> key is the corresponding accelerator for this feature.</p>
+</div>
+<div class="paragraph">
+<p>The current implementation of this feature closely follows the <strong>observer design pattern</strong>. Whenever the system detects changes to the underlying list, like adding, deleting or editing
+records, it updates a listener which is attached to the <code>FilteredList</code> recordsInCurrentMonth present in ModelManager. To check if the current month is the same as the cached month,
+the listener will run a check by creating a separate <code>DateIsWithinIntervalPredicate</code> and comparing it with the current <code>Predicate</code> of the filtered list.
+This listener will then process changes in the list and compute a <code>CategoryStatisticsList</code> before passing it into the constructor of <code>UpdateWelcomePanelEvent</code>.
+Then the event is triggered, and the corresponding listener on the UI side is called.</p>
+</div>
+<div class="paragraph">
+<p>The program flow on the UI side is similar to that of viewing category breakdown of a time period with the exception that tabs are not created.</p>
+</div>
+<div class="paragraph">
+<p>The accelerators and the menu bar is connected to the UI component and will trigger <code>MainWindow#handleHome</code> whenever the accelerator <strong>HOME</strong> key or <strong>Home</strong> is selected using the menu.</p>
+</div>
+</div>
+</div>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 05:37:14 UTC</div></div></div></body></html>
