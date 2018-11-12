@@ -91,20 +91,23 @@
 <ul class="sectlevel2">
 <li><a href="#launch-and-shutdown">H.1. Launch and Shutdown</a></li>
 <li><a href="#listing-by-date">H.2. Listing by date</a></li>
-<li><a href="#viewing-summary">H.3. Viewing summary</a></li>
-<li><a href="#viewing-statistics-about-category-breakdown">H.4. Viewing statistics about category breakdown</a></li>
-<li><a href="#viewing-current-month-s-breakdown">H.5. Viewing current month&#8217;s breakdown</a></li>
-<li><a href="#adding-a-normal-limit">H.6. Adding a normal limit</a></li>
-<li><a href="#editing-an-existing-normal-limit">H.7. Editing an existing normal limit</a></li>
-<li><a href="#deleting-an-existing-normal-limit">H.8. Deleting an existing normal limit</a></li>
-<li><a href="#adding-a-monthly-limit">H.9. Adding a monthly limit</a></li>
-<li><a href="#deleting-the-monthly-limit">H.10. Deleting the monthly limit</a></li>
-<li><a href="#checking-all-the-limits">H.11. Checking all the limits</a></li>
-<li><a href="#deleting-all-records-whose-date-is-required">H.12. Deleting all records whose date is required.</a></li>
-<li><a href="#archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.13. Archiving records data from Savee to Excel file and store it in a specific directory.</a></li>
-<li><a href="#import-all-record-data-from-excel-file-to-savee">H.14. Import all record data from Excel file to Savee</a></li>
-<li><a href="#exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.15. Exporting records data from Savee to Excel file and store it in a specific directory.</a></li>
-<li><a href="#saving-data">H.16. Saving data</a></li>
+<li><a href="#sorting-records">H.3. Sorting records</a></li>
+<li><a href="#finding-records-by-tag">H.4. Finding Records by Tag</a></li>
+<li><a href="#viewing-summary">H.5. Viewing summary</a></li>
+<li><a href="#viewing-statistics-about-category-breakdown">H.6. Viewing statistics about category breakdown</a></li>
+<li><a href="#viewing-current-month-s-breakdown">H.7. Viewing current month&#8217;s breakdown</a></li>
+<li><a href="#adding-a-normal-limit">H.8. Adding a normal limit</a></li>
+<li><a href="#editing-an-existing-normal-limit">H.9. Editing an existing normal limit</a></li>
+<li><a href="#deleting-an-existing-normal-limit">H.10. Deleting an existing normal limit</a></li>
+<li><a href="#adding-a-monthly-limit">H.11. Adding a monthly limit</a></li>
+<li><a href="#deleting-the-monthly-limit">H.12. Deleting the monthly limit</a></li>
+<li><a href="#checking-all-the-limits">H.13. Checking all the limits</a></li>
+<li><a href="#deleting-all-records-whose-date-is-required">H.14. Deleting all records whose date is required.</a></li>
+<li><a href="#archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.15. Archiving records data from Savee to Excel file and store it in a specific directory.</a></li>
+<li><a href="#import-all-record-data-from-excel-file-to-savee">H.16. Import all record data from Excel file to Savee</a></li>
+<li><a href="#exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.17. Exporting records data from Savee to Excel file and store it in a specific directory.</a></li>
+<li><a href="#auto-complete-feature-2">H.18. Auto Complete Feature</a></li>
+<li><a href="#saving-data">H.19. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -5410,7 +5413,83 @@ Expected: The most recent window size and location is retained.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-summary"><a class="link" href="#viewing-summary">H.3. Viewing summary</a></h3>
+<h3 id="sorting-records"><a class="link" href="#sorting-records">H.3. Sorting records</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Sorting with no argument<br>
+Test case: Enter <code>sort</code><br>
+Expected: System will throw error saying invalid command and show the correct format</p>
+</li>
+<li>
+<p>Sorting with invalid argument<br>
+Test case: Enter <code>sort invalidargument</code><br>
+Expected: System will throw error saying invalid command and show the correct format</p>
+</li>
+<li>
+<p>Sorting with valid and invalid argument<br>
+Test case: Enter <code>sort money haha</code><br>
+Expected: System will throw error saying invalid command and show the correct format</p>
+</li>
+<li>
+<p>Sorting with name only<br>
+Test case: Enter <code>sort</code><br>
+Expected: System will sort all records by date in ascending order.</p>
+</li>
+<li>
+<p>Sorting with date only<br>
+Test case: Enter <code>sort date</code><br>
+Expected: System will sort all records by date in ascending order.</p>
+</li>
+<li>
+<p>Sorting with money only<br>
+Test case: Enter <code>sort money</code><br>
+Expected: System will sort all records by money in ascending order.</p>
+</li>
+<li>
+<p>Sorting with ascending order only<br>
+Test case: Enter <code>sort asc</code><br>
+Expected: System will sort all records by name in ascending order.</p>
+</li>
+<li>
+<p>Sorting with descending order only<br>
+Test case: Enter <code>sort desc</code><br>
+Expected: System will sort all records by name in ascending order.</p>
+</li>
+<li>
+<p>Sorting with no argument<br>
+Test case: Enter <code>sort money desc</code><br>
+Expected: System will sort all records by money in descending order.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="finding-records-by-tag"><a class="link" href="#finding-records-by-tag">H.4. Finding Records by Tag</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Sorting with no argument<br>
+Test case: Enter <code>findtag</code><br>
+Expected: System will throw error saying invalid command and show the correct format</p>
+</li>
+<li>
+<p>Sorting with single argument<br>
+.est case: Enter <code>findtag anystring</code><br>
+Expected: System will display all records with the tag <code>anystring</code> and display message showing
+how many records were found and the tag searched.</p>
+</li>
+<li>
+<p>Sorting with multiple arguments<br>
+Test case: Enter <code>findtag anystring haha funny</code><br>
+Expected: System will display all records with the tag <code>anystring</code> <code>haha</code> <code>funny</code> and display message showing
+how many records were found and the tags searched.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="viewing-summary"><a class="link" href="#viewing-summary">H.5. Viewing summary</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5552,7 +5631,7 @@ about the date. If mode is <code>month</code>, the error message will be about t
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-statistics-about-category-breakdown"><a class="link" href="#viewing-statistics-about-category-breakdown">H.4. Viewing statistics about category breakdown</a></h3>
+<h3 id="viewing-statistics-about-category-breakdown"><a class="link" href="#viewing-statistics-about-category-breakdown">H.6. Viewing statistics about category breakdown</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5700,7 +5779,7 @@ should allow you to navigate to the hidden tags within the legend.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="viewing-current-month-s-breakdown"><a class="link" href="#viewing-current-month-s-breakdown">H.5. Viewing current month&#8217;s breakdown</a></h3>
+<h3 id="viewing-current-month-s-breakdown"><a class="link" href="#viewing-current-month-s-breakdown">H.7. Viewing current month&#8217;s breakdown</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5739,7 +5818,7 @@ should allow you to navigate to the hidden tags within the legend.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-normal-limit"><a class="link" href="#adding-a-normal-limit">H.6. Adding a normal limit</a></h3>
+<h3 id="adding-a-normal-limit"><a class="link" href="#adding-a-normal-limit">H.8. Adding a normal limit</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5811,7 +5890,7 @@ Expected: No limit will be added, related error information will be displayed.</
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-an-existing-normal-limit"><a class="link" href="#editing-an-existing-normal-limit">H.7. Editing an existing normal limit</a></h3>
+<h3 id="editing-an-existing-normal-limit"><a class="link" href="#editing-an-existing-normal-limit">H.9. Editing an existing normal limit</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5898,7 +5977,7 @@ Expected: No limit will be edited, related error information will be displayed.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-existing-normal-limit"><a class="link" href="#deleting-an-existing-normal-limit">H.8. Deleting an existing normal limit</a></h3>
+<h3 id="deleting-an-existing-normal-limit"><a class="link" href="#deleting-an-existing-normal-limit">H.10. Deleting an existing normal limit</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5955,7 +6034,7 @@ Expected: No limit will be deleted, related error information will be displayed.
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-monthly-limit"><a class="link" href="#adding-a-monthly-limit">H.9. Adding a monthly limit</a></h3>
+<h3 id="adding-a-monthly-limit"><a class="link" href="#adding-a-monthly-limit">H.11. Adding a monthly limit</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -6039,7 +6118,7 @@ Expected: The monthly limit will not be edited, related error information will b
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-the-monthly-limit"><a class="link" href="#deleting-the-monthly-limit">H.10. Deleting the monthly limit</a></h3>
+<h3 id="deleting-the-monthly-limit"><a class="link" href="#deleting-the-monthly-limit">H.12. Deleting the monthly limit</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -6069,7 +6148,7 @@ Expected: The monthly limit will not be deleted, no monthly limit error message 
 </div>
 </div>
 <div class="sect2">
-<h3 id="checking-all-the-limits"><a class="link" href="#checking-all-the-limits">H.11. Checking all the limits</a></h3>
+<h3 id="checking-all-the-limits"><a class="link" href="#checking-all-the-limits">H.13. Checking all the limits</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -6120,7 +6199,7 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-all-records-whose-date-is-required"><a class="link" href="#deleting-all-records-whose-date-is-required">H.12. Deleting all records whose date is required.</a></h3>
+<h3 id="deleting-all-records-whose-date-is-required"><a class="link" href="#deleting-all-records-whose-date-is-required">H.14. Deleting all records whose date is required.</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -6158,7 +6237,7 @@ Expected: Invalid date entered. Error indicating invalid command format and noti
 </div>
 </div>
 <div class="sect2">
-<h3 id="archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory"><a class="link" href="#archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.13. Archiving records data from Savee to Excel file and store it in a specific directory.</a></h3>
+<h3 id="archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory"><a class="link" href="#archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.15. Archiving records data from Savee to Excel file and store it in a specific directory.</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -6219,7 +6298,7 @@ Expected: Invalid command entered. Error indicating invalid command format is sh
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-all-record-data-from-excel-file-to-savee"><a class="link" href="#import-all-record-data-from-excel-file-to-savee">H.14. Import all record data from Excel file to Savee</a></h3>
+<h3 id="import-all-record-data-from-excel-file-to-savee"><a class="link" href="#import-all-record-data-from-excel-file-to-savee">H.16. Import all record data from Excel file to Savee</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -6252,7 +6331,7 @@ Expected: Invalid date entered. Error indicating invalid command format. Status 
 </div>
 </div>
 <div class="sect2">
-<h3 id="exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory"><a class="link" href="#exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.15. Exporting records data from Savee to Excel file and store it in a specific directory.</a></h3>
+<h3 id="exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory"><a class="link" href="#exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.17. Exporting records data from Savee to Excel file and store it in a specific directory.</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -6313,7 +6392,128 @@ Expected: Invalid command entered. Error indicating invalid command format is sh
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">H.16. Saving data</a></h3>
+<h3 id="auto-complete-feature-2"><a class="link" href="#auto-complete-feature-2">H.18. Auto Complete Feature</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Typing part of a command word<br>
+Test case: Enter <code>ad</code>.<br>
+Expected: Suggestions pop up with the words "add", "addlimit", "addmonthlylimit".</p>
+</li>
+<li>
+<p>Typing a complete command word<br>
+Test case: Enter <code>add</code>.<br>
+Expected: No Suggestions appear.</p>
+</li>
+<li>
+<p>Typing a complete command word with extra text<br>
+Test case: Enter <code>addm</code>.<br>
+Expected: Suggestions pop up with the word "addmonthlylimit" only.</p>
+</li>
+<li>
+<p>Typing name arguments for add command word
+Test case: Enter <code>add n/s</code>.<br>
+Expected: Suggestions pop up with the words that begin with "s", only if there are record names that have words that
+begin with 's'.</p>
+</li>
+<li>
+<p>Typing name arguments for add command word
+Test case: Enter <code>add n/Buying it</code>.<br>
+Expected: Suggestions pop up with the words that begin with "it", only if there are record names that have words that
+begin with 'it'.</p>
+</li>
+<li>
+<p>Typing date arguments for add command word
+Test case: Enter <code>add d/1</code>.<br>
+Expected: Suggestions pop up with the dates that begin with "1", only if there are record dates that have words that
+begin with '1'. Does not show dates that begin with '01'.</p>
+</li>
+<li>
+<p>Typing date arguments for add command word
+Test case: Enter <code>add d/t</code>.<br>
+Expected: Suggestions pop up with the word "today" only.</p>
+</li>
+<li>
+<p>Typing moneyflow arguments for add command word
+Test case: Enter <code>add m/1</code>.<br>
+Expected: No suggestions popup no matter what records are in the data. No suggestion expected for moneyflow at all.</p>
+</li>
+<li>
+<p>Typing tag arguments for add command word
+Test case: Enter <code>add t/f</code>.<br>
+Expected: Suggestions pop up with the words that begin with "f", only if there are record tags that have words that
+          begin with 'f', such as food and family, which are some default words for tags.</p>
+</li>
+<li>
+<p>Typing name arguments for add command word with a 'n/' prefix
+Test case: Enter <code>add n/Buying m/-50 it</code>.<br>
+Expected: No suggestions pop up for 'it' no matter what. No suggestions are expected for this invalid input.</p>
+</li>
+<li>
+<p>Typing date arguments for list command word
+Test case: Enter <code>list t</code>.<br>
+Expected: no suggestions pop up as prefix is required.</p>
+</li>
+<li>
+<p>Typing date arguments for list command word with a 'd/' prefix
+Test case: Enter <code>list d/t</code>.<br>
+Expected: Suggestions pop up with the word "today" only.</p>
+</li>
+<li>
+<p>Typing date arguments for list command word after a date with 'd/' prefix
+Test case: Enter <code>list d/ytd t</code>.<br>
+Expected: Suggestions pop up with the word "today" only.</p>
+</li>
+<li>
+<p>Typing date arguments for list command word after a date with 'd/' prefix
+Test case: Enter <code>list d/ytd t</code>.<br>
+Expected: Suggestions pop up with the word "today" only.</p>
+</li>
+<li>
+<p>Typing arguments for sort command word
+Test case: Enter <code>sort d</code>.<br>
+Expected: Suggestions pop up with the words "date" and "desc" only. Any category or order can be suggested.</p>
+</li>
+<li>
+<p>Typing arguments for sort command word with a category specified
+Test case: Enter <code>sort money d</code>.<br>
+Expected: Suggestions pop up with the word "desc" only. Only order can be suggested.</p>
+</li>
+<li>
+<p>Typing arguments for sort command word with a order specified
+Test case: Enter <code>sort asc m</code>.<br>
+Expected: Suggestions pop up with the words "money" and "moneyflow" only. Only category can be suggested.</p>
+</li>
+<li>
+<p>Typing arguments for sort command word with a order specified
+Test case: Enter <code>sort asc m</code>.<br>
+Expected: Suggestions pop up with the words "money" and "moneyflow" only. Only category can be suggested.</p>
+</li>
+<li>
+<p>Typing date arguments for addlimit command word
+Test case: Enter <code>addlimit d/t</code>.<br>
+Expected: Suggestions pop up with the word "today" only.</p>
+</li>
+<li>
+<p>Typing secondary date arguments for addlimit command word
+Test case: Enter <code>addlimit d/ytd t</code>.<br>
+Expected: Suggestions pop up with the word "today" only.</p>
+</li>
+<li>
+<p>Typing date arguments for addlimit command word with money included
+Test case: Enter <code>addlimit m/999 d/ytd t</code>.<br>
+Expected: Suggestions pop up with the word "today" only.</p>
+</li>
+<li>
+<p>Typing date arguments for addlimit command word with money included
+Test case: Enter <code>addlimit d/ytd t m/999</code>. Move the caret in the command box back to right after the 't'.
+Expected: Caret will be stopped right after 't' and suggestions pop up with the word "today" only.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="saving-data"><a class="link" href="#saving-data">H.19. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -6343,4 +6543,4 @@ Then, open the app.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:06:38 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:07:57 UTC</div></div></div></body></html>
