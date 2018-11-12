@@ -93,18 +93,16 @@
 <li><a href="#viewing-summary">H.3. Viewing summary</a></li>
 <li><a href="#viewing-statistics-about-category-breakdown">H.4. Viewing statistics about category breakdown</a></li>
 <li><a href="#viewing-current-month-s-breakdown">H.5. Viewing current month&#8217;s breakdown</a></li>
-<li><a href="#adding-a-normal-limit">H.6. Adding a normal limit</a></li>
-<li><a href="#editing-an-existing-normal-limit">H.7. Editing an existing normal limit</a></li>
-<li><a href="#deleting-an-existing-normal-limit">H.8. Deleting an existing normal limit</a></li>
-<li><a href="#adding-a-monthly-limit">H.9. Adding a monthly limit</a></li>
-<li><a href="#deleting-the-monthly-limit">H.10. Deleting the monthly limit</a></li>
-<li><a href="#checking-all-the-limits">H.11. Checking all the limits</a></li>
-<li><a href="#deleting-a-person">H.12. Deleting a person</a></li>
-<li><a href="#deleting-all-records-whose-date-is-required">H.13. Deleting all records whose date is required.</a></li>
-<li><a href="#archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.14. Archiving records data from Savee to Excel file and store it in a specific directory.</a></li>
-<li><a href="#import-all-record-data-from-excel-file-to-savee">H.15. Import all record data from Excel file to Savee</a></li>
-<li><a href="#exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.16. Exporting records data from Savee to Excel file and store it in a specific directory.</a></li>
-<li><a href="#saving-data">H.17. Saving data</a></li>
+<li><a href="#editing-an-existing-normal-limit">H.6. Editing an existing normal limit</a></li>
+<li><a href="#deleting-an-existing-normal-limit">H.7. Deleting an existing normal limit</a></li>
+<li><a href="#adding-a-monthly-limit">H.8. Adding a monthly limit</a></li>
+<li><a href="#deleting-the-monthly-limit">H.9. Deleting the monthly limit</a></li>
+<li><a href="#checking-all-the-limits">H.10. Checking all the limits</a></li>
+<li><a href="#deleting-all-records-whose-date-is-required">H.11. Deleting all records whose date is required.</a></li>
+<li><a href="#archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.12. Archiving records data from Savee to Excel file and store it in a specific directory.</a></li>
+<li><a href="#import-all-record-data-from-excel-file-to-savee">H.13. Import all record data from Excel file to Savee</a></li>
+<li><a href="#exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.14. Exporting records data from Savee to Excel file and store it in a specific directory.</a></li>
+<li><a href="#saving-data">H.15. Saving data</a></li>
 </ul>
 </li>
 </ul>
@@ -1576,7 +1574,7 @@ The command will read in a limit with the input dates and delete the limit with 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/DeleteLimitSequenceDiagram.png" alt="width:800">
+<img src="images/deleteLimitSequenceDiagram.png" alt="width:800">
 </div>
 </div>
 </div>
@@ -1604,7 +1602,7 @@ The command will read in a limit and replace the limit with the same dates by ca
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/EditLimitSequenceDiagram.png" alt="width:800">
+<img src="images/editLimitSequenceDiagram.png" alt="width:800">
 </div>
 </div>
 </div>
@@ -5572,18 +5570,12 @@ should allow you to navigate to the hidden tags within the legend.</p>
 <p>Test case: Add any record with date in current month/ Delete any record with date in current month/ Edit any record to a date in current month/ Clear</p>
 </li>
 <li>
-<p>Expected: Panel should show the welcome screen.</p>
+<p>Expected: Panel should show the welcome screen.
+=== Adding a normal limit</p>
 </li>
 </ol>
 </div>
 </li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="adding-a-normal-limit"><a class="link" href="#adding-a-normal-limit">H.6. Adding a normal limit</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
 <li>
 <p>Adding a normal limit to the Financial Planner without the same time period limits inside.</p>
 <div class="olist loweralpha">
@@ -5653,7 +5645,7 @@ Expected: No limit will be added, related error information will be displayed.</
 </div>
 </div>
 <div class="sect2">
-<h3 id="editing-an-existing-normal-limit"><a class="link" href="#editing-an-existing-normal-limit">H.7. Editing an existing normal limit</a></h3>
+<h3 id="editing-an-existing-normal-limit"><a class="link" href="#editing-an-existing-normal-limit">H.6. Editing an existing normal limit</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5740,7 +5732,7 @@ Expected: No limit will be edited, related error information will be displayed.<
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-an-existing-normal-limit"><a class="link" href="#deleting-an-existing-normal-limit">H.8. Deleting an existing normal limit</a></h3>
+<h3 id="deleting-an-existing-normal-limit"><a class="link" href="#deleting-an-existing-normal-limit">H.7. Deleting an existing normal limit</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5797,7 +5789,7 @@ Expected: No limit will be deleted, related error information will be displayed.
 </div>
 </div>
 <div class="sect2">
-<h3 id="adding-a-monthly-limit"><a class="link" href="#adding-a-monthly-limit">H.9. Adding a monthly limit</a></h3>
+<h3 id="adding-a-monthly-limit"><a class="link" href="#adding-a-monthly-limit">H.8. Adding a monthly limit</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5881,7 +5873,7 @@ Expected: The monthly limit will not be edited, related error information will b
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-the-monthly-limit"><a class="link" href="#deleting-the-monthly-limit">H.10. Deleting the monthly limit</a></h3>
+<h3 id="deleting-the-monthly-limit"><a class="link" href="#deleting-the-monthly-limit">H.9. Deleting the monthly limit</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5911,7 +5903,7 @@ Expected: The monthly limit will not be deleted, no monthly limit error message 
 </div>
 </div>
 <div class="sect2">
-<h3 id="checking-all-the-limits"><a class="link" href="#checking-all-the-limits">H.11. Checking all the limits</a></h3>
+<h3 id="checking-all-the-limits"><a class="link" href="#checking-all-the-limits">H.10. Checking all the limits</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5930,18 +5922,12 @@ Expected: The monthly limit will be deleted.</p>
 </li>
 <li>
 <p>Test case: <code>checklimit</code><br>
-Expected: The limits' detailed information will not be displayed, no limit in the list error message will be displayed.</p>
+   Expected: The limits' detailed information will not be displayed, no limit in the list error message will be displayed.
+=== Deleting a person</p>
 </li>
 </ol>
 </div>
 </li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="deleting-a-person"><a class="link" href="#deleting-a-person">H.12. Deleting a person</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
 <li>
 <p>Deleting a records while all records are listed</p>
 <div class="olist loweralpha">
@@ -5968,7 +5954,7 @@ Expected: Similar to previous.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="deleting-all-records-whose-date-is-required"><a class="link" href="#deleting-all-records-whose-date-is-required">H.13. Deleting all records whose date is required.</a></h3>
+<h3 id="deleting-all-records-whose-date-is-required"><a class="link" href="#deleting-all-records-whose-date-is-required">H.11. Deleting all records whose date is required.</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -6006,7 +5992,7 @@ Expected: Invalid date entered. Error indicating invalid command format and noti
 </div>
 </div>
 <div class="sect2">
-<h3 id="archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory"><a class="link" href="#archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.14. Archiving records data from Savee to Excel file and store it in a specific directory.</a></h3>
+<h3 id="archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory"><a class="link" href="#archiving-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.12. Archiving records data from Savee to Excel file and store it in a specific directory.</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -6067,7 +6053,7 @@ Expected: Invalid command entered. Error indicating invalid command format is sh
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-all-record-data-from-excel-file-to-savee"><a class="link" href="#import-all-record-data-from-excel-file-to-savee">H.15. Import all record data from Excel file to Savee</a></h3>
+<h3 id="import-all-record-data-from-excel-file-to-savee"><a class="link" href="#import-all-record-data-from-excel-file-to-savee">H.13. Import all record data from Excel file to Savee</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -6100,7 +6086,7 @@ Expected: Invalid date entered. Error indicating invalid command format. Status 
 </div>
 </div>
 <div class="sect2">
-<h3 id="exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory"><a class="link" href="#exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.16. Exporting records data from Savee to Excel file and store it in a specific directory.</a></h3>
+<h3 id="exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory"><a class="link" href="#exporting-records-data-from-savee-to-excel-file-and-store-it-in-a-specific-directory">H.14. Exporting records data from Savee to Excel file and store it in a specific directory.</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -6161,7 +6147,7 @@ Expected: Invalid command entered. Error indicating invalid command format is sh
 </div>
 </div>
 <div class="sect2">
-<h3 id="saving-data"><a class="link" href="#saving-data">H.17. Saving data</a></h3>
+<h3 id="saving-data"><a class="link" href="#saving-data">H.15. Saving data</a></h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -6191,4 +6177,4 @@ Then, open the app.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:50:13 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:54:02 UTC</div></div></div></body></html>

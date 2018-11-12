@@ -11,8 +11,10 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>FinancialPlanner is a PC software specially designed for students who love typing.
-This purpose of this product is to help users better manage their finances, including their daily spend and income.
-Users are able to record their finances and modify these records, set and modify limits, summarize their financial status and export their records into excel file.
+This purpose of this product is to help users better manage their finances, including their daily spend and income.</p>
+</div>
+<div class="paragraph">
+<p>Users are able to record their finances and modify these records, set and modify limits, summarize their financial status and export their records into excel file.
 The product is based on Command Line Interface (CLI), users are able input their commands and related information at the TextBox.
 Graphic User Interface is used for displaying statistic and other information, which will provide user with a clear and direct understanding about their financial status.
 This product is user-friendly, the command can be automatically completed, limits will check automatically and report any exceeded limits' details.
@@ -100,7 +102,7 @@ two dates.</p>
 <ul>
 <li>
 <p>What it does: allows the user to set the continuous monthly limit which will always check the total spending for the
-current month. For example, if the limit was set to be 200 at April, the limit will check the total spend for April.
+current month. For example, if the limit was set to be 200 at April, the limit will check the total spend for April in April.
 When the time comes to May, the limit will no longer check April, instead, the limit
 will check the total spend of May until the last second of May.
 The user will be reminded if the monthly limits have been exceeded and the monthly limit will always be placed at the top of limits' information.</p>
@@ -658,7 +660,7 @@ The command will read in a limit with the input dates and delete the limit with 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/DeleteLimitSequenceDiagram.png" alt="width:800">
+<img src="../images/deleteLimitSequenceDiagram.png" alt="width:800">
 </div>
 </div>
 </div>
@@ -686,7 +688,7 @@ The command will read in a limit and replace the limit with the same dates by ca
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="../images/EditLimitSequenceDiagram.png" alt="width:800">
+<img src="../images/editLimitSequenceDiagram.png" alt="width:800">
 </div>
 </div>
 </div>
@@ -807,9 +809,843 @@ manualLimitCheck(), which will generate a string that contains all limits' infor
 <img src="../images/checkLimitSequenceDiagram.png" alt="width:800">
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="13-use-case-create-a-normal-limit-for-a-period-of-time-or-a-day"><a class="link" href="#13-use-case-create-a-normal-limit-for-a-period-of-time-or-a-day">13. Use case: Create a normal limit for a period of time or a day</a></h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to create a normal limit for expenses different period of time or a day.</p>
+</li>
+<li>
+<p>Savee requests for the dateStart and dateEnd of that period of time or the date of the day and the maximum amount of spending.</p>
+</li>
+<li>
+<p>User enters the dateStart and dateEnd or the date and the amount of spending.</p>
+</li>
+<li>
+<p>Savee records the limit in the hard drive.</p>
+</li>
+<li>
+<p>Savee keeps tracking the spending during limit&#8217;s date period of time or that day.</p>
+</li>
+<li>
+<p>Savee warns user when the total spend exceeds the limit amount of spending.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s input command is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. User&#8217;s input parameters are missing or invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and notifies user of the correct format.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. The dateStart is later than dateEnd.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows date error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3c. There is already a limit for the time period or the day.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows redundant limit error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="14-use-case-edit-an-existing-normal-limit" class="discrete">14. Use case: Edit an existing normal limit</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to edit an existing normal limit.</p>
+</li>
+<li>
+<p>Savee requests for the new maximum amount of spending for the period of time or the day.</p>
+</li>
+<li>
+<p>User enters the dateStart and dateEnd or the date and the new amount of spending.</p>
+</li>
+<li>
+<p>Savee updates the new limit in the hard drive.</p>
+</li>
+<li>
+<p>Savee keeps tracking the spending during the limit&#8217;s date period of time or that day.</p>
+</li>
+<li>
+<p>Savee warns user when the total spend exceeds the limit amount of spending.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s input command is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. User&#8217;s input parameters are missing or invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and notifies user of the correct format.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. The dateStart is later than dateEnd.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows date error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3c. There is no existing limit for the time period or the day.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows no existing limit error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3d. The edit limit is exactly the same as the original one.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows same limit error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="15-use-case-delete-an-existing-limit" class="discrete">15. Use case: Delete an existing limit</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to delete an existing limit.</p>
+</li>
+<li>
+<p>Savee requests for the date period of the limit to be deleted.</p>
+</li>
+<li>
+<p>User enters the dateStart and dateEnd or the date.</p>
+</li>
+<li>
+<p>Savee deletes the limit in the hard drive.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s input command is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. User&#8217;s input parameters are missing or invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and notifies user of the correct format.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. The dateStart is later than dateEnd.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows date error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3c. There is no existing limit for the time period or the day.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows no existing limit error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="16-use-case-add-a-monthly-limit" class="discrete">16. Use case: Add a monthly limit</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to add the monthly limit.</p>
+</li>
+<li>
+<p>Savee requests the monthly maximum amount of spending.</p>
+</li>
+<li>
+<p>User enters the maximum amount of spending.</p>
+</li>
+<li>
+<p>Savee adds the monthly limit.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s input command is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. User&#8217;s input parameters are missing or invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and notifies user of the correct format.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. There is already a monthly limit.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows existing monthly limit error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="17-use-case-edit-the-monthly-limit" class="discrete">17. Use case: Edit the monthly limit</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to edit the monthly limit.</p>
+</li>
+<li>
+<p>Savee requests the new monthly maximum amount of spending.</p>
+</li>
+<li>
+<p>User enters the new maximum amount of spending.</p>
+</li>
+<li>
+<p>Savee updates the monthly limit.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s input command is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3a. User&#8217;s input parameters are missing or invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and notifies user of the correct format.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>3b. There is no monthly limit.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows no monthly limit error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="18-use-case-delete-the-monthly-limit" class="discrete">18. Use case: Delete the monthly limit</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to delete the monthly limit.</p>
+</li>
+<li>
+<p>Savee updates the monthly limit.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>Extensions</strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1a. User’s input command is invalid.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System throws invalid command error and shows an example command input needed.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>2a. There is no monthly limit.<br></p>
+<div class="ulist">
+<ul>
+<li>
+<p>System shows no monthly limit error.</p>
+</li>
+<li>
+<p>Use case ends.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<h3 id="19-use-case-check-all-the-existing-limits" class="discrete">19. Use case: Check all the existing limits</h3>
+<div class="paragraph">
+<p><strong>MSS</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>User requests to check all the existing limits.</p>
+</li>
+<li>
+<p>Savee displays all the existing limits.</p>
+<div class="paragraph">
+<p>Use case ends.</p>
+</div>
+</li>
+</ol>
+</div>
+<h3 id="adding-a-normal-limit" class="discrete">Adding a normal limit</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a normal limit to the Financial Planner without the same time period limits inside.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
+There is no limit with date period "11-11-2018&#8201;&#8212;&#8201;17-11-2018" and "12-11-2018".</p>
+</li>
+<li>
+<p>Test case: <code>addlimit d/11-11-2018 17-11-2018 m/100</code><br>
+Expected: The information shows that the new limit has been added followed by detailed information about the newly added limit.</p>
+</li>
+<li>
+<p>Test case: <code>addlimit d/12-11-2018 m/200</code><br>
+Expected: The information shows that the new limit has been added followed by detailed information about the newly added limit.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Trying to add a normal limit to the Financial Planner with command errors.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>addlimit d/17-11-2018 11-11-2018 m/200</code><br>
+Expected: No limit will be added. Error message about the dateStart must be earlier than dateEnd will be displayed.</p>
+</li>
+<li>
+<p>Test case: <code>addlimit d/11-11-2018 17-11-2018 m/+200</code><br>
+Expected: No limit will be added. Error message about wrong type of limit MoneyFlow will be displayed.</p>
+</li>
+<li>
+<p>Test case: <code>addlimit d/11-11-2018 17-11-2018</code><br>
+Expected: No limit will be added. Error message about wrong addlimit command format will be displayed.</p>
+</li>
+<li>
+<p>Test case: <code>addlimit 11-11-2018 17-11-2018 m/100</code><br>
+Expected: No limit will be added. Error message about wrong addlimit command format will be displayed.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Trying to add a normal limit to the Financial Planner with the same time period limits inside.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
+There are existing limits with date period "11-11-2018&#8201;&#8212;&#8201;17-11-2018" and "12-11-2018".</p>
+</li>
+<li>
+<p>Test case: <code>addlimit d/11-11-2018 17-11-2018 m/100</code><br>
+Expected: No limit will be added.  Error message about already existing limit will be displayed.</p>
+</li>
+<li>
+<p>Test case: <code>addlimit d/12-11-2018 m/100</code><br>
+Expected: No limit will be added.  Error message about already existing limit will be displayed.</p>
+</li>
+<li>
+<p>Other incorrect delete commands to try: <code>addlimit asd `, `addlimit x</code> (where x is an integer), <code>addlimit x/12-11-2018 m/asd</code><br>
+Expected: No limit will be added, related error information will be displayed.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="editing-an-existing-normal-limit"><a class="link" href="#editing-an-existing-normal-limit">Editing an existing normal limit</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Editing an existing normal limit in the Financial Planner</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
+There are limits with date period "11-11-2018&#8201;&#8212;&#8201;17-11-2018" with the limit MoneyFlow isn&#8217;t "100" and "12-11-2018" with the limit MoneyFlow isn&#8217;t "200".</p>
+</li>
+<li>
+<p>Test case: <code>editlimit d/11-11-2018 17-11-2018 m/100</code><br>
+Expected: The information shows that the limit has been edited followed by detailed information about both the original limit and the new limit.</p>
+</li>
+<li>
+<p>Test case: <code>editlimit d/12-11-2018 m/200</code><br>
+Expected: The information shows that the limit has been edited followed by detailed information about both the original limit and the new limit.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Trying to edit a normal limit in the Financial Planner with command errors.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>editlimit d/17-11-2018 11-11-2018 m/200</code><br>
+Expected: No limit will be edited. Error message about the dateStart must be earlier than dateEnd will be displayed.</p>
+</li>
+<li>
+<p>Test case: <code>editlimit d/11-11-2018 17-11-2018 m/+200</code><br>
+Expected: No limit will be edited. Error message about wrong type of limit MoneyFlow will be displayed.</p>
+</li>
+<li>
+<p>Test case: <code>editlimit d/11-11-2018 17-11-2018</code><br>
+Expected: No limit will be edited. Error message about wrong editlimit command format will be displayed.</p>
+</li>
+<li>
+<p>Test case: <code>editlimit 11-11-2018 17-11-2018 m/200</code><br>
+Expected: No limit will be edited. Error message about wrong editlimit command format will be displayed.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Trying to edit a normal limit in the Financial Planner with wrong command format.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
+There is no existing limit with date period "11-11-2018&#8201;&#8212;&#8201;17-11-2018" and "12-11-2018".</p>
+</li>
+<li>
+<p>Test case: <code>editlimit d/11-11-2018 17-11-2018 m/100</code><br>
+Expected: No limit will be edited. Error message about no existing limit will be displayed.</p>
+</li>
+<li>
+<p>Test case: <code>editlimit d/12-11-2018 m/100</code><br>
+Expected: No limit will be edited. Error message about no existing limit will be displayed.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Trying to edit a normal limit in the Financial Planner with the same limit inside.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
+There is no existing limit with date period "11-11-2018&#8201;&#8212;&#8201;17-11-2018"  with the limit MoneyFlow isn&#8217;t "100".</p>
+</li>
+<li>
+<p>Test case: <code>editlimit d/11-11-2018 17-11-2018 m/100</code><br>
+Expected: No limit will be edited. Error message about same limit will be displayed.</p>
+</li>
+<li>
+<p>Other incorrect delete commands to try: <code>editlimit asd `, `editlimit x</code> (where x is an integer), <code>editlimit x/12-11-2018 m/asd</code><br>
+Expected: No limit will be edited, related error information will be displayed.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-an-existing-normal-limit"><a class="link" href="#deleting-an-existing-normal-limit">Deleting an existing normal limit</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deleting an existing normal limit in the Financial Planner</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
+There are limits with date period "11-11-2018&#8201;&#8212;&#8201;17-11-2018" and "12-11-2018".</p>
+</li>
+<li>
+<p>Test case: <code>deletelimit d/11-11-2018 17-11-2018</code><br>
+Expected: The information shows that the limit has been deleted.</p>
+</li>
+<li>
+<p>Test case: <code>deletelimit d/12-11-2018</code><br>
+Expected: The information shows that the limit has been deleted.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Trying to delete a normal limit in the Financial Planner with command format error.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>deletelimit d/17-11-2018 11-11-2018</code><br>
+Expected: No limit will be edited. Error message about the dateStart must be earlier than dateEnd will be displayed.</p>
+</li>
+<li>
+<p>Test case: <code>deletelimit 11-11-2018 17-11-2018 m/100</code><br>
+Expected: No limit will be edited. Error message about wrong deletelimit command format will be displayed.</p>
+</li>
+<li>
+<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
+There is no existing limit with date period "11-11-2018&#8201;&#8212;&#8201;17-11-2018" and "12-11-2018".</p>
+</li>
+<li>
+<p>Test case: <code>deletelimit d/11-11-2018 17-11-2018</code><br>
+Expected: No limit will be edited. Error message about no existing limit will be displayed.</p>
+</li>
+<li>
+<p>Test case: <code>deletelimit d/12-11-2018</code><br>
+Expected: No limit will be edited. Error message about no existing limit will be displayed.</p>
+</li>
+<li>
+<p>Other incorrect delete commands to try: <code>deletelimit asd `, `deletelimit x</code> (where x is an integer), <code>deletelimit x/12-11-2018 m/asd</code><br>
+Expected: No limit will be deleted, related error information will be displayed.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="adding-a-monthly-limit"><a class="link" href="#adding-a-monthly-limit">Adding a monthly limit</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Adding a monthly limit to the Financial Planner</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
+There is no monthly limit in the FinancialPlanner.</p>
+</li>
+<li>
+<p>Test case: <code>addmonthlylimit m/500</code><br>
+Expected: The monthly limit will be added, detailed monthly limit&#8217;s information will be displayed.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Trying to add a monthly limit to the Financial Planner with command format error.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>addmonthlylimit 500</code><br>
+Expected: No limit will be edited. Error message about wrong addmonthlylimit command format will be displayed.</p>
+</li>
+<li>
+<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
+There is already an existing monthly limit.</p>
+</li>
+<li>
+<p>Test case: <code>addmonthlylimit m/200</code><br>
+Expected: No limit will be edited. Error message about existing monthly limit will be displayed.</p>
+</li>
+<li>
+<p>Other incorrect delete commands to try: <code>addmonthlylimit asd `, `addmonthlylimit  m/asd</code><br>
+   Expected: The monthly limit will not be added, related error information will be displayed.
+=== Editing the monthly limit</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Editing the monthly limit existing the Financial Planner</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
+There is already a monthly limit in the FinancialPlanner.</p>
+</li>
+<li>
+<p>Test case: <code>editmonthlylimit m/500</code><br>
+Expected: The monthly limit will be edited, detailed information for both original monthly limit and new monthly limit will be displayed.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Trying to edit the monthly limit in the Financial Planner with command format error.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Test case: <code>editmonthlylimit 500</code><br>
+Expected: No limit will be edited. Error message about wrong editmonthlylimit command format will be displayed.</p>
+</li>
+<li>
+<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
+There is no existing monthly limit.</p>
+</li>
+<li>
+<p>Test case: <code>editmonthlylimit m/200</code><br>
+Expected: No limit will be edited. Error message about no monthly limit will be displayed.</p>
+</li>
+<li>
+<p>Other incorrect delete commands to try: <code>editmonthlylimit asd `, `editmonthlylimit m/asd</code><br>
+Expected: The monthly limit will not be edited, related error information will be displayed.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="deleting-the-monthly-limit"><a class="link" href="#deleting-the-monthly-limit">Deleting the monthly limit</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deleting the monthly limit existing the Financial Planner</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
+There is already a monthly limit in the FinancialPlanner.</p>
+</li>
+<li>
+<p>Test case: <code>deletemonthlylimit</code><br>
+Expected: The monthly limit will be deleted.</p>
+</li>
+<li>
+<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
+There is no existing monthly limit.</p>
+</li>
+<li>
+<p>Test case: <code>deletemonthlylimit</code><br>
+Expected: The monthly limit will not be deleted, no monthly limit error message will be displayed.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="checking-all-the-limits"><a class="link" href="#checking-all-the-limits">Checking all the limits</a></h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Checking all limits</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Prerequisites: There are limits inside the LimitList.</p>
+</li>
+<li>
+<p>Test case: <code>checklimit</code><br>
+Expected: The monthly limit will be deleted.</p>
+</li>
+<li>
+<p>Prerequisites: No limits inside the limit list.</p>
+</li>
+<li>
+<p>Test case: <code>checklimit</code><br>
+Expected: The limits' detailed information will not be displayed, no limit in the list error message will be displayed.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
 <hr>
 </div>
 </div>
-</div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:50:13 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:54:02 UTC</div></div></div></body></html>
