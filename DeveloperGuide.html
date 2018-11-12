@@ -38,9 +38,9 @@
 <li><a href="#find-records-by-tag-feature">3.7. Find records by tag feature</a></li>
 <li><a href="#limit-features">3.8. Limit features</a></li>
 <li><a href="#delete-all-the-record-whose-date-is-required">3.9. Delete all the record whose date is required</a></li>
-<li><a href="#export-the-records-from-financial-planner-into-the-excel-file">3.10. Export the records from Financial Planner into the Excel file.</a></li>
-<li><a href="#import-the-record-data-from-the-excel-file-to-the-financial-planner">3.11. Import the record data from the Excel file to the Financial Planner</a></li>
-<li><a href="#archive-the-record-data-from-financial-planner-to-the-excel-file">3.12. Archive the record data from Financial Planner to the Excel file</a></li>
+<li><a href="#export-the-records-from-savee-to-the-excel-file">3.10. Export the records from Savee to the Excel file.</a></li>
+<li><a href="#import-the-record-data-from-the-excel-file-to-savee">3.11. Import the record data from the Excel file to Savee</a></li>
+<li><a href="#archive-the-record-data-from-savee-to-the-excel-file">3.12. Archive the record data from Savee to the Excel file</a></li>
 <li><a href="#draw-a-line-chart-automatically-inside-the-excel-sheet">3.13. Draw a line chart automatically inside the Excel sheet</a></li>
 <li><a href="#proposed-data-encryption">3.14. [Proposed] Data Encryption</a></li>
 <li><a href="#logging">3.15. Logging</a></li>
@@ -1734,23 +1734,14 @@ manualLimitCheck(), which will generate a string that contains all limits' infor
 <h4 id="current-implementation-13"><a class="link" href="#current-implementation-13">3.9.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The delete by date entry mechanism is facilitated by <code>ModelManager</code>.
-It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>.</p>
-</div>
-<div class="paragraph">
-<p>DeleteByDateEntryCommand calls <code>ModelManager#getFilteredRecordList</code> to retrieve the list of all current records in the Financial Planner. Then, it will loop through the list of records and call <code>ModelManger#deleteRecord(Record record)</code> to delete the record whose date is required.</p>
-</div>
-<div class="paragraph">
-<p>If there exists target records, <code>ModelManager#commitFinancialPlanner</code> will be called to update the current version of Financial Planner and the message, which states records have been deleted. Then, <code>ModelManager#autoLimitCheck</code> will be called to check the current change in limit as we delete some records exceeds the limit or not.</p>
-</div>
-<div class="paragraph">
-<p>This feature has only one keyword <code>deletedate</code> and implements only 1 argument mode.
+It represents an in-memory model of Savee and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>. DeleteByDateEntryCommand calls <code>ModelManager#getFilteredRecordList</code> to retrieve the list of all current records in the Savee. Then, it will loop through the list of records and call <code>ModelManger#deleteRecord(Record record)</code> to delete the record whose date is required. If there exists target records, <code>ModelManager#commitFinancialPlanner</code> will be called to update the current version of Savee and the message, which states records have been deleted. Then, <code>ModelManager#autoLimitCheck</code> will be called to check the current change in limit as we delete some records exceeds the limit or <strong>not</strong>. This feature has only one keyword <code>deletedate</code> and implements only 1 argument mode.
 The three argument modes are as listed below:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
 <p>Single Argument mode&#8201;&#8212;&#8201;Requires only one date. It deletes all records whose date is required.
-The date must follow the format: dd-mm-yyyy, error will be thrown if the format is not correct or the date entered is not real.</p>
+The date must follow the format: dd-mm-yyyy, error will be thrown if the format is <strong>not</strong> correct or the date entered is <strong>not</strong> real.</p>
 </li>
 </ul>
 </div>
@@ -1765,32 +1756,14 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-the-records-from-financial-planner-into-the-excel-file"><a class="link" href="#export-the-records-from-financial-planner-into-the-excel-file">3.10. Export the records from Financial Planner into the Excel file.</a></h3>
+<h3 id="export-the-records-from-savee-to-the-excel-file"><a class="link" href="#export-the-records-from-savee-to-the-excel-file">3.10. Export the records from Savee to the Excel file.</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-14"><a class="link" href="#current-implementation-14">3.10.1. Current implementation</a></h4>
 <div class="paragraph">
-<p>The export into excel file mechanism is facilitated by <code>ModelManager</code> with the help of <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, <code>ExcelUtil</code> and the <code>VersionedFinancialPlanner</code>.</p>
+<p>The export into excel file mechanism is facilitated by <code>ModelManager</code> with the help of <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It represents an in-memory model of the Savee and is the component which manages the interactions between the commands, <code>ExcelUtil</code> and the <code>VersionedFinancialPlanner</code>. ExportExcelCommand calls <code>ModelManager#updateFilteredRecords</code> and passes in different predicates depending on the argument mode. The List&lt;Record&gt; is retrieved by calling <code>ModelManager#getFilteredRecordList</code>. Meanwhile, it also called <code>ModelManager#getFinancialPlanner</code> to get the <code>ReadOnlyFinancialPlanner</code>. The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List&lt;SummaryEntry&gt; is easily retrieved from SummaryByDateList by calling <code>SummaryByDateList#getSummaryList</code>. <code>ExcelUtil#setNameExcelFile</code> is called to make the Excel name based on the condition of startDate and endDate. After that, <code>ExcelUtil#setPathFile</code> is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default <strong>User&#8217;s Working Directory</strong>. With the sufficient information, <code>List&lt;Record&gt; records</code>, <code>List&lt;SummaryByDateEntry&gt; summaryList</code>, <code>file path</code>, <code>ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords</code> is called to start the processing of producing Excel file.</p>
 </div>
 <div class="paragraph">
-<p>ExportExcelCommand calls <code>ModelManager#updateFilteredRecords</code> and passes in different predicates depending on the argument mode. The List&lt;Record&gt; is retrieved by calling <code>ModelManager#getFilteredRecordList</code>.</p>
-</div>
-<div class="paragraph">
-<p>Meanwhile, it also called <code>ModelManager#getFinancialPlanner</code> to get the <code>ReadOnlyFinancialPlanner</code> Financial Planner.</p>
-</div>
-<div class="paragraph">
-<p>The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List&lt;SummaryEntry&gt; is easily retrieved from SummaryByDateList by calling <code>SummaryByDateList#getSummaryList</code>.</p>
-</div>
-<div class="paragraph">
-<p><code>ExcelUtil#setNameExcelFile</code> is called to make the Excel name based on the condition of startDate and endDate.</p>
-</div>
-<div class="paragraph">
-<p>After that, <code>ExcelUtil#setPathFile</code> is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User&#8217;s Working Directory.</p>
-</div>
-<div class="paragraph">
-<p>With the sufficient information, <code>List&lt;Record&gt; records</code>, <code>List&lt;SummaryByDateEntry&gt; summaryList</code>, <code>file path</code>, <code>ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords</code> is called to start the processing of producing Excel file.</p>
-</div>
-<div class="paragraph">
-<p>The mechanism that facilitates these modes can be found in the <code>ExportExcelCommandParser#parse</code>. Below is a overview of the mechanism:</p>
+<p>There are 6 modes for this feature [refer to <strong>Export the record data from Savee to the Excel file</strong> part in <strong>User Guide</strong>]. The mechanism that facilitates these modes can be found in the <code>ExportExcelCommandParser#parse</code>. Below is a overview of the mechanism:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1808,13 +1781,7 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>It is then passed into <code>ExportExcelCommandParser#splitByWhitespace</code> for further processing and returns an array. This string will be split into sub-strings and each of them will be construct as a date type variable. The the size of the array exceed 2, error wil be thrown to inform invalid command format.</p>
-</li>
-<li>
-<p>If the size of the string equals 1, it is constructed as a date type variable after being passed to <code>ParseUtil#parseDate</code>, it must follow the format dd-mm-yyyy. Error will be thrown if the format is not correct or the date entered is not real.</p>
-</li>
-<li>
-<p>If the size of the string equals 2, each sub-string is constructed as a date type variable after being passed to <code>ParseUtil#parseDate</code>, and an additional check is conducted to check if the first date entered, known as Start date is smaller than the second date entered, known as End Date.</p>
+<p>It is then passed into <code>ExportExcelCommandParser#splitByWhitespace</code> for further processing and returns an array. This string will be split into sub-strings and each of them will be construct as a date type variable. The the size of the array exceed 2, error wil be thrown to inform invalid command format. <strong>If the size of the string equals 1</strong>, it is constructed as a date type variable after being passed to <code>ParseUtil#parseDate</code>, it must follow the format dd-mm-yyyy. Error will be thrown if the format is <strong>not</strong> correct or the date entered is <strong>not</strong> real. <strong>If the size of the string equals 2</strong>, each sub-string is constructed as a date type variable after being passed to <code>ParseUtil#parseDate</code>, and an additional check is conducted to check if the first date entered, known as Start date is smaller than or equal to the second date entered, known as End Date.</p>
 </li>
 </ol>
 </div>
@@ -1824,10 +1791,7 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>It is then passed into <code>ParseUtil#parseDirectoryString</code> to check if the Directory path given is existing.</p>
-</li>
-<li>
-<p>If the Directory is unreal, an error is thrown to inform the user.</p>
+<p>It is then passed into <code>ParseUtil#parseDirectoryString</code> to check if the Directory path given is existing. <strong>If the Directory path is unreal</strong>, an error is thrown to inform the user.</p>
 </li>
 </ol>
 </div>
@@ -1837,10 +1801,10 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>If the prefix <code>d/</code> is not entered in the input, meaning that all the records will be included in the Excel sheet.</p>
+<p>If the prefix <code>d/</code> is <strong>not</strong> entered in the input, meaning that all the records will be included in the Excel sheet.</p>
 </li>
 <li>
-<p>If the prefix <code>dir/</code> is not entered in the input, meaning that the Directory Path is default as the <strong>User&#8217;s Working Directory</strong>.</p>
+<p>If the prefix <code>dir/</code> is <strong>not</strong> entered in the input, meaning that the Directory Path is default as the <strong>User&#8217;s Working Directory</strong>.</p>
 </li>
 </ol>
 </div>
@@ -1875,58 +1839,23 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 <img src="images/ExportExcelSequenceDiagram.png" alt="width:800">
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Please note that the <code>undo</code> and <code>redo</code> command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter <code>undo</code> command after you enter the <code>exportexcel</code> command, the Excel file created will not be deleted.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>If the Excel file with the same name and stored in same Directory exists, it will be overwritten. However, it <strong>must</strong> be closed before we enter the command.<br></p>
+</div>
+<div class="paragraph">
+<p>Please note that <code>undo</code> and <code>redo</code> command can only affect Savee but the <strong>not</strong> the Excel file created, meaning that when you enter <code>undo</code> command after you enter the <code>export</code> command, Savee will inform the user that <strong>No more command to undo</strong>, the records remain the same and the Excel file created will <strong>not</strong> be deleted.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-the-record-data-from-the-excel-file-to-the-financial-planner"><a class="link" href="#import-the-record-data-from-the-excel-file-to-the-financial-planner">3.11. Import the record data from the Excel file to the Financial Planner</a></h3>
+<h3 id="import-the-record-data-from-the-excel-file-to-savee"><a class="link" href="#import-the-record-data-from-the-excel-file-to-savee">3.11. Import the record data from the Excel file to Savee</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-15"><a class="link" href="#current-implementation-15">3.11.1. Current implementation</a></h4>
 <div class="paragraph">
-<p>The import from Excel file mechanism is facilitated by <code>ExcelUtil</code>, the utility created to handle all method relating to Excel.</p>
+<p>The import from Excel file mechanism is facilitated by <code>ExcelUtil</code>, the utility created to handle all method relating to Excel. ImportExcelCommand calls <code>ExcelUtil#readExcelSheet</code> to read the Excel file and retrieve data of records from them to create a list of record List&lt;Record&gt;. In <code>ExcelUtil#readExcelSheet</code>, by using method <code>XSSFWorkbook#setMissingCellPolicy</code>, every missing cell will be considered as Null cell, quite useful when you export or archive the record data if the record does <strong>not</strong> have tag. If blank row is found, the <code>ExcelUtil#readExcelSheet</code> will ignore and read the next line, until the last line is read. This concept also applies to read multiple sheets until all sheets have been read. However, please take note that in order to prevent errors, there are certain constraints of Excel file list in <strong>User Guide</strong> with <strong>Import the record data from the Excel file to the Savee</strong> part. After that, <code>ModelManager#addListUniqueRecord</code> is called to add the records in the List&lt;Record&gt;. If the record has already existed in the Savee, it will be ignored and <strong>not</strong> added into the Savee. Eventually, when all the records are added in the Savee, <code>ModelManager#commitFinancialPlanner</code> will be called to update the current version of Savee and the message, which states records have been added.</p>
 </div>
 <div class="paragraph">
-<p>ImportExcelCommand calls <code>ExcelUtil#readExcelSheet</code> to read the Excel file and retrieve data of records from them to create a list of record List&lt;Record&gt;.</p>
-</div>
-<div class="paragraph">
-<p>In <code>ExcelUtil#readExcelSheet</code>, by using method <code>XSSFWorkbook#setMissingCellPolicy</code>, every missing cell will be considered as Null cell, quite useful when you export or archive the record data if the record does not have tag.</p>
-</div>
-<div class="paragraph">
-<p>If blank row is found, the <code>ExcelUtil#readExcelSheet</code> will ignore and read the next line, until the last line is read. This concept also applies to read multiple sheets until all sheets have been read.</p>
-</div>
-<div class="paragraph">
-<p>However, please take note that in order to prevent errors, every sheet that user want to read have to set the First row of the table <strong>must</strong> have 4 cells, namely NAME, DATE, MONEY, TAGS. These 4 columns can be case-insensitive. The sheet with records data but does not have the first row, NAME, DATE, MONEY, TAGS will <strong>not</strong> be read.</p>
-</div>
-<div class="paragraph">
-<p>After that, <code>ModelManager#addListUniqueRecord</code> is called to add the records in the List&lt;Record&gt;. If the record has already existed in the Financial Planner, it will be ignored and not added into the Financial Planner.</p>
-</div>
-<div class="paragraph">
-<p>Eventually, when all the records are added in the Financial Planner, <code>ModelManager#commitFinancialPlanner</code> will be called to update the current version of Financial Planner and the message, which states records have been added.</p>
-</div>
-<div class="paragraph">
-<p>This feature has only one keyword <code>archive</code> but implements 2 different argument modes to allow users to access multiple versions of the same command.
-The two argument modes are as listed below:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Single argument File Path mode</strong> <code>import dir/FILE_PATH</code> will open the Excel file using the given File Path, import all records in the Financial Planner and check if these records exist in the Financial Planner, then exports all of non-existent records to Financial Planner.</p>
-</li>
-<li>
-<p><strong>Single argument File Path + single argument File name mode</strong> <code>import dir/DIRECTORY_PATH  n/NAME_FILE</code> will open the Excel file using the given Directory path and given file name, import all records in the Financial Planner and check if these records exist in the Financial Planner, then exports all of non-existent records to Financial Planner.</p>
-<div class="paragraph">
-<p>The mechanism that facilitates these modes can be found in the <code>ImportExcelCommandParser#parse</code>. Below is a overview of the mechanism:</p>
+<p>This feature has 2 different modes [refer to in <strong>Import the record data from the Excel file to the Savee</strong> part in <strong>User Guide</strong>]. The mechanism that facilitates these modes can be found in the <code>ImportExcelCommandParser#parse</code>. Below is a overview of the mechanism:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1944,10 +1873,7 @@ The two argument modes are as listed below:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>It is then passed into <code>ParseUtil#parseDirectoryString</code> to check if the Directory path given is existing.</p>
-</li>
-<li>
-<p>If the Directory is unreal, an error is thrown to inform the user.</p>
+<p>It is then passed into <code>ParseUtil#parseDirectoryString</code> to check if the Directory path given is existing. If the Directory is unreal, an error is thrown to inform the user.</p>
 </li>
 </ol>
 </div>
@@ -1957,13 +1883,7 @@ The two argument modes are as listed below:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>It is then passed into <code>ExcelUtil#getPathFile</code> together with the String associated with <code>dir/</code> to create the File Path.</p>
-</li>
-<li>
-<p>The File Path is then passed into <code>ParseUtil#parseFilePathString</code> to check if the File path given is existing.</p>
-</li>
-<li>
-<p>If the File Path is unreal, an error is thrown to inform the user.</p>
+<p>It is then passed into <code>ExcelUtil#getPathFile</code> together with the String associated with <code>dir/</code> to create the File Path. The File Path is then passed into <code>ParseUtil#parseFilePathString</code> to check if the File path given is existing. If the File Path is unreal, an error is thrown to inform the user.</p>
 </li>
 </ol>
 </div>
@@ -1989,9 +1909,6 @@ The two argument modes are as listed below:</p>
 </li>
 </ol>
 </div>
-</li>
-</ul>
-</div>
 <div class="paragraph">
 <p>The <code>ImportExcelCommand</code> has only one constructor.</p>
 </div>
@@ -2010,38 +1927,23 @@ The two argument modes are as listed below:</p>
 <img src="images/ImportExcelSequenceDiagram.png" alt="width:800">
 </div>
 </div>
+<div class="paragraph">
+<p>The file user want to import <strong>must</strong> be closed before entering the command.<br></p>
+</div>
+<div class="paragraph">
+<p>Please note that the <code>undo</code> and <code>redo</code> command can only affect the Savee but the <strong>not</strong> the Excel file created, meaning that when you enter <code>undo</code> command after you enter the <code>import</code> command, the records imported will be deleted.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="archive-the-record-data-from-financial-planner-to-the-excel-file"><a class="link" href="#archive-the-record-data-from-financial-planner-to-the-excel-file">3.12. Archive the record data from Financial Planner to the Excel file</a></h3>
+<h3 id="archive-the-record-data-from-savee-to-the-excel-file"><a class="link" href="#archive-the-record-data-from-savee-to-the-excel-file">3.12. Archive the record data from Savee to the Excel file</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-16"><a class="link" href="#current-implementation-16">3.12.1. Current implementation</a></h4>
 <div class="paragraph">
-<p>The archive into excel file mechanism is facilitated by <code>ModelManager</code> with the help of <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands, <code>ExcelUtil</code> and the <code>VersionedFinancialPlanner</code>.</p>
+<p>The archive into excel file mechanism is facilitated by <code>ModelManager</code> with the help of <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It represents an in-memory model of Savee and is the component which manages the interactions between the commands, <code>ExcelUtil</code> and the <code>VersionedFinancialPlanner</code>. ArchiveCommand calls <code>ModelManager#updateFilteredRecords</code> and passes in different predicates depending on the argument mode. The List&lt;Record&gt; is retrieved by calling <code>ModelManager#getFilteredRecordList</code>. Meanwhile, it also called <code>ModelManager#getFinancialPlanner</code> to get the <code>ReadOnlyFinancialPlanner</code>. The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List&lt;SummaryEntry&gt; is easily retrieved from SummaryByDateList by calling <code>SummaryByDateList#getSummaryList</code>. <code>ExcelUtil#setNameExcelFile</code> is called to make the Excel name based on the condition of startDate and endDate. After that, <code>ExcelUtil#setPathFile</code> is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default <strong>User&#8217;s Working Directory</strong>. With the sufficient information, <code>List&lt;Record&gt; records</code>, <code>List&lt;SummaryByDateEntry&gt; summaryList</code>, <code>file path</code>, <code>ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords</code> is called to start the processing of producing Excel file. After records are archived to Excel file, <code>ModelManager#deleteListRecord</code> is called to delete the archived records.If there exists target records, <code>ModelManager#commitFinancialPlanner</code> will be called to update the current version of Savee and the message, which states records have been deleted.</p>
 </div>
 <div class="paragraph">
-<p>ArchiveCommand calls <code>ModelManager#updateFilteredRecords</code> and passes in different predicates depending on the argument mode. The List&lt;Record&gt; is retrieved by calling <code>ModelManager#getFilteredRecordList</code>.</p>
-</div>
-<div class="paragraph">
-<p>Meanwhile, it also called <code>ModelManager#getFinancialPlanner</code> to get the <code>ReadOnlyFinancialPlanner</code> Financial Planner.</p>
-</div>
-<div class="paragraph">
-<p>The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List&lt;SummaryEntry&gt; is easily retrieved from SummaryByDateList by calling <code>SummaryByDateList#getSummaryList</code>.</p>
-</div>
-<div class="paragraph">
-<p><code>ExcelUtil#setNameExcelFile</code> is called to make the Excel name based on the condition of startDate and endDate.</p>
-</div>
-<div class="paragraph">
-<p>After that, <code>ExcelUtil#setPathFile</code> is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default User&#8217;s Working Directory.</p>
-</div>
-<div class="paragraph">
-<p>With the sufficient information, <code>List&lt;Record&gt; records</code>, <code>List&lt;SummaryByDateEntry&gt; summaryList</code>, <code>file path</code>, <code>ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords</code> is called to start the processing of producing Excel file.</p>
-</div>
-<div class="paragraph">
-<p>After records are archived to Excel file, <code>ModelManager#deleteListRecord</code> is called to delete the archived records.If there exists target records, <code>ModelManager#commitFinancialPlanner</code> will be called to update the current version of Financial Planner and the message, which states records have been deleted.</p>
-</div>
-<div class="paragraph">
-<p>The mechanism that facilitates these modes can be found in the <code>ArchiveCommandParser#parse</code>. Below is a overview of the mechanism:</p>
+<p>This feature has 6 different modes [refer to Archive the record data from Savee to the Excel file in <strong>User Guide</strong>]The mechanism that facilitates these modes can be found in the <code>ArchiveCommandParser#parse</code>. Below is a overview of the mechanism:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -2059,13 +1961,7 @@ The two argument modes are as listed below:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>It is then passed into <code>ArchiveCommandParser#splitByWhitespace</code> for further processing and returns an array. This string will be split into sub-strings and each of them will be construct as a date type variable. The the size of the array exceed 2, error wil be thrown to inform invalid command format.</p>
-</li>
-<li>
-<p>If the size of the string equals 1, it is constructed as a date type variable after being passed to <code>ParseUtil#parseDate</code>, it must follow the format dd-mm-yyyy. Error will be thrown if the format is not correct or the date entered is not real.</p>
-</li>
-<li>
-<p>If the size of the string equals 2, each sub-string is constructed as a date type variable after being passed to <code>ParseUtil#parseDate</code>, and an additional check is conducted to check if the first date entered, known as Start date is smaller than the second date entered, known as End Date.</p>
+<p>It is then passed into <code>ArchiveCommandParser#splitByWhitespace</code> for further processing and returns an array. This string will be split into sub-strings and each of them will be construct as a date type variable. The the size of the array exceed 2, error wil be thrown to inform invalid command format. <strong>If the size of the string equals 1</strong>, it is constructed as a date type variable after being passed to <code>ParseUtil#parseDate</code>, it must follow the format dd-mm-yyyy. Error will be thrown if the format is <strong>not</strong> correct or the date entered is <strong>not</strong> real. <strong>If the size of the string equals 2</strong>, each sub-string is constructed as a date type variable after being passed to <code>ParseUtil#parseDate</code>, and an additional check is conducted to check if the first date entered, known as Start date is smaller than or equal to the second date entered, known as End Date.</p>
 </li>
 </ol>
 </div>
@@ -2075,10 +1971,7 @@ The two argument modes are as listed below:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>It is then passed into <code>ParseUtil#parseDirectoryString</code> to check if the Directory path given is existing.</p>
-</li>
-<li>
-<p>If the Directory is unreal, an error is thrown to inform the user.</p>
+<p>It is then passed into <code>ParseUtil#parseDirectoryString</code> to check if the Directory path given is existing. <strong>If the Directory path is unreal</strong>, an error is thrown to inform the user.</p>
 </li>
 </ol>
 </div>
@@ -2088,10 +1981,10 @@ The two argument modes are as listed below:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>If the prefix <code>d/</code> is not entered in the input, meaning that all the records will be included in the Excel sheet.</p>
+<p>If the prefix <code>d/</code> is <strong>not</strong> entered in the input, meaning that all the records will be included in the Excel sheet.</p>
 </li>
 <li>
-<p>If the prefix <code>dir/</code> is not entered in the input, meaning that the Directory Path is default as the <strong>User&#8217;s Working Directory</strong>.</p>
+<p>If the prefix <code>dir/</code> is <strong>not</strong> entered in the input, meaning that the Directory Path is default as the <strong>User&#8217;s Working Directory</strong>.</p>
 </li>
 </ol>
 </div>
@@ -2126,17 +2019,11 @@ The two argument modes are as listed below:</p>
 <img src="images/ArchiveSequenceDiagram.png" alt="width:800">
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Please note that the <code>undo</code> and <code>redo</code> command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter <code>undo</code> command after you enter the <code>archive</code> command, the records archived will be added again back to the Financial Planner but the Excel file created will not be deleted.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>If the Excel file with the same name and stored in same Directory exists, it will be overwritten. However, it <strong>must</strong> be closed before we enter the command.<br></p>
+</div>
+<div class="paragraph">
+<p>Please note that the <code>undo</code> and <code>redo</code> command can only affect the Savee but the <strong>not</strong> the Excel file created, meaning that when you enter <code>undo</code> command after you enter the <code>archive</code> command, the records archived will be added again back to the Savee but the Excel file created will <strong>not</strong> be deleted.</p>
 </div>
 </div>
 </div>
@@ -2145,10 +2032,7 @@ Please note that the <code>undo</code> and <code>redo</code> command can only af
 <div class="sect3">
 <h4 id="current-implementation-17"><a class="link" href="#current-implementation-17">3.13.1. Current implementation</a></h4>
 <div class="paragraph">
-<p>This feature will automatically uses the the summary data from the <code>SUMMARY DATA</code> sheet in the Excel sheet after the command <code>archive</code> or <code>export_excel</code> is called.</p>
-</div>
-<div class="paragraph">
-<p>The feature mechanism is facilitated by <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It is the component which manages the interactions between the ExportExcelCommand or the ArchiveCommand with <code>ExcelUtil#drawChart</code>.</p>
+<p>This feature will automatically uses the the summary data from the <code>SUMMARY DATA</code> sheet in the Excel sheet after the command <code>archive</code> or <code>export_excel</code> is called. The feature mechanism is facilitated by <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It is the component which manages the interactions between the ExportExcelCommand or the ArchiveCommand with <code>ExcelUtil#drawChart</code>.</p>
 </div>
 </div>
 </div>
@@ -5174,7 +5058,7 @@ Resolution refers to the number of pixels that are available in the screen. It d
 </div>
 <div class="paragraph">
 <p><a id="Appname"></a> App Name: (FinancialPlanner/Savee)
-Both FinancialPlanner and Savee refers to the app. Savee is the official name of the app when it is marketed for the users. FInancialPlanner
+Both FinancialPlanner and Savee refers to the app. Savee is the official name of the app when it is marketed for the users. FinancialPlanner
 is the name used when referring to the app in the developer guide and code.</p>
 </div>
 </div>
@@ -6307,4 +6191,4 @@ Then, open the app.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 14:56:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:50:13 UTC</div></div></div></body></html>

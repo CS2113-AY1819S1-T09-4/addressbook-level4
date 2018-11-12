@@ -47,10 +47,10 @@
 </li>
 <li><a href="#data-management-features">6. Data management features:</a>
 <ul class="sectlevel2">
-<li><a href="#export-the-record-data-from-financial-planner-to-the-excel-file-code-exportexcel-code">6.1. Export the record data from Financial Planner to the Excel file: <code>exportexcel</code></a></li>
-<li><a href="#import-the-record-data-from-the-excel-file-to-the-financial-planner-code-import-code">6.2. Import the record data from the Excel file to the Financial Planner: <code>import</code></a></li>
-<li><a href="#archive-the-record-data-from-financial-planner-to-the-excel-file-code-archive-code">6.3. Archive the record data from Financial Planner to the Excel file: <code>archive</code></a></li>
-<li><a href="#draw-a-line-chart-automatically-inside-the-excel-sheet-code-no-command-required-code">6.4. Draw a line chart automatically inside the Excel sheet : <code>NO COMMAND REQUIRED</code></a></li>
+<li><a href="#export-the-record-data-from-savee-to-the-excel-file-code-exportexcel-code">6.1. Export the record data from Savee to the Excel file: <code>exportexcel</code></a></li>
+<li><a href="#import-the-record-data-from-the-excel-file-to-the-savee-code-import-code">6.2. Import the record data from the Excel file to the Savee: <code>import</code></a></li>
+<li><a href="#archive-the-record-data-from-savee-to-the-excel-file-code-archive-code">6.3. Archive the record data from Savee to the Excel file: <code>archive</code></a></li>
+<li><a href="#draw-a-line-chart-automatically-inside-the-excel-sheet-code-no-command-required-to-be-typed-code">6.4. Draw a line chart automatically inside the Excel sheet : <code>NO COMMAND REQUIRED TO BE TYPED</code></a></li>
 </ul>
 </li>
 <li><a href="#spending-limit-features">7. Spending Limit Features</a>
@@ -588,7 +588,7 @@ Deletes the 1st record in the results of the <code>find</code> command.</p>
 <div class="sect2">
 <h3 id="delete-all-the-record-whose-date-is-required-code-deletedate-code"><a class="link" href="#delete-all-the-record-whose-date-is-required-code-deletedate-code">3.10. Delete all the record whose date is required: <code>deletedate</code></a></h3>
 <div class="paragraph">
-<p>Deletes the records with a specified date from the expense book.<br>
+<p>Deletes the records with a specified date from the Savee.<br>
 Format: <code>deletedate DATE</code></p>
 </div>
 <div class="sidebarblock">
@@ -606,13 +606,15 @@ Format: <code>deletedate DATE</code></p>
 </div>
 </div>
 <div class="paragraph">
+<p>Date should follow the same configurations as date parameters required when adding records. It is in the form of <strong>dd-mm-yyyy</strong> where <strong>dd</strong> represents day, <strong>mm</strong> represents month and <strong>yyyy</strong> represents the year. <strong>dd</strong> and <strong>mm</strong> both require 1 to 2 digits while <strong>yyyy</strong> requires exactly 4 digits.<br></p>
+</div>
+<div class="paragraph">
 <p>Examples:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>deletedate 31-7-2018</code><br>
-Deletes the records with date 31-7-2018.</p>
+<p><code>deletedate 31-7-2018</code><br></p>
 </li>
 </ul>
 </div>
@@ -655,13 +657,16 @@ Format: <code>undo</code></p>
 <ul>
 <li>
 <p>Undoable commands: those commands that modify Savee&#8217;s stored content (
-<code>add</code>, <code>delete</code>, <code>deletedate</code>, <code>exportexcel</code>, <code>archive</code>, <code>import</code>, <code>edit</code>, <code>addlimit</code>, <code>deletelimit</code>, <code>editlimit</code> and <code>clear</code>).</p>
+<code>add</code>, <code>delete</code>, <code>deletedate</code>, <code>archive</code>, <code>import</code>, <code>edit</code>, <code>addlimit</code>, <code>deletelimit</code>, <code>editlimit</code> and <code>clear</code>).</p>
 </li>
 <li>
 <p>Please note that the <code>undo</code> and <code>redo</code> command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter <code>undo</code> command after you enter the <code>archive</code> command, the records archived will be added again back to the Financial Planner but the Excel file created will not be deleted.</p>
 </li>
 <li>
-<p>Please note that <code>undo</code> and <code>redo</code> command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter <code>undo</code> command after you enter the <code>export</code> command, the records remains the same and the Excel file created will not be deleted.</p>
+<p>Please note that <code>undo</code> and <code>redo</code> command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter <code>undo</code> command after you enter the <code>export</code> command, the Financial Planner will inform the user that <strong>No more command to undo</strong>, the records remain the same and the Excel file created will not be deleted.</p>
+</li>
+<li>
+<p>Please note that the <code>undo</code> and <code>redo</code> command can only affect the Financial Planner but the not the Excel file created, meaning that when you enter <code>undo</code> command after you enter the <code>import</code> command, the records imported will be deleted.</p>
 </li>
 </ul>
 </div>
@@ -1068,7 +1073,8 @@ This includes adding records, deleting records and editing records in Savee, but
 </table>
 </div>
 <div class="paragraph">
-<p>Below shows a snapshot of what the user can see when there are records available of the current month</p>
+<p>Below shows a snapshot of what the user can see when there are records available of the current month. If the screen is too small, the welcome message may be
+truncated to allow more space for the charts.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1088,74 +1094,67 @@ This includes adding records, deleting records and editing records in Savee, but
 <p>This section describe features for the user to manage his/her records data in Savee, with the help of Excel.</p>
 </div>
 <div class="sect2">
-<h3 id="export-the-record-data-from-financial-planner-to-the-excel-file-code-exportexcel-code"><a class="link" href="#export-the-record-data-from-financial-planner-to-the-excel-file-code-exportexcel-code">6.1. Export the record data from Financial Planner to the Excel file: <code>exportexcel</code></a></h3>
+<h3 id="export-the-record-data-from-savee-to-the-excel-file-code-exportexcel-code"><a class="link" href="#export-the-record-data-from-savee-to-the-excel-file-code-exportexcel-code">6.1. Export the record data from Savee to the Excel file: <code>exportexcel</code></a></h3>
 <div class="paragraph">
 <p>Exports the records into an Excel file.<br></p>
 </div>
 <div class="paragraph">
-<p>There are 6 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path).<br>
-Format:<br></p>
+<p>There are 6 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path).<br></p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Default mode: <code>exportexcel</code></p>
-</li>
-<li>
-<p>Single argument Date mode: <code>exportexcel d/DATE</code></p>
-</li>
-<li>
-<p>Dual argument Date mode: <code>exportexcel d/START_DATE END_DATE</code></p>
-</li>
-<li>
-<p>Single argument Directory Path mode: <code>exportexcel dir/DIRECTORY_PATH</code></p>
-</li>
-<li>
-<p>Single argument Directory Path + Single argument Date mode: <code>exportexcel d/DATE dir/DIRECTORY_PATH</code></p>
-</li>
-<li>
-<p>Single argument Directory Path + Dual argument Date mode: <code>exportexcel d/START_DATE END_DATE dir/DIRECTORY_PATH</code></p>
-</li>
-</ol>
+<div class="paragraph">
+<p>Format:<br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Default mode</strong> will list down all records in Savee and exports all of them to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.</p>
+<p><strong>Default mode</strong> <code>exportexcel</code> will list down all records in Savee and exports all of them to an Excel file and store the file in the default <strong>Working Directory</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
-<p><strong>Single argument Date mode</strong> will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.</p>
+<p><strong>Single argument Date mode</strong> <code>exportexcel d/DATE</code> will list down all records with the specified date and exports all shown records to an Excel file and store the file in the default <strong>Working Directory</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
-<p><strong>Dual argument Date mode</strong> will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default <strong>Working DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.</p>
+<p><strong>Dual argument Date mode</strong> <code>exportexcel d/START_DATE END_DATE</code> will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the default <strong>Working Directory</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.</p>
 </li>
 <li>
-<p><strong>Single argument Directory Path mode</strong> will list down all records in Savee and exports all of them to an Excel file and store the file in the chosen Directory Path.</p>
+<p><strong>Single argument Directory Path mode</strong> <code>exportexcel dir/DIRECTORY_PATH</code> will list down all records in Savee and exports all of them to an Excel file and store the file in the chosen Directory Path.</p>
 </li>
 <li>
-<p><strong>Single argument Date mode + Single argument Directory path mode</strong> will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.</p>
+<p><strong>Single argument Date mode + Single argument Directory path mode</strong> <code>exportexcel d/DATE dir/DIRECTORY_PATH</code> will list down all records with the specified date and exports all shown records to an Excel file and store the file in the chosen Directory Path.</p>
 </li>
 <li>
-<p><strong>Dual argument Date mode + Single argument Directory path mode</strong> will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.</p>
+<p><strong>Dual argument Date mode + Single argument Directory path mode</strong> <code>exportexcel d/START_DATE END_DATE dir/DIRECTORY_PATH</code> will list down all records with the date that fall on either dates or between both dates and exports all shown records to an Excel file and store the file in the chosen Directory Path.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Date follow the same configurations as date parameters required when adding records. It is in the form of <strong>dd-mm-yyyy</strong> where <strong>dd</strong> represents day, <strong>mm</strong> represents month and <strong>yyyy</strong> represents the year. <strong>dd</strong> and <strong>mm</strong> both require 1 to 2 digits while
-<strong>yyyy</strong> requires exactly 4 digits.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>If the command is in <strong>Dual argument Date mode</strong>, START_DATE (the first <code>Date</code>) should be earlier than or equal to the END_DATE (the second <code>Date</code>).<br>
+Date should follow the same configurations as date parameters required when adding records. It is in the form of <strong>dd-mm-yyyy</strong> where <strong>dd</strong> represents day, <strong>mm</strong> represents month and <strong>yyyy</strong> represents the year. <strong>dd</strong> and <strong>mm</strong> both require 1 to 2 digits while <strong>yyyy</strong> requires exactly 4 digits.</p>
+</div>
+<div class="paragraph">
+<p>The Excel file name will be named based on the command, relating to Date:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Default mode</strong>: The Excel file will be named <code>Financial_Planner_ALL.xlsx</code></p>
+</li>
+<li>
+<p><strong>Single argument Date mode</strong>: The Excel file will be named <code>Financial_Planner_dd-mm-yyyy.xlsx</code></p>
+</li>
+<li>
+<p><strong>Dual argument Date</strong>: The Excel file will be named <code>Financial_Planner_dd-mm-yyyy_dd-mm-yyyy.xlsx</code></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>If the Excel file with the same name and stored in same Directory exists, it will be overwritten. However, it <strong>must</strong> be closed before we enter the command.</p>
+</div>
+<div class="paragraph">
+<p>Please note that <code>undo</code> and <code>redo</code> command can only affect Savee but the <strong>not</strong> the Excel file created, meaning that when you enter <code>undo</code> command after you enter the <code>export</code> command, the Savee will inform the user that <strong>No more command to undo</strong>, the records remain the same and the Excel file created will <strong>not</strong> be deleted.</p>
 </div>
 <div class="paragraph">
 <p>Examples:</p>
@@ -1183,84 +1182,44 @@ Date follow the same configurations as date parameters required when adding reco
 </ul>
 </div>
 <div class="paragraph">
-<p>The Excel file name will be named based on the command, relating to Date:<br></p>
+<p>There will be two sheets in the Excel file, namely <strong>RECORD DATA</strong> and <strong>SUMMARY DATA</strong>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Default mode</strong>: The Excel file will be named <code>Financial_Planner_ALL.xlsx</code></p>
+<p><strong>RECORD DATA</strong> stores all the data of record the user want to export, there are 4 columns: Name, date, money and tags, the tags names will be separated by &#8230;&#8203;, for visual benefit.</p>
 </li>
 <li>
-<p><strong>Single argument Date mode</strong>: The Excel file will be named <code>Financial_Planner_dd-mm-yyyy.xlsx</code></p>
+<p><strong>SUMMARY DATA</strong> stored the summary statistics for the period you exported, and there is a <strong>Line Chart</strong> next to the table for visual statistic [refer to <strong>Draw a line chart automatically inside the Excel sheet</strong> part in <strong>User guide</strong> for more information].</p>
 </li>
 <li>
-<p><strong>Dual argument Date</strong>: The Excel file will be named <code>Financial_Planner_dd-mm-yyyy_dd-mm-yyyy.xlsx</code></p>
-<div class="paragraph">
-<p>There will be two sheets in the Excel file, namely <code>RECORD DATA</code> and <code>SUMMARY DATA</code>.</p>
-</div>
-</li>
-<li>
-<p><code>RECORD DATA</code> stores all the data of record the user want to export, there are 4 columns: Name, date, money and tags, the tags names will be separated by &#8230;&#8203;, for visual benefit.</p>
+<p>As the size of the Chart is fixed initially. Sometimes, when user exports too many dates, the distance between each date on the chart might be tight. It is suggesting that the user justify the size of the chart by himself/herself.</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Export_Capture1_LinhChi.png" alt="width:800">
+<img src="images/Export_Capture3_LinhChi.png" alt="width:800">
 </div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>SUMMARY DATA</code> stored the summary statistics for the period you exported, and there is a <strong>Line Chart</strong> next to the table for visual statistic [refer to <code>Draw a line chart automatically inside the Excel sheet</code> part for more information].</p>
-</li>
-</ul>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/Export_Capture2_LinhChi.png" alt="width:800">
-</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-As the size of the Chart is fixed initially. Sometimes, when user exports too many dates, the distance between each date on the chart might be tight. It is suggesting that the user justify the size of the chart by himself/herself.
-</td>
-</tr>
-</table>
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-the-record-data-from-the-excel-file-to-the-financial-planner-code-import-code"><a class="link" href="#import-the-record-data-from-the-excel-file-to-the-financial-planner-code-import-code">6.2. Import the record data from the Excel file to the Financial Planner: <code>import</code></a></h3>
+<h3 id="import-the-record-data-from-the-excel-file-to-the-savee-code-import-code"><a class="link" href="#import-the-record-data-from-the-excel-file-to-the-savee-code-import-code">6.2. Import the record data from the Excel file to the Savee: <code>import</code></a></h3>
 <div class="paragraph">
 <p>There are 2 modes, single argument File Path mode and (single argument Directory Path + single argument File Name) mode<br></p>
 </div>
 <div class="paragraph">
 <p>Format:<br></p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Single argument File Path mode: <code>import dir/FILE_PATH</code><br></p>
-</li>
-<li>
-<p>Single argument File Path + single argument File name mode: <code>import dir/DIRECTORY_PATH  n/NAME_FILE</code><br></p>
-</li>
-</ol>
-</div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Single argument File Path mode</strong> will open the Excel file using the given File Path, import all records in Savee and check if these records exist in the Savee, then exports all of non-existent records to Savee.</p>
+<p><strong>Single argument File Path mode</strong> <code>import dir/FILE_PATH</code> will open the Excel file using the given File Path, import all records in Savee and check if these records exist in the Savee, then exports all of non-existent records to Savee.</p>
 </li>
 <li>
-<p><strong>Single argument File Path + single argument File name mode</strong> will open the Excel file using the given Directory path and given file name, import all records in Savee and check if these records exist in Savee, then exports all of non-existent records to Savee.</p>
+<p><strong>Single argument File Path + single argument File name mode</strong> <code>import dir/DIRECTORY_PATH  n/NAME_FILE</code> will open the Excel file using the given Directory path and given file name, import all records in Savee and check if these records exist in Savee, then exports all of non-existent records to Savee.</p>
 </li>
 </ul>
 </div>
@@ -1282,17 +1241,14 @@ As the size of the Chart is fixed initially. Sometimes, when user exports too ma
 </li>
 </ul>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Please note that User have to add the post-fix <code>.xlsx</code> at the end to indicate this is a Excel file (in first and second example).
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Please note that User have to add the post-fix <code>.xlsx</code> at the end to indicate this is a Excel file (in first and second example).</p>
+</div>
+<div class="paragraph">
+<p>The file user want to import <strong>must</strong> be closed before entering the command.</p>
+</div>
+<div class="paragraph">
+<p>Please note that the <code>undo</code> and <code>redo</code> command can only affect the Savee but the <strong>not</strong> the Excel file created, meaning that when you enter <code>undo</code> command after you enter the <code>import</code> command, the records imported will be deleted.</p>
 </div>
 <div class="paragraph">
 <p>When performing <code>import</code> command to import all the records data from the Excel file to Savee, user should take note that there are some constraints which may help the <code>import</code> command performs smoothly.</p>
@@ -1300,19 +1256,10 @@ Please note that User have to add the post-fix <code>.xlsx</code> at the end to 
 <div class="ulist">
 <ul>
 <li>
-<p>The excel file can have multiple sheets, containing records data. The starting row of the table does not have to be first row of the sheet. This also applies to the column.</p>
+<p>The excel file can have multiple sheets, containing records data. The starting row of the table does <strong>not</strong> have to be first row of the sheet. This also applies to the column. There can be blank row blending in the table, but there must be <strong>no</strong> blank column.</p>
 </li>
 <li>
-<p>There can be blank row blending in the table, but there must be <strong>no</strong> blank column.</p>
-</li>
-<li>
-<p>The First row of the table should have 4 cells, namely NAME, DATE, MONEY, TAGS. These 4 columns can be case-insensitive. The sheet with records data but does not have the first row, NAME, DATE, MONEY, TAGS will <strong>not</strong> be read.</p>
-</li>
-<li>
-<p>The information of NAME, DATE, MONEY columns should be fully filled, while the TAGS columns is optionally filled.</p>
-</li>
-<li>
-<p>Each tag should be separated by &#8230;&#8203; (3 <strong>consecutive</strong> dots). Beside &#8230;&#8203; , numbers and alphabet character, there should be no other character.</p>
+<p>The First row of the table should have 4 cells, namely <strong>NAME</strong>, <strong>DATE</strong>, <strong>MONEY</strong>, <strong>TAGS</strong>. These 4 cells can be case-insensitive. The sheet with records data but does <strong>not</strong> have the first row, <strong>NAME</strong>, <strong>DATE</strong>, <strong>MONEY</strong>, <strong>TAGS</strong> will <strong>not</strong> be read. The information of <strong>NAME</strong>, <strong>DATE</strong>, <strong>MONEY</strong> columns should be fully filled, while the <strong>TAGS</strong> columns is optionally filled. Each tag should be separated by &#8230;&#8203; (<strong>3 consecutive dots</strong>). Beside &#8230;&#8203; , numbers and alphabet character, there should be no other character.</p>
 </li>
 </ul>
 </div>
@@ -1321,83 +1268,54 @@ Please note that User have to add the post-fix <code>.xlsx</code> at the end to 
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Export_Capture1_LinhChi.png" alt="width:800">
+<img src="images/Export_Capture1_LinhChi.png" alt="Export Capture1 LinhChi" width="350">
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="archive-the-record-data-from-financial-planner-to-the-excel-file-code-archive-code"><a class="link" href="#archive-the-record-data-from-financial-planner-to-the-excel-file-code-archive-code">6.3. Archive the record data from Financial Planner to the Excel file: <code>archive</code></a></h3>
+<h3 id="archive-the-record-data-from-savee-to-the-excel-file-code-archive-code"><a class="link" href="#archive-the-record-data-from-savee-to-the-excel-file-code-archive-code">6.3. Archive the record data from Savee to the Excel file: <code>archive</code></a></h3>
 <div class="paragraph">
 <p>Archives the records into an Excel file.<br></p>
 </div>
 <div class="paragraph">
-<p>There are 6 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path).<br>
-Format:<br></p>
+<p>There are 6 modes, default mode, single argument mode and dual argument mode (for Date) and single argument mode (Directory Path).<br></p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Default mode: <code>archive</code><br></p>
-</li>
-<li>
-<p>Single argument Date mode: <code>archive d/DATE</code><br></p>
-</li>
-<li>
-<p>Dual argument Date mode: <code>archive d/START_DATE END_DATE</code></p>
-</li>
-<li>
-<p>Single argument Directory Path mode: <code>archive dir/DIRECTORY_PATH</code></p>
-</li>
-<li>
-<p>Single argument Directory Path + Single argument Date mode: <code>archive d/DATE dir/DIRECTORY_PATH</code></p>
-</li>
-<li>
-<p>Single argument Directory Path + Dual argument Date mode: <code>archive d/START_DATE END_DATE dir/DIRECTORY_PATH</code></p>
-</li>
-</ol>
+<div class="paragraph">
+<p>Format:<br></p>
 </div>
 <div class="sidebarblock">
 <div class="content">
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Default mode</strong> will list down all records in Savee and archives all of them to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>. Then, the records stored in the Excel file will be deleted automatically in Savee.</p>
+<p><strong>Default mode</strong> <code>archive</code> will list down all records in Savee and archives all of them to an Excel file and store the file in the default <strong>Working Directory</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>. Then, the records stored in the Excel file will be deleted automatically in Savee.</p>
 </li>
 <li>
-<p><strong>Single argument Date mode</strong> will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.Then, the records stored in the Excel file will be deleted automatically in the Savee.</p>
+<p><strong>Single argument Date mode</strong> <code>archive d/DATE</code> will list down all records with the specified date and archives all shown records to an Excel file and store the file in the default <strong>Working Directory</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.Then, the records stored in the Excel file will be deleted automatically in the Savee.</p>
 </li>
 <li>
-<p><strong>Dual argument Date mode</strong> will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default <strong>WORKING DIRECTORY</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.Then, the records stored in the Excel file will be deleted automatically in the Savee.</p>
+<p><strong>Dual argument Date mode</strong> <code>archive d/START_DATE END_DATE</code> will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the default <strong>Working Directory</strong>, it will <strong>detect automatically user&#8217;s Working Directory</strong>.Then, the records stored in the Excel file will be deleted automatically in the Savee.</p>
 </li>
 <li>
-<p><strong>Single argument Directory Path mode</strong> will list down all records in Savee and archives all of them to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.</p>
+<p><strong>Single argument Directory Path mode</strong> <code>archive dir/DIRECTORY_PATH</code> will list down all records in Savee and archives all of them to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.</p>
 </li>
 <li>
-<p><strong>Single argument Date mode + Single argument Directory path mode</strong> will list down all records with the specified date and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.</p>
+<p><strong>Single argument Date mode + Single argument Directory path mode</strong> <code>archive d/DATE dir/DIRECTORY_PATH</code> will list down all records with the specified date and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.</p>
 </li>
 <li>
-<p><strong>Dual argument Date mode + Single argument Directory path mode</strong> will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.</p>
+<p><strong>Dual argument Date mode + Single argument Directory path mode</strong> <code>archive d/START_DATE END_DATE dir/DIRECTORY_PATH</code> will list down all records with the date that fall on either dates or between both dates and archives all shown records to an Excel file and store the file in the chosen Directory Path.Then, the records stored in the Excel file will be deleted automatically in Savee.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
+<div class="paragraph">
+<p>If the command is in <strong>Dual argument Date mode</strong>, START_DATE (the first <code>Date</code>) should be earlier than or equal to the END_DATE (the second <code>Date</code>).<br>
 Date follow the same configurations as date parameters required when adding records. It is in the form of <strong>dd-mm-yyyy</strong> where <strong>dd</strong> represents day, <strong>mm</strong> represents month and <strong>yyyy</strong> represents the year. <strong>dd</strong> and <strong>mm</strong> both require 1 to 2 digits while
-<strong>yyyy</strong> requires exactly 4 digits.
-</td>
-</tr>
-</table>
+<strong>yyyy</strong> requires exactly 4 digits.</p>
 </div>
 <div class="paragraph">
-<p>The Excel file name will be named based on t
-he command, relating to Date:<br></p>
+<p>The Excel file name will be named based on the command, relating to Date:<br></p>
 </div>
 <div class="ulist">
 <ul>
@@ -1410,9 +1328,19 @@ he command, relating to Date:<br></p>
 <li>
 <p><strong>Dual argument Date</strong>: The Excel file will be named <code>Financial_Planner_dd-mm-yyyy_dd-mm-yyyy.xlsx</code></p>
 <div class="paragraph">
-<p>Examples:</p>
+<p>If the Excel file with the same name and stored in same Directory exists, it will be overwritten. However, it <strong>must</strong> be closed before we enter the command.</p>
 </div>
 </li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Please note that the <code>undo</code> and <code>redo</code> command can only affect the Savee but the <strong>not</strong> the Excel file created, meaning that when you enter <code>undo</code> command after you enter the <code>archive</code> command, the records archived will be added again back to Savee but the Excel file created will <strong>not</strong> be deleted.</p>
+</div>
+<div class="paragraph">
+<p>Examples:</p>
+</div>
+<div class="ulist">
+<ul>
 <li>
 <p><code>archive</code></p>
 </li>
@@ -1434,52 +1362,34 @@ he command, relating to Date:<br></p>
 </ul>
 </div>
 <div class="paragraph">
-<p>There will be two sheets in the Excel file, namely <code>RECORD DATA</code> and <code>SUMMARY DATA</code>.</p>
+<p>There will be two sheets in the Excel file, namely <strong>RECORD DATA</strong> and <strong>SUMMARY DATA</strong>.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p><code>RECORD DATA</code> stores all the data of record the user want to archive, there are 4 columns: Name, date, money and tags, the tags names will be separated by &#8230;&#8203;, for visual benefit.</p>
+<p><strong>RECORD DATA</strong> stores all the data of record the user want to archive, there are 4 columns: Name, date, money and tags, the tags names will be separated by &#8230;&#8203;, for visual benefit.</p>
+</li>
+<li>
+<p><strong>SUMMARY DATA</strong> stored the summary statistics for the period you archived, and there is a <strong>Line Chart</strong> next to the table for visual statistic [refer to <strong>Draw a line chart automatically inside the Excel sheet</strong> part in <strong>User guide</strong> for more information].</p>
+</li>
+<li>
+<p>As the size of the Chart is fixed initially. Sometimes, when user archive too many dates, the distance between each date on the chart might be tight. It is suggesting that the user justify the size of the chart by himself/herself.</p>
 </li>
 </ul>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/Export_Capture1_LinhChi.png" alt="width:800">
-</div>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>SUMMARY DATA</code> stored the summary statistics for the period you archived, and there is a <strong>Line Chart</strong> next to the table for visual statistic [refer to <code>Draw a line chart automatically inside the Excel sheet</code> part for more information].</p>
-</li>
-</ul>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-As the size of the Chart is fixed initially. Sometimes, when user archive too many dates, the distance between each date on the chart might be tight. It is suggesting that the user justify the size of the chart by himself/herself.
-</td>
-</tr>
-</table>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/Export_Capture2_LinhChi.png" alt="width:800">
+<img src="images/Export_Capture3_LinhChi.png" alt="width:800">
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="draw-a-line-chart-automatically-inside-the-excel-sheet-code-no-command-required-code"><a class="link" href="#draw-a-line-chart-automatically-inside-the-excel-sheet-code-no-command-required-code">6.4. Draw a line chart automatically inside the Excel sheet : <code>NO COMMAND REQUIRED</code></a></h3>
+<h3 id="draw-a-line-chart-automatically-inside-the-excel-sheet-code-no-command-required-to-be-typed-code"><a class="link" href="#draw-a-line-chart-automatically-inside-the-excel-sheet-code-no-command-required-to-be-typed-code">6.4. Draw a line chart automatically inside the Excel sheet : <code>NO COMMAND REQUIRED TO BE TYPED</code></a></h3>
 <div class="paragraph">
-<p>Automatically uses the the summary data from the <code>SUMMARY DATA</code> sheet in the Excel sheet after the command <code>archive</code> or <code>exportexcel</code> is called.</p>
+<p>Automatically uses the the summary data from the <strong>SUMMARY DATA</strong> sheet in the Excel sheet after the command <code>archive</code> or <code>exportexcel</code> is called.</p>
 </div>
 <div class="paragraph">
-<p>As you can see the screenshot below, in the <code>SUMMARY DATA</code> sheet, next to the summary table:</p>
+<p>As you can see the screenshot below, in the <strong>SUMMARY DATA</strong> sheet, next to the summary table:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -1849,7 +1759,7 @@ e.g. <code>delete 3</code></p>
 </li>
 <li>
 <p><strong>Delete by date</strong> : <code>deletedate DATE</code><br>
-e.g. <code>delete 31-7-2018</code></p>
+e.g. <code>deletedate 31-7-2018</code></p>
 </li>
 <li>
 <p><strong>History</strong> : <code>history</code></p>
@@ -2020,4 +1930,4 @@ e.g.<br>
 </ul>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-11 14:56:31 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 09:50:13 UTC</div></div></div></body></html>
