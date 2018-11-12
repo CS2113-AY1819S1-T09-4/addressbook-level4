@@ -30,21 +30,22 @@
 <li><a href="#implementation">3. Implementation</a>
 <ul class="sectlevel2">
 <li><a href="#undo-redo-feature">3.1. Undo/Redo feature</a></li>
-<li><a href="#sort-records-feature">3.2. Sort records feature</a></li>
+<li><a href="#auto-complete-feature">3.2. Auto Complete Feature</a></li>
 <li><a href="#list-history-feature">3.3. List history feature</a></li>
-<li><a href="#view-summary-feature">3.4. View summary feature</a></li>
-<li><a href="#view-category-breakdown-feature">3.5. View category breakdown feature</a></li>
-<li><a href="#view-current-month-s-breakdown">3.6. View current month&#8217;s breakdown</a></li>
-<li><a href="#find-records-by-tag-feature">3.7. Find records by tag feature</a></li>
-<li><a href="#limit-features">3.8. Limit features</a></li>
-<li><a href="#delete-all-the-record-whose-date-is-required">3.9. Delete all the record whose date is required</a></li>
-<li><a href="#export-the-records-from-savee-to-the-excel-file">3.10. Export the records from Savee to the Excel file.</a></li>
-<li><a href="#import-the-record-data-from-the-excel-file-to-savee">3.11. Import the record data from the Excel file to Savee</a></li>
-<li><a href="#archive-the-record-data-from-savee-to-the-excel-file">3.12. Archive the record data from Savee to the Excel file</a></li>
-<li><a href="#draw-a-line-chart-automatically-inside-the-excel-sheet">3.13. Draw a line chart automatically inside the Excel sheet</a></li>
-<li><a href="#proposed-data-encryption">3.14. [Proposed] Data Encryption</a></li>
-<li><a href="#logging">3.15. Logging</a></li>
-<li><a href="#Implementation-Configuration">3.16. Configuration</a></li>
+<li><a href="#sort-records-feature">3.4. Sort records feature</a></li>
+<li><a href="#view-summary-feature">3.5. View summary feature</a></li>
+<li><a href="#view-category-breakdown-feature">3.6. View category breakdown feature</a></li>
+<li><a href="#view-current-month-s-breakdown">3.7. View current month&#8217;s breakdown</a></li>
+<li><a href="#find-records-by-tag-feature">3.8. Find records by tag feature</a></li>
+<li><a href="#limit-features">3.9. Limit features</a></li>
+<li><a href="#delete-all-the-record-whose-date-is-required">3.10. Delete all the record whose date is required</a></li>
+<li><a href="#export-the-records-from-savee-to-the-excel-file">3.11. Export the records from Savee to the Excel file.</a></li>
+<li><a href="#import-the-record-data-from-the-excel-file-to-savee">3.12. Import the record data from the Excel file to Savee</a></li>
+<li><a href="#archive-the-record-data-from-savee-to-the-excel-file">3.13. Archive the record data from Savee to the Excel file</a></li>
+<li><a href="#draw-a-line-chart-automatically-inside-the-excel-sheet">3.14. Draw a line chart automatically inside the Excel sheet</a></li>
+<li><a href="#proposed-data-encryption">3.15. [Proposed] Data Encryption</a></li>
+<li><a href="#logging">3.16. Logging</a></li>
+<li><a href="#Implementation-Configuration">3.17. Configuration</a></li>
 </ul>
 </li>
 <li><a href="#documentation">4. Documentation</a>
@@ -840,91 +841,135 @@ to check if this is the case. If so, it will return an error to the user rather 
 </div>
 </div>
 <div class="sect2">
-<h3 id="sort-records-feature"><a class="link" href="#sort-records-feature">3.2. Sort records feature</a></h3>
+<h3 id="auto-complete-feature"><a class="link" href="#auto-complete-feature">3.2. Auto Complete Feature</a></h3>
 <div class="sect3">
 <h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">3.2.1. Current Implementation</a></h4>
 <div class="paragraph">
-<p>The sort mechanism is facilitated by <code>ModelManager</code>. It extends <code>FinancialPlanner</code> with a component that sorts the
-internal list of records. SortCommand calls <code>ModelManager#sortFilteredRecordList</code> and passes in the category to be
-sorted by and the sort order.</p>
+<p>The autocomplete mechanism is facilitated by the <code>NewAutoCompletionBinding</code> class. It represents the binding of the
+autocomplete window to the <code>CommandBox</code> and is the component that manages the interactions between the text input and
+the contents of the autocomplete list that is displayed in the window. This feature observes the text input in the
+CommandBox and displays a list of words in another window under the
+CommandBox for the user to select and complete his current focus text - the word he is currently typing.</p>
 </div>
 <div class="paragraph">
-<p>This feature has one keyword <code>sort</code> and takes in arguments of either category or order of sort. Keywords are not
-case sensitive.</p>
+<p>The key components in this class are the <code>autoCompletionPopup</code> and the <code>caretChangedListener</code> that perform the key
+functionalities.</p>
 </div>
 <div class="paragraph">
-<p>Category can be either of the following keywords:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>name</code> - To sort in lexicographical order by the name attribute of the record</p>
-</li>
-<li>
-<p><code>date</code> - To sort by the date attribute of the record</p>
-</li>
-<li>
-<p><code>money</code>/<code>moneyflow</code> - To sort by the expenditure or income of the record</p>
-</li>
-</ul>
+<p><code>caretChangedListener</code> is an observer that checks the caret in the command box and is triggered whenever the caret
+changes its position, whether a character is typed or the caret is moved using the arrow keys. When triggered, it reads
+the text in the command box and checks the position of the caret, then extracts the current word of target to be
+completed as well as the current input text and the prefix of the current word if any. Extraction is done by tracing back from the caret
+position and as well as tracing forward. Any characters that are not a whitespace and are not separated by a whitespace
+are considered to be the same word as the current word to be completed. The text before and after the word to completed
+are also saved so they will not be lost upon completion.</p>
 </div>
 <div class="paragraph">
-<p>Order can be either of the following keywords:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>desc</code> - To sort in descending order</p>
-</li>
-<li>
-<p><code>asc</code> - To sort in ascending order</p>
-</li>
-</ul>
+<p>This listener passes the extracted String input to the <code>CustomSuggestionProvider</code> through <code>updateSuggestions</code>.</p>
 </div>
 <div class="paragraph">
-<p>This feature has 2 different kind of modes as follows:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Single Argument Mode - Input argument can be either the category or the order of sort</p>
-<div class="ulist">
-<ul>
-<li>
-<p>If category specified, records are sorted in ascending order of that category</p>
-</li>
-<li>
-<p>If order specified, records will be sorted by name in the specified order</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Duo Argument Mode - Input arguments must contain only 1 category and only 1 order, and can be input in no particular order</p>
-</li>
-</ol>
+<p><code>CustomSuggestionProvider</code> reads the word to be competed and the input text. It trims and splits the input text and
+find the index of the word to completed. It reads the first input first as it is the key command word and performs a
+different operation on the input string depending on the command word as well as any possible following parameters.</p>
 </div>
 <div class="paragraph">
-<p>The input given by the useris passed to <code>SortCommandParser</code> to split the input separated by whitespaces to ensure
-there is either only one or two arguments input by the user. These arguments are stored in an array of strings and
-the size of the array determines the mode of the command.</p>
+<p>Functions which are supported by autocomplete will parse the input individually through the different private methods
+available in <code>CustomSuggestionProvider</code>. Once it has decided which set of texts to be the new word suggestion bank,
+it calls the <code>CustomSuggestionProvider#updateSuggestions</code> overloaded method to update the <code>SuggestionProvider</code>.</p>
 </div>
 <div class="paragraph">
-<p>The strings are compared to two sets of strings containing the supported categories and orders of the function.
-The string of the category and a boolean representing whether the records are to be reversed will then be passed to
-<code>ModelManager</code> to sort the records.</p>
+<p>After updating the <code>SuggestionProvider</code>, <code>NewAutoCompletionBinding#SetUserInput</code> calls <code>onUserInputChanged</code> which
+is responsible for updating the suggestions list according to what the word to be completed is. As this class was
+tweaked from the library implementation, the threading involved in this method will not be detailed. It updates
+the list of suggestions
+by comparing the user input word to the list of suggestions and passes the resultant list to the <code>autoCompletionPopup</code>
+which will proceed to display the list of text in the popup below the command box.</p>
 </div>
 <div class="paragraph">
-<p>Since the displayed list in the UI is a <code>FilteredList</code> which is a wrapper for the underlying list <code>UniqueRecordList</code> structure,
-sorting the internal list of records in <code>versionedFinancialPlanner</code> will post an event that notifies the UI to update
-the displayed list.</p>
+<p>Now back to the <code>autoCompletionPopup</code>, whenever the user highlights a selected word input and selects it, the
+<code>autoCompletionPopup#setOnSuggestion</code> is triggered and will try to complete the word with the selected text and once
+completed, it hides the popup and sets the caret to the end of the newly completed word.</p>
 </div>
 <div class="paragraph">
-<p>The following sequence diagram shows how the sort operation works:</p>
+<p>The following sequence diagram shows how the auto completion operation works:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="images/SortSequenceDiagram.png" alt="width:800">
+<img src="images/AutoCompleteSequenceDiagram.png" alt="AutoCompleteSequenceDiagram" width="800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.2.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-method-to-update-suggestion-bank-to-use-for-comparison-to-input-word"><a class="link" href="#aspect-method-to-update-suggestion-bank-to-use-for-comparison-to-input-word">Aspect: Method to Update Suggestion Bank to use for comparison to input word</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Use listeners to the caret in the command box</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Accurate parsing of input and able to detect which word is currently in focus.</p>
+</li>
+<li>
+<p>Cons: Difficult to correctly parse text, as need to avoid whitespaces. Also led to many index array exceptions that
+can occur when checking the input.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Use text listeners in the command box</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Simple to implement, similar to library implementation. Safe and minimal room for errors.</p>
+</li>
+<li>
+<p>Cons: Cannot autocomplete by word, can only complete the last word input in the command box. Unable to perform
+completion for texts before the last word.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="aspect-method-to-compare-input-word-to-suggestion-bank-to-obtain-displayed-list-of-words"><a class="link" href="#aspect-method-to-compare-input-word-to-suggestion-bank-to-obtain-displayed-list-of-words">Aspect: Method to compare input word to Suggestion Bank to obtain displayed list of words</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Check if suggestion bank word <strong>begins</strong> with input word</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Simple, straightforward autocomplete for users. Users that are already good at typing and spelling
+will have a breeze using this implementation.</p>
+</li>
+<li>
+<p>Cons: Smaller range of completion texts as users need to accurately type the first few letters before getting a
+an expected completion suggestion.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Check if suggestion bank word <strong>contains</strong> input word e.g type <code>tag</code> &#8594; suggests <code>findtag</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: User can type whichever word is convenient to them to obtain a suggestion they desire. Users who may not know
+the full spelling of a word and only partially will enjoy this.</p>
+</li>
+<li>
+<p>Cons: Range of texts displayed may be excessive and not appealing to all users.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
@@ -988,7 +1033,7 @@ listener is present in <code>RecordListPanel</code> and will update the UI list 
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">3.3.2. Design Considerations</a></h4>
+<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.3.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-data-structure-to-support-listing-of-records"><a class="link" href="#aspect-data-structure-to-support-listing-of-records">Aspect: Data structure to support listing of records</a></h5>
 <div class="ulist">
@@ -1025,7 +1070,113 @@ listener is present in <code>RecordListPanel</code> and will update the UI list 
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-summary-feature"><a class="link" href="#view-summary-feature">3.4. View summary feature</a></h3>
+<h3 id="sort-records-feature"><a class="link" href="#sort-records-feature">3.4. Sort records feature</a></h3>
+<div class="sect3">
+<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.4.1. Current Implementation</a></h4>
+<div class="paragraph">
+<p>The sort mechanism is facilitated by <code>ModelManager</code>. It extends <code>FinancialPlanner</code> with a component that sorts the
+internal list of records. SortCommand calls <code>ModelManager#sortFilteredRecordList</code> and passes in the category to be
+sorted by and the sort order.</p>
+</div>
+<div class="paragraph">
+<p>This feature has one keyword <code>sort</code> and takes in arguments of either category or order of sort. Keywords are not
+case sensitive.</p>
+</div>
+<div class="paragraph">
+<p>Category can be either of the following keywords: <code>name</code>, <code>date</code>, <code>money</code>, <code>moneyflow</code></p>
+</div>
+<div class="paragraph">
+<p>Order can be either of the following keywords: <code>desc</code> - descending, <code>asc</code> - ascending</p>
+</div>
+<div class="paragraph">
+<p>This feature has 2 different kind of modes as follows:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Single Argument Mode - Input argument can be either the category or the order of sort</p>
+<div class="ulist">
+<ul>
+<li>
+<p>If category specified, records are sorted in ascending order of that category</p>
+</li>
+<li>
+<p>If order specified, records will be sorted by name in the specified order</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Duo Argument Mode - Input arguments must contain only 1 category and only 1 order, and can be input in no particular order</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The input given by the user is passed to <code>SortCommandParser</code> to split the input separated by whitespaces to ensure
+there is either only one or two arguments input by the user. These arguments are stored in an array of strings and
+the size of the array determines the mode of the command.</p>
+</div>
+<div class="paragraph">
+<p>The strings are compared to two sets of strings containing the supported categories and orders of the function.
+The string of the category and a boolean representing whether the records are to be reversed will then be passed to
+<code>ModelManager</code> to sort the records.</p>
+</div>
+<div class="paragraph">
+<p>Since the displayed list in the UI is a <code>FilteredList</code> which is a wrapper for the underlying list <code>UniqueRecordList</code> structure,
+sorting the internal list of records in <code>versionedFinancialPlanner</code> will post an event that notifies the UI to update
+the displayed list.</p>
+</div>
+<div class="paragraph">
+<p>The following sequence diagram shows how the sort operation works:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SortSequenceDiagram.png" alt="width:800">
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.4.2. Design Considerations</a></h4>
+<div class="sect4">
+<h5 id="aspect-method-of-sorting-data"><a class="link" href="#aspect-method-of-sorting-data">Aspect: Method of sorting data</a></h5>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Alternative 1 (current choice):</strong> Sort the observable array list in the underlying data structure in <code>UniqueRecordList</code></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Easy to implement, sorting will be permanent, user need not sort again with every following command</p>
+</li>
+<li>
+<p>Cons: Not very intuitive, user may not have intended to modify the underlying data arrangement instead only want to
+sort the data just this once for viewing</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>Alternative 2:</strong> Sort the FilteredList of records obtained after filtering the underlying array list</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Pros: Does not allow the user to alter the arrangement of the underlying data, and only obtains a sorted version of
+the read only data.</p>
+</li>
+<li>
+<p>Cons: Unable to sort a FilteredList as it does not support it, implementations could instead use SortedList but it
+will not be able to perform the filtering function</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="view-summary-feature"><a class="link" href="#view-summary-feature">3.5. View summary feature</a></h3>
 <div class="paragraph">
 <p>This feature allows the user to view a summary table of all their financial activity within a period of time. There are 3 different ways the user can
 view the summary, one is summary by date which means the summary of each day in the period will be provided, summary by month or summary by category.</p>
@@ -1095,7 +1246,7 @@ passed into a <code>ShowSummaryTableEvent</code> before triggering the event.</p
 </ol>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">3.4.1. Design Considerations</a></h4>
+<h4 id="design-considerations-5"><a class="link" href="#design-considerations-5">3.5.1. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-method-of-generating-the-summary"><a class="link" href="#aspect-method-of-generating-the-summary">Aspect: Method of generating the summary</a></h5>
 <div class="ulist">
@@ -1152,7 +1303,7 @@ Also, if the sequence of commands is as follows, <strong>summary, add, summary</
 </div>
 </div>
 <div class="sect3">
-<h4 id="aspect-method-of-switching-ui-panels"><a class="link" href="#aspect-method-of-switching-ui-panels">3.4.2. Aspect: Method of switching UI panels</a></h4>
+<h4 id="aspect-method-of-switching-ui-panels"><a class="link" href="#aspect-method-of-switching-ui-panels">3.5.2. Aspect: Method of switching UI panels</a></h4>
 <div class="ulist">
 <ul>
 <li>
@@ -1188,9 +1339,9 @@ However, this is unrealistic and it is unlikely that there are a lot of UI panel
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-category-breakdown-feature"><a class="link" href="#view-category-breakdown-feature">3.5. View category breakdown feature</a></h3>
+<h3 id="view-category-breakdown-feature"><a class="link" href="#view-category-breakdown-feature">3.6. View category breakdown feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-4"><a class="link" href="#current-implementation-4">3.5.1. Current Implementation</a></h4>
+<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.6.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>This feature allows the user to view a pie chart breakdown o
 f all expenses and all income within a date range which the user can specify.</p>
@@ -1309,7 +1460,7 @@ only be accessed within CustomPieChart for security purposes.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-4"><a class="link" href="#design-considerations-4">3.5.2. Design Considerations</a></h4>
+<h4 id="design-considerations-6"><a class="link" href="#design-considerations-6">3.6.2. Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-data-structure-to-support-statistic-command"><a class="link" href="#aspect-data-structure-to-support-statistic-command">Aspect: Data structure to support statistic command</a></h5>
 <div class="ulist">
@@ -1346,7 +1497,7 @@ only be accessed within CustomPieChart for security purposes.
 </div>
 </div>
 <div class="sect2">
-<h3 id="view-current-month-s-breakdown"><a class="link" href="#view-current-month-s-breakdown">3.6. View current month&#8217;s breakdown</a></h3>
+<h3 id="view-current-month-s-breakdown"><a class="link" href="#view-current-month-s-breakdown">3.7. View current month&#8217;s breakdown</a></h3>
 <div class="paragraph">
 <p>This feature does not require user to type any command into the command box or update manually. It provides information about the category breakdown for
 the current month, presenting income and expense statistics together in one panel. In addition, to improve usability, accelerators were assigned to the menu bar
@@ -1367,9 +1518,9 @@ Then the event is triggered, and the corresponding listener on the UI side is ca
 </div>
 </div>
 <div class="sect2">
-<h3 id="find-records-by-tag-feature"><a class="link" href="#find-records-by-tag-feature">3.7. Find records by tag feature</a></h3>
+<h3 id="find-records-by-tag-feature"><a class="link" href="#find-records-by-tag-feature">3.8. Find records by tag feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-5"><a class="link" href="#current-implementation-5">3.7.1. Current Implementation</a></h4>
+<h4 id="current-implementation-6"><a class="link" href="#current-implementation-6">3.8.1. Current Implementation</a></h4>
 <div class="paragraph">
 <p>The findtag mechanism is also facilitated by <code>ModelManager</code>. FindTagCommand calls <code>ModelManager#updateFilteredRecords</code>
 and passes in different predicates depending on the input by the user.</p>
@@ -1401,7 +1552,7 @@ and obtain a new <code>filteredRecords</code> based on the predicate, which will
 </div>
 </div>
 <div class="sect2">
-<h3 id="limit-features"><a class="link" href="#limit-features">3.8. Limit features</a></h3>
+<h3 id="limit-features"><a class="link" href="#limit-features">3.9. Limit features</a></h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1524,9 +1675,9 @@ will generate a temporary limit according to the current date. Then use this tem
 </ul>
 </div>
 <div class="sect3">
-<h4 id="addlimit-feature"><a class="link" href="#addlimit-feature">3.8.1. addLimit feature</a></h4>
+<h4 id="addlimit-feature"><a class="link" href="#addlimit-feature">3.9.1. addLimit feature</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-6"><a class="link" href="#current-implementation-6">Current Implementation</a></h5>
+<h5 id="current-implementation-7"><a class="link" href="#current-implementation-7">Current Implementation</a></h5>
 <div class="paragraph">
 <p>This command is to add a new limit according to the dates input.
 The command will read in a limit and store the limit by calling the <code>addLimit()</code> function.</p>
@@ -1552,9 +1703,9 @@ The command will read in a limit and store the limit by calling the <code>addLim
 </div>
 </div>
 <div class="sect3">
-<h4 id="deletelimit-feature"><a class="link" href="#deletelimit-feature">3.8.2. deleteLimit feature</a></h4>
+<h4 id="deletelimit-feature"><a class="link" href="#deletelimit-feature">3.9.2. deleteLimit feature</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-7"><a class="link" href="#current-implementation-7">Current Implementation</a></h5>
+<h5 id="current-implementation-8"><a class="link" href="#current-implementation-8">Current Implementation</a></h5>
 <div class="paragraph">
 <p>This command is to delete an existing limit.
 The command will read in a limit with the input dates and delete the limit with the same dates by calling the <code>deleteLimit</code> function.</p>
@@ -1583,9 +1734,9 @@ The command will read in a limit with the input dates and delete the limit with 
 </div>
 </div>
 <div class="sect3">
-<h4 id="editlimit-feature"><a class="link" href="#editlimit-feature">3.8.3. editLimit feature</a></h4>
+<h4 id="editlimit-feature"><a class="link" href="#editlimit-feature">3.9.3. editLimit feature</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-8"><a class="link" href="#current-implementation-8">Current Implementation</a></h5>
+<h5 id="current-implementation-9"><a class="link" href="#current-implementation-9">Current Implementation</a></h5>
 <div class="paragraph">
 <p>The editLimit command is to edit an existing limit.
 The command will read in a limit and replace the limit with the same dates by calliing the <code>updateLimit()</code> function.</p>
@@ -1611,9 +1762,9 @@ The command will read in a limit and replace the limit with the same dates by ca
 </div>
 </div>
 <div class="sect3">
-<h4 id="addmonthlylimit-feature"><a class="link" href="#addmonthlylimit-feature">3.8.4. addMonthlyLimit feature</a></h4>
+<h4 id="addmonthlylimit-feature"><a class="link" href="#addmonthlylimit-feature">3.9.4. addMonthlyLimit feature</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-9"><a class="link" href="#current-implementation-9">Current Implementation</a></h5>
+<h5 id="current-implementation-10"><a class="link" href="#current-implementation-10">Current Implementation</a></h5>
 <div class="paragraph">
 <p>The addMonthlyLimit command is to add a monthly limit.
 The command will read in the monthly limit and store it by calling the <code>addLimit()</code> function.</p>
@@ -1642,9 +1793,9 @@ The command will read in the monthly limit and store it by calling the <code>add
 </div>
 </div>
 <div class="sect3">
-<h4 id="editmonthlylimit-feature"><a class="link" href="#editmonthlylimit-feature">3.8.5. editMonthlyLimit feature</a></h4>
+<h4 id="editmonthlylimit-feature"><a class="link" href="#editmonthlylimit-feature">3.9.5. editMonthlyLimit feature</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-10"><a class="link" href="#current-implementation-10">Current Implementation</a></h5>
+<h5 id="current-implementation-11"><a class="link" href="#current-implementation-11">Current Implementation</a></h5>
 <div class="paragraph">
 <p>The editMonthlyLimit command is to edit the monthly limit.
 The command will read in the monthly limit and update the monthly limit by calling the <code>updateLimit()</code> function.</p>
@@ -1673,9 +1824,9 @@ The command will read in the monthly limit and update the monthly limit by calli
 </div>
 </div>
 <div class="sect3">
-<h4 id="deletemonthlylimit-feature"><a class="link" href="#deletemonthlylimit-feature">3.8.6. deleteMonthlyLimit feature</a></h4>
+<h4 id="deletemonthlylimit-feature"><a class="link" href="#deletemonthlylimit-feature">3.9.6. deleteMonthlyLimit feature</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-11"><a class="link" href="#current-implementation-11">Current Implementation</a></h5>
+<h5 id="current-implementation-12"><a class="link" href="#current-implementation-12">Current Implementation</a></h5>
 <div class="paragraph">
 <p>The deleteMonthlyLimit command is to delete the monthly limit.
 The command will read in the monthly limit and update the monthly limit by calling the <code>deleteLimit()</code> function.</p>
@@ -1704,9 +1855,9 @@ The command will read in the monthly limit and update the monthly limit by calli
 </div>
 </div>
 <div class="sect3">
-<h4 id="checklimit-feature"><a class="link" href="#checklimit-feature">3.8.7. checkLimit feature</a></h4>
+<h4 id="checklimit-feature"><a class="link" href="#checklimit-feature">3.9.7. checkLimit feature</a></h4>
 <div class="sect4">
-<h5 id="current-implementation-12"><a class="link" href="#current-implementation-12">Current Implementation</a></h5>
+<h5 id="current-implementation-13"><a class="link" href="#current-implementation-13">Current Implementation</a></h5>
 <div class="paragraph">
 <p>This feature is to help the user to check all the limits stored inside the limitList. The function will call
 manualLimitCheck(), which will generate a string that contains all limits' information.</p>
@@ -1730,9 +1881,9 @@ manualLimitCheck(), which will generate a string that contains all limits' infor
 </div>
 </div>
 <div class="sect2">
-<h3 id="delete-all-the-record-whose-date-is-required"><a class="link" href="#delete-all-the-record-whose-date-is-required">3.9. Delete all the record whose date is required</a></h3>
+<h3 id="delete-all-the-record-whose-date-is-required"><a class="link" href="#delete-all-the-record-whose-date-is-required">3.10. Delete all the record whose date is required</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-13"><a class="link" href="#current-implementation-13">3.9.1. Current implementation</a></h4>
+<h4 id="current-implementation-14"><a class="link" href="#current-implementation-14">3.10.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The delete by date entry mechanism is facilitated by <code>ModelManager</code>.
 It represents an in-memory model of Savee and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>. DeleteByDateEntryCommand calls <code>ModelManager#getFilteredRecordList</code> to retrieve the list of all current records in the Savee. Then, it will loop through the list of records and call <code>ModelManger#deleteRecord(Record record)</code> to delete the record whose date is required. If there exists target records, <code>ModelManager#commitFinancialPlanner</code> will be called to update the current version of Savee and the message, which states records have been deleted. Then, <code>ModelManager#autoLimitCheck</code> will be called to check the current change in limit as we delete some records exceeds the limit or <strong>not</strong>. This feature has only one keyword <code>deletedate</code> and implements only 1 argument mode.
@@ -1757,9 +1908,9 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 </div>
 </div>
 <div class="sect2">
-<h3 id="export-the-records-from-savee-to-the-excel-file"><a class="link" href="#export-the-records-from-savee-to-the-excel-file">3.10. Export the records from Savee to the Excel file.</a></h3>
+<h3 id="export-the-records-from-savee-to-the-excel-file"><a class="link" href="#export-the-records-from-savee-to-the-excel-file">3.11. Export the records from Savee to the Excel file.</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-14"><a class="link" href="#current-implementation-14">3.10.1. Current implementation</a></h4>
+<h4 id="current-implementation-15"><a class="link" href="#current-implementation-15">3.11.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The export into excel file mechanism is facilitated by <code>ModelManager</code> with the help of <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It represents an in-memory model of the Savee and is the component which manages the interactions between the commands, <code>ExcelUtil</code> and the <code>VersionedFinancialPlanner</code>. ExportExcelCommand calls <code>ModelManager#updateFilteredRecords</code> and passes in different predicates depending on the argument mode. The List&lt;Record&gt; is retrieved by calling <code>ModelManager#getFilteredRecordList</code>. Meanwhile, it also called <code>ModelManager#getFinancialPlanner</code> to get the <code>ReadOnlyFinancialPlanner</code>. The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List&lt;SummaryEntry&gt; is easily retrieved from SummaryByDateList by calling <code>SummaryByDateList#getSummaryList</code>. <code>ExcelUtil#setNameExcelFile</code> is called to make the Excel name based on the condition of startDate and endDate. After that, <code>ExcelUtil#setPathFile</code> is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default <strong>User&#8217;s Working Directory</strong>. With the sufficient information, <code>List&lt;Record&gt; records</code>, <code>List&lt;SummaryByDateEntry&gt; summaryList</code>, <code>file path</code>, <code>ExportExcelCommand#exportDataIntoExcelSheetWithGivenRecords</code> is called to start the processing of producing Excel file.</p>
 </div>
@@ -1849,9 +2000,9 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 </div>
 </div>
 <div class="sect2">
-<h3 id="import-the-record-data-from-the-excel-file-to-savee"><a class="link" href="#import-the-record-data-from-the-excel-file-to-savee">3.11. Import the record data from the Excel file to Savee</a></h3>
+<h3 id="import-the-record-data-from-the-excel-file-to-savee"><a class="link" href="#import-the-record-data-from-the-excel-file-to-savee">3.12. Import the record data from the Excel file to Savee</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-15"><a class="link" href="#current-implementation-15">3.11.1. Current implementation</a></h4>
+<h4 id="current-implementation-16"><a class="link" href="#current-implementation-16">3.12.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The import from Excel file mechanism is facilitated by <code>ExcelUtil</code>, the utility created to handle all method relating to Excel. ImportExcelCommand calls <code>ExcelUtil#readExcelSheet</code> to read the Excel file and retrieve data of records from them to create a list of record List&lt;Record&gt;. In <code>ExcelUtil#readExcelSheet</code>, by using method <code>XSSFWorkbook#setMissingCellPolicy</code>, every missing cell will be considered as Null cell, quite useful when you export or archive the record data if the record does <strong>not</strong> have tag. If blank row is found, the <code>ExcelUtil#readExcelSheet</code> will ignore and read the next line, until the last line is read. This concept also applies to read multiple sheets until all sheets have been read. However, please take note that in order to prevent errors, there are certain constraints of Excel file list in <strong>User Guide</strong> with <strong>Import the record data from the Excel file to the Savee</strong> part. After that, <code>ModelManager#addListUniqueRecord</code> is called to add the records in the List&lt;Record&gt;. If the record has already existed in the Savee, it will be ignored and <strong>not</strong> added into the Savee. Eventually, when all the records are added in the Savee, <code>ModelManager#commitFinancialPlanner</code> will be called to update the current version of Savee and the message, which states records have been added.</p>
 </div>
@@ -1937,9 +2088,9 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 </div>
 </div>
 <div class="sect2">
-<h3 id="archive-the-record-data-from-savee-to-the-excel-file"><a class="link" href="#archive-the-record-data-from-savee-to-the-excel-file">3.12. Archive the record data from Savee to the Excel file</a></h3>
+<h3 id="archive-the-record-data-from-savee-to-the-excel-file"><a class="link" href="#archive-the-record-data-from-savee-to-the-excel-file">3.13. Archive the record data from Savee to the Excel file</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-16"><a class="link" href="#current-implementation-16">3.12.1. Current implementation</a></h4>
+<h4 id="current-implementation-17"><a class="link" href="#current-implementation-17">3.13.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>The archive into excel file mechanism is facilitated by <code>ModelManager</code> with the help of <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It represents an in-memory model of Savee and is the component which manages the interactions between the commands, <code>ExcelUtil</code> and the <code>VersionedFinancialPlanner</code>. ArchiveCommand calls <code>ModelManager#updateFilteredRecords</code> and passes in different predicates depending on the argument mode. The List&lt;Record&gt; is retrieved by calling <code>ModelManager#getFilteredRecordList</code>. Meanwhile, it also called <code>ModelManager#getFinancialPlanner</code> to get the <code>ReadOnlyFinancialPlanner</code>. The SummaryByDateList is constructed after the ReadOnlyFinancialPlanner together with the predicate are passed into the construction of SummaryByDateList. The List&lt;SummaryEntry&gt; is easily retrieved from SummaryByDateList by calling <code>SummaryByDateList#getSummaryList</code>. <code>ExcelUtil#setNameExcelFile</code> is called to make the Excel name based on the condition of startDate and endDate. After that, <code>ExcelUtil#setPathFile</code> is called to set the Path file, which is the location of the Excel file stored in future. The Path file is constructed based on the name of the Excel file we retrieve above and the directory Path, it can be either optionally entered by the user or the default <strong>User&#8217;s Working Directory</strong>. With the sufficient information, <code>List&lt;Record&gt; records</code>, <code>List&lt;SummaryByDateEntry&gt; summaryList</code>, <code>file path</code>, <code>ArchiveCommand#archiveDataIntoExcelSheetWithGivenRecords</code> is called to start the processing of producing Excel file. After records are archived to Excel file, <code>ModelManager#deleteListRecord</code> is called to delete the archived records.If there exists target records, <code>ModelManager#commitFinancialPlanner</code> will be called to update the current version of Savee and the message, which states records have been deleted.</p>
 </div>
@@ -2029,29 +2180,29 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 </div>
 </div>
 <div class="sect2">
-<h3 id="draw-a-line-chart-automatically-inside-the-excel-sheet"><a class="link" href="#draw-a-line-chart-automatically-inside-the-excel-sheet">3.13. Draw a line chart automatically inside the Excel sheet</a></h3>
+<h3 id="draw-a-line-chart-automatically-inside-the-excel-sheet"><a class="link" href="#draw-a-line-chart-automatically-inside-the-excel-sheet">3.14. Draw a line chart automatically inside the Excel sheet</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-17"><a class="link" href="#current-implementation-17">3.13.1. Current implementation</a></h4>
+<h4 id="current-implementation-18"><a class="link" href="#current-implementation-18">3.14.1. Current implementation</a></h4>
 <div class="paragraph">
 <p>This feature will automatically uses the the summary data from the <code>SUMMARY DATA</code> sheet in the Excel sheet after the command <code>archive</code> or <code>export_excel</code> is called. The feature mechanism is facilitated by <code>ExcelUtil</code>, the utility created to handle all methods relating to Excel. It is the component which manages the interactions between the ExportExcelCommand or the ArchiveCommand with <code>ExcelUtil#drawChart</code>.</p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.14. [Proposed] Data Encryption</a></h3>
+<h3 id="proposed-data-encryption"><a class="link" href="#proposed-data-encryption">3.15. [Proposed] Data Encryption</a></h3>
 <div class="paragraph">
 <p><em>{Explain here how the data encryption feature will be implemented}</em></p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="logging"><a class="link" href="#logging">3.15. Logging</a></h3>
+<h3 id="logging"><a class="link" href="#logging">3.16. Logging</a></h3>
 <div class="paragraph">
 <p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.16, &#8220;Configuration&#8221;</a>)</p>
+<p>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#Implementation-Configuration">Section 3.17, &#8220;Configuration&#8221;</a>)</p>
 </li>
 <li>
 <p>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</p>
@@ -2082,7 +2233,7 @@ The date must follow the format: dd-mm-yyyy, error will be thrown if the format 
 </div>
 </div>
 <div class="sect2">
-<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.16. Configuration</a></h3>
+<h3 id="Implementation-Configuration"><a class="link" href="#Implementation-Configuration">3.17. Configuration</a></h3>
 <div class="paragraph">
 <p>Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: <code>config.json</code>).</p>
 </div>
@@ -3466,6 +3617,12 @@ for <code>RemarkCommandParser</code>.</p>
 <p>User requests to add record into Savee.</p>
 </li>
 <li>
+<p>Save requests for record information to be added.</p>
+</li>
+<li>
+<p>User inputs record information.</p>
+</li>
+<li>
 <p>System adds the record into the system.</p>
 </li>
 <li>
@@ -3860,23 +4017,23 @@ for <code>RemarkCommandParser</code>.</p>
 </li>
 </ul>
 </div>
-<h3 id="8-use-case-search-expenses-based-on-category-zhi-thon" class="discrete">8.  Use case: Search expenses based on category [Zhi Thon]</h3>
+<h3 id="8-use-case-search-expenses-based-on-tags-zhi-thon" class="discrete">8.  Use case: Search expenses based on tags [Zhi Thon]</h3>
 <div class="paragraph">
 <p><strong>MSS</strong></p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>User requests to search for expenses by category</p>
+<p>User requests to search for expenses by tags</p>
 </li>
 <li>
-<p>Savee requests for category of expenditure</p>
+<p>Savee requests for tag of expenditure</p>
 </li>
 <li>
-<p>User enters category desired</p>
+<p>User enters tag desired</p>
 </li>
 <li>
-<p>Savee displays each expenditure with name category and the total expenditure.</p>
+<p>Savee displays each expenditure tagged with specified word.</p>
 <div class="paragraph">
 <p>Use case ends.</p>
 </div>
@@ -3889,7 +4046,7 @@ for <code>RemarkCommandParser</code>.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>3a User’s input category cannot be found.</p>
+<p>3a User’s input tag cannot be found.</p>
 <div class="ulist">
 <ul>
 <li>
@@ -6186,4 +6343,4 @@ Then, open the app.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:33:21 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 14:09:29 UTC</div></div></div></body></html>
