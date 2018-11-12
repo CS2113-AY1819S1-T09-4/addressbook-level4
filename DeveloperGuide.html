@@ -1046,22 +1046,7 @@ code shared by these classes can be placed in <code>SummaryCommand</code> for co
 <div class="title">Figure 10. Class diagram showing the inheritance from SummaryCommand</div>
 </div>
 <div class="paragraph">
-<p>Also, these commands utilise their own version of summary lists which is also inherited from the parent class <code>SummaryList</code> as shown below.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/SummaryListClassDiagram.png" alt="SummaryListClassDiagram" width="500">
-</div>
-<div class="title">Figure 11. Class diagram showing the inheritance from SummaryList</div>
-</div>
-<div class="paragraph">
-<p>The sequence diagram below details the sequence of program executions for the logic phase.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="images/SummarySequenceDiagram.png" alt="SummarySequenceDiagram" width="790">
-</div>
-<div class="title">Figure 12. Sequence diagram for high level interactions in logic phase</div>
+<p>Also, these commands utilise their own version of summary lists which is also inherited from the parent class <code>SummaryList</code> as shown below. Below details the logic phase.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -1083,6 +1068,15 @@ passed into a <code>ShowSummaryTableEvent</code> before triggering the event.</p
 <p>The entire logic process is the same for SummaryByMonthCommand and SummaryByCategoryCommand but uses different lists.</p>
 </li>
 </ol>
+</div>
+<div class="paragraph">
+<p>The sequence diagram below details the sequence of program executions for the logic phase.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/SummarySequenceDiagram.png" alt="SummarySequenceDiagram" width="790">
+</div>
+<div class="title">Figure 11. Sequence diagram for high level interactions in logic phase</div>
 </div>
 <div class="paragraph">
 <p>The next phase of the program execution is performed in the UI components.</p>
@@ -1210,7 +1204,7 @@ The detailed execution sequence of functions used for <code>Logic phase</code> a
 <div class="content">
 <img src="images/StatisticLogicSequenceDiagram.png" alt="StatisticLogicSequenceDiagram" width="790">
 </div>
-<div class="title">Figure 13. Sequence diagram for high level interactions in logic phase</div>
+<div class="title">Figure 12. Sequence diagram for high level interactions in logic phase</div>
 </div>
 <div class="paragraph">
 <p>Consider the situation where the user enters <strong>"stats d/1-1-2018 12-12-2018"</strong>:</p>
@@ -1234,7 +1228,7 @@ within the <code>StatisticCommandParser#parse</code> method.</p>
 <div class="content">
 <img src="images/StatisticParserActivityDiagram.png" alt="StatisticParserActivityDiagram" width="790">
 </div>
-<div class="title">Figure 14. Activity diagram for details in StatisticCommandParser</div>
+<div class="title">Figure 13. Activity diagram for details in StatisticCommandParser</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1266,7 +1260,7 @@ the event system in FinancialPlanner. The sequence diagram below details the pro
 <div class="content">
 <img src="images/StatisticUiSequenceDiagram.png" alt="StatisticUiSequenceDiagram" width="790">
 </div>
-<div class="title">Figure 15. Sequence diagram for high level interactions in UI phase</div>
+<div class="title">Figure 14. Sequence diagram for high level interactions in UI phase</div>
 </div>
 <div class="ulist">
 <ul>
@@ -1284,7 +1278,7 @@ the activity diagram below.</p>
 <div class="content">
 <img src="images/StatisticUiActivityDiagram.png" alt="StatisticUiActivityDiagram" width="790">
 </div>
-<div class="title">Figure 16. Activity diagram for details in MixedPieChartDataList</div>
+<div class="title">Figure 15. Activity diagram for details in MixedPieChartDataList</div>
 </div>
 <div class="paragraph">
 <p>The program flow is then as shown above where the <code>CategoryBreakdown</code> is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
@@ -1298,7 +1292,7 @@ In the current implementation, whenever <code>stats</code> is called, 2 tabs wil
 <div class="content">
 <img src="images/StatisticUiDetailedSequenceDiagram.png" alt="StatisticUiDetailedSequenceDiagram" width="790">
 </div>
-<div class="title">Figure 17. Sequence diagram for creation of pie charts</div>
+<div class="title">Figure 16. Sequence diagram for creation of pie charts</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -2154,7 +2148,7 @@ Alternatively, you can download the AsciiDoc plugin for IntelliJ, which allows y
 <div class="content">
 <img src="images/chrome_save_as_pdf.png" alt="chrome save as pdf" width="300">
 </div>
-<div class="title">Figure 18. Saving documentation as PDF files in Chrome</div>
+<div class="title">Figure 17. Saving documentation as PDF files in Chrome</div>
 </div>
 </div>
 <div class="sect2">
@@ -6192,4 +6186,4 @@ Then, open the app.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:27:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:33:21 UTC</div></div></div></body></html>

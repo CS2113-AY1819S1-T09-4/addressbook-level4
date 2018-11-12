@@ -11,9 +11,8 @@
 <div class="sectionbody">
 <div class="paragraph">
 <p>Savee is an application my team has created for the NUS module CS2113T on Software Engineering Principles and Object Oriented Programming.
-This project lasted for 10 weeks and we were tasked to develop a desktop application for a particular group of users.
 Savee&#8217;s main target audience are students who need help managing their finances and likes typing. In Savee,
-there is a text box located at the topmost part of the application which users can use to type commands into the system. Graphic user interface(GUI)
+there is a command box for inputting commands and graphic user interface(GUI)
 created using JavaFX was also used to display the output of the system to create a more intuitive and engaging user experience.</p>
 </div>
 </div>
@@ -22,8 +21,7 @@ created using JavaFX was also used to display the output of the system to create
 <h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Savee was adapted from <a href="https://nuscs2113-ay1819s1.github.io/addressbook-level4/">AddressBook Level 4</a>, a sample codebase given by the module.
-Throughout this development cycle, I have made much contributions to the team and below shows a summary of my
+<p>Throughout this development cycle, I have made much contributions to the team and below shows a summary of my
 contributions.</p>
 </div>
 <div class="sect2">
@@ -35,12 +33,10 @@ contributions.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>Reason for the enhancement</code> Savee is mainly targeted at users who wants to store and keep track of their daily financial activity. This is significantly
-different from the original AddressBook Level 4.</p>
+<p><code>Reason for the enhancement</code> Savee is mainly targeted at users who wants to store and keep track of their daily financial activity, which is not the same as AB4.</p>
 </li>
 <li>
-<p><code>My contributions</code> I adapted all model and storage components. I also fixed
-all the tests that broke as a result of the morph.</p>
+<p><code>My contributions</code> I adapted all model and storage components. I also fixed all the tests that broke as a result of the morph.</p>
 </li>
 </ul>
 </div>
@@ -82,7 +78,7 @@ the Ui panel in this feature can be switched out for other panels. The pie chart
 </div>
 </li>
 <li>
-<p><strong>Major Enhancements</strong>: Added a welcome panel that displays breakdown for current month</p>
+<p><strong>Minor Enhancements</strong>: Added a welcome panel that displays breakdown for current month</p>
 <div class="ulist">
 <ul>
 <li>
@@ -90,13 +86,7 @@ the Ui panel in this feature can be switched out for other panels. The pie chart
 to type a single command.</p>
 </li>
 <li>
-<p><code>Overview</code> This feature serves as the front page of the application. It displays the category breakdown of current month and is automatically
-updated whenever the data in the application is changed.</p>
-</li>
-<li>
-<p><code>My contributions</code> Since this feature is automatic and should not require any user input, I created new methods that can track the current date and cached a list in <code>ModelManager</code> to store
-the record list for the current month. I also hooked up this cached list to main model to listen to any changes to the underlying list and update itself. Furthermore,
-I created the welcome panel UI layout and logic to read from this list whenever it updates and refresh the UI panel.</p>
+<p><code>My contributions</code> I created a system to track the current date and refresh the UI panel whenever it detects changes to the underlying list.</p>
 </li>
 </ul>
 </div>
@@ -105,13 +95,6 @@ I created the welcome panel UI layout and logic to read from this list whenever 
 <p><strong>Minor Enhancements</strong>: Added an extension to list command</p>
 <div class="ulist">
 <ul>
-<li>
-<p><code>Reason for the enhancement</code> Originally, the list command would list all records in the application. This may not be very convenient when the
-number of records become very large.</p>
-</li>
-<li>
-<p><code>Overview</code> This list command allows users to specify the date range and will only show records in that range.</p>
-</li>
 <li>
 <p><code>My contributions</code> ListCommandParser of the original implementation was tweaked slightly to allow additional functionality.</p>
 </li>
@@ -156,16 +139,6 @@ number of records become very large.</p>
 </div>
 </li>
 <li>
-<p>Debugging team members code</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Helped debug other team member&#8217;s code and offer suggestions when they are stuck</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
 <p>Testing</p>
 <div class="ulist">
 <ul>
@@ -202,57 +175,10 @@ number of records become very large.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Below are some of my contributions to the User Guide. These show that I am able to write comprehensive User Guides.</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Below are some of my contributions to the User Guide. These show that I am able to write comprehensive User Guides.</p></td>
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="listing-all-records-within-a-date-range-code-list-code"><a class="link" href="#listing-all-records-within-a-date-range-code-list-code">Listing all records within a date range : <code>list</code></a></h3>
-<div class="paragraph">
-<p>Shows a list of all records in Savee which is within a certain date range.<br>
-There are 3 modes, <strong>default</strong> mode, <strong>single argument</strong> mode and <strong>dual argument</strong> mode.<br>
-Format:<br>
-Default mode: <code>list</code><br>
-Single argument mode: <code>list d/DATE</code><br>
-Dual argument mode: <code>list d/START_DATE END_DATE</code></p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div class="ulist">
-<ul>
-<li>
-<p>Default mode will list down all records in Savee.<br></p>
-</li>
-<li>
-<p>Single argument mode will list down all records with the date specified.<br></p>
-</li>
-<li>
-<p>Dual argument mode will list down all records with the date that fall on either dates or between both dates.</p>
-</li>
-<li>
-<p>Refer to <a href="#constraints">[constraints]</a> for the more information on the parameters.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><code>list</code></p>
-</li>
-<li>
-<p><code>list d/10-11-2018</code></p>
-</li>
-<li>
-<p><code>list d/10-11-2018 11-11-2018</code></p>
-</li>
-</ul>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -311,24 +237,6 @@ Format:<br></p>
 </div>
 </div>
 <div class="paragraph">
-<p>Once the command has been executed, a panel will appear showing the summary table containing data that is relevant in the range.<br>
-The table entries are sorted according to either date, month or category depending on the mode used in ascending order.<br>
-At the same time, currently selected record will be unselected to reduce confusion for the user.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The table listing is currently non-resizable. If either the date, month or category is too long, the default behaviour of this app is to truncate
-those words and replace the parts truncated with ellipses("&#8230;&#8203;").
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
 <p>Examples:</p>
 </div>
 <div class="ulist">
@@ -373,25 +281,8 @@ Format:`stats d/START_DATE END_DATE`</p>
 <div class="paragraph">
 <p>Once the command has been executed, 2 tabs will appear showing a pie chart containing data that is relevant in the range.<br>
 At the same time, currently selected record will be unselected to reduce confusion for the user. If there are many categories shown and
-the box is not large enough, you can use the scroll bar at the side of each legend to view the other categories which are not in view.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-Due to label constraints, some labels may not be displaying correctly if they are overlapping with other labels. This happens when the pie slice
-is too small. To improve readability, we have decided to hide some labels in such scenarios. Also, when the label is too long, since the pie charts
-need to fit the labels, the pie chart may become small as a result. To prevent such situations, please keep your labels short. This will be improved in
-later versions of the product to remove the labels completely and use a mouse over input instead.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Examples:</p>
+the box is not large enough, you can use the scroll bar at the side of each legend to view the other categories which are not in view.
+Examples:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -399,67 +290,6 @@ later versions of the product to remove the labels completely and use a mouse ov
 <p><code>stats d/1-1-2018 12-12-2018</code></p>
 </li>
 </ul>
-</div>
-<div class="paragraph">
-<p>Below are some screenshots of what you can see when the command has been accepted. The commands entered have been left
-in for visualisation purposes. These screenshots are taken in <strong>fullscreen mode</strong> at 1080p resolution.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UiPieChartExpense.png" alt="UiPieChartExpense" width="790">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Screenshot of app displaying expense breakdown when <code>stats d/1-1-2018 12-12-2018</code> is run</strong></p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/UiPieChartIncome.png" alt="UiPieChartIncome" width="790">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Screenshot of app displaying income breakdown when <code>stats d/1-1-2018 12-12-2018</code> is run</strong></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="showing-a-breakdown-of-total-expenses-and-income-into-categories-of-this-month-code-no-command-required-to-be-typed-code"><a class="link" href="#showing-a-breakdown-of-total-expenses-and-income-into-categories-of-this-month-code-no-command-required-to-be-typed-code">Showing a breakdown of total expenses and income into categories of this month: <code>NO COMMAND REQUIRED TO BE TYPED</code></a></h3>
-<div class="paragraph">
-<p>Shows a breakdown of total expenses and income into categories using data of this month.<br>
-No format is required for this feature as the feature is automatically triggered when there is any mutation of data within the application.
-Another way of returning to the welcome panel from anywhere in the app is to press <code>HOME</code> on the keyboard or click <code>Home</code> on the menu.</p>
-</div>
-<div class="paragraph">
-<p>This feature automatically tracks the <strong>current date</strong> and ensures that the data presented is updated regardless regardless of whether the application is <strong>off</strong> or <strong>on for
-prolonged periods of time</strong>. This feature also works offline and retrieves information from the system clock to determine the current date.<br></p>
-</div>
-<div class="paragraph">
-<p>Even in the event where the user is using the application at close to 12 midnight of the last day of a particular month and the clocks strikes 12,
-the application will update the data whenever it detects any record data modifications in the app to reflect the next month.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-The data used to represent the pie charts in the welcome panel is <strong>only updated</strong> whenever there are any changes to records within Savee.<br>
-This includes adding records, deleting records and editing records in Savee, but not sorting, listing, summary, stats, etc.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Below shows a snapshot of what the user can see when there are records available of the current month. If the screen is too small, the welcome message may be
-truncated to allow more space for the charts.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/WelcomePanelWithPieCharts.png" alt="WelcomePanelWithPieCharts" width="790">
-</div>
-</div>
-<div class="paragraph">
-<p><strong>Screenshot of app on startup when records of current month are available</strong></p>
 </div>
 </div>
 </div>
@@ -479,101 +309,6 @@ developers the architecture of my product.</em></p></td>
 </tr>
 </tbody>
 </table>
-<div class="sect2">
-<h3 id="list-history-feature"><a class="link" href="#list-history-feature">List history feature</a></h3>
-<div class="sect3">
-<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
-<div class="paragraph">
-<p>The list mechanism is facilitated by <code>ModelManager</code>.
-It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the <code>VersionedFinancialPlanner</code>.
-ListCommand calls <code>ModelManager#updateFilteredRecords</code> and passes in different predicates depending on the argument mode.</p>
-</div>
-<div class="paragraph">
-<p>This feature has only one keyword <code>list</code> but implements 3 different argument modes to allow users to access multiple versions of the same command.
-The three argument modes are as listed below:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>No Argument mode&#8201;&#8212;&#8201;Requires no arguments and returns the entire list of records in the FinancialPlanner.</p>
-</li>
-<li>
-<p>Single Argument mode&#8201;&#8212;&#8201;Requires a single date and returns all records containing that date</p>
-</li>
-<li>
-<p>Dual Argument mode&#8201;&#8212;&#8201;Requires 2 dates, a <code>start date</code> and an <code>end date</code>. It returns all records containing dates within the time frame of start date and end date, inclusive of both start date and end date
-The mechanism that facilitates these modes can be found in the <code>ListCommandParser#parse</code>. Below is a overview of the mechanism:</p>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>The input given by the user is passed to <code>ArgumentTokeniser#tokenise</code> to split the input separated by prefixes which returns a <code>ArgumentMultiMap</code> which contains a map with prefixes as keys and their associated input arguments as the value.</p>
-</li>
-<li>
-<p>The string associated with <code>d/</code> is then passed into <code>ListCommandParser#splitByWhitespace</code> for further processing and returns an array.</p>
-</li>
-<li>
-<p>The argument mode is determined by the size of this array and the elements are further processed into <code>Date</code> objects, before creating and returning a <code>ListCommand</code> object.</p>
-</li>
-</ol>
-</div>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>The <code>ListCommand</code> has two constructors which makes use of overloading to reduce code complexity, one with no argument and the other one with 2 <code>Date</code> arguments.</p>
-</div>
-<div class="paragraph">
-<p>The following sequence diagram shows how the list operation works:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/ListSequenceDiagram.png" alt="ListSequenceDiagram" width="800">
-</div>
-</div>
-<div class="paragraph">
-<p>For simplicity, interactions with the UI is not shown in the diagram above.<br>
-The update of the UI <code>RecordListPanel</code> is done through the event system. <code>FilteredList</code> is a type of ObservableList
-implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
-listener is present in <code>RecordListPanel</code> and will update the UI list automatically.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
-<div class="sect4">
-<h5 id="aspect-data-structure-to-support-listing-of-records"><a class="link" href="#aspect-data-structure-to-support-listing-of-records">Aspect: Data structure to support listing of records</a></h5>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1 (current choice):</strong> Uses a FilteredList that is tracked by the UI. FilteredLIst is a wrapper around the ObservableList&lt;Record&gt; that is stored in UniquePersonList which allows for any changes in the observable list to be propagated to the filtered list automatically.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement</p>
-</li>
-<li>
-<p>Cons: May take a significantly longer time to list records if there are many records spanning across a large timeframe.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Implement a HashMap with Date as the key and Record as the value.</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Allows for constant time complexity to access any elements. Hence, listing records can potentially be faster.</p>
-</li>
-<li>
-<p>Cons: Current UI implementation relies on <code>FilteredList</code>. In order for UI to be compatible with the new data structure, the UI may need to change its implementation to <code>ObservableMap</code> instead. Alternatively, one can utilise a <code>HashMap</code> to first generate the list and pass the list reference into <code>FilteredList</code>. However, there is a need to code a filter function.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
 <div class="sect2">
 <h3 id="view-summary-feature"><a class="link" href="#view-summary-feature">View summary feature</a></h3>
 <div class="paragraph">
@@ -596,22 +331,7 @@ code shared by these classes can be placed in <code>SummaryCommand</code> for co
 <div class="title">Figure 1. Class diagram showing the inheritance from SummaryCommand</div>
 </div>
 <div class="paragraph">
-<p>Also, these commands utilise their own version of summary lists which is also inherited from the parent class <code>SummaryList</code> as shown below.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/SummaryListClassDiagram.png" alt="SummaryListClassDiagram" width="500">
-</div>
-<div class="title">Figure 2. Class diagram showing the inheritance from SummaryList</div>
-</div>
-<div class="paragraph">
-<p>The sequence diagram below details the sequence of program executions for the logic phase.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="../images/SummarySequenceDiagram.png" alt="SummarySequenceDiagram" width="790">
-</div>
-<div class="title">Figure 3. Sequence diagram for high level interactions in logic phase</div>
+<p>Also, these commands utilise their own version of summary lists which is also inherited from the parent class <code>SummaryList</code> as shown below. Below details the logic phase.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -635,6 +355,15 @@ passed into a <code>ShowSummaryTableEvent</code> before triggering the event.</p
 </ol>
 </div>
 <div class="paragraph">
+<p>The sequence diagram below details the sequence of program executions for the logic phase.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="../images/SummarySequenceDiagram.png" alt="SummarySequenceDiagram" width="790">
+</div>
+<div class="title">Figure 2. Sequence diagram for high level interactions in logic phase</div>
+</div>
+<div class="paragraph">
 <p>The next phase of the program execution is performed in the UI components.</p>
 </div>
 <div class="olist arabic">
@@ -651,7 +380,7 @@ passed into a <code>ShowSummaryTableEvent</code> before triggering the event.</p
 </ol>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
+<h4 id="design-considerations"><a class="link" href="#design-considerations">Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-method-of-generating-the-summary"><a class="link" href="#aspect-method-of-generating-the-summary">Aspect: Method of generating the summary</a></h5>
 <div class="ulist">
@@ -707,46 +436,11 @@ Also, if the sequence of commands is as follows, <strong>summary, add, summary</
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="aspect-method-of-switching-ui-panels"><a class="link" href="#aspect-method-of-switching-ui-panels">Aspect: Method of switching UI panels</a></h4>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Alternative 1(current choice):</strong> Disable all UI panels within the Main UI placeholder before enabling the desired one</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Easy to implement and apply it to other newly created panels. To make use of the current implementation, the panel can simply be the children of
-the main Ui placeholder and its event handler can be placed in main window.</p>
-</li>
-<li>
-<p>Cons: Might be inefficient when there are many panels or many switching as the same process must be repeated for all panels.
-However, this is unrealistic and it is unlikely that there are a lot of UI panels for it to make a significant impact.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p><strong>Alternative 2:</strong> Track which UI panel is visible and only hide that panel</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Pros: Might have some benefits if the amount of resources available is low</p>
-</li>
-<li>
-<p>Cons: Slightly harder to implement but unlikely to have visible benefits.</p>
-</li>
-</ul>
-</div>
-</li>
-</ul>
-</div>
-</div>
 </div>
 <div class="sect2">
 <h3 id="view-category-breakdown-feature"><a class="link" href="#view-category-breakdown-feature">View category breakdown feature</a></h3>
 <div class="sect3">
-<h4 id="current-implementation-2"><a class="link" href="#current-implementation-2">Current Implementation</a></h4>
+<h4 id="current-implementation"><a class="link" href="#current-implementation">Current Implementation</a></h4>
 <div class="paragraph">
 <p>This feature allows the user to view a pie chart breakdown o
 f all expenses and all income within a date range which the user can specify.</p>
@@ -760,7 +454,7 @@ The detailed execution sequence of functions used for <code>Logic phase</code> a
 <div class="content">
 <img src="../images/StatisticLogicSequenceDiagram.png" alt="StatisticLogicSequenceDiagram" width="790">
 </div>
-<div class="title">Figure 4. Sequence diagram for high level interactions in logic phase</div>
+<div class="title">Figure 3. Sequence diagram for high level interactions in logic phase</div>
 </div>
 <div class="paragraph">
 <p>Consider the situation where the user enters <strong>"stats d/1-1-2018 12-12-2018"</strong>:</p>
@@ -784,7 +478,7 @@ within the <code>StatisticCommandParser#parse</code> method.</p>
 <div class="content">
 <img src="../images/StatisticParserActivityDiagram.png" alt="StatisticParserActivityDiagram" width="790">
 </div>
-<div class="title">Figure 5. Activity diagram for details in StatisticCommandParser</div>
+<div class="title">Figure 4. Activity diagram for details in StatisticCommandParser</div>
 </div>
 <div class="ulist">
 <ul>
@@ -816,7 +510,7 @@ the event system in FinancialPlanner. The sequence diagram below details the pro
 <div class="content">
 <img src="../images/StatisticUiSequenceDiagram.png" alt="StatisticUiSequenceDiagram" width="790">
 </div>
-<div class="title">Figure 6. Sequence diagram for high level interactions in UI phase</div>
+<div class="title">Figure 5. Sequence diagram for high level interactions in UI phase</div>
 </div>
 <div class="ulist">
 <ul>
@@ -834,7 +528,7 @@ the activity diagram below.</p>
 <div class="content">
 <img src="../images/StatisticUiActivityDiagram.png" alt="StatisticUiActivityDiagram" width="790">
 </div>
-<div class="title">Figure 7. Activity diagram for details in MixedPieChartDataList</div>
+<div class="title">Figure 6. Activity diagram for details in MixedPieChartDataList</div>
 </div>
 <div class="paragraph">
 <p>The program flow is then as shown above where the <code>CategoryBreakdown</code> is created and instantiated with 2 lists, one being expenseLabelData and other being expenseLegendData.
@@ -848,7 +542,7 @@ In the current implementation, whenever <code>stats</code> is called, 2 tabs wil
 <div class="content">
 <img src="../images/StatisticUiDetailedSequenceDiagram.png" alt="StatisticUiDetailedSequenceDiagram" width="790">
 </div>
-<div class="title">Figure 8. Sequence diagram for creation of pie charts</div>
+<div class="title">Figure 7. Sequence diagram for creation of pie charts</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -865,7 +559,7 @@ only be accessed within CustomPieChart for security purposes.
 </div>
 </div>
 <div class="sect3">
-<h4 id="design-considerations-3"><a class="link" href="#design-considerations-3">Design Considerations</a></h4>
+<h4 id="design-considerations-2"><a class="link" href="#design-considerations-2">Design Considerations</a></h4>
 <div class="sect4">
 <h5 id="aspect-data-structure-to-support-statistic-command"><a class="link" href="#aspect-data-structure-to-support-statistic-command">Aspect: Data structure to support statistic command</a></h5>
 <div class="ulist">
@@ -901,26 +595,5 @@ only be accessed within CustomPieChart for security purposes.
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="view-current-month-s-breakdown"><a class="link" href="#view-current-month-s-breakdown">View current month&#8217;s breakdown</a></h3>
-<div class="paragraph">
-<p>This feature does not require user to type any command into the command box or update manually. It provides information about the category breakdown for
-the current month, presenting income and expense statistics together in one panel. In addition, to improve usability, accelerators were assigned to the menu bar
-and <strong>HOME</strong> key is the corresponding accelerator for this feature.</p>
 </div>
-<div class="paragraph">
-<p>The current implementation of this feature closely follows the <strong>observer design pattern</strong>. Whenever the system detects changes to the underlying list, like adding, deleting or editing
-records, it updates a listener which is attached to the <code>FilteredList</code> recordsInCurrentMonth present in ModelManager. To check if the current month is the same as the cached month,
-the listener will run a check by creating a separate <code>DateIsWithinIntervalPredicate</code> and comparing it with the current <code>Predicate</code> of the filtered list.
-This listener will then process changes in the list and compute a <code>CategoryStatisticsList</code> before passing it into the constructor of <code>UpdateWelcomePanelEvent</code>.
-Then the event is triggered, and the corresponding listener on the UI side is called.</p>
-</div>
-<div class="paragraph">
-<p>The program flow on the UI side is similar to that of viewing category breakdown of a time period with the exception that tabs are not created.</p>
-</div>
-<div class="paragraph">
-<p>The accelerators and the menu bar is connected to the UI component and will trigger <code>MainWindow#handleHome</code> whenever the accelerator <strong>HOME</strong> key or <strong>Home</strong> is selected using the menu.</p>
-</div>
-</div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:27:32 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 13:33:21 UTC</div></div></div></body></html>
