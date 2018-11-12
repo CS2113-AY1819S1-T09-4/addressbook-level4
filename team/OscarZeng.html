@@ -1,45 +1,31 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>Oscar Zeng Hao - Project Portfolio</title><link rel="stylesheet" href="../stylesheets//gh-pages-oscar.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../stylesheets//coderay-asciidoctor.css"></head><body class="article"><div id="site-header"><nav class="navbar navbar-light bg-light"><div class="container"><a class="navbar-brand" href="../index.html">Savee</a><ul class="navbar-nav"><li class="nav-item"><a class="nav-link" href="../UserGuide.html">User Guide</a></li><li class="nav-item"><a class="nav-link" href="../DeveloperGuide.html">Developer Guide</a></li><li class="nav-item"><a class="nav-link active" href="../AboutUs.html">About Us</a></li><li class="nav-item"><a class="nav-link" href="../ContactUs.html">Contact Us</a></li><li class="navitem"><a class="nav-link" href="https://github.com/CS2113-AY1819S1-T09-4/main"><span class="fa fa-github fa-lg" aria-hidden="true"></span>&nbsp;View on GitHub</a></li></ul></div></nav></div><div id="header"><h1>Oscar Zeng Hao - Project Portfolio</h1></div><div id="content"><div class="sect1">
-<h2 id="project-financialplanner"><a class="link" href="#project-financialplanner">PROJECT: FinancialPlanner</a></h2>
+<h2 id="project-savee"><a class="link" href="#project-savee">PROJECT: Savee</a></h2>
 <div class="sectionbody">
 
 </div>
 </div>
 <div class="sect1">
-<h2 id="financial-planner-overview"><a class="link" href="#financial-planner-overview">Financial Planner Overview</a></h2>
+<h2 id="savee-overview"><a class="link" href="#savee-overview">Savee Overview</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>FinancialPlanner is a PC software specially designed for students who love typing.
-This purpose of this product is to help users better manage their finances, including their daily spend and income.</p>
-</div>
-<div class="paragraph">
-<p>Users are able to record their finances and modify these records, set and modify limits, summarize their financial status and export their records into excel file.
-The product is based on Command Line Interface (CLI), users are able input their commands and related information at the TextBox.
-Graphic User Interface is used for displaying statistic and other information, which will provide user with a clear and direct understanding about their financial status.
-This product is user-friendly, the command can be automatically completed, limits will check automatically and report any exceeded limits' details.</p>
-</div>
-<div class="paragraph">
-<p>This project is under the NUS CS2113 (Software Engineering &amp; Object-Oriented Programming) module.
-This module provides students with basic knowledge about Object-Oriented Programming and necessary software engineering training.
-Students were asked to form a group with four members and develop a production with the base code <a href="https://nuscs2113-ay1819s1.github.io/addressbook-level4/">AddressBook Level 4</a> provided.
-As a group we decided to morph the original product into FinancialPlanner.</p>
+<p>Savee is a PC software specially designed for students who love typing.
+This purpose of this product is to help users better manage their finances.
+This project is under the NUS CS2113 (Software Engineering &amp; Object-Oriented Programming) module.
+Students were asked to form a group with four members and develop a production with the base code <a href="https://nuscs2113-ay1819s1.github.io/addressbook-level4/">AddressBook Level 4</a> provided.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="summary-of-contributions"><a class="link" href="#summary-of-contributions">Summary of contributions</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>I made significant contribution to the product by constructing the spending limit functions.
-Detailed information about my contributions is listed below.</p>
-</div>
 <div class="sect2">
 <h3 id="code-completed-code-strong-major-enhancement-1-strong-added-the-ability-to-set-limits-for-multiple-periods-of-time"><a class="link" href="#code-completed-code-strong-major-enhancement-1-strong-added-the-ability-to-set-limits-for-multiple-periods-of-time"><code>completed</code> <strong>Major enhancement #1</strong>: added the ability to set limits for multiple periods of time.</a></h3>
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to set multiple limits for different periods of time or a single day to better manage their spend.
+<p>What it does: allows the user to add, edit and delete multiple limits for different periods of time or a single day to better manage their spend.
 All the limits will be stored and automatically checked whenever the records were updated.
 The user will be reminded if any of the limits have been exceeded.</p>
 </li>
@@ -47,36 +33,6 @@ The user will be reminded if any of the limits have been exceeded.</p>
 <p>Justification:This feature improves the product significantly because the user will be able to better manage their finances by setting limits.
 This feature is challenging because it requires me to build a storage for limits to store limits' details and read from the storage.
 Besides that, I also need to keep limits' information updated whenever there is a change of records and generate output if any limit has been exceeded.</p>
-</li>
-<li>
-<p>Highlights: This enhancement is the foundation of the three major features below. It affects existing commands, commands to be added in future, and storage.
-A new xml file will be created to store all the limits. It required an in-depth analysis of design alternatives and storage workflow.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="code-completed-code-strong-major-enhancement-1-1-strong-added-the-ability-to-delete-limits"><a class="link" href="#code-completed-code-strong-major-enhancement-1-1-strong-added-the-ability-to-delete-limits"><code>completed</code> <strong>Major enhancement #1.1</strong>: added the ability to delete limits.</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>What it does: allows the user to delete existing limits. Users are able to delete certain limits by according to the input dates.</p>
-</li>
-<li>
-<p>Justification: This feature improves the product significantly because the user need to delete outdated limits and the limits that will be no longer used in the future.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="code-completed-code-strong-major-enhancement-1-2-strong-added-the-ability-to-edit-limits"><a class="link" href="#code-completed-code-strong-major-enhancement-1-2-strong-added-the-ability-to-edit-limits"><code>completed</code> <strong>Major enhancement #1.2</strong>: added the ability to edit limits.</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>What it does: allows the user to change the limit money of existing limits. Users are able to edit certain limits by according to the two dates they.</p>
-</li>
-<li>
-<p>Justification: This feature improves the product significantly because the user may need to adjust their plan accordingly whenever there are accidents.</p>
 </li>
 </ul>
 </div>
@@ -86,7 +42,7 @@ A new xml file will be created to store all the limits. It required an in-depth 
 <div class="ulist">
 <ul>
 <li>
-<p>What it does: allows the user to set the continuous monthly limit which will always check the total spending for the
+<p>What it does: allows the user to add, edit and delete the continuous monthly limit which will always check the total spending for the
 current month. The user will be reminded if the monthly limits have been exceeded and the monthly limit will always be placed at the top of limits' information.</p>
 </li>
 <li>
@@ -94,35 +50,6 @@ current month. The user will be reminded if the monthly limits have been exceede
 want to set the limit for every month, this function will provide the user with a convenient method to manage their monthly spend without entering
 similar commands every month.
 This feature is challenging because it requires me to get the current time and generate a special limit that will change according to different time.</p>
-</li>
-<li>
-<p>Highlights: This enhancement is the foundation of the two minor features below. It affects existing commands, commands to be added in future, and storage. A new xml file will be created to store all the limits. It required an in-depth analysis of design alternatives.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="code-completed-code-strong-major-enhancement-2-1-strong-added-the-ability-to-edit-monthly-limits"><a class="link" href="#code-completed-code-strong-major-enhancement-2-1-strong-added-the-ability-to-edit-monthly-limits"><code>completed</code> <strong>Major enhancement #2.1</strong>: added the ability to edit monthly limits.</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>What it does: allows the user to change the existing monthly limit.</p>
-</li>
-<li>
-<p>Justification: This feature improves the product significantly because the user need to adjust the monthly limit in the future.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="code-completed-code-strong-major-enhancement-2-2-strong-added-the-ability-to-delete-the-monthly-limit"><a class="link" href="#code-completed-code-strong-major-enhancement-2-2-strong-added-the-ability-to-delete-the-monthly-limit"><code>completed</code> <strong>Major enhancement #2.2</strong>: added the ability to delete the monthly limit.</a></h3>
-<div class="ulist">
-<ul>
-<li>
-<p>What it does: allows the user to delete existing monthly limits.</p>
-</li>
-<li>
-<p>Justification: This feature improves the product significantly because the user need to delete the monthly limit in the future.</p>
 </li>
 </ul>
 </div>
@@ -137,17 +64,13 @@ This feature is challenging because it requires me to get the current time and g
 <li>
 <p>Justification: This feature improves the product significantly because the user is able to check all the limit he/she had set
 and have a better understanding about limits' conditions.</p>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Code contributed(including tests)</strong>:
-Example:
-<a href="https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&amp;search=oscarzeng">oscarzeng</a></p>
 </li>
 </ul>
 </div>
-</li>
-</ul>
+<div class="paragraph">
+<p><strong>Code contributed(including tests)</strong>:
+Example:
+<a href="https://nuscs2113-ay1819s1.github.io/dashboard/#=undefined&amp;search=oscarzeng">oscarzeng</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -162,35 +85,6 @@ Example:
 <p>Provide teammates with valid suggestions about their features error.
 (Examples: <a href="https://github.com/CS2113-AY1819S1-T09-4/main/issues/167">1</a>, <a href="https://github.com/CS2113-AY1819S1-T09-4/main/issues/149">2</a>)</p>
 </li>
-<li>
-<p>Arrange team meetings and discussion.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Enhancements to existing features:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Helped combine the storage of the FinancialPlanner.</p>
-</li>
-<li>
-<p>Fix some bugs of tests.</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Documentation:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>Update limit related content and some other content of the User Guide and some other contents.</p>
-</li>
-<li>
-<p>Update limit related content and of Developer Guide.</p>
-</li>
 </ul>
 </div>
 </li>
@@ -198,12 +92,6 @@ Example:
 <p>Community:</p>
 <div class="ulist">
 <ul>
-<li>
-<p>PRs reviewed. [Examples: <a href="https://github.com/CS2113-AY1819S1-T09-4/main/pull/199">1</a>, <a href="https://github.com/CS2113-AY1819S1-T09-4/main/pull/195">2</a>]</p>
-</li>
-<li>
-<p>Contributed to discussions in Whatsapp group.</p>
-</li>
 <li>
 <p>Reported bugs and suggestions for other teams in the class both in Whatsapp and Github.
 (Examples: <a href="https://github.com/CS2113-AY1819S1-T16-1/main/issues/267">1</a>, <a href="https://github.com/CS2113-AY1819S1-T16-1/main/issues/272#event-1952348734">2</a>)</p>
@@ -943,367 +831,12 @@ manualLimitCheck(), which will generate a string that contains all limits' infor
 <div class="paragraph">
 <p><a href="https://github.com/CS2113-AY1819S1-T09-4/main/blob/Latest_UGDG_Update/docs/DeveloperGuide.adoc#13-use-case-create-a-normal-limit-for-a-period-of-time-or-a-day">LimitUserCase</a></p>
 </div>
+<div class="paragraph">
+<p><a href="https://github.com/CS2113-AY1819S1-T09-4/main/blob/Latest_UGDG_Update/docs/DeveloperGuide.adoc#h5-viewing-current-months-breakdown">LimitManualTest</a>
+---</p>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="adding-a-normal-limit"><a class="link" href="#adding-a-normal-limit">Adding a normal limit</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Adding a normal limit to the Financial Planner without the same time period limits inside.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
-There is no limit with date period "11-11-2018&#8201;&#8212;&#8201;17-11-2018" and "12-11-2018".</p>
-</li>
-<li>
-<p>Test case: <code>addlimit d/11-11-2018 17-11-2018 m/100</code><br>
-Expected: The information shows that the new limit has been added followed by detailed information about the newly added limit.</p>
-</li>
-<li>
-<p>Test case: <code>addlimit d/12-11-2018 m/200</code><br>
-Expected: The information shows that the new limit has been added followed by detailed information about the newly added limit.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Trying to add a normal limit to the Financial Planner with command errors.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Test case: <code>addlimit d/17-11-2018 11-11-2018 m/200</code><br>
-Expected: No limit will be added. Error message about the dateStart must be earlier than dateEnd will be displayed.</p>
-</li>
-<li>
-<p>Test case: <code>addlimit d/11-11-2018 17-11-2018 m/+200</code><br>
-Expected: No limit will be added. Error message about wrong type of limit MoneyFlow will be displayed.</p>
-</li>
-<li>
-<p>Test case: <code>addlimit d/11-11-2018 17-11-2018</code><br>
-Expected: No limit will be added. Error message about wrong addlimit command format will be displayed.</p>
-</li>
-<li>
-<p>Test case: <code>addlimit 11-11-2018 17-11-2018 m/100</code><br>
-Expected: No limit will be added. Error message about wrong addlimit command format will be displayed.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Trying to add a normal limit to the Financial Planner with the same time period limits inside.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
-There are existing limits with date period "11-11-2018&#8201;&#8212;&#8201;17-11-2018" and "12-11-2018".</p>
-</li>
-<li>
-<p>Test case: <code>addlimit d/11-11-2018 17-11-2018 m/100</code><br>
-Expected: No limit will be added.  Error message about already existing limit will be displayed.</p>
-</li>
-<li>
-<p>Test case: <code>addlimit d/12-11-2018 m/100</code><br>
-Expected: No limit will be added.  Error message about already existing limit will be displayed.</p>
-</li>
-<li>
-<p>Other incorrect delete commands to try: <code>addlimit asd `, `addlimit x</code> (where x is an integer), <code>addlimit x/12-11-2018 m/asd</code><br>
-Expected: No limit will be added, related error information will be displayed.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
 </div>
 </div>
-<div class="sect2">
-<h3 id="editing-an-existing-normal-limit"><a class="link" href="#editing-an-existing-normal-limit">Editing an existing normal limit</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Editing an existing normal limit in the Financial Planner</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
-There are limits with date period "11-11-2018&#8201;&#8212;&#8201;17-11-2018" with the limit MoneyFlow isn&#8217;t "100" and "12-11-2018" with the limit MoneyFlow isn&#8217;t "200".</p>
-</li>
-<li>
-<p>Test case: <code>editlimit d/11-11-2018 17-11-2018 m/100</code><br>
-Expected: The information shows that the limit has been edited followed by detailed information about both the original limit and the new limit.</p>
-</li>
-<li>
-<p>Test case: <code>editlimit d/12-11-2018 m/200</code><br>
-Expected: The information shows that the limit has been edited followed by detailed information about both the original limit and the new limit.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Trying to edit a normal limit in the Financial Planner with command errors.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Test case: <code>editlimit d/17-11-2018 11-11-2018 m/200</code><br>
-Expected: No limit will be edited. Error message about the dateStart must be earlier than dateEnd will be displayed.</p>
-</li>
-<li>
-<p>Test case: <code>editlimit d/11-11-2018 17-11-2018 m/+200</code><br>
-Expected: No limit will be edited. Error message about wrong type of limit MoneyFlow will be displayed.</p>
-</li>
-<li>
-<p>Test case: <code>editlimit d/11-11-2018 17-11-2018</code><br>
-Expected: No limit will be edited. Error message about wrong editlimit command format will be displayed.</p>
-</li>
-<li>
-<p>Test case: <code>editlimit 11-11-2018 17-11-2018 m/200</code><br>
-Expected: No limit will be edited. Error message about wrong editlimit command format will be displayed.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Trying to edit a normal limit in the Financial Planner with wrong command format.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
-There is no existing limit with date period "11-11-2018&#8201;&#8212;&#8201;17-11-2018" and "12-11-2018".</p>
-</li>
-<li>
-<p>Test case: <code>editlimit d/11-11-2018 17-11-2018 m/100</code><br>
-Expected: No limit will be edited. Error message about no existing limit will be displayed.</p>
-</li>
-<li>
-<p>Test case: <code>editlimit d/12-11-2018 m/100</code><br>
-Expected: No limit will be edited. Error message about no existing limit will be displayed.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Trying to edit a normal limit in the Financial Planner with the same limit inside.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
-There is no existing limit with date period "11-11-2018&#8201;&#8212;&#8201;17-11-2018"  with the limit MoneyFlow isn&#8217;t "100".</p>
-</li>
-<li>
-<p>Test case: <code>editlimit d/11-11-2018 17-11-2018 m/100</code><br>
-Expected: No limit will be edited. Error message about same limit will be displayed.</p>
-</li>
-<li>
-<p>Other incorrect delete commands to try: <code>editlimit asd `, `editlimit x</code> (where x is an integer), <code>editlimit x/12-11-2018 m/asd</code><br>
-Expected: No limit will be edited, related error information will be displayed.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="deleting-an-existing-normal-limit"><a class="link" href="#deleting-an-existing-normal-limit">Deleting an existing normal limit</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Deleting an existing normal limit in the Financial Planner</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
-There are limits with date period "11-11-2018&#8201;&#8212;&#8201;17-11-2018" and "12-11-2018".</p>
-</li>
-<li>
-<p>Test case: <code>deletelimit d/11-11-2018 17-11-2018</code><br>
-Expected: The information shows that the limit has been deleted.</p>
-</li>
-<li>
-<p>Test case: <code>deletelimit d/12-11-2018</code><br>
-Expected: The information shows that the limit has been deleted.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Trying to delete a normal limit in the Financial Planner with command format error.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Test case: <code>deletelimit d/17-11-2018 11-11-2018</code><br>
-Expected: No limit will be edited. Error message about the dateStart must be earlier than dateEnd will be displayed.</p>
-</li>
-<li>
-<p>Test case: <code>deletelimit 11-11-2018 17-11-2018 m/100</code><br>
-Expected: No limit will be edited. Error message about wrong deletelimit command format will be displayed.</p>
-</li>
-<li>
-<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
-There is no existing limit with date period "11-11-2018&#8201;&#8212;&#8201;17-11-2018" and "12-11-2018".</p>
-</li>
-<li>
-<p>Test case: <code>deletelimit d/11-11-2018 17-11-2018</code><br>
-Expected: No limit will be edited. Error message about no existing limit will be displayed.</p>
-</li>
-<li>
-<p>Test case: <code>deletelimit d/12-11-2018</code><br>
-Expected: No limit will be edited. Error message about no existing limit will be displayed.</p>
-</li>
-<li>
-<p>Other incorrect delete commands to try: <code>deletelimit asd `, `deletelimit x</code> (where x is an integer), <code>deletelimit x/12-11-2018 m/asd</code><br>
-Expected: No limit will be deleted, related error information will be displayed.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="adding-a-monthly-limit"><a class="link" href="#adding-a-monthly-limit">Adding a monthly limit</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Adding a monthly limit to the Financial Planner</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
-There is no monthly limit in the FinancialPlanner.</p>
-</li>
-<li>
-<p>Test case: <code>addmonthlylimit m/500</code><br>
-Expected: The monthly limit will be added, detailed monthly limit&#8217;s information will be displayed.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Trying to add a monthly limit to the Financial Planner with command format error.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Test case: <code>addmonthlylimit 500</code><br>
-Expected: No limit will be edited. Error message about wrong addmonthlylimit command format will be displayed.</p>
-</li>
-<li>
-<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
-There is already an existing monthly limit.</p>
-</li>
-<li>
-<p>Test case: <code>addmonthlylimit m/200</code><br>
-Expected: No limit will be edited. Error message about existing monthly limit will be displayed.</p>
-</li>
-<li>
-<p>Other incorrect delete commands to try: <code>addmonthlylimit asd `, `addmonthlylimit  m/asd</code><br>
-   Expected: The monthly limit will not be added, related error information will be displayed.
-=== Editing the monthly limit</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Editing the monthly limit existing the Financial Planner</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
-There is already a monthly limit in the FinancialPlanner.</p>
-</li>
-<li>
-<p>Test case: <code>editmonthlylimit m/500</code><br>
-Expected: The monthly limit will be edited, detailed information for both original monthly limit and new monthly limit will be displayed.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Trying to edit the monthly limit in the Financial Planner with command format error.</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Test case: <code>editmonthlylimit 500</code><br>
-Expected: No limit will be edited. Error message about wrong editmonthlylimit command format will be displayed.</p>
-</li>
-<li>
-<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
-There is no existing monthly limit.</p>
-</li>
-<li>
-<p>Test case: <code>editmonthlylimit m/200</code><br>
-Expected: No limit will be edited. Error message about no monthly limit will be displayed.</p>
-</li>
-<li>
-<p>Other incorrect delete commands to try: <code>editmonthlylimit asd `, `editmonthlylimit m/asd</code><br>
-Expected: The monthly limit will not be edited, related error information will be displayed.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="deleting-the-monthly-limit"><a class="link" href="#deleting-the-monthly-limit">Deleting the monthly limit</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Deleting the monthly limit existing the Financial Planner</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
-There is already a monthly limit in the FinancialPlanner.</p>
-</li>
-<li>
-<p>Test case: <code>deletemonthlylimit</code><br>
-Expected: The monthly limit will be deleted.</p>
-</li>
-<li>
-<p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
-There is no existing monthly limit.</p>
-</li>
-<li>
-<p>Test case: <code>deletemonthlylimit</code><br>
-Expected: The monthly limit will not be deleted, no monthly limit error message will be displayed.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="checking-all-the-limits"><a class="link" href="#checking-all-the-limits">Checking all the limits</a></h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Checking all limits</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Prerequisites: There are limits inside the LimitList.</p>
-</li>
-<li>
-<p>Test case: <code>checklimit</code><br>
-Expected: The monthly limit will be deleted.</p>
-</li>
-<li>
-<p>Prerequisites: No limits inside the limit list.</p>
-</li>
-<li>
-<p>Test case: <code>checklimit</code><br>
-Expected: The limits' detailed information will not be displayed, no limit in the list error message will be displayed.</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-<hr>
-</div>
-</div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:08:42 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:13:21 UTC</div></div></div></body></html>

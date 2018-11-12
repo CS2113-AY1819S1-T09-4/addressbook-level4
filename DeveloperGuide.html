@@ -5880,7 +5880,7 @@ Expected: No limit will be added.  Error message about already existing limit wi
 Expected: No limit will be added.  Error message about already existing limit will be displayed.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>addlimit asd `, `addlimit x</code> (where x is an integer), <code>addlimit x/12-11-2018 m/asd</code><br>
+<p>Other incorrect addlimit commands to try: <code>addlimit asd `, `addlimit x</code> (where x is an integer), <code>addlimit x/12-11-2018 m/asd</code><br>
 Expected: No limit will be added, related error information will be displayed.</p>
 </li>
 </ol>
@@ -5967,7 +5967,7 @@ There is no existing limit with date period "11-11-2018&#8201;&#8212;&#8201;17-1
 Expected: No limit will be edited. Error message about same limit will be displayed.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>editlimit asd `, `editlimit x</code> (where x is an integer), <code>editlimit x/12-11-2018 m/asd</code><br>
+<p>Other incorrect editlimit commands to try: <code>editlimit asd `, `editlimit x</code> (where x is an integer), <code>editlimit x/12-11-2018 m/asd</code><br>
 Expected: No limit will be edited, related error information will be displayed.</p>
 </li>
 </ol>
@@ -6005,11 +6005,11 @@ Expected: The information shows that the limit has been deleted.</p>
 <ol class="loweralpha" type="a">
 <li>
 <p>Test case: <code>deletelimit d/17-11-2018 11-11-2018</code><br>
-Expected: No limit will be edited. Error message about the dateStart must be earlier than dateEnd will be displayed.</p>
+Expected: No limit will be deleted. Error message about the dateStart must be earlier than dateEnd will be displayed.</p>
 </li>
 <li>
 <p>Test case: <code>deletelimit 11-11-2018 17-11-2018 m/100</code><br>
-Expected: No limit will be edited. Error message about wrong deletelimit command format will be displayed.</p>
+Expected: No limit will be deleted. Error message about wrong deletelimit command format will be displayed.</p>
 </li>
 <li>
 <p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
@@ -6017,11 +6017,11 @@ There is no existing limit with date period "11-11-2018&#8201;&#8212;&#8201;17-1
 </li>
 <li>
 <p>Test case: <code>deletelimit d/11-11-2018 17-11-2018</code><br>
-Expected: No limit will be edited. Error message about no existing limit will be displayed.</p>
+Expected: No limit will be deleted. Error message about no existing limit will be displayed.</p>
 </li>
 <li>
 <p>Test case: <code>deletelimit d/12-11-2018</code><br>
-Expected: No limit will be edited. Error message about no existing limit will be displayed.</p>
+Expected: No limit will be deleted. Error message about no existing limit will be displayed.</p>
 </li>
 <li>
 <p>Other incorrect delete commands to try: <code>deletelimit asd `, `deletelimit x</code> (where x is an integer), <code>deletelimit x/12-11-2018 m/asd</code><br>
@@ -6058,7 +6058,7 @@ Expected: The monthly limit will be added, detailed monthly limit&#8217;s inform
 <ol class="loweralpha" type="a">
 <li>
 <p>Test case: <code>addmonthlylimit 500</code><br>
-Expected: No limit will be edited. Error message about wrong addmonthlylimit command format will be displayed.</p>
+Expected: No limit will be added. Error message about wrong addmonthlylimit command format will be displayed.</p>
 </li>
 <li>
 <p>Prerequisites: Check all the existing limit using the <code>checklimit</code> command.
@@ -6066,10 +6066,10 @@ There is already an existing monthly limit.</p>
 </li>
 <li>
 <p>Test case: <code>addmonthlylimit m/200</code><br>
-Expected: No limit will be edited. Error message about existing monthly limit will be displayed.</p>
+Expected: No limit will be added. Error message about existing monthly limit will be displayed.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>addmonthlylimit asd `, `addmonthlylimit  m/asd</code><br>
+<p>Other incorrect addmonthlylimit commands to try: <code>addmonthlylimit asd `, `addmonthlylimit  m/asd</code><br>
    Expected: The monthly limit will not be added, related error information will be displayed.
 === Editing the monthly limit</p>
 </li>
@@ -6108,7 +6108,7 @@ There is no existing monthly limit.</p>
 Expected: No limit will be edited. Error message about no monthly limit will be displayed.</p>
 </li>
 <li>
-<p>Other incorrect delete commands to try: <code>editmonthlylimit asd `, `editmonthlylimit m/asd</code><br>
+<p>Other incorrect editmonthlylimit commands to try: <code>editmonthlylimit asd `, `editmonthlylimit m/asd</code><br>
 Expected: The monthly limit will not be edited, related error information will be displayed.</p>
 </li>
 </ol>
@@ -6160,7 +6160,7 @@ Expected: The monthly limit will not be deleted, no monthly limit error message 
 </li>
 <li>
 <p>Test case: <code>checklimit</code><br>
-Expected: The monthly limit will be deleted.</p>
+Expected: All the detailed limits' information will be displayed.</p>
 </li>
 <li>
 <p>Prerequisites: No limits inside the limit list.</p>
@@ -6543,4 +6543,4 @@ Then, open the app.</p>
 </div>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:08:42 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-11-12 15:13:21 UTC</div></div></div></body></html>
